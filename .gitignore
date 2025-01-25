@@ -1,0 +1,29 @@
+# Flutter/Dart
+.dart_tool/
+.packages
+build/
+pubspec.lock
+
+# IntelliJ IDE
+.idea/
+*.iml
+
+# VS Code
+.vscode/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# Logs
+*.log
+
+# Generated files
+android/app/google-services.json
+ios/Runner/GoogleService-Info.plist
+
+# Flutter dependencies
+flutter/.pub-cache/
+flutter/bin/cache/
