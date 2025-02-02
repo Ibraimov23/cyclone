@@ -1,3 +1,4 @@
+import 'package:cyclone/pages/chatbot.dart';
 import 'package:cyclone/pages/home.dart';
 import 'package:flutter/material.dart';
 
@@ -8,8 +9,6 @@ void main() {
       backgroundColor: Colors.transparent,
     )),
     initialRoute: "/",
-    routes: {
-      '/': (context) => Home(),
-    },
+    routes: {'/': (context) => Home(), '/chatbot': (context) => Chatbot()},
   ));
 }
