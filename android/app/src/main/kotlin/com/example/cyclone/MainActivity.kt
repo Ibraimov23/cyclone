@@ -1,4 +1,4 @@
-package com.cyclone.cyclone
+package com.example.cyclone
 
 import io.flutter.embedding.android.FlutterActivity
 

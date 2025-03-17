@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "54693493790",
+    "project_id": "cyclone-e4f7a",
+    "storage_bucket": "cyclone-e4f7a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:54693493790:android:6e6b1e33196267eb84020f",
+        "android_client_info": {
+          "package_name": "com.example.cyclone"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUCAljg-Dsw7n_6O1CwBXiSwDfVZxh1HU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
