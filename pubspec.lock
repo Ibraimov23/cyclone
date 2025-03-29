@@ -89,6 +89,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.8"
+  deepseek:
+    dependency: "direct main"
+    description:
+      name: deepseek
+      sha256: "3b067aca72318cbe3f0351829085e257bac0eaba17239281000681df58949a48"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.0"
   dropdown_button2:
     dependency: "direct main"
     description:

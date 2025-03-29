@@ -66,7 +66,7 @@ class _ShopState extends State<Shop> {
                   mainAxisSpacing: 16.0,
                   childAspectRatio: 0.927,
                 ),
-                itemCount: 6,
+                itemCount: 1,
                 itemBuilder: (context, index) {
                   return Card(
                     clipBehavior: Clip.antiAlias,

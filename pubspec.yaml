@@ -21,6 +21,7 @@ dependencies:
   flutter_svg: ^2.0.17
   cloud_firestore: ^5.6.5
   dropdown_button2: ^2.3.9
+  deepseek: ^1.2.0
 
 
 dev_dependencies:
