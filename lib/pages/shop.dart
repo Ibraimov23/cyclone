@@ -1,4 +1,3 @@
-import 'package:cyclone/widget/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 
 class Shop extends StatefulWidget {
@@ -12,10 +11,6 @@ class _ShopState extends State<Shop> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
-        title: "",
-        onMenuTap: () {},
-      ),
       body: Container(
         height: MediaQuery.of(context).size.height,
         decoration: BoxDecoration(

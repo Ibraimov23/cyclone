@@ -1,28 +1,27 @@
 import 'package:cyclone/services/auth_service.dart';
 import 'package:flutter/material.dart';
 
-class NewPassword extends StatefulWidget {
-  const NewPassword({super.key});
+class ResetPassword extends StatefulWidget {
+  const ResetPassword({super.key});
 
   @override
-  State<NewPassword> createState() => _NewPasswordState();
+  State<ResetPassword> createState() => _ResetPasswordState();
 }
 
-class _NewPasswordState extends State<NewPassword> {
-  final TextEditingController _newPasswordController = TextEditingController();
-  final TextEditingController _confirmPasswordController =
-      TextEditingController();
+class _ResetPasswordState extends State<ResetPassword> {
+  final TextEditingController _emailController = TextEditingController();
 
-  Future<void> _resetPassword() async {
-    final newPassword = _newPasswordController.text.trim();
-    final confirmPassword = _confirmPasswordController.text.trim();
+  Future<void> _sendPasswordResetEmail() async {
+    final email = _emailController.text.trim();
 
-    final result = await authService.value
-        .resetPasswordFromCurrentPassword(newPassword, confirmPassword);
+    if (email.isEmpty) {
+      _showErrorDialog("Введите вашу почту.");
+      return;
+    }
 
-    print(result);
+    final result = await authService.value.sendPasswordResetEmail(email);
 
-    if (result == "Пароль успешно изменен.") {
+    if (result == "Письмо отправлено.") {
       _showSuccessDialog(result);
     } else {
       _showErrorDialog(result);
@@ -34,12 +33,12 @@ class _NewPasswordState extends State<NewPassword> {
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: Colors.white,
-        title: Text("Ошибка"),
+        title: const Text("Успех"),
         content: Text(message),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: Text("ОК"),
+            child: const Text("ОК"),
           ),
         ],
       ),
@@ -51,12 +50,12 @@ class _NewPasswordState extends State<NewPassword> {
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: Colors.white,
-        title: Text("Успех"),
+        title: const Text("Успех"),
         content: Text(message),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: Text("ОК"),
+            child: const Text("ОК"),
           ),
         ],
       ),
@@ -69,11 +68,15 @@ class _NewPasswordState extends State<NewPassword> {
       appBar: AppBar(
         backgroundColor: Colors.grey.shade300,
         leading: Container(
-          margin: EdgeInsets.all(8),
-          decoration:
-              BoxDecoration(color: Color(0xFF90010A), shape: BoxShape.circle),
-          child: IconTheme(
-              data: IconThemeData(color: Colors.white), child: BackButton()),
+          margin: const EdgeInsets.all(8),
+          decoration: const BoxDecoration(
+            color: Color(0xFF90010A),
+            shape: BoxShape.circle,
+          ),
+          child: const IconTheme(
+            data: IconThemeData(color: Colors.white),
+            child: BackButton(),
+          ),
         ),
       ),
       backgroundColor: Colors.grey.shade300,
@@ -85,27 +88,26 @@ class _NewPasswordState extends State<NewPassword> {
             children: [
               const SizedBox(height: 20),
               const Text(
-                'Придумайте пароль',
+                'Сброс пароля',
                 style: TextStyle(
                   fontWeight: FontWeight.w900,
                   fontSize: 30,
                   letterSpacing: 0,
                 ),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 10),
               /*const Text(
-                "Новый пароль",
+                "Введите ваш email",
                 style: TextStyle(fontSize: 20, letterSpacing: 0),
               ),*/
-              const SizedBox(
-                height: 15,
-              ),
+              const SizedBox(height: 10),
               TextField(
-                controller: _newPasswordController,
+                controller: _emailController,
+                keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
                   filled: true,
                   fillColor: Colors.white,
-                  hintText: 'Введите новый пароль',
+                  hintText: 'Введите вашу почту',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15),
                     borderSide: BorderSide.none,
@@ -119,39 +121,11 @@ class _NewPasswordState extends State<NewPassword> {
                   color: Colors.black,
                 ),
               ),
-              const SizedBox(height: 15),
-              /*const Text(
-                "Подтвердите новый пароль",
-                style: TextStyle(fontSize: 20, letterSpacing: 0),
-              ),*/
-              const SizedBox(
-                height: 15,
-              ),
-              TextField(
-                controller: _confirmPasswordController,
-                obscureText: true,
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Colors.white,
-                  hintText: 'Введите пароль',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15),
-                    borderSide: BorderSide.none,
-                  ),
-                  contentPadding:
-                      const EdgeInsets.symmetric(vertical: 19, horizontal: 17),
-                ),
-                style: const TextStyle(
-                  fontSize: 14,
-                  letterSpacing: 0,
-                  color: Colors.black,
-                ),
-              ),
-              const SizedBox(height: 400),
+              const SizedBox(height: 500),
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: _resetPassword,
+                  onPressed: _sendPasswordResetEmail,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF90010A),
                     padding: const EdgeInsets.symmetric(vertical: 13),
@@ -160,7 +134,7 @@ class _NewPasswordState extends State<NewPassword> {
                     ),
                   ),
                   child: const Text(
-                    'Изменить',
+                    'Отправить письмо',
                     style: TextStyle(
                       fontSize: 20,
                       color: Colors.white,

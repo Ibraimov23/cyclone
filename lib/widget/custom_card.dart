@@ -23,7 +23,7 @@ class CustomCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(15),
       ),
       child: Container(
-        padding: const EdgeInsets.fromLTRB(0, 6, 24, 0),
+        padding: const EdgeInsets.fromLTRB(0, 6, 25, 0),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(15),
@@ -41,7 +41,7 @@ class CustomCard extends StatelessWidget {
                       title,
                       style: const TextStyle(
                         color: Colors.black,
-                        fontSize: 14,
+                        fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -50,7 +50,7 @@ class CustomCard extends StatelessWidget {
                       description,
                       style: const TextStyle(
                         color: Colors.black,
-                        fontSize: 12,
+                        fontSize: 14,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -79,12 +79,12 @@ class CustomCard extends StatelessWidget {
                     height: 32,
                   ),
                 ),
-                const SizedBox(width: 10),
+                const SizedBox(width: 20),
                 Text(
                   count,
                   style: const TextStyle(
                     color: Colors.black,
-                    fontSize: 14,
+                    fontSize: 16,
                   ),
                 ),
               ],

@@ -174,14 +174,6 @@ class AuthService {
     }
   }
 
-  Future<void> resendVerificationEmail() async {
-    User? user = FirebaseAuth.instance.currentUser;
-    if (user != null && !user.emailVerified) {
-      await user.sendEmailVerification();
-      print("Письмо отправлено повторно");
-    }
-  }
-
   Future<String> resetPasswordFromCurrentPassword(
       String newPassword, String confirmPassword) async {
     try {
@@ -203,6 +195,21 @@ class AuthService {
       await user.reload();
 
       return "Пароль успешно изменен.";
+    } on FirebaseAuthException catch (e) {
+      return _handleAuthError(e);
+    } catch (e) {
+      return "Неизвестная ошибка: $e";
+    }
+  }
+
+  Future<String> sendPasswordResetEmail(String email) async {
+    try {
+      if (email.isEmpty) {
+        return "Введите email.";
+      }
+
+      await firebaseAuth.sendPasswordResetEmail(email: email);
+      return "Письмо на сброс пароля отправлено.";
     } on FirebaseAuthException catch (e) {
       return _handleAuthError(e);
     } catch (e) {

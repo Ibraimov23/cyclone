@@ -1,5 +1,5 @@
-import 'package:cyclone/auth_service.dart';
 import 'package:cyclone/main.dart';
+import 'package:cyclone/services/auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import "package:flutter_svg/svg.dart";
@@ -14,6 +14,7 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   TextEditingController controllerEmail = TextEditingController();
   TextEditingController controllerPassword = TextEditingController();
+  bool _isLoading = false;
 
   @override
   void dispose() {
@@ -23,6 +24,10 @@ class _LoginState extends State<Login> {
   }
 
   void login() async {
+    setState(() {
+      _isLoading = true; // Включаем индикатор загрузки
+    });
+
     try {
       await authService.value.signIn(
         controllerEmail.text,
@@ -37,6 +42,10 @@ class _LoginState extends State<Login> {
       _showErrorDialog(e.message ?? "Ошибка при входе");
     } catch (e) {
       _showErrorDialog('Неизвестная ошибка: $e');
+    } finally {
+      setState(() {
+        _isLoading = false; // Отключаем индикатор загрузки
+      });
     }
   }
 
@@ -44,6 +53,7 @@ class _LoginState extends State<Login> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
+        backgroundColor: Colors.white,
         title: Text("Ошибка"),
         content: Text(message),
         actions: [
@@ -131,7 +141,7 @@ class _LoginState extends State<Login> {
                 alignment: Alignment.centerRight,
                 child: TextButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, '');
+                    Navigator.pushNamed(context, '/resetpassword');
                   },
                   child: const Text(
                     'Забыли пароль?',
@@ -145,7 +155,8 @@ class _LoginState extends State<Login> {
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: login,
+                  onPressed: _isLoading ? null : login,
+                  // Отключаем кнопку при загрузке
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF90010A),
                     padding: const EdgeInsets.symmetric(vertical: 13),
@@ -153,15 +164,18 @@ class _LoginState extends State<Login> {
                       borderRadius: BorderRadius.circular(15),
                     ),
                   ),
-                  child: const Text(
-                    'Войти',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                      letterSpacing: 1,
-                    ),
-                  ),
+                  child: _isLoading
+                      ? CircularProgressIndicator(
+                          color: Colors.white) // Показываем индикатор
+                      : const Text(
+                          'Войти',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            letterSpacing: 1,
+                          ),
+                        ),
                 ),
               ),
               const SizedBox(height: 30),
@@ -179,9 +193,7 @@ class _LoginState extends State<Login> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   IconButton(
-                    onPressed: () {
-                      // Логика для первой иконки
-                    },
+                    onPressed: () {},
                     style: IconButton.styleFrom(
                       backgroundColor: Colors.white,
                       padding: const EdgeInsets.symmetric(
@@ -196,9 +208,7 @@ class _LoginState extends State<Login> {
                   ),
                   const SizedBox(width: 13),
                   IconButton(
-                    onPressed: () {
-                      // Логика для второй иконки
-                    },
+                    onPressed: () {},
                     style: IconButton.styleFrom(
                       backgroundColor: Colors.white,
                       padding: const EdgeInsets.symmetric(
@@ -213,9 +223,7 @@ class _LoginState extends State<Login> {
                   ),
                   const SizedBox(width: 13),
                   IconButton(
-                    onPressed: () {
-                      // Логика для третьей иконки
-                    },
+                    onPressed: () {},
                     style: IconButton.styleFrom(
                       backgroundColor: Colors.white,
                       padding: const EdgeInsets.symmetric(

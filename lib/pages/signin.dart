@@ -1,4 +1,4 @@
-import 'package:cyclone/auth_service.dart';
+import 'package:cyclone/services/auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -50,6 +50,7 @@ class _siginState extends State<Sigin> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
+        backgroundColor: Colors.white,
         title: Text("Аккаунт уже существует"),
         content: Text("Этот email уже зарегистрирован. Попробуйте войти."),
         actions: [
@@ -131,7 +132,7 @@ class _siginState extends State<Sigin> {
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 30,
-                  letterSpacing: 2,
+                  letterSpacing: 0,
                 ),
               ),
               const SizedBox(height: 20),

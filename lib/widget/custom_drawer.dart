@@ -1,34 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class CustomDrawer extends StatelessWidget {
-  const CustomDrawer({super.key});
+  final String title;
+  final VoidCallback onLogout;
+
+  const CustomDrawer({Key? key, required this.title, required this.onLogout})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      backgroundColor: Colors.white,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.zero,
+      ),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Align(
-              alignment: Alignment.topRight,
-              child: GestureDetector(
-                onTap: () {
-                  // Закрываем Drawer при нажатии на иконку
-                  Navigator.pop(context);
-                },
-                child: SvgPicture.asset("assets/icons/x.svg"),
-              ),
-            ),
             const SizedBox(height: 43),
             Center(
               child: Image.asset('assets/alina.png'),
             ),
             const SizedBox(height: 23),
-            const Text(
-              'Алина Р.',
+            Text(
+              title,
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors.black,
@@ -37,36 +34,33 @@ class CustomDrawer extends StatelessWidget {
                 height: 1.3,
               ),
             ),
-            const SizedBox(height: 10),
-            const Text(
-              '+996990777222',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Color.fromRGBO(0, 0, 0, 0.36),
-                fontSize: 12,
-                fontWeight: FontWeight.w600,
-                height: 1.3,
-              ),
-            ),
-            const SizedBox(height: 20),
-            _buildButton('Профиль'),
+            const SizedBox(height: 50),
+            _buildButton('Профиль', onPressed: () {
+              Navigator.pushNamed(context, '/profile');
+            }),
             const SizedBox(height: 25),
-            _buildButton('Профиль'),
+            _buildButton('Финансы'),
             const SizedBox(height: 25),
-            _buildButton('Профиль'),
+            _buildButton('Язык'),
             const SizedBox(height: 25),
-            _buildButton('Профиль'),
+            _buildButton('Статистика'),
             const SizedBox(height: 25),
-            _buildButton('Профиль'),
+            _buildButton('Добавить аккаунт', onPressed: () {
+              Navigator.pushNamed(context, '/signin');
+            }),
             const SizedBox(height: 25),
-            _buildButton('Профиль'),
+            _buildButton('Изменить пароль', onPressed: () {
+              Navigator.pushNamed(context, '/newpassword');
+            }),
+            const SizedBox(height: 25),
+            _buildButton('Выйти', onPressed: onLogout),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildButton(String text) {
+  Widget _buildButton(String text, {VoidCallback? onPressed}) {
     return Container(
       decoration: const BoxDecoration(
         border: Border(
@@ -77,7 +71,7 @@ class CustomDrawer extends StatelessWidget {
         ),
       ),
       child: TextButton(
-        onPressed: () {},
+        onPressed: onPressed ?? () {},
         style: TextButton.styleFrom(
           padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
           backgroundColor: Colors.transparent,

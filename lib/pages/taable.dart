@@ -1,4 +1,3 @@
-import 'package:cyclone/widget/custom_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -39,9 +38,7 @@ class _TableState extends State<Warehouse> {
             padding: const EdgeInsets.only(right: 2),
             child: Builder(
               builder: (context) => InkWell(
-                onTap: () {
-                  Scaffold.of(context).openEndDrawer();
-                },
+                onTap: () {},
                 borderRadius: BorderRadius.circular(30),
                 child: Container(
                   width: 51,
@@ -300,7 +297,6 @@ class _TableState extends State<Warehouse> {
           ],
         ),
       ),
-      endDrawer: const CustomDrawer(),
     );
   }
 

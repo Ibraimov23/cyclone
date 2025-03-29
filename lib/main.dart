@@ -11,10 +11,14 @@ import 'package:cyclone/pages/login.dart';
 import 'package:cyclone/pages/newpassowrd.dart';
 import 'package:cyclone/pages/passport.dart';
 import 'package:cyclone/pages/profile.dart';
+import 'package:cyclone/pages/resetpassword.dart';
 import 'package:cyclone/pages/shop.dart';
 import 'package:cyclone/pages/signin.dart';
+import 'package:cyclone/pages/stem.dart';
 import 'package:cyclone/pages/taable.dart';
 import 'package:cyclone/pages/welcome.dart';
+import 'package:cyclone/widget/custom_app_bar.dart';
+import 'package:cyclone/widget/custom_drawer.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -54,7 +58,8 @@ class Cyclone extends StatelessWidget {
         '/welcome': (context) => Welcome(),
         "/signin": (context) => Sigin(),
         "/login": (context) => Login(),
-        "/newpassport": (context) => Newpassowrd(),
+        "/newpassword": (context) => NewPassword(),
+        "/resetpassword": (context) => ResetPassword(),
         "/create": (context) => Create(),
         "/profile": (context) => Profile(),
         "/intro": (context) => Intro(),
@@ -64,6 +69,7 @@ class Cyclone extends StatelessWidget {
         "/taable": (context) => Warehouse(),
         "/adding": (context) => Adding(),
         "/finance": (context) => Finance(),
+        "/steam": (context) => Steam(),
       },
     );
   }
@@ -95,13 +101,20 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
+  String username = "друг";
 
   final List<Widget> _pages = [
     Home(),
     Shop(),
     Chatbot(),
-    Warehouse(),
+    Steam(),
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUsername();
+  }
 
   void _onItemTapped(int index) {
     setState(() {
@@ -109,10 +122,54 @@ class _MainScreenState extends State<MainScreen> {
     });
   }
 
+  void _loadUsername() {
+    final User? user = FirebaseAuth.instance.currentUser;
+    if (user != null && user.email != null) {
+      setState(() {
+        username = user.email!.split('@')[0];
+      });
+    }
+  }
+
+  void _logout() async {
+    final shouldLogout = await showDialog<bool>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Colors.white,
+          title: const Text("Выход из аккаунта"),
+          content: const Text("Вы уверены, что хотите выйти?"),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(false),
+              child: const Text("Отмена"),
+            ),
+            TextButton(
+              onPressed: () async {
+                Navigator.of(context).pop(true);
+              },
+              child: const Text("Выйти", style: TextStyle(color: Colors.red)),
+            ),
+          ],
+        );
+      },
+    );
+
+    if (shouldLogout == true) {
+      await FirebaseAuth.instance.signOut();
+      Navigator.pushReplacementNamed(context, '/signin');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFFE7E7E7),
+      appBar: CustomAppBar(
+          title: "Йоу, ${username}",
+          onMenuTap: () {
+            Scaffold.of(context).openEndDrawer();
+          }),
       body: IndexedStack(
         index: _selectedIndex,
         children: _pages,
@@ -122,8 +179,8 @@ class _MainScreenState extends State<MainScreen> {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(40),
-            topRight: Radius.circular(40),
+            topLeft: Radius.circular(30),
+            topRight: Radius.circular(30),
           ),
           boxShadow: [
             BoxShadow(
@@ -142,6 +199,10 @@ class _MainScreenState extends State<MainScreen> {
             _buildNavItem(3, 'Кормы', 'assets/icons/food.svg'),
           ],
         ),
+      ),
+      endDrawer: CustomDrawer(
+        title: username,
+        onLogout: _logout,
       ),
     );
   }

@@ -24,13 +24,13 @@ class AnimalPassport extends StatelessWidget {
   Color _getHealthColor() {
     switch (healthStatus) {
       case "good":
-        return const Color(0xFF18B027); // Зеленый
+        return const Color(0xFF18B027);
       case "warning":
-        return const Color(0xFFFFA500); // Оранжевый
+        return const Color(0xFFFFA500);
       case "bad":
-        return const Color(0xFFD32F2F); // Красный
+        return const Color(0xFFD32F2F);
       default:
-        return const Color(0xFF18B027); // По умолчанию зеленый
+        return const Color(0xFF18B027);
     }
   }
 

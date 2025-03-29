@@ -1,5 +1,3 @@
-import 'package:cyclone/widget/custom_app_bar.dart';
-import 'package:cyclone/widget/custom_drawer.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -31,10 +29,10 @@ class _ChatState extends State<Chatbot> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
+      /*appBar: CustomAppBar(
         title: "",
         onMenuTap: () {},
-      ),
+      ),*/
       body: Container(
         decoration: const BoxDecoration(
           color: Color(0xFFE7E7E7),
@@ -74,7 +72,6 @@ class _ChatState extends State<Chatbot> {
           ],
         ),
       ),
-      endDrawer: const CustomDrawer(),
     );
   }
 }
