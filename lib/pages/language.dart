@@ -9,7 +9,7 @@ class LanguageSelectionScreen extends StatefulWidget {
 }
 
 class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
-  String selectedLanguage = 'russian'; // По умолчанию выбран русский язык
+  String selectedLanguage = 'russian';
 
   final Map<String, Map<String, String>> texts = {
     'kyrgyz': {

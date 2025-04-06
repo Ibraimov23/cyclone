@@ -260,7 +260,13 @@ class _siginState extends State<Sigin> {
                   ),
                   const SizedBox(width: 13),
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      try {
+                        await authService.value.registerInWithGoogle();
+                      } catch (e) {
+                        print("Ошибка при входе через Google: $e");
+                      }
+                    },
                     style: IconButton.styleFrom(
                       backgroundColor: Colors.white,
                       padding: const EdgeInsets.symmetric(

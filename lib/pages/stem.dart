@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -19,6 +20,9 @@ class _SteamState extends State<Steam> {
     {'name': 'Трава', 'value': '2 кг'},
     {'name': 'Сено', 'value': '12 кг'},
   ];
+
+  final String storageId =
+      'storageId'; // Укажите ID хранилища, которое нужно обновить
 
   @override
   Widget build(BuildContext context) {
@@ -131,7 +135,7 @@ class _SteamState extends State<Steam> {
                           width: double.infinity,
                           child: ElevatedButton(
                             onPressed: () {
-                              // Add save logic here
+                              _saveData();
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: const Color(0xFF90010A),
@@ -265,5 +269,39 @@ class _SteamState extends State<Steam> {
         );
       },
     );
+  }
+
+  // Save data to Firebase
+  Future<void> _saveData() async {
+    try {
+      // Create the storage data from the form
+      Map<String, dynamic> storageData = {
+        'corns': double.parse(data[1]['value']!.split(' ')[0]),
+        'hays': double.parse(data[7]['value']!.split(' ')[0]),
+        'herbs': double.parse(data[6]['value']!.split(' ')[0]),
+        'oats': double.parse(data[2]['value']!.split(' ')[0]),
+        'ownerId': 'your_owner_id', // Change this to the actual owner ID
+        'peas': double.parse(data[5]['value']!.split(' ')[0]),
+        'silages': double.parse(data[3]['value']!.split(' ')[0]),
+        'straws': double.parse(data[4]['value']!.split(' ')[0]),
+      };
+
+      // Update the data in Firestore
+      await FirebaseFirestore.instance
+          .collection('storages')
+          .doc(storageId)
+          .update(storageData);
+
+      // Show success message
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Данные успешно сохранены')),
+      );
+    } catch (e) {
+      // Handle errors
+      print("Ошибка сохранения данных: $e");
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Ошибка сохранения данных')),
+      );
+    }
   }
 }

@@ -1,11 +1,15 @@
 import 'package:cyclone/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 ValueNotifier<AuthService> authService = ValueNotifier(AuthService());
 
 class AuthService {
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  final GoogleSignIn googleUser = GoogleSignIn(
+      clientId:
+          '1009865774921-oo4h5gfllc4nr1g4jr4lse2kmj74vrpt.apps.googleusercontent.com');
 
   User? get currentUser => firebaseAuth.currentUser;
 
@@ -226,6 +230,67 @@ class AuthService {
       return "Эта операция не разрешена.";
     } else {
       return e.message ?? "Ошибка при изменении пароля.";
+    }
+  }
+
+  Future<UserCredential?> signInWithGoogle() async {
+    try {
+      final GoogleSignInAccount? googleUsers = await googleUser.signIn();
+
+      if (googleUsers == null) {
+        return null;
+      }
+
+      final GoogleSignInAuthentication googleAuth =
+          await googleUsers.authentication;
+
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      UserCredential userCredential =
+          await firebaseAuth.signInWithCredential(credential);
+
+      return userCredential;
+    } catch (e) {
+      print("Ошибка аутентификации через Google: $e");
+      rethrow;
+    }
+  }
+
+  Future<String?> registerInWithGoogle() async {
+    try {
+      final GoogleSignInAccount? googleUsers = await googleUser.signIn();
+
+      if (googleUsers == null) {
+        return "Пользователь отменил авторизацию.";
+      }
+
+      final GoogleSignInAuthentication googleAuth =
+          await googleUsers.authentication;
+
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      UserCredential userCredential =
+          await firebaseAuth.signInWithCredential(credential);
+
+      User? user = userCredential.user;
+      if (user != null) {
+        if (user.emailVerified) {
+          return null;
+        } else {
+          return "Пожалуйста, подтвердите ваш email.";
+        }
+      }
+
+      return "Ошибка при входе.";
+    } catch (e) {
+      print("Ошибка при аутентификации через Google: $e");
+      return "Неизвестная ошибка при аутентификации.";
     }
   }
 }

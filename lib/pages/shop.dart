@@ -26,41 +26,44 @@ class _ShopState extends State<Shop> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 0),
-              const Text(
-                'Ассортимент кормов',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 24,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              const SizedBox(height: 23),
-              const TextField(
-                decoration: InputDecoration(
-                  hintText: 'Search',
-                  filled: true,
-                  fillColor: Colors.white,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(12)),
-                    borderSide: BorderSide(
-                      color: Color(0xFF90010A),
-                      width: 2,
-                    ),
+              Padding(
+                padding: const EdgeInsets.only(top: 16.0),
+                child: Text(
+                  'Ассортимент кормов',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 24,
+                    fontWeight: FontWeight.w600,
                   ),
-                  contentPadding: EdgeInsets.all(12),
-                ),
-                style: TextStyle(
-                  color: Color(0xFF363B4B),
-                  fontSize: 18,
-                  fontWeight: FontWeight.w400,
                 ),
               ),
-              const SizedBox(height: 23),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 16.0),
+                child: TextField(
+                  decoration: InputDecoration(
+                    hintText: 'Search',
+                    filled: true,
+                    fillColor: Colors.white,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(12)),
+                      borderSide: BorderSide(
+                        color: Color(0xFF90010A),
+                        width: 2,
+                      ),
+                    ),
+                    contentPadding: EdgeInsets.all(12),
+                  ),
+                  style: TextStyle(
+                    color: Color(0xFF363B4B),
+                    fontSize: 18,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ),
               GridView.builder(
                 shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                physics: NeverScrollableScrollPhysics(),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 1,
                   crossAxisSpacing: 16.0,
                   mainAxisSpacing: 16.0,
@@ -70,10 +73,11 @@ class _ShopState extends State<Shop> {
                 itemBuilder: (context, index) {
                   return Card(
                     clipBehavior: Clip.antiAlias,
-                    shape: const RoundedRectangleBorder(
+                    shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.vertical(
-                          bottom: Radius.circular(10),
-                          top: Radius.circular(10)),
+                        bottom: Radius.circular(10),
+                        top: Radius.circular(10),
+                      ),
                     ),
                     child: Column(
                       children: [
@@ -82,8 +86,8 @@ class _ShopState extends State<Shop> {
                           fit: BoxFit.cover,
                         ),
                         Container(
-                          padding: const EdgeInsets.all(24),
-                          decoration: const BoxDecoration(
+                          padding: EdgeInsets.all(24),
+                          decoration: BoxDecoration(
                             color: Color(0xCC90010A),
                             borderRadius: BorderRadius.vertical(
                               bottom: Radius.circular(10),
@@ -91,7 +95,7 @@ class _ShopState extends State<Shop> {
                           ),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
+                            children: [
                               Text(
                                 'Корм для скота высшего качества!',
                                 style: TextStyle(

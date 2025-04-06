@@ -215,7 +215,6 @@ class _CreateState extends State<Create> {
                 padding: EdgeInsets.only(top: 20),
                 child: ElevatedButton(
                   onPressed: isLoading ? null : _saveStado,
-                  // Блокировка кнопки при сохранении
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color(0xFF90010A),
                     padding: EdgeInsets.symmetric(vertical: 16),

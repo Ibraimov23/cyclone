@@ -44,7 +44,7 @@ class _LoginState extends State<Login> {
       _showErrorDialog('Неизвестная ошибка: $e');
     } finally {
       setState(() {
-        _isLoading = false; // Отключаем индикатор загрузки
+        _isLoading = false;
       });
     }
   }
@@ -208,7 +208,13 @@ class _LoginState extends State<Login> {
                   ),
                   const SizedBox(width: 13),
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      try {
+                        await authService.value.signInWithGoogle();
+                      } catch (e) {
+                        print("Ошибка при входе через Google: $e");
+                      }
+                    },
                     style: IconButton.styleFrom(
                       backgroundColor: Colors.white,
                       padding: const EdgeInsets.symmetric(

@@ -37,25 +37,26 @@ class _ChatState extends State<Chatbot> {
 
     setState(() {
       messages.add({"role": "user", "content": userMessage});
+      messages.add({"role": "bot", "content": ""}); // Заготовка под поток
     });
 
     _controller.clear();
+    _listKey.currentState?.insertItem(messages.length - 2); // user msg
+    _listKey.currentState?.insertItem(messages.length - 1); // bot msg
 
-    _listKey.currentState?.insertItem(messages.length - 1);
+    int botIndex = messages.length - 1;
 
     try {
-      String botResponse = await sendMessageToBot(userMessage);
-      setState(() {
-        messages.add({"role": "bot", "content": botResponse});
-      });
-
-      _listKey.currentState?.insertItem(messages.length - 1);
+      await for (final chunk in sendMessageToBotStream(userMessage)) {
+        setState(() {
+          messages[botIndex]["content"] =
+              (messages[botIndex]["content"] ?? "") + chunk;
+        });
+      }
     } catch (e) {
       setState(() {
-        messages.add({"role": "bot", "content": "Ошибка: $e"});
+        messages[botIndex]["content"] = "Ошибка: $e";
       });
-
-      _listKey.currentState?.insertItem(messages.length - 1);
     }
   }
 
@@ -97,9 +98,8 @@ class _ChatState extends State<Chatbot> {
                         bool isUser = messages[index]["role"] == "user";
                         return SlideTransition(
                           position: Tween<Offset>(
-                            begin: Offset(1, 0),
-                            end: Offset(0, 0),
-                          ).animate(animation),
+                                  begin: Offset(1, 0), end: Offset(0, 0))
+                              .animate(animation),
                           child: Align(
                             alignment: isUser
                                 ? Alignment.centerRight

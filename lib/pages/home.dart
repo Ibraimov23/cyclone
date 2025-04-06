@@ -48,6 +48,7 @@ class _HomeState extends State<Home> {
             .get();
 
         return {
+          "id": stado.id,
           "name": stado["name"],
           "cattleType": stado["cattleType"],
           "iconUrl": cattleTypeDoc.exists ? cattleTypeDoc["iconUrl"] : "",
@@ -94,9 +95,6 @@ class _HomeState extends State<Home> {
               }
 
               var stadosList = snapshot.data!;
-              /*if (stadosList.isEmpty) {
-                return const Center(child: Text("Стада не найдены"));
-              }*/
 
               return ListView(
                 padding: const EdgeInsets.all(16.0),
@@ -124,11 +122,16 @@ class _HomeState extends State<Home> {
                     itemCount: stadosList.length,
                     itemBuilder: (context, index) {
                       var cattle = stadosList[index];
-                      return CustomCard(
-                        title: cattle["cattleType"],
-                        description: 'номер скота \n${cattle["name"]}',
-                        iconPath: cattle["iconUrl"],
-                        count: cattle["count"],
+                      return GestureDetector(
+                        onTap: () {
+                          /*Navigator.pushNamed(context, '/id');*/
+                        },
+                        child: CustomCard(
+                          title: cattle["cattleType"],
+                          description: 'номер скота \n${cattle["name"]}',
+                          iconPath: cattle["iconUrl"],
+                          count: cattle["count"],
+                        ),
                       );
                     },
                   ),
@@ -173,6 +176,62 @@ class _HomeState extends State<Home> {
               );
             },
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class CattleDetailsPage extends StatelessWidget {
+  final String cattleId;
+
+  CattleDetailsPage({required this.cattleId});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Детали скота'),
+      ),
+      body: Center(
+        child: FutureBuilder<DocumentSnapshot>(
+          future: FirebaseFirestore.instance
+              .collection('stados')
+              .doc(cattleId)
+              .get(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            }
+
+            if (snapshot.hasError || !snapshot.hasData) {
+              return const Center(child: Text("Ошибка загрузки данных"));
+            }
+
+            var cattle = snapshot.data!;
+            return Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Тип скота: ${cattle["cattleType"]}',
+                    style: const TextStyle(fontSize: 22),
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    'Номер скота: ${cattle["name"]}',
+                    style: const TextStyle(fontSize: 18),
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    'Количество: ${cattle["count"]}',
+                    style: const TextStyle(fontSize: 18),
+                  ),
+                ],
+              ),
+            );
+          },
         ),
       ),
     );

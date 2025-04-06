@@ -13,20 +13,7 @@ class _IdState extends State<Id> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: Container(
-          margin: const EdgeInsets.all(8),
-          decoration: const BoxDecoration(
-            color: Color(0xFF90010A),
-            shape: BoxShape.circle,
-          ),
-          child: IconTheme(
-            data: const IconThemeData(color: Colors.white),
-            child: BackButton(),
-          ),
-        ),
-      ),
-      backgroundColor: Colors.grey.shade300,
+      backgroundColor: const Color(0xFFE7E7E7),
       body: Column(
         children: [
           Expanded(

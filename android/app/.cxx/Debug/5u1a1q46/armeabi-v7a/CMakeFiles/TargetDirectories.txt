@@ -1,0 +1,2 @@
+C:/Users/nursultan/Downloads/lala/cyclone/android/app/.cxx/Debug/5u1a1q46/armeabi-v7a/CMakeFiles/edit_cache.dir
+C:/Users/nursultan/Downloads/lala/cyclone/android/app/.cxx/Debug/5u1a1q46/armeabi-v7a/CMakeFiles/rebuild_cache.dir
