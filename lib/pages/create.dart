@@ -14,8 +14,8 @@ class _CreateState extends State<Create> {
   final TextEditingController _stadoNameController = TextEditingController();
   String? selectedCattleType;
   List<String> cattleTypes = [];
-  List<String> cattleTypeIds = []; // This will hold the IDs of the cattle types
-  bool isLoading = false; // Flag to disable the save button while loading
+  List<String> cattleTypeIds = [];
+  bool isLoading = false;
 
   @override
   void initState() {
@@ -23,7 +23,6 @@ class _CreateState extends State<Create> {
     _loadCattleTypes();
   }
 
-  // Load cattle types and their IDs
   Future<void> _loadCattleTypes() async {
     try {
       QuerySnapshot querySnapshot =
@@ -32,16 +31,13 @@ class _CreateState extends State<Create> {
       setState(() {
         cattleTypes =
             querySnapshot.docs.map((doc) => doc["name"] as String).toList();
-        cattleTypeIds = querySnapshot.docs
-            .map((doc) => doc.id)
-            .toList(); // Capture the document IDs
+        cattleTypeIds = querySnapshot.docs.map((doc) => doc.id).toList();
       });
     } catch (e) {
       print("Ошибка загрузки типов скота: $e");
     }
   }
 
-  // Save the new stado with cattleTypeId as the document ID
   Future<void> _saveStado() async {
     if (_stadoNameController.text.isEmpty || selectedCattleType == null) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -60,19 +56,36 @@ class _CreateState extends State<Create> {
         throw Exception("Пользователь не авторизован");
       }
 
-      // Get the index of the selected cattle type
       int selectedIndex = cattleTypes.indexOf(selectedCattleType!);
-      String selectedCattleTypeId = cattleTypeIds[
-          selectedIndex]; // Get the ID of the selected cattle type
+      String selectedCattleTypeId = cattleTypeIds[selectedIndex];
 
-      await FirebaseFirestore.instance.collection("stados").add({
+      DocumentReference docRef =
+          await FirebaseFirestore.instance.collection("stados").add({
         "name": _stadoNameController.text,
         "cattleType": selectedCattleType,
         "userId": userId,
         "createdAt": Timestamp.now(),
         "cattleTypeId": selectedCattleTypeId,
-        // Store the document ID of the selected cattle type
       });
+
+      final List<String> feedTypes = [
+        "corns",
+        "hays",
+        "herbs",
+        "oats",
+        "peas",
+        "silages",
+        "straws",
+      ];
+
+      for (int i = 1; i <= 6; i++) {
+        Map<String, dynamic> feedData = {
+          for (var feed in feedTypes) feed: 0,
+          "createdAt": Timestamp.now(),
+        };
+
+        await docRef.collection("tables").doc("reception $i").set(feedData);
+      }
 
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text("Стадо успешно создано!")),
@@ -83,8 +96,6 @@ class _CreateState extends State<Create> {
         selectedCattleType = null;
         isLoading = false;
       });
-
-      /*Navigator.popUntil(context, ModalRoute.withName('/'));*/
     } catch (e) {
       print("Ошибка при создании стада: $e");
       ScaffoldMessenger.of(context).showSnackBar(
@@ -100,7 +111,18 @@ class _CreateState extends State<Create> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.grey.shade300,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            color: const Color(0xFFE7E7E7),
+            image: DecorationImage(
+              image: const AssetImage('assets/pattern.png'),
+              fit: BoxFit.cover,
+              repeat: ImageRepeat.repeat,
+            ),
+          ),
+        ),
         leading: Container(
           margin: EdgeInsets.all(8),
           decoration: BoxDecoration(
@@ -115,7 +137,15 @@ class _CreateState extends State<Create> {
       ),
       backgroundColor: Colors.grey.shade300,
       body: SingleChildScrollView(
-        child: Padding(
+        child: Container(
+          decoration: BoxDecoration(
+            color: const Color(0xFFE7E7E7),
+            image: DecorationImage(
+              image: const AssetImage('assets/pattern.png'),
+              fit: BoxFit.cover,
+              repeat: ImageRepeat.repeat,
+            ),
+          ),
           padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

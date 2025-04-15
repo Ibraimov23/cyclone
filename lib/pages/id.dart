@@ -1,171 +1,138 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cyclone/widget/animal_passport.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
-class Id extends StatefulWidget {
-  const Id({super.key});
+class Id extends StatelessWidget {
+  final String stadoId;
+  final String stadoName;
+  final String stadoType;
 
-  @override
-  State<Id> createState() => _IdState();
-}
+  const Id({
+    super.key,
+    required this.stadoId,
+    required this.stadoName,
+    required this.stadoType,
+  });
 
-class _IdState extends State<Id> {
+  String formatAnimalName(String type) {
+    const map = {
+      'коровы': 'Корова',
+      'быки': 'Бык',
+      'овцы': 'Овца',
+      'козлы': 'Козел',
+    };
+    return map[type.toLowerCase()] ?? 'Неизвестно';
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFE7E7E7),
-      body: Column(
-        children: [
-          Expanded(
-            child: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.only(top: 20),
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      const Text(
-                        'Технический паспорт',
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.black,
-                        ),
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/pattern.png'),
+            fit: BoxFit.cover,
+            repeat: ImageRepeat.repeat,
+          ),
+        ),
+        child: CustomScrollView(
+          slivers: [
+            SliverPadding(
+              padding: const EdgeInsets.only(top: 20),
+              sliver: SliverToBoxAdapter(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const Text(
+                      'Технический паспорт',
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black,
                       ),
-                      const SizedBox(height: 7),
-                      const Text(
-                        'Стада №',
-                        style: TextStyle(
-                          fontSize: 24,
-                          color: Colors.black,
-                        ),
+                    ),
+                    const SizedBox(height: 7),
+                    Text(
+                      'стадо $stadoName',
+                      style: const TextStyle(
+                        fontSize: 24,
+                        color: Colors.black,
                       ),
-                      const SizedBox(height: 40),
-                      AnimalPassport(
-                        animalName: 'Корова',
-                        age: '12 лет',
-                        weight: '90 кг',
-                        breed: 'Голштинская',
-                        healthStatus: 'good',
-                        iconPath: 'assets/icons/beef_id.svg',
-                        idNumber: '5483534',
-                      ),
-                      const SizedBox(height: 20),
-                      AnimalPassport(
-                        animalName: 'Баран',
-                        age: '5 лет',
-                        weight: '70 кг',
-                        breed: 'Романовская',
-                        healthStatus: 'bad',
-                        iconPath: 'assets/icons/male_goat_id.svg',
-                        idNumber: '7593899',
-                      ),
-                      const SizedBox(height: 20),
-                      AnimalPassport(
-                        animalName: 'Овца',
-                        age: '7 лет',
-                        weight: '45 кг',
-                        breed: 'Мегрельская',
-                        healthStatus: 'warning',
-                        iconPath: 'assets/icons/goat_id.svg',
-                        idNumber: '8954095',
-                      ),
-                    ],
-                  ),
+                    ),
+                    const SizedBox(height: 30),
+                  ],
                 ),
               ),
             ),
-          ),
-          // Нижний контейнер с кнопками
-          Container(
-            width: double.infinity,
-            padding:
-                const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(20.0),
-                topRight: Radius.circular(20.0),
+            SliverToBoxAdapter(
+              child: StreamBuilder<QuerySnapshot>(
+                stream: FirebaseFirestore.instance
+                    .collection("stados")
+                    .doc(stadoId)
+                    .collection("animals")
+                    .orderBy("createdAt", descending: true)
+                    .snapshots(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+
+                  if (snapshot.hasError) {
+                    return const Center(child: Text('Ошибка загрузки данных'));
+                  }
+
+                  final animals = snapshot.data?.docs ?? [];
+
+                  if (animals.isEmpty) {
+                    return const Center(child: Text(""));
+                  }
+
+                  return ListView.separated(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: animals.length,
+                    separatorBuilder: (_, __) => const SizedBox(height: 20),
+                    itemBuilder: (context, index) {
+                      final animal = animals[index];
+                      final data = animal.data() as Map<String, dynamic>;
+
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(16),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.05),
+                                blurRadius: 6,
+                                offset: const Offset(0, 2),
+                              )
+                            ],
+                          ),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 0, vertical: 10),
+                          child: AnimalPassport(
+                            animalName: formatAnimalName(stadoType),
+                            age: data['age'] ?? '—',
+                            weight: data['weight'] ?? '—',
+                            breed: data['breed'] ?? '—',
+                            healthStatus: data['health'] ?? 'unknown',
+                            iconPath:
+                                data['iconUrl'] ?? 'assets/icons/default.svg',
+                            idNumber: data['tagnumber'] ?? '',
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                },
               ),
             ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              // Центрируем по вертикали
-              children: <Widget>[
-                ElevatedButton(
-                  onPressed: () {
-                    print('Корзина нажата');
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.transparent,
-                    elevation: 0,
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SvgPicture.asset('assets/icons/food.svg'),
-                      const SizedBox(height: 2),
-                      const Text(
-                        'Корзина',
-                        style: TextStyle(
-                          fontSize: 10,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                // Вставляем кастомную кнопку вместо текста "here"
-                GestureDetector(
-                  onTap: () {
-                    print('Кастомная кнопка нажата!');
-                  },
-                  child: Container(
-                    height: 26,
-                    width: 26,
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF90010A), // Цвет фона #90010A
-                      borderRadius: BorderRadius.circular(100), // Круглая форма
-                    ),
-                    padding: const EdgeInsets.all(4),
-                    // Отступы
-                    child: const Center(
-                      child: Icon(
-                        Icons.add, // Иконка плюса
-                        color: Colors.white, // Цвет иконки
-                        size: 16, // Размер иконки
-                      ),
-                    ),
-                  ),
-                ),
-                ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.transparent,
-                    elevation: 0,
-                  ),
-                  child: Container(
-                    width: 51,
-                    height: 51,
-                    decoration: const BoxDecoration(
-                      color: Color(0xFF90010A),
-                      shape: BoxShape.circle,
-                    ),
-                    padding: const EdgeInsets.all(12),
-                    child: SvgPicture.asset(
-                      'assets/icons/animal_info.svg',
-                      width: 28,
-                      height: 24,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
+            const SliverToBoxAdapter(child: SizedBox(height: 30)),
+          ],
+        ),
       ),
     );
   }

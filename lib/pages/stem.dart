@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -10,236 +11,272 @@ class Steam extends StatefulWidget {
 }
 
 class _SteamState extends State<Steam> {
-  List<Map<String, String>> data = [
-    {'name': 'Дата и время', 'value': '30.09.2025'},
-    {'name': 'Овес', 'value': '5.5 кг'},
-    {'name': 'Кукуруза', 'value': '12 кг'},
-    {'name': 'Силос', 'value': '3 кг'},
-    {'name': 'Солома', 'value': '5.2 кг'},
-    {'name': 'Горох', 'value': '7.1 кг'},
-    {'name': 'Трава', 'value': '2 кг'},
-    {'name': 'Сено', 'value': '12 кг'},
-  ];
+  String? storageDocId;
+  Map<String, dynamic> storageData = {};
 
-  final String storageId =
-      'storageId'; // Укажите ID хранилища, которое нужно обновить
+  final Map<String, String> fieldLabels = {
+    'oats': 'Овес',
+    'corns': 'Кукуруза',
+    'silages': 'Силос',
+    'straws': 'Солома',
+    'peas': 'Горох',
+    'herbs': 'Трава',
+    'hays': 'Сено',
+  };
+
+  @override
+  void initState() {
+    super.initState();
+    _loadOrInitStorage();
+  }
+
+  Future<void> _loadOrInitStorage() async {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) return;
+
+    final snapshot = await FirebaseFirestore.instance
+        .collection('storages')
+        .where('ownerId', isEqualTo: user.uid)
+        .limit(1)
+        .get();
+
+    if (snapshot.docs.isNotEmpty) {
+      final doc = snapshot.docs.first;
+      setState(() {
+        storageDocId = doc.id;
+        storageData = doc.data();
+      });
+    } else {
+      setState(() {
+        storageDocId = null;
+        storageData = {
+          'oats': 0.0,
+          'corns': 0.0,
+          'silages': 0.0,
+          'straws': 0.0,
+          'peas': 0.0,
+          'herbs': 0.0,
+          'hays': 0.0,
+        };
+      });
+    }
+  }
+
+  Future<void> _updateStorageValue(String key, double newValue) async {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) return;
+    if (storageDocId == null) {
+      final docRef =
+          await FirebaseFirestore.instance.collection('storages').add({
+        'ownerId': user.uid,
+        ...storageData,
+        key: newValue,
+      });
+      setState(() {
+        storageDocId = docRef.id;
+        storageData[key] = newValue;
+      });
+    } else {
+      await FirebaseFirestore.instance
+          .collection('storages')
+          .doc(storageDocId)
+          .update({key: newValue});
+      setState(() {
+        storageData[key] = newValue;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.grey.shade300,
-        body: Container(
-          decoration: BoxDecoration(
-            color: Color(0xFFE7E7E7),
-            image: DecorationImage(
-              image: AssetImage('assets/pattern.png'),
-              fit: BoxFit.cover,
-              repeat: ImageRepeat.repeat,
-            ),
+      backgroundColor: Colors.grey.shade300,
+      body: Container(
+        // Здесь указываем фон, который будет заполнять весь экран
+        decoration: const BoxDecoration(
+          color: Color(0xFFE7E7E7),
+          image: DecorationImage(
+            image: AssetImage('assets/pattern.png'),
+            fit: BoxFit.cover,
+            repeat: ImageRepeat.repeat,
           ),
-          child: Column(
-            children: [
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      const SizedBox(height: 20),
-                      const Text(
-                        "Склад кормов",
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.black,
-                        ),
+        ),
+        child: Column(
+          children: [
+            Expanded(
+              // Expanded чтобы фон занимал все доступное пространство
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    const SizedBox(height: 20),
+                    const Text(
+                      "Склад кормов",
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black,
                       ),
-                      const SizedBox(height: 23),
-                      // Table
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: Container(
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(12),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.1),
-                                blurRadius: 10,
-                                spreadRadius: 2,
-                              ),
-                            ],
+                    ),
+                    const SizedBox(height: 23),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(12),
+                            topRight: Radius.circular(12),
+                            bottomLeft: Radius.circular(12),
+                            bottomRight: Radius.circular(12),
                           ),
-                          child: Column(
-                            children: [
-                              Row(
-                                children: [
-                                  Expanded(
-                                    child: DecoratedBox(
-                                      decoration: const BoxDecoration(
-                                        color: Color(0xFF90010A),
-                                        borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(12),
-                                        ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.1),
+                              blurRadius: 10,
+                              spreadRadius: 2,
+                            ),
+                          ],
+                        ),
+                        child: Column(
+                          children: [
+                            Row(
+                              children: const [
+                                Expanded(
+                                  child: DecoratedBox(
+                                    decoration: BoxDecoration(
+                                      color: Color(0xFF90010A),
+                                      borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(12),
                                       ),
-                                      child: const Padding(
-                                          padding: EdgeInsets.all(12),
-                                          child: Row(children: [
-                                            SizedBox(
-                                              width: 20,
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsets.all(12),
+                                      child: Row(
+                                        children: [
+                                          SizedBox(width: 20),
+                                          Text(
+                                            'Название',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.w600,
                                             ),
-                                            Text(
-                                              'Название',
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.w600,
-                                              ),
-                                            ),
-                                          ])),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
-                                  Expanded(
-                                    child: DecoratedBox(
-                                      decoration: const BoxDecoration(
-                                        color: Color(0xFF90010A),
-                                        borderRadius: BorderRadius.only(
-                                          topRight: Radius.circular(12),
+                                ),
+                                Expanded(
+                                  child: DecoratedBox(
+                                    decoration: BoxDecoration(
+                                      color: Color(0xFF90010A),
+                                      borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(12),
+                                      ),
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsets.all(12),
+                                      child: Text(
+                                        'Значение',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w600,
                                         ),
                                       ),
-                                      child: const Padding(
-                                        padding: EdgeInsets.all(12),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            ...fieldLabels.entries.map((entry) {
+                              final key = entry.key;
+                              final label = entry.value;
+                              final value = storageData[key]?.toString() ?? '0';
+
+                              return Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.only(
+                                    bottomLeft: Radius.circular(12),
+                                    bottomRight: Radius.circular(12),
+                                  ),
+                                ),
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      child: Padding(
+                                        padding: const EdgeInsets.fromLTRB(
+                                            30, 12, 12, 12),
                                         child: Text(
-                                          'Значение',
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w600,
+                                          label,
+                                          style: const TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w500,
                                           ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                              ..._buildTableRows(),
-                            ],
-                          ),
+                                    Expanded(
+                                      child: Padding(
+                                        padding: const EdgeInsets.fromLTRB(
+                                            12, 12, 30, 12),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            GestureDetector(
+                                              onTap: () async {
+                                                String? newValue =
+                                                    await _showEditDialog(
+                                                        context, value);
+                                                if (newValue != null &&
+                                                    newValue.isNotEmpty) {
+                                                  final parsed =
+                                                      double.tryParse(newValue);
+                                                  if (parsed != null) {
+                                                    _updateStorageValue(
+                                                        key, parsed);
+                                                  }
+                                                }
+                                              },
+                                              child: Text(
+                                                "$value кг",
+                                                style: const TextStyle(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                              ),
+                                            ),
+                                            SvgPicture.asset(
+                                                'assets/icons/pen.svg'),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            }).toList(),
+                          ],
                         ),
                       ),
-                      const SizedBox(height: 20),
-                      // Save button
-                      Padding(
-                        padding: const EdgeInsets.all(20),
-                        child: SizedBox(
-                          width: double.infinity,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              _saveData();
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xFF90010A),
-                              padding: const EdgeInsets.symmetric(vertical: 13),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                            ),
-                            child: const Text(
-                              'Сохранить',
-                              style: TextStyle(
-                                fontSize: 20,
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ));
-  }
-
-  List<Widget> _buildTableRows() {
-    return data.map((item) {
-      int index = data.indexOf(item);
-      return Container(
-        decoration: BoxDecoration(
-          color: index % 2 == 0 ? const Color(0xFFF9F9F9) : Colors.white,
-          borderRadius: index == data.length - 1
-              ? const BorderRadius.only(
-                  bottomLeft: Radius.circular(30),
-                  bottomRight: Radius.circular(30),
-                )
-              : null,
-        ),
-        child: Row(
-          children: [
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(30, 12, 12, 12),
-                child: Text(
-                  item['name']!,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ),
-            ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(12, 12, 30, 12),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    item['name'] == 'Дата и время'
-                        ? Text(
-                            item['value']!,
-                            style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          )
-                        : GestureDetector(
-                            onTap: () async {
-                              String? newValue = await _showEditDialog(
-                                  context, item['value']!);
-                              if (newValue != null && newValue.isNotEmpty) {
-                                setState(() {
-                                  item['value'] = newValue + ' кг';
-                                });
-                              }
-                            },
-                            child: Text(
-                              item['value']!,
-                              style: const TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.black,
-                              ),
-                            ),
-                          ),
-                    SvgPicture.asset(
-                      'assets/icons/pen.svg',
                     ),
+                    const SizedBox(height: 20),
                   ],
                 ),
               ),
             ),
           ],
         ),
-      );
-    }).toList();
+      ),
+    );
   }
 
-  Future<String?> _showEditDialog(BuildContext context, String currentValue) {
-    TextEditingController controller =
-        TextEditingController(text: currentValue.split(' ')[0]);
+  Future<String?> _showEditDialog(
+      BuildContext context, String currentValue) async {
+    final controller = TextEditingController(text: currentValue);
     return showDialog<String>(
       context: context,
       builder: (context) {
@@ -248,60 +285,22 @@ class _SteamState extends State<Steam> {
           title: const Text('Изменить значение'),
           content: TextField(
             controller: controller,
-            keyboardType: TextInputType.numberWithOptions(decimal: true),
+            keyboardType: const TextInputType.numberWithOptions(decimal: true),
             decoration:
                 const InputDecoration(hintText: 'Введите новое значение'),
           ),
           actions: [
             TextButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
+              onPressed: () => Navigator.pop(context),
               child: const Text('Отмена'),
             ),
             TextButton(
-              onPressed: () {
-                Navigator.pop(context, controller.text);
-              },
+              onPressed: () => Navigator.pop(context, controller.text),
               child: const Text('Сохранить'),
             ),
           ],
         );
       },
     );
-  }
-
-  // Save data to Firebase
-  Future<void> _saveData() async {
-    try {
-      // Create the storage data from the form
-      Map<String, dynamic> storageData = {
-        'corns': double.parse(data[1]['value']!.split(' ')[0]),
-        'hays': double.parse(data[7]['value']!.split(' ')[0]),
-        'herbs': double.parse(data[6]['value']!.split(' ')[0]),
-        'oats': double.parse(data[2]['value']!.split(' ')[0]),
-        'ownerId': 'your_owner_id', // Change this to the actual owner ID
-        'peas': double.parse(data[5]['value']!.split(' ')[0]),
-        'silages': double.parse(data[3]['value']!.split(' ')[0]),
-        'straws': double.parse(data[4]['value']!.split(' ')[0]),
-      };
-
-      // Update the data in Firestore
-      await FirebaseFirestore.instance
-          .collection('storages')
-          .doc(storageId)
-          .update(storageData);
-
-      // Show success message
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Данные успешно сохранены')),
-      );
-    } catch (e) {
-      // Handle errors
-      print("Ошибка сохранения данных: $e");
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Ошибка сохранения данных')),
-      );
-    }
   }
 }

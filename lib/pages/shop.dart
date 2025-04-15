@@ -101,6 +101,7 @@ class _ShopState extends State<Shop> {
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 18,
+                                  letterSpacing: 0.5,
                                   fontWeight: FontWeight.w700,
                                 ),
                               ),

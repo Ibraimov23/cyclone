@@ -27,8 +27,8 @@ class _ProfileState extends State<Profile> {
           children: <Widget>[
             const SizedBox(height: 37),
             Image.asset(
-              'assets/person.png', // Убедись, что путь к изображению правильный
-              height: 100, // Укажи нужную высоту
+              'assets/person.png',
+              height: 100,
             ),
             const SizedBox(height: 30),
             const Text(

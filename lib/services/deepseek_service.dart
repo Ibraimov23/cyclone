@@ -23,7 +23,6 @@ Stream<String> sendMessageToBotStream(String userMessage) async* {
       ..body = jsonEncode(request),
   );
 
-  // Чтение стрима по строкам
   final lines =
       response.stream.transform(utf8.decoder).transform(const LineSplitter());
 

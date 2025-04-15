@@ -1,4 +1,5 @@
 import 'package:cyclone/pages/Instruction.dart';
+import 'package:cyclone/pages/add.dart';
 import 'package:cyclone/pages/adding.dart';
 import 'package:cyclone/pages/chatbot.dart';
 import 'package:cyclone/pages/create.dart';
@@ -9,15 +10,15 @@ import 'package:cyclone/pages/intro.dart';
 import 'package:cyclone/pages/language.dart';
 import 'package:cyclone/pages/login.dart';
 import 'package:cyclone/pages/newpassowrd.dart';
-import 'package:cyclone/pages/passport.dart';
 import 'package:cyclone/pages/profile.dart';
 import 'package:cyclone/pages/resetpassword.dart';
 import 'package:cyclone/pages/shop.dart';
 import 'package:cyclone/pages/signin.dart';
 import 'package:cyclone/pages/stem.dart';
+import 'package:cyclone/pages/subpage.dart';
 import 'package:cyclone/pages/taable.dart';
 import 'package:cyclone/pages/welcome.dart';
-import 'package:cyclone/widget/custom_app_bar.dart';
+import 'package:cyclone/widget/custom_app-bar.dart';
 import 'package:cyclone/widget/custom_drawer.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -52,7 +53,6 @@ class Cyclone extends StatelessWidget {
       home: AuthWrapper(),
       routes: {
         '/chatbot': (context) => Chatbot(),
-        '/passport': (context) => Passport(),
         '/home': (context) => Home(),
         '/language': (context) => LanguageSelectionScreen(),
         '/welcome': (context) => Welcome(),
@@ -64,12 +64,22 @@ class Cyclone extends StatelessWidget {
         "/profile": (context) => Profile(),
         "/intro": (context) => Intro(),
         "/instruction": (context) => Instruction(),
-        "/id": (context) => Id(),
+        "/id": (context) => Id(
+              stadoId: 'null',
+              stadoName: 'null',
+              stadoType: 'null',
+            ),
         "/shop": (context) => Shop(),
-        "/taable": (context) => Warehouse(),
+        "/taable": (context) => TableScreen(
+              stadoName: 'null',
+              stadoId: 'null',
+            ),
         "/adding": (context) => Adding(),
         "/finance": (context) => Finance(),
         "/steam": (context) => Steam(),
+        "/add": (context) => AddAnimal(stadoId: 'null'),
+        "/inner": (context) => SubPageScreen(
+            stadoId: 'null', stadoName: 'null', stadoType: 'null'),
       },
     );
   }
@@ -245,64 +255,3 @@ class _MainScreenState extends State<MainScreen> {
     );
   }
 }
-
-/*runApp(MaterialApp(
-    theme: ThemeData(
-      fontFamily: 'Montserrat',
-      //   textTheme: TextTheme(
-      //     bodyMedium: TextStyle(color: Colors.black),
-      //     // Замена bodyText1 на bodyMedium
-      //     bodySmall: TextStyle(color: Colors.black),
-      //     // Замена bodyText2 на bodySmall
-      //     displayLarge: TextStyle(color: Colors.black),
-      //     // Замена headline1 на displayLarge
-      //     displayMedium: TextStyle(color: Colors.black),
-      //     // Замена headline2 на displayMedium
-      //     displaySmall: TextStyle(color: Colors.black),
-      //     // Замена headline3 на displaySmall
-      //     headlineMedium: TextStyle(color: Colors.black),
-      //     // Замена headline4 на headlineMedium
-      //     headlineSmall: TextStyle(color: Colors.black),
-      //     // Замена headline5 на headlineSmall
-      //     titleLarge: TextStyle(color: Colors.black),
-      //     // Замена headline6 на titleLarge
-      //     titleMedium: TextStyle(color: Colors.black),
-      //     // Замена subtitle1 на titleMedium
-      //     titleSmall: TextStyle(color: Colors.black),
-      //     // Замена subtitle2 на titleSmall
-      //     labelLarge: TextStyle(color: Colors.black),
-      //     // Замена button на labelLarge
-      //     bodyLarge: TextStyle(color: Colors.black),
-      //     // Замена bodyText1 на bodyLarge (если нужно)
-      //     labelSmall: TextStyle(color: Colors.black),
-      //     // Замена caption на labelSmall
-      //   ),
-      appBarTheme: AppBarTheme(
-        backgroundColor: Colors.transparent,
-      ),
-    ),
-    initialRoute: "/",
-    routes: {
-      '/': (context) => Pages(),
-      '/chatbot': (context) => Chatbot(),
-      '/passport': (context) => Passport(),
-      '/home': (context) => Home(),
-      '/language': (context) => LanguageSelectionScreen(),
-      '/welcome': (context) => Welcome(),
-      "/signin": (context) => Sigin(),
-      "/login": (context) => Login(),
-      "/newpassport": (context) => Newpassowrd(),
-      "/confirming": (context) => Confirming(),
-      "/empty": (context) => Empty(),
-      "/create": (context) => Create(),
-      "/profile": (context) => Profile(),
-      "/intro": (context) => Intro(),
-      "/instruction": (context) => Instruction(),
-      "/id": (context) => Id(),
-      "/shop": (context) => Shop(),
-      "/taable": (context) => Taable(),
-      "/adding": (context) => Adding(),
-      "/finance": (context) => Finance(),
-    },
-  ));
-}*/

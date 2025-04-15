@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cyclone/pages/subpage.dart';
 import 'package:cyclone/widget/custom_card.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -124,7 +125,16 @@ class _HomeState extends State<Home> {
                       var cattle = stadosList[index];
                       return GestureDetector(
                         onTap: () {
-                          /*Navigator.pushNamed(context, '/id');*/
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => SubPageScreen(
+                                stadoId: cattle["id"],
+                                stadoName: cattle["name"],
+                                stadoType: cattle["cattleType"],
+                              ),
+                            ),
+                          );
                         },
                         child: CustomCard(
                           title: cattle["cattleType"],

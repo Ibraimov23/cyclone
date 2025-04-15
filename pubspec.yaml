@@ -25,6 +25,7 @@ dependencies:
   google_sign_in: ^6.3.0
   http: ^1.3.0
   deepseek_api: ^0.1.0
+  firebase_database: ^11.3.5
 
 
 dev_dependencies:
@@ -58,7 +59,7 @@ flutter:
     - assets/principles.png
     - assets/icons/goat_id.svg
     - assets/icons/beef_id.svg
-    - assets/icons/male_goat_id.svg
+    - assets/icons/sheep_id.svg
     - assets/icons/table.svg
     - assets/icons/animal_info.svg
     - assets/korm.png
@@ -75,6 +76,9 @@ flutter:
     - assets/visa_cart.png
     - assets/pattern.png
     - assets/icons/pen.svg
+    - assets/icons/create.svg
+    - assets/icons/stern.svg
+    - assets/icons/one.svg
 
   fonts:
     - family: 'Montserrat'

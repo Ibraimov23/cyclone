@@ -13,13 +13,13 @@ class _AddingState extends State<Adding> {
     return Scaffold(
       appBar: AppBar(
         leading: Container(
-          margin: EdgeInsets.all(8), // Отступы для круга
+          margin: EdgeInsets.all(8),
           decoration: BoxDecoration(
-            color: Color(0xFF90010A), // Красный фон для круга
-            shape: BoxShape.circle, // Делаем круглую форму
+            color: Color(0xFF90010A),
+            shape: BoxShape.circle,
           ),
           child: IconTheme(
-            data: IconThemeData(color: Colors.white), // Белый цвет иконки
+            data: IconThemeData(color: Colors.white),
             child: BackButton(),
           ),
         ),
