@@ -97,6 +97,24 @@ class Id extends StatelessWidget {
                       final animal = animals[index];
                       final data = animal.data() as Map<String, dynamic>;
 
+                      int? calculateAgeFromTimestamp(dynamic value) {
+                        if (value is Timestamp) {
+                          DateTime birthDate = value.toDate();
+                          DateTime today = DateTime.now();
+                          int age = today.year - birthDate.year;
+                          if (today.month < birthDate.month ||
+                              (today.month == birthDate.month &&
+                                  today.day < birthDate.day)) {
+                            age--;
+                          }
+                          return age;
+                        }
+                        return null;
+                      }
+
+                      final int? calculatedAge =
+                          calculateAgeFromTimestamp(data['age']);
+
                       return Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: Container(
@@ -115,7 +133,9 @@ class Id extends StatelessWidget {
                               horizontal: 0, vertical: 10),
                           child: AnimalPassport(
                             animalName: formatAnimalName(stadoType),
-                            age: data['age'] ?? '—',
+                            age: calculatedAge != null
+                                ? '$calculatedAge лет'
+                                : '—',
                             weight: data['weight'] ?? '—',
                             breed: data['breed'] ?? '—',
                             healthStatus: data['health'] ?? 'unknown',

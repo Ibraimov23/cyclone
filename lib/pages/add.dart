@@ -19,16 +19,55 @@ class _CreateState extends State<AddAnimal> {
   final TextEditingController _weightController = TextEditingController();
   final TextEditingController _healthController = TextEditingController();
   final TextEditingController _medCardController = TextEditingController();
-  final TextEditingController _breedController = TextEditingController();
+  final TextEditingController _dateController = TextEditingController();
 
   bool isLoading = false;
   List<String> healthStatuses = [];
   String? selectedHealthStatus;
+  List<String> breeds = [];
+  String? selectedBreed;
+  DateTime? _selectedDate;
 
   @override
   void initState() {
     super.initState();
     _loadHealthStatuses();
+    _loadBreeds(widget.stadoId);
+  }
+
+  Future<void> _loadBreeds(String stadoId) async {
+    try {
+      final stadoSnapshot = await FirebaseFirestore.instance
+          .collection('stados')
+          .doc(stadoId)
+          .get();
+
+      if (!stadoSnapshot.exists) {
+        print("Стадо не найдено");
+        return;
+      }
+
+      final currentCattleType = stadoSnapshot.data()?['cattleType'];
+
+      if (currentCattleType == null) {
+        print("Тип скота у стада не указан");
+        return;
+      }
+
+      final breedsSnapshot =
+          await FirebaseFirestore.instance.collection('breeds').get();
+
+      final breedList = breedsSnapshot.docs
+          .where((doc) => doc['cattleType'] == currentCattleType)
+          .map((doc) => doc['name'].toString())
+          .toList();
+
+      setState(() {
+        breeds = breedList;
+      });
+    } catch (e) {
+      print("Ошибка при загрузке пород: $e");
+    }
   }
 
   Future<void> _loadHealthStatuses() async {
@@ -50,10 +89,10 @@ class _CreateState extends State<AddAnimal> {
   Future<void> _addAnimal() async {
     if (_stadoNameController.text.isEmpty ||
         _genderController.text.isEmpty ||
-        _ageController.text == null ||
+        _selectedDate == null ||
         _weightController.text.isEmpty ||
         selectedHealthStatus == null ||
-        _breedController.text.isEmpty ||
+        selectedBreed == null ||
         _medCardController.text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text("Заполните все поля")),
@@ -87,7 +126,7 @@ class _CreateState extends State<AddAnimal> {
             iconUrl = 'assets/icons/beef_id.svg';
             break;
           case 'быки':
-            iconUrl = 'assets/icons/goat_id.svg';
+            iconUrl = 'assets/icons/bull_id.svg';
             break;
           case 'овцы':
             iconUrl = 'assets/icons/sheep_id.svg';
@@ -107,11 +146,12 @@ class _CreateState extends State<AddAnimal> {
           .add({
         "tagnumber": _stadoNameController.text,
         "floor": _genderController.text,
-        "age": _ageController.text,
+        "age":
+            _selectedDate != null ? Timestamp.fromDate(_selectedDate!) : null,
         "weight": _weightController.text,
         "health": selectedHealthStatus,
         "medical_card": _medCardController.text,
-        "breed": _breedController.text,
+        "breed": selectedBreed,
         "stadoId": widget.stadoId,
         "createdAt": Timestamp.now(),
         "iconUrl": iconUrl,
@@ -138,6 +178,34 @@ class _CreateState extends State<AddAnimal> {
       );
       setState(() {
         isLoading = false;
+      });
+    }
+  }
+
+  Future<void> _selectDate(BuildContext context) async {
+    DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2050),
+      builder: (BuildContext context, Widget? widget) => Theme(
+        data: ThemeData(
+          colorScheme: ColorScheme.light(primary: Color(0xFF90010A)),
+          datePickerTheme: const DatePickerThemeData(
+            backgroundColor: Colors.white,
+            dividerColor: Color(0xFF90010A),
+            headerBackgroundColor: Color(0xFF90010A),
+            headerForegroundColor: Colors.white,
+          ),
+        ),
+        child: widget!,
+      ),
+    );
+
+    if (picked != null && picked != _selectedDate) {
+      setState(() {
+        _selectedDate = picked;
+        _dateController.text = "${picked.day}/${picked.month}/${picked.year}";
       });
     }
   }
@@ -239,25 +307,30 @@ class _CreateState extends State<AddAnimal> {
                   style: TextStyle(fontSize: 20, letterSpacing: 0),
                 ),
               ),
-              Container(
-                padding: EdgeInsets.symmetric(vertical: 5),
-                child: TextField(
-                  controller: _ageController,
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: Colors.white,
-                    hintText: 'Введите возраст животного',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      borderSide: BorderSide.none,
+              GestureDetector(
+                onTap: () async {
+                  // Вызов выбора даты
+                  await _selectDate(context);
+                },
+                child: AbsorbPointer(
+                  child: TextField(
+                    controller: _dateController,
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.white,
+                      hintText: 'Выберите дату рождения животного',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: BorderSide.none,
+                      ),
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 19, horizontal: 17),
                     ),
-                    contentPadding: const EdgeInsets.symmetric(
-                        vertical: 19, horizontal: 17),
-                  ),
-                  style: const TextStyle(
-                    fontSize: 16,
-                    letterSpacing: 0,
-                    color: Colors.black,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      letterSpacing: 0,
+                      color: Colors.black,
+                    ),
                   ),
                 ),
               ),
@@ -303,23 +376,39 @@ class _CreateState extends State<AddAnimal> {
               ),
               Container(
                 padding: EdgeInsets.symmetric(vertical: 5),
-                child: TextField(
-                  controller: _breedController,
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: Colors.white,
-                    hintText: 'Введите породу животного',
-                    border: OutlineInputBorder(
+                child: DropdownButton2<String>(
+                  value: selectedBreed,
+                  hint: Text("Выберите породу животного"),
+                  items: breeds.map((String breed) {
+                    return DropdownMenuItem<String>(
+                      value: breed,
+                      child: Text(breed),
+                    );
+                  }).toList(),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      selectedBreed = newValue;
+                    });
+                  },
+                  dropdownStyleData: DropdownStyleData(
+                    maxHeight: 200,
+                    offset: Offset(0, 5),
+                    decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
-                      borderSide: BorderSide.none,
+                      color: Colors.white,
                     ),
-                    contentPadding: const EdgeInsets.symmetric(
-                        vertical: 19, horizontal: 17),
                   ),
-                  style: const TextStyle(
-                    fontSize: 16,
-                    letterSpacing: 0,
-                    color: Colors.black,
+                  buttonStyleData: ButtonStyleData(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    height: 60,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                  ),
+                  menuItemStyleData: MenuItemStyleData(
+                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                   ),
                 ),
               ),
@@ -385,7 +474,7 @@ class _CreateState extends State<AddAnimal> {
                   decoration: InputDecoration(
                     filled: true,
                     fillColor: Colors.white,
-                    hintText: 'Введите данные медицинской карты',
+                    hintText: 'Введите номер медицинской карты',
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
                       borderSide: BorderSide.none,

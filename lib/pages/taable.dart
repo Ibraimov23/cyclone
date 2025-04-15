@@ -19,6 +19,7 @@ class TableScreen extends StatefulWidget {
 
 class _TableScreenState extends State<TableScreen> {
   Map<String, double> feedRatios = {};
+
   final List<String> dates = [
     'Прием 1',
     'Прием 2',
@@ -35,8 +36,19 @@ class _TableScreenState extends State<TableScreen> {
     'silages',
     'straws',
   ];
-  List<Map<String, dynamic>> data = []; // для UI
+
+  List<Map<String, dynamic>> data = [];
   List<String> totals = [];
+  Map<String, double> feedUnitValues = {
+    'corns': 1.1,
+    'hays': 0.9,
+    'herbs': 1.2,
+    'oats': 1.0,
+    'peas': 1.3,
+    'silages': 0.8,
+    'straws': 0.7,
+  };
+
   Map<String, Map<String, num>> tableData = {};
   bool isLoading = true;
   final ScrollController _horizontalController = ScrollController();
@@ -56,7 +68,6 @@ class _TableScreenState extends State<TableScreen> {
   static const _footerTextStyle = TextStyle(
     color: Colors.black,
     fontSize: 18,
-    fontFamily: 'Montserat',
     fontWeight: FontWeight.w600,
   );
 
@@ -90,8 +101,81 @@ class _TableScreenState extends State<TableScreen> {
   }
 
   Future<void> loadData() async {
-    await fetchFeedRatios();
-    await fetchFeedData();
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) return;
+
+    final firestore = FirebaseFirestore.instance;
+
+    firestore
+        .collection('storages')
+        .where('ownerId', isEqualTo: user.uid)
+        .snapshots()
+        .listen((storagesSnapshot) {
+      final Map<String, double> ratios = {
+        for (var feed in feedNames) feed: 0.0,
+      };
+
+      for (var doc in storagesSnapshot.docs) {
+        final data = doc.data() as Map<String, dynamic>;
+        for (var feed in feedNames) {
+          if (data[feed] is num) {
+            ratios[feed] = (data[feed] as num).toDouble();
+          }
+        }
+      }
+
+      setState(() {
+        feedRatios = ratios;
+      });
+    });
+
+    firestore
+        .collection('stados')
+        .doc(widget.stadoId)
+        .collection('tables')
+        .snapshots()
+        .listen((tablesSnapshot) {
+      Map<String, List<num>> temp = {
+        for (var f in feedNames) f: List.filled(dates.length, 0)
+      };
+
+      for (int i = 0; i < dates.length; i++) {
+        final docName = 'reception ${i + 1}';
+        final doc = tablesSnapshot.docs.firstWhere(
+          (doc) => doc.id == docName,
+          orElse: () => throw Exception('Документ не найден'),
+        );
+
+        final dataMap = doc.data() as Map<String, dynamic>;
+        for (var feed in feedNames) {
+          if (dataMap[feed] != null && dataMap[feed] is num) {
+            temp[feed]![i] = dataMap[feed] as num;
+          }
+        }
+      }
+
+      final List<Map<String, dynamic>> tempData = feedNames.map((feed) {
+        final values = temp[feed]!;
+        return {
+          'origin': feed,
+          'name': _translateFeedName(feed),
+          'values': values.map((e) => '$e').toList(),
+        };
+      }).toList();
+
+      final List<String> tempTotals = List.generate(dates.length, (i) {
+        num sum = 0;
+        for (var feed in feedNames) {
+          sum += temp[feed]![i] * (feedUnitValues[feed] ?? 1.0);
+        }
+        return sum.toStringAsFixed(1);
+      });
+
+      setState(() {
+        data = tempData;
+        totals = tempTotals;
+      });
+    });
   }
 
   Future<void> fetchFeedRatios() async {
@@ -410,7 +494,6 @@ class _TableScreenState extends State<TableScreen> {
                                     .toList(),
                               ),
                             ),
-                            // Табличные строки
                             ...List.generate(data.length, (i) {
                               final item = data[i];
                               final isEven = i.isEven;
@@ -426,7 +509,7 @@ class _TableScreenState extends State<TableScreen> {
                                     String val = item['values'][index];
                                     return GestureDetector(
                                       onTap: () async {
-                                        final newValue = await _showEditDialog2(
+                                        final newValue = await _showEditDialog(
                                           currentValue: val,
                                           stadoId: widget.stadoId,
                                           receptionId: 'reception ${index + 1}',
@@ -482,7 +565,6 @@ class _TableScreenState extends State<TableScreen> {
                                               color: Colors.black,
                                               fontSize: 16,
                                               fontWeight: FontWeight.w800,
-                                              fontFamily: 'Montserat',
                                             ),
                                           ),
                                         ))
@@ -498,12 +580,12 @@ class _TableScreenState extends State<TableScreen> {
               ),
             ),
           ),
-        ),
+        )
       ],
     );
   }
 
-  Future<String?> _showEditDialog2({
+  Future<String?> _showEditDialog({
     required String currentValue,
     required String stadoId,
     required String receptionId,
@@ -516,39 +598,124 @@ class _TableScreenState extends State<TableScreen> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Редактировать $fieldName'),
+          backgroundColor: Colors.white,
+          title: Text(
+            'Редактировать ${_translateFeedName(fieldName)}',
+            style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
           content: TextField(
             controller: controller,
             keyboardType: TextInputType.number,
-            decoration: InputDecoration(labelText: 'Введите новое значение'),
+            decoration: InputDecoration(
+              labelText: 'Введите новое значение',
+              labelStyle: TextStyle(color: Colors.black),
+              hintText: 'Введите число',
+              hintStyle: TextStyle(color: Colors.grey),
+              enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.black),
+              ),
+              focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.black),
+              ),
+            ),
+            style: TextStyle(color: Colors.black),
           ),
           actions: <Widget>[
-            TextButton(
-              onPressed: () async {
-                String newValue = controller.text;
-
-                try {
-                  await FirebaseFirestore.instance
-                      .collection('stados')
-                      .doc(stadoId)
-                      .collection('tables')
-                      .doc(receptionId)
-                      .update({
-                    fieldName: double.tryParse(newValue) ?? 0,
-                  });
-                } catch (e) {
-                  print('Ошибка при сохранении: $e');
-                }
-
-                Navigator.of(context).pop(newValue);
-              },
-              child: Text('Сохранить'),
-            ),
+            // Сначала кнопка "Отменить" слева
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text('Отменить'),
+              child: Text(
+                'Отменить',
+                style: TextStyle(color: Colors.red, fontSize: 14),
+              ),
+            ),
+            // Кнопка "Сохранить" справа
+            TextButton(
+              onPressed: () async {
+                String newValueStr = controller.text.trim();
+                double? newValue = double.tryParse(newValueStr);
+                if (newValue == null) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                        content: Text('Пожалуйста, введите корректное число')),
+                  );
+                  return;
+                }
+
+                final user = FirebaseAuth.instance.currentUser;
+                if (user == null) return;
+
+                final firestore = FirebaseFirestore.instance;
+                final tableDocRef = firestore
+                    .collection('stados')
+                    .doc(stadoId)
+                    .collection('tables')
+                    .doc(receptionId);
+
+                final tableDocSnap = await tableDocRef.get();
+                double oldValue = 0.0;
+                if (tableDocSnap.exists) {
+                  final data = tableDocSnap.data();
+                  if (data != null && data[fieldName] is num) {
+                    oldValue = (data[fieldName] as num).toDouble();
+                  }
+                }
+
+                double delta = newValue - oldValue;
+
+                final storageQuery = await firestore
+                    .collection('storages')
+                    .where('ownerId', isEqualTo: user.uid)
+                    .limit(1)
+                    .get();
+
+                if (storageQuery.docs.isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Склад не найден')),
+                  );
+                  return;
+                }
+
+                final storageDoc = storageQuery.docs.first;
+                final storageRef = storageDoc.reference;
+                final storageData = storageDoc.data();
+                double currentStock = 0.0;
+                if (storageData.containsKey(fieldName) &&
+                    storageData[fieldName] is num) {
+                  currentStock = (storageData[fieldName] as num).toDouble();
+                }
+
+                if (currentStock < newValue) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Недостаточно корма на складе')),
+                  );
+                  return;
+                }
+
+                try {
+                  await firestore.runTransaction((transaction) async {
+                    transaction.update(tableDocRef, {fieldName: newValue});
+                    transaction
+                        .update(storageRef, {fieldName: currentStock - delta});
+                  });
+
+                  Navigator.of(context).pop(newValueStr);
+                } catch (e) {
+                  print('Ошибка при сохранении: $e');
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Ошибка при сохранении данных')),
+                  );
+                }
+              },
+              child: Text(
+                'Сохранить',
+                style: TextStyle(color: Colors.black, fontSize: 14),
+              ),
             ),
           ],
         );
