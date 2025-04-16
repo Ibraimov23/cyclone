@@ -38,8 +38,11 @@ class _EmailVerificationState extends State<EmailVerification> {
 
   Future<void> resendVerificationEmail() async {
     await widget.user.sendEmailVerification();
-    ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text("Письмо отправлено повторно ✅")));
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text("Письмо отправлено повторно ✅",
+            style: TextStyle(color: Colors.white)),
+        backgroundColor: Color(0xFF90010A),
+        duration: Duration(seconds: 2)));
   }
 
   @override

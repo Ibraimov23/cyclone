@@ -41,7 +41,11 @@ class _CreateState extends State<Create> {
   Future<void> _saveStado() async {
     if (_stadoNameController.text.isEmpty || selectedCattleType == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Заполните все поля")),
+        SnackBar(
+            content: Text("Заполните все поля",
+                style: TextStyle(color: Colors.white)),
+            backgroundColor: Color(0xFF90010A),
+            duration: Duration(seconds: 2)),
       );
       return;
     }
@@ -88,7 +92,12 @@ class _CreateState extends State<Create> {
       }
 
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Стадо успешно создано!")),
+        SnackBar(
+          content: Text("Стадо успешно создано!",
+              style: TextStyle(color: Colors.white)),
+          backgroundColor: Color(0xFF90010A),
+          duration: Duration(seconds: 2),
+        ),
       );
 
       _stadoNameController.clear();
@@ -99,7 +108,14 @@ class _CreateState extends State<Create> {
     } catch (e) {
       print("Ошибка при создании стада: $e");
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Ошибка при создании стада")),
+        SnackBar(
+          content: Text(
+            "Ошибка при создании стада",
+            style: TextStyle(color: Colors.white),
+          ),
+          backgroundColor: Color(0xFF90010A),
+          duration: Duration(seconds: 2),
+        ),
       );
       setState(() {
         isLoading = false;

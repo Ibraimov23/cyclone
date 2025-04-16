@@ -642,7 +642,11 @@ class _TableScreenState extends State<TableScreen> {
                 if (newValue == null) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                        content: Text('Пожалуйста, введите корректное число')),
+                      content: Text('Пожалуйста, введите корректное число',
+                          style: TextStyle(color: Colors.white)),
+                      backgroundColor: Color(0xFF90010A),
+                      duration: Duration(seconds: 2),
+                    ),
                   );
                   return;
                 }
@@ -676,7 +680,14 @@ class _TableScreenState extends State<TableScreen> {
 
                 if (storageQuery.docs.isEmpty) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('Склад не найден')),
+                    SnackBar(
+                      content: Text(
+                        'Склад не найден',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      backgroundColor: Color(0xFF90010A),
+                      duration: Duration(seconds: 2),
+                    ),
                   );
                   return;
                 }
@@ -692,7 +703,11 @@ class _TableScreenState extends State<TableScreen> {
 
                 if (currentStock < newValue) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('Недостаточно корма на складе')),
+                    SnackBar(
+                        content: Text('Недостаточно корма на складе',
+                            style: TextStyle(color: Colors.white)),
+                        backgroundColor: Color(0xFF90010A),
+                        duration: Duration(seconds: 2)),
                   );
                   return;
                 }
@@ -708,7 +723,11 @@ class _TableScreenState extends State<TableScreen> {
                 } catch (e) {
                   print('Ошибка при сохранении: $e');
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('Ошибка при сохранении данных')),
+                    SnackBar(
+                        content: Text('Ошибка при сохранении данных',
+                            style: TextStyle(color: Colors.white)),
+                        backgroundColor: Color(0xFF90010A),
+                        duration: Duration(seconds: 2)),
                   );
                 }
               },

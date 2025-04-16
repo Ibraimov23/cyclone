@@ -95,7 +95,12 @@ class _CreateState extends State<AddAnimal> {
         selectedBreed == null ||
         _medCardController.text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Заполните все поля")),
+        SnackBar(
+          content:
+              Text("Заполните все поля", style: TextStyle(color: Colors.white)),
+          backgroundColor: Color(0xFF90010A),
+          duration: Duration(seconds: 2),
+        ),
       );
       return;
     }
@@ -174,7 +179,12 @@ class _CreateState extends State<AddAnimal> {
     } catch (e) {
       print("Ошибка при добавлении животного: $e");
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Ошибка при добавлении животного")),
+        SnackBar(
+          content: Text("Ошибка при добавлении животного",
+              style: TextStyle(color: Colors.white)),
+          backgroundColor: Color(0xFF90010A),
+          duration: Duration(seconds: 2),
+        ),
       );
       setState(() {
         isLoading = false;

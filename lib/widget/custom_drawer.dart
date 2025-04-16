@@ -27,7 +27,7 @@ class CustomDrawer extends StatelessWidget {
             Text(
               title,
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.black,
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -35,32 +35,31 @@ class CustomDrawer extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 50),
-            _buildButton('Профиль', onPressed: () {
-              Navigator.pushNamed(context, '/profile');
-            }),
+            _buildButton(context, 'Профиль'),
             const SizedBox(height: 25),
-            _buildButton('Финансы'),
+            _buildButton(context, 'Финансы'),
             const SizedBox(height: 25),
-            _buildButton('Язык'),
+            _buildButton(context, 'Язык'),
             const SizedBox(height: 25),
-            _buildButton('Статистика'),
+            _buildButton(context, 'Статистика'),
             const SizedBox(height: 25),
-            _buildButton('Добавить аккаунт', onPressed: () {
+            _buildButton(context, 'Добавить аккаунт', onPressed: () {
               Navigator.pushNamed(context, '/signin');
             }),
             const SizedBox(height: 25),
-            _buildButton('Изменить пароль', onPressed: () {
+            _buildButton(context, 'Изменить пароль', onPressed: () {
               Navigator.pushNamed(context, '/newpassword');
             }),
             const SizedBox(height: 25),
-            _buildButton('Выйти', onPressed: onLogout),
+            _buildButton(context, 'Выйти', onPressed: onLogout),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildButton(String text, {VoidCallback? onPressed}) {
+  Widget _buildButton(BuildContext context, String text,
+      {VoidCallback? onPressed}) {
     return Container(
       decoration: const BoxDecoration(
         border: Border(
@@ -71,10 +70,30 @@ class CustomDrawer extends StatelessWidget {
         ),
       ),
       child: TextButton(
-        onPressed: onPressed ?? () {},
-        style: TextButton.styleFrom(
-          padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-          backgroundColor: Colors.transparent,
+        onPressed: onPressed ??
+            () {
+              Navigator.of(context).pop();
+              Future.delayed(const Duration(milliseconds: 300), () {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text(
+                      'Скоро будет доступно',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    backgroundColor: Color(0xFF90010A),
+                    duration: Duration(seconds: 2),
+                  ),
+                );
+              });
+            },
+        style: ButtonStyle(
+          padding: MaterialStateProperty.all(
+            const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+          ),
+          backgroundColor: MaterialStateProperty.all(Colors.transparent),
+          splashFactory: NoSplash.splashFactory,
+          overlayColor: MaterialStateProperty.all(Colors.transparent),
+          foregroundColor: MaterialStateProperty.all(Colors.black),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -88,7 +107,7 @@ class CustomDrawer extends StatelessWidget {
                 height: 1.3,
               ),
             ),
-            const Icon(Icons.navigate_next),
+            const Icon(Icons.navigate_next, color: Colors.black),
           ],
         ),
       ),
