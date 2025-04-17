@@ -1,3 +1,4 @@
+import 'package:cyclone/pages/profile.dart';
 import 'package:flutter/material.dart';
 
 class CustomDrawer extends StatelessWidget {
@@ -29,36 +30,44 @@ class CustomDrawer extends StatelessWidget {
               textAlign: TextAlign.center,
               style: const TextStyle(
                 color: Colors.black,
-                fontSize: 20,
+                fontSize: 24,
                 fontWeight: FontWeight.bold,
                 height: 1.3,
               ),
             ),
             const SizedBox(height: 50),
-            _buildButton(context, 'Профиль'),
-            const SizedBox(height: 25),
-            _buildButton(context, 'Финансы'),
-            const SizedBox(height: 25),
-            _buildButton(context, 'Язык'),
-            const SizedBox(height: 25),
-            _buildButton(context, 'Статистика'),
-            const SizedBox(height: 25),
-            _buildButton(context, 'Добавить аккаунт', onPressed: () {
+            _buildButton(context, 'Профиль', Icons.person, onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Profile(
+                    username: title,
+                    onLogout: onLogout,
+                  ),
+                ),
+              );
+            }),
+            const SizedBox(height: 30),
+            _buildButton(context, 'Подписка', Icons.star),
+            const SizedBox(height: 30),
+            _buildButton(context, 'Язык', Icons.language),
+            const SizedBox(height: 30),
+            _buildButton(context, 'Инструкция', Icons.help_outline),
+            const SizedBox(height: 30),
+            _buildButton(context, 'Статистика', Icons.bar_chart),
+            const SizedBox(height: 30),
+            _buildButton(context, 'Добавить аккаунт', Icons.add, onPressed: () {
               Navigator.pushNamed(context, '/signin');
             }),
-            const SizedBox(height: 25),
-            _buildButton(context, 'Изменить пароль', onPressed: () {
-              Navigator.pushNamed(context, '/newpassword');
-            }),
-            const SizedBox(height: 25),
-            _buildButton(context, 'Выйти', onPressed: onLogout),
+            const SizedBox(height: 30),
+            _buildButton(context, 'Выйти', Icons.logout, onPressed: onLogout),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildButton(BuildContext context, String text,
+  Widget _buildButton(BuildContext context, String text, IconData icon,
       {VoidCallback? onPressed}) {
     return Container(
       decoration: const BoxDecoration(
@@ -98,14 +107,20 @@ class CustomDrawer extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              text,
-              style: const TextStyle(
-                color: Colors.black,
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-                height: 1.3,
-              ),
+            Row(
+              children: [
+                Icon(icon, color: Color(0xFF90010A)), // <-- здесь
+                const SizedBox(width: 12),
+                Text(
+                  text,
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    height: 1.3,
+                  ),
+                ),
+              ],
             ),
             const Icon(Icons.navigate_next, color: Colors.black),
           ],

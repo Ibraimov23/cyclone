@@ -37,7 +37,7 @@ class _ChatState extends State<Chatbot> {
 
     setState(() {
       messages.add({"role": "user", "content": userMessage});
-      messages.add({"role": "bot", "content": ""}); // Заготовка под поток
+      messages.add({"role": "bot", "content": ""});
     });
 
     _controller.clear();

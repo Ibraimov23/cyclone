@@ -334,7 +334,7 @@ class _TableScreenState extends State<TableScreen> {
           color: Color(0xFFE7E7E7),
           image: DecorationImage(
             image: AssetImage('assets/pattern.png'),
-            fit: BoxFit.cover,
+            fit: BoxFit.none,
             repeat: ImageRepeat.repeat,
           ),
         ),
@@ -624,7 +624,6 @@ class _TableScreenState extends State<TableScreen> {
             style: TextStyle(color: Colors.black),
           ),
           actions: <Widget>[
-            // Сначала кнопка "Отменить" слева
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
@@ -634,7 +633,6 @@ class _TableScreenState extends State<TableScreen> {
                 style: TextStyle(color: Colors.red, fontSize: 14),
               ),
             ),
-            // Кнопка "Сохранить" справа
             TextButton(
               onPressed: () async {
                 String newValueStr = controller.text.trim();

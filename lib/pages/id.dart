@@ -32,7 +32,7 @@ class Id extends StatelessWidget {
         decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/pattern.png'),
-            fit: BoxFit.cover,
+            fit: BoxFit.none,
             repeat: ImageRepeat.repeat,
           ),
         ),

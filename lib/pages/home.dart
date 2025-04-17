@@ -79,7 +79,7 @@ class _HomeState extends State<Home> {
             color: const Color(0xFFE7E7E7),
             image: DecorationImage(
               image: const AssetImage('assets/pattern.png'),
-              fit: BoxFit.cover,
+              fit: BoxFit.none,
               repeat: ImageRepeat.repeat,
             ),
           ),

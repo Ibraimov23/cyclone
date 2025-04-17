@@ -17,7 +17,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             color: Color(0xFFE7E7E7),
             image: DecorationImage(
               image: AssetImage('assets/pattern.png'),
-              fit: BoxFit.cover,
+              fit: BoxFit.none,
               repeat: ImageRepeat.repeat,
               colorFilter: ColorFilter.mode(
                 Colors.grey.shade300.withOpacity(0.5),
@@ -52,11 +52,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                     color: const Color(0xFF90010A),
                     shape: BoxShape.circle,
                   ),
-                  padding: const EdgeInsets.all(12),
+                  padding: const EdgeInsets.all(13),
                   child: SvgPicture.asset(
                     'assets/icons/menu.svg',
-                    width: 22,
-                    height: 22,
                   ),
                 ),
               ),

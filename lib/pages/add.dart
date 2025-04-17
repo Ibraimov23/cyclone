@@ -230,7 +230,7 @@ class _CreateState extends State<AddAnimal> {
             color: const Color(0xFFE7E7E7),
             image: DecorationImage(
               image: const AssetImage('assets/pattern.png'),
-              fit: BoxFit.cover,
+              fit: BoxFit.none,
               repeat: ImageRepeat.repeat,
             ),
           ),
@@ -319,7 +319,6 @@ class _CreateState extends State<AddAnimal> {
               ),
               GestureDetector(
                 onTap: () async {
-                  // Вызов выбора даты
                   await _selectDate(context);
                 },
                 child: AbsorbPointer(

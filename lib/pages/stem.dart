@@ -243,7 +243,6 @@ class _SteamState extends State<Steam> {
           }
 
           if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-            // Если документа нет — создать его
             _createStorageIfMissing();
             return const Center(child: CircularProgressIndicator());
           }
@@ -257,7 +256,7 @@ class _SteamState extends State<Steam> {
               color: Color(0xFFE7E7E7),
               image: DecorationImage(
                 image: AssetImage('assets/pattern.png'),
-                fit: BoxFit.cover,
+                fit: BoxFit.none,
                 repeat: ImageRepeat.repeat,
               ),
             ),

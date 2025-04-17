@@ -30,90 +30,117 @@ class AnimalPassport extends StatelessWidget {
       case "Плохое":
         return const Color(0xFFD32F2F);
       default:
-        return const Color(0xFF18B027);
+        return Colors.grey;
     }
   }
 
   String _shortenIdNumber(String id) {
-    return id.length > 5 ? '${id.substring(0, 5)}..' : id;
+    return id.length > 6 ? '${id.substring(0, 6)}...' : id;
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width * 0.9,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
-        color: const Color(0xFFFDFDFD),
-      ),
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+    return Card(
+      elevation: 6,
+      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      color: Colors.white,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 16),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // 🐾 Icon Section
+            Column(
               children: [
-                Text(
-                  animalName,
-                  style: const TextStyle(
-                    fontSize: 30,
-                    color: Color(0xFF90010A),
-                    fontFamily: 'Montserat',
-                    letterSpacing: 1,
-                    fontWeight: FontWeight.w600,
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(12),
+                  child: SvgPicture.asset(
+                    iconPath,
+                    height: 60,
+                    width: 60,
+                    fit: BoxFit.contain,
                   ),
                 ),
-                const SizedBox(height: 20),
-                const Text('Возраст:', style: _labelStyle),
-                const SizedBox(height: 10),
-                const Text('Вес:', style: _labelStyle),
-                const SizedBox(height: 10),
-                const Text('Порода:', style: _labelStyle),
-                const SizedBox(height: 10),
-                const Text('Здоровье:', style: _labelStyle),
+                const SizedBox(height: 8),
+                Text(
+                  idNumber,
+                  style: const TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.grey,
+                  ),
+                ),
               ],
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 64.5),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
+            const SizedBox(width: 16),
+            // 📋 Info Section
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    animalName,
+                    style: const TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF90010A),
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  _infoRow("Возраст", age),
+                  _infoRow("Вес", weight),
+                  _infoRow("Порода", breed),
+                ],
+              ),
+            ),
+            const SizedBox(width: 8),
+            // ❤️ Health Indicator
+            Column(
               children: [
-                _underlineText(age),
-                const SizedBox(height: 10),
-                _underlineText(weight),
-                const SizedBox(height: 10),
-                _underlineText(breed),
-                const SizedBox(height: 13),
+                const Text(
+                  "Здоровье",
+                  style: TextStyle(fontSize: 13, color: Colors.black54),
+                ),
+                const SizedBox(height: 6),
                 Container(
-                  width: 19,
-                  height: 19,
+                  width: 22,
+                  height: 22,
                   decoration: BoxDecoration(
                     color: _getHealthColor(),
                     shape: BoxShape.circle,
                   ),
                 ),
               ],
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _infoRow(String label, String value) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8),
+      child: Row(
+        children: [
+          Text(
+            "$label: ",
+            style: const TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w600,
+              color: Colors.black87,
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 6),
-            child: Column(
-              children: [
-                Text(
-                  _shortenIdNumber(idNumber),
-                  style: const TextStyle(
-                    fontSize: 25,
-                    color: Color(0xFF90010A),
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                const SizedBox(height: 30),
-                SvgPicture.asset(iconPath),
-              ],
+          Expanded(
+            child: Text(
+              value,
+              style: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+                color: Colors.black,
+              ),
+              overflow: TextOverflow.ellipsis,
             ),
           ),
         ],
@@ -121,62 +148,3 @@ class AnimalPassport extends StatelessWidget {
     );
   }
 }
-
-Widget _underlineText(String text) {
-  return Container(
-    constraints: const BoxConstraints(minWidth: 100),
-    decoration: const BoxDecoration(
-      border: Border(bottom: BorderSide(width: 1, color: Colors.black12)),
-    ),
-    padding: const EdgeInsets.only(bottom: 2),
-    child: Text(
-      text,
-      style: _valueStyle,
-      textAlign: TextAlign.right,
-    ),
-  );
-}
-
-Widget _labelWithUnderline(String label, String value) {
-  return Row(
-    crossAxisAlignment: CrossAxisAlignment.center,
-    children: [
-      Text('$label ', style: _labelStyle),
-      Flexible(
-        fit: FlexFit.tight,
-        child: Stack(
-          alignment: Alignment.centerRight,
-          children: [
-            Container(
-              height: 20,
-              decoration: const BoxDecoration(
-                border: Border(
-                  bottom: BorderSide(color: Colors.black, width: 1),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(right: 3),
-              child: Text(
-                value,
-                style: _valueStyle,
-              ),
-            ),
-          ],
-        ),
-      ),
-    ],
-  );
-}
-
-const TextStyle _labelStyle = TextStyle(
-  fontSize: 14,
-  fontWeight: FontWeight.w600,
-  color: Colors.black,
-);
-
-const TextStyle _valueStyle = TextStyle(
-  fontSize: 14,
-  fontWeight: FontWeight.w500,
-  color: Colors.black,
-);

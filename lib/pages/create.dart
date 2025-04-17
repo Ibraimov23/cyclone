@@ -134,8 +134,8 @@ class _CreateState extends State<Create> {
             color: const Color(0xFFE7E7E7),
             image: DecorationImage(
               image: const AssetImage('assets/pattern.png'),
-              fit: BoxFit.cover,
               repeat: ImageRepeat.repeat,
+              fit: BoxFit.none,
             ),
           ),
         ),
@@ -158,7 +158,6 @@ class _CreateState extends State<Create> {
             color: const Color(0xFFE7E7E7),
             image: DecorationImage(
               image: const AssetImage('assets/pattern.png'),
-              fit: BoxFit.cover,
               repeat: ImageRepeat.repeat,
             ),
           ),
