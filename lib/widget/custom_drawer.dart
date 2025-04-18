@@ -1,3 +1,4 @@
+import 'package:cyclone/pages/Instruction.dart';
 import 'package:cyclone/pages/profile.dart';
 import 'package:flutter/material.dart';
 
@@ -52,7 +53,18 @@ class CustomDrawer extends StatelessWidget {
             const SizedBox(height: 30),
             _buildButton(context, 'Язык', Icons.language),
             const SizedBox(height: 30),
-            _buildButton(context, 'Инструкция', Icons.help_outline),
+            _buildButton(context, 'Инструкция', Icons.help_outline,
+                onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Instruction(
+                    username: title,
+                    onLogout: onLogout,
+                  ),
+                ),
+              );
+            }),
             const SizedBox(height: 30),
             _buildButton(context, 'Статистика', Icons.bar_chart),
             const SizedBox(height: 30),
@@ -109,7 +121,7 @@ class CustomDrawer extends StatelessWidget {
           children: [
             Row(
               children: [
-                Icon(icon, color: Color(0xFF90010A)), // <-- здесь
+                Icon(icon, color: Color(0xFF90010A)),
                 const SizedBox(width: 12),
                 Text(
                   text,

@@ -63,6 +63,6 @@ class DefaultFirebaseOptions {
     messagingSenderId: '754754459046',
     projectId: 'cyclone-b59d7',
     storageBucket: 'cyclone-b59d7.firebasestorage.app',
-    iosBundleId: 'com.example.cyclone',
+    iosBundleId: 'com.nursultan.cycloneapp',
   );
 }

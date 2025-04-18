@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:android_intent_plus/android_intent.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class Shop extends StatefulWidget {
   const Shop({super.key});
@@ -93,23 +92,7 @@ class _ShopState extends State<Shop> {
                   itemCount: 1,
                   itemBuilder: (context, index) {
                     return GestureDetector(
-                      onTap: () {
-                        HapticFeedback.lightImpact();
-                        showDialog(
-                          context: context,
-                          builder: (_) => AlertDialog(
-                            title: const Text('Корм добавлен'),
-                            content:
-                                const Text('Вы можете оформить заказ позже.'),
-                            actions: [
-                              TextButton(
-                                onPressed: () => Navigator.pop(context),
-                                child: const Text('Ок'),
-                              ),
-                            ],
-                          ),
-                        );
-                      },
+                      onTap: () {},
                       child: Card(
                         elevation: 4,
                         shape: RoundedRectangleBorder(

@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 
+import '../widget/custom_app-bar.dart';
+
 class Intro extends StatefulWidget {
-  const Intro({super.key});
+  final String username;
+  final VoidCallback onLogout;
+
+  const Intro({super.key, required this.username, required this.onLogout});
 
   @override
   State<Intro> createState() => _IntroState();
@@ -11,69 +16,116 @@ class _IntroState extends State<Intro> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: Container(
-          margin: const EdgeInsets.all(8),
-          decoration: const BoxDecoration(
-            color: Color(0xFF90010A),
-            shape: BoxShape.circle,
-          ),
-          child: const IconTheme(
-            data: IconThemeData(color: Colors.white),
-            child: BackButton(),
+      backgroundColor: const Color(0xFFE7E7E7),
+      appBar: CustomAppBar(
+        title: "Привет, ${widget.username}!",
+        onMenuTap: () {
+          Scaffold.of(context).openEndDrawer();
+        },
+      ),
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/pattern.png'),
+            fit: BoxFit.none,
+            repeat: ImageRepeat.repeat,
           ),
         ),
-      ),
-      backgroundColor: Colors.grey.shade300,
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text(
-                'Введение',
+                'CYCLONE — ваш цифровой помощник в управлении фермой',
                 style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.black,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black87,
                 ),
               ),
-              const SizedBox(height: 15),
+              const SizedBox(height: 12),
               Container(
-                height: 1,
+                height: 1.5,
+                color: Colors.grey,
                 width: double.infinity,
-                color: Colors.black,
               ),
-              const SizedBox(height: 15),
-              const Text(
-                'Информационные технологии (ИТ) — это использование любых компьютеров, хранилищ, сетей и других физических устройств, инфраструктуры и процессов для создания, обработки, хранения, защиты и обмена всеми формами электронных данных. Коммерческое использование ИТ охватывает как компьютерные технологии',
+              const SizedBox(height: 20),
+              Text(
+                'CYCLONE — это приложение, которое помогает фермерам упростить управление кормлением, учитывать рост поголовья и следить за запасами. Всё в одном месте, без бумажной рутины.',
                 style: TextStyle(
-                  fontSize: 14,
-                  color: Colors.black,
+                  fontSize: 15,
+                  height: 1.5,
+                  color: Colors.grey.shade800,
                 ),
               ),
-              const SizedBox(height: 10),
-              // Центрируем изображение
+              const SizedBox(height: 20),
+              Text(
+                'С чего начать?',
+                style: TextStyle(
+                  fontSize: 17,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black87,
+                ),
+              ),
+              const SizedBox(height: 12),
+              _buildBulletPoint(
+                  '1. Выберите язык интерфейса — русский или английский.'),
+              _buildBulletPoint(
+                  '2. Зарегистрируйтесь с помощью электронной почты и пароля.'),
+              _buildBulletPoint(
+                  '3. Или войдите через аккаунт Google — быстро и удобно.'),
+              _buildBulletPoint(
+                  '4. После входа вы попадёте на главную панель, где сможете начать работу: добавлять данные, следить за статистикой и получать аналитику.'),
+              const SizedBox(height: 20),
               Center(
-                child: Image.asset(
-                  'assets/principles.png',
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(12),
+                  child: Image.asset(
+                    'assets/onboarding.png',
+                    fit: BoxFit.cover,
+                    width: MediaQuery.of(context).size.width * 0.85,
+                  ),
                 ),
               ),
-              const SizedBox(height: 10),
-              const Text(
-                'ИТ-отдел обеспечивает правильное подключение и функционирование систем, сетей, данных и приложений организации. ИТ-отдел занимается тремя основными направлениями:\n'
-                'развертывает и обслуживает бизнес-приложения, службы и инфраструктуру (серверы, сети, хранилища);\n'
-                'отслеживает, оптимизирует и устраняет неполадки в работе приложений, служб и инфраструктуры; и\n'
-                'контролирует безопасность и управление приложениями, службами и инфраструктурой.',
+              const SizedBox(height: 20),
+              Text(
+                'CYCLONE делает фермерство понятным, эффективным и современным. Всё управление — у вас под рукой.',
                 style: TextStyle(
-                  fontSize: 14,
-                  color: Colors.black,
+                  fontSize: 15,
+                  height: 1.5,
+                  color: Colors.grey.shade800,
                 ),
               ),
+              const SizedBox(height: 30),
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildBulletPoint(String text) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10, left: 8),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            '• ',
+            style: TextStyle(fontSize: 16, color: Color(0xFF90010A)),
+          ),
+          Expanded(
+            child: Text(
+              text,
+              style: const TextStyle(
+                fontSize: 14.5,
+                height: 1.5,
+                color: Colors.black87,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

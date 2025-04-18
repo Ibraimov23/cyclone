@@ -84,6 +84,7 @@ flutter:
     - assets/icons/stern.svg
     - assets/icons/one.svg
     - assets/icons/bull_id.svg
+    - assets/onboarding.png
 
   fonts:
     - family: 'Montserrat'

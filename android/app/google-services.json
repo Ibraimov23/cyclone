@@ -7,12 +7,17 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:754754459046:android:5de1f469ef72157d71eb67",
+        "mobilesdk_app_id": "1:754754459046:android:a743c018f45d973271eb67",
         "android_client_info": {
-          "package_name": "com.example.cyclone"
+          "package_name": "com.nursultan.cycloneapp"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "754754459046-vi1q5v7j44ovmsrn4vrr2q10541l6bs8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAxNDNNteF51AsNwtBo2HxaEqDwsa7J7Jc"
@@ -20,7 +25,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "754754459046-vi1q5v7j44ovmsrn4vrr2q10541l6bs8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "754754459046-t54mukvvvqf3v8k0fb6nftbqme93jm9s.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.cyclone"
+              }
+            }
+          ]
         }
       }
     }

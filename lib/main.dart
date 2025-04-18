@@ -62,8 +62,9 @@ class Cyclone extends StatelessWidget {
         "/resetpassword": (context) => ResetPassword(),
         "/create": (context) => Create(),
         "/profile": (context) => Profile(username: 'null', onLogout: () {}),
-        "/intro": (context) => Intro(),
-        "/instruction": (context) => Instruction(),
+        "/intro": (context) => Intro(username: 'null', onLogout: () {}),
+        "/instruction": (context) =>
+            Instruction(username: 'null', onLogout: () {}),
         "/id": (context) => Id(
               stadoId: 'null',
               stadoName: 'null',
