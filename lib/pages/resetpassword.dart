@@ -96,11 +96,6 @@ class _ResetPasswordState extends State<ResetPassword> {
                 ),
               ),
               const SizedBox(height: 10),
-              /*const Text(
-                "Введите ваш email",
-                style: TextStyle(fontSize: 20, letterSpacing: 0),
-              ),*/
-              const SizedBox(height: 10),
               TextField(
                 controller: _emailController,
                 keyboardType: TextInputType.emailAddress,

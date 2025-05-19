@@ -3,14 +3,14 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class Create extends StatefulWidget {
-  const Create({super.key});
+class CreateStado extends StatefulWidget {
+  const CreateStado({super.key});
 
   @override
-  State<Create> createState() => _CreateState();
+  State<CreateStado> createState() => _CreateState();
 }
 
-class _CreateState extends State<Create> {
+class _CreateState extends State<CreateStado> {
   final TextEditingController _stadoNameController = TextEditingController();
   String? selectedCattleType;
   List<String> cattleTypes = [];

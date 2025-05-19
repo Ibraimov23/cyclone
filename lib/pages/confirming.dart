@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pinput/pinput.dart'; // Импортируем пакет pinput
+import 'package:pinput/pinput.dart';
 
 class Confirming extends StatefulWidget {
   const Confirming({super.key});
@@ -13,7 +13,6 @@ class _ConfirmingState extends State<Confirming> {
 
   @override
   Widget build(BuildContext context) {
-    // Стиль для Pinput (Rounded With Shadows)
     final defaultPinTheme = PinTheme(
       width: 56,
       height: 56,
@@ -74,26 +73,20 @@ class _ConfirmingState extends State<Confirming> {
                 ),
               ),
               const SizedBox(height: 35),
-              // Добавляем Pinput с 5 полями ввода
               Center(
                 child: Pinput(
                   length: 5,
-                  // Количество полей ввода
                   controller: _pinController,
                   defaultPinTheme: defaultPinTheme,
                   separator: const SizedBox(width: 10),
-                  // Расстояние между полями
                   onCompleted: (pin) {
-                    // Действие при завершении ввода
                     print("Введенный код: $pin");
                   },
                 ),
               ),
               const SizedBox(height: 54),
               ElevatedButton(
-                onPressed: () {
-                  // Действие при нажатии на кнопку
-                },
+                onPressed: () {},
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF90010A),
                   minimumSize: const Size(double.infinity, 50),

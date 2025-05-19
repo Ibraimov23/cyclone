@@ -1,0 +1,8 @@
+{
+  "@@locale": "en",
+  "languagePrompt": "Select language",
+  "kyrgyz": "Kyrgyz",
+  "russian": "Russian",
+  "english": "English",
+  "selectButton": "Choose"
+}

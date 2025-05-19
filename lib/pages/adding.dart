@@ -42,9 +42,9 @@ class _AddingState extends State<Adding> {
               Row(
                 children: [
                   Container(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 6, horizontal: 3), // Отступы 12 и 5 пикселей
-                    color: Colors.white, // Белый фон
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 6, horizontal: 3),
+                    color: Colors.white,
                     child: IconButton(
                       onPressed: () {},
                       style: IconButton.styleFrom(),
@@ -57,9 +57,9 @@ class _AddingState extends State<Adding> {
                     width: 16,
                   ),
                   Container(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 6, horizontal: 3), // Отступы 12 и 5 пикселей
-                    color: Colors.white, // Белый фон
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 6, horizontal: 3),
+                    color: Colors.white,
                     child: IconButton(
                       onPressed: () {},
                       style: IconButton.styleFrom(),
@@ -72,9 +72,9 @@ class _AddingState extends State<Adding> {
                     width: 16,
                   ),
                   Container(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 6, horizontal: 3), // Отступы 12 и 5 пикселей
-                    color: Colors.white, // Белый фон
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 6, horizontal: 3),
+                    color: Colors.white,
                     child: IconButton(
                       onPressed: () {},
                       style: IconButton.styleFrom(),
@@ -258,11 +258,9 @@ class _AddingState extends State<Adding> {
                 height: 60,
               ),
               SizedBox(
-                width: double.infinity, // Растягиваем на всю ширину
+                width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {
-                    // Добавьте логику для кнопки "Зарегистрироваться"
-                  },
+                  onPressed: () {},
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF90010A),
                     padding: const EdgeInsets.symmetric(vertical: 13),

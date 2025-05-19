@@ -25,7 +25,7 @@ class _LoginState extends State<Login> {
 
   void login() async {
     setState(() {
-      _isLoading = true; // Включаем индикатор загрузки
+      _isLoading = true;
     });
 
     try {
@@ -145,9 +145,7 @@ class _LoginState extends State<Login> {
                   },
                   child: const Text(
                     'Забыли пароль?',
-                    style: TextStyle(
-                      fontSize: 14,
-                    ),
+                    style: TextStyle(fontSize: 14, color: Color(0xFF90010A)),
                   ),
                 ),
               ),
@@ -156,7 +154,6 @@ class _LoginState extends State<Login> {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: _isLoading ? null : login,
-                  // Отключаем кнопку при загрузке
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF90010A),
                     padding: const EdgeInsets.symmetric(vertical: 13),
@@ -165,8 +162,7 @@ class _LoginState extends State<Login> {
                     ),
                   ),
                   child: _isLoading
-                      ? CircularProgressIndicator(
-                          color: Colors.white) // Показываем индикатор
+                      ? CircularProgressIndicator(color: Colors.white)
                       : const Text(
                           'Войти',
                           style: TextStyle(

@@ -95,7 +95,6 @@ class AnimalPassport extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 8),
-            // ❤️ Health Indicator
             Column(
               children: [
                 const Text(

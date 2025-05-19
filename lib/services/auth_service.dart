@@ -9,7 +9,7 @@ class AuthService {
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   final GoogleSignIn googleUser = GoogleSignIn(
       clientId:
-          '1009865774921-oo4h5gfllc4nr1g4jr4lse2kmj74vrpt.apps.googleusercontent.com');
+          '140550366207-2fjc1nn6bkpktcivo9mtamujl8liq884.apps.googleusercontent.com');
 
   User? get currentUser => firebaseAuth.currentUser;
 

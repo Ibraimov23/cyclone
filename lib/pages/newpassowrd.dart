@@ -78,98 +78,99 @@ class _NewPasswordState extends State<NewPassword> {
       ),
       backgroundColor: Colors.grey.shade300,
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 20),
-              const Text(
-                'Придумайте пароль',
-                style: TextStyle(
-                  fontWeight: FontWeight.w900,
-                  fontSize: 30,
-                  letterSpacing: 0,
-                ),
-              ),
-              const SizedBox(height: 20),
-              /*const Text(
-                "Новый пароль",
-                style: TextStyle(fontSize: 20, letterSpacing: 0),
-              ),*/
-              const SizedBox(
-                height: 15,
-              ),
-              TextField(
-                controller: _newPasswordController,
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Colors.white,
-                  hintText: 'Введите новый пароль',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15),
-                    borderSide: BorderSide.none,
+        child: Container(
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/pattern.png'),
+              fit: BoxFit.none,
+              repeat: ImageRepeat.repeat,
+            ),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 20),
+                const Text(
+                  'Придумайте пароль',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w900,
+                    fontSize: 30,
+                    letterSpacing: 0,
                   ),
-                  contentPadding:
-                      const EdgeInsets.symmetric(vertical: 19, horizontal: 17),
                 ),
-                style: const TextStyle(
-                  fontSize: 14,
-                  letterSpacing: 0,
-                  color: Colors.black,
+                const SizedBox(height: 20),
+                const SizedBox(
+                  height: 15,
                 ),
-              ),
-              const SizedBox(height: 15),
-              /*const Text(
-                "Подтвердите новый пароль",
-                style: TextStyle(fontSize: 20, letterSpacing: 0),
-              ),*/
-              const SizedBox(
-                height: 15,
-              ),
-              TextField(
-                controller: _confirmPasswordController,
-                obscureText: true,
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Colors.white,
-                  hintText: 'Введите пароль',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15),
-                    borderSide: BorderSide.none,
-                  ),
-                  contentPadding:
-                      const EdgeInsets.symmetric(vertical: 19, horizontal: 17),
-                ),
-                style: const TextStyle(
-                  fontSize: 14,
-                  letterSpacing: 0,
-                  color: Colors.black,
-                ),
-              ),
-              const SizedBox(height: 400),
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: _resetPassword,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF90010A),
-                    padding: const EdgeInsets.symmetric(vertical: 13),
-                    shape: RoundedRectangleBorder(
+                TextField(
+                  controller: _newPasswordController,
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: Colors.white,
+                    hintText: 'Введите новый пароль',
+                    border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
+                      borderSide: BorderSide.none,
                     ),
+                    contentPadding: const EdgeInsets.symmetric(
+                        vertical: 19, horizontal: 17),
                   ),
-                  child: const Text(
-                    'Изменить',
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
+                  style: const TextStyle(
+                    fontSize: 14,
+                    letterSpacing: 0,
+                    color: Colors.black,
+                  ),
+                ),
+                const SizedBox(height: 15),
+                const SizedBox(
+                  height: 15,
+                ),
+                TextField(
+                  controller: _confirmPasswordController,
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: Colors.white,
+                    hintText: 'Введите пароль',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                      borderSide: BorderSide.none,
+                    ),
+                    contentPadding: const EdgeInsets.symmetric(
+                        vertical: 19, horizontal: 17),
+                  ),
+                  style: const TextStyle(
+                    fontSize: 14,
+                    letterSpacing: 0,
+                    color: Colors.black,
+                  ),
+                ),
+                const SizedBox(height: 400),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: _resetPassword,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF90010A),
+                      padding: const EdgeInsets.symmetric(vertical: 13),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                    ),
+                    child: const Text(
+                      'Изменить',
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

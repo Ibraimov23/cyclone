@@ -41,8 +41,8 @@ class _ChatState extends State<Chatbot> {
     });
 
     _controller.clear();
-    _listKey.currentState?.insertItem(messages.length - 2); // user msg
-    _listKey.currentState?.insertItem(messages.length - 1); // bot msg
+    _listKey.currentState?.insertItem(messages.length - 2);
+    _listKey.currentState?.insertItem(messages.length - 1);
 
     int botIndex = messages.length - 1;
 

@@ -36,7 +36,7 @@ Stream<String> sendMessageToBotStream(String userMessage) async* {
         final Map<String, dynamic> chunk = jsonDecode(jsonPart);
         final String? content = chunk['choices'][0]['delta']?['content'];
         if (content != null) {
-          yield cleanMarkdown(content); // Очищаем ответ
+          yield cleanMarkdown(content);
         }
       } catch (e) {
         yield '[Ошибка парсинга: $e]';

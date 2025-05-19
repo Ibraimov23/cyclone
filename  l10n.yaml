@@ -1,0 +1,7 @@
+# Все эти ключи должны быть на одном уровне (без отступов относительно начала файла)
+arb-dir: lib/l10n
+template-arb-file: intl_en.arb
+output-localization-file: app_localizations.dart
+
+# Если вы добавляете output-dir, он также должен быть на этом же уровне:
+# output-dir: lib/generated/l10n

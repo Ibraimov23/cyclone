@@ -4,9 +4,14 @@ import 'package:flutter/material.dart';
 
 class CustomDrawer extends StatelessWidget {
   final String title;
+  final String fullEmail;
   final VoidCallback onLogout;
 
-  const CustomDrawer({Key? key, required this.title, required this.onLogout})
+  const CustomDrawer(
+      {Key? key,
+      required this.title,
+      required this.fullEmail,
+      required this.onLogout})
       : super(key: key);
 
   @override
@@ -43,6 +48,7 @@ class CustomDrawer extends StatelessWidget {
                 MaterialPageRoute(
                   builder: (context) => Profile(
                     username: title,
+                    fullEmail: fullEmail,
                     onLogout: onLogout,
                   ),
                 ),
@@ -51,7 +57,7 @@ class CustomDrawer extends StatelessWidget {
             const SizedBox(height: 30),
             _buildButton(context, 'Подписка', Icons.star),
             const SizedBox(height: 30),
-            _buildButton(context, 'Язык', Icons.language),
+            _buildButton(context, 'Язык', Icons.language, onPressed: () {}),
             const SizedBox(height: 30),
             _buildButton(context, 'Инструкция', Icons.help_outline,
                 onPressed: () {

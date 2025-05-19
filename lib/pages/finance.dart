@@ -9,20 +9,20 @@ class Finance extends StatefulWidget {
 }
 
 class _FinanceState extends State<Finance> {
-  int _currentPage = 0; // Переменная для отслеживания текущей страницы
+  int _currentPage = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         leading: Container(
-          margin: const EdgeInsets.all(8), // Отступы для круга
+          margin: const EdgeInsets.all(8),
           decoration: BoxDecoration(
-            color: const Color(0xFF90010A), // Красный фон для круга
-            shape: BoxShape.circle, // Делаем круглую форму
+            color: const Color(0xFF90010A),
+            shape: BoxShape.circle,
           ),
           child: IconTheme(
-            data: const IconThemeData(color: Colors.white), // Белый цвет иконки
+            data: const IconThemeData(color: Colors.white),
             child: const BackButton(),
           ),
         ),
@@ -43,7 +43,6 @@ class _FinanceState extends State<Finance> {
                 ),
               ),
               const SizedBox(height: 25),
-              // Карусель с карточками
               SizedBox(
                 height: 190,
                 child: FlutterCarousel(
@@ -58,36 +57,31 @@ class _FinanceState extends State<Finance> {
                     );
                   }),
                   options: FlutterCarouselOptions(
-                    showIndicator: true, // Включаем встроенный индикатор
+                    showIndicator: true,
                     enlargeCenterPage: true,
                     height: 190,
                     onPageChanged: (index, reason) {
                       setState(() {
-                        _currentPage = index; // Обновляем текущую страницу
+                        _currentPage = index;
                       });
                     },
                   ),
                 ),
               ),
-              const SizedBox(height: 20), // Просто добавляем отступ
-              // Кнопки "Изменить карту" и "Удалить карту"
+              const SizedBox(height: 20),
               Row(
                 children: [
                   Expanded(
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white, // Цвет фона кнопки
-                        foregroundColor: Colors.black, // Цвет текста
+                        backgroundColor: Colors.white,
+                        foregroundColor: Colors.black,
                         shape: const RoundedRectangleBorder(
-                          borderRadius:
-                              BorderRadius.zero, // Убираем закругления
+                          borderRadius: BorderRadius.zero,
                         ),
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 13), // Отступы внутри кнопки
+                        padding: const EdgeInsets.symmetric(vertical: 13),
                       ),
-                      onPressed: () {
-                        // Действие при нажатии на кнопку "Изменить карту"
-                      },
+                      onPressed: () {},
                       child: const Text(
                         'Изменить карту',
                         style: TextStyle(
@@ -97,22 +91,18 @@ class _FinanceState extends State<Finance> {
                       ),
                     ),
                   ),
-                  const SizedBox(width: 2), // Небольшой отступ между кнопками
+                  const SizedBox(width: 2),
                   Expanded(
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white, // Цвет фона кнопки
-                        foregroundColor: Colors.black, // Цвет текста
+                        backgroundColor: Colors.white,
+                        foregroundColor: Colors.black,
                         shape: const RoundedRectangleBorder(
-                          borderRadius:
-                              BorderRadius.zero, // Убираем закругления
+                          borderRadius: BorderRadius.zero,
                         ),
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 13), // Отступы внутри кнопки
+                        padding: const EdgeInsets.symmetric(vertical: 13),
                       ),
-                      onPressed: () {
-                        // Действие при нажатии на кнопку "Удалить карту"
-                      },
+                      onPressed: () {},
                       child: const Text(
                         'Удалить карту',
                         style: TextStyle(
@@ -125,23 +115,22 @@ class _FinanceState extends State<Finance> {
                 ],
               ),
               const SizedBox(height: 20),
-              // Белые контейнеры
               Container(
-                width: double.infinity, // Ширина 100%
-                height: 128, // Высота 128 пикселей
-                color: Colors.white, // Белый фон
+                width: double.infinity,
+                height: 128,
+                color: Colors.white,
               ),
               const SizedBox(height: 10),
               Container(
-                width: double.infinity, // Ширина 100%
-                height: 128, // Высота 128 пикселей
-                color: Colors.white, // Белый фон
+                width: double.infinity,
+                height: 128,
+                color: Colors.white,
               ),
               const SizedBox(height: 10),
               Container(
-                width: double.infinity, // Ширина 100%
-                height: 128, // Высота 128 пикселей
-                color: Colors.white, // Белый фон
+                width: double.infinity,
+                height: 128,
+                color: Colors.white,
               ),
             ],
           ),

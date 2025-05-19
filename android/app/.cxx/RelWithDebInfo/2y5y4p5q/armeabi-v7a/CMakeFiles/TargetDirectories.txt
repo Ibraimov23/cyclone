@@ -1,0 +1,2 @@
+C:/Users/nursultan/Downloads/lala/cyclone/android/app/.cxx/RelWithDebInfo/2y5y4p5q/armeabi-v7a/CMakeFiles/edit_cache.dir
+C:/Users/nursultan/Downloads/lala/cyclone/android/app/.cxx/RelWithDebInfo/2y5y4p5q/armeabi-v7a/CMakeFiles/rebuild_cache.dir

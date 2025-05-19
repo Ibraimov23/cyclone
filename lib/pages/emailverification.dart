@@ -1,4 +1,4 @@
-import 'dart:async'; // Для Timer
+import 'dart:async';
 
 import 'package:cyclone/pages/home.dart';
 import 'package:firebase_auth/firebase_auth.dart';

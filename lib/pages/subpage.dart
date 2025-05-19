@@ -26,6 +26,7 @@ class SubPageScreen extends StatefulWidget {
 class _SubPageScreenState extends State<SubPageScreen> {
   int _selectedIndex = 0;
   String username = "друг";
+  String fullName = "";
 
   final List<Widget> _pages = [];
 
@@ -54,8 +55,17 @@ class _SubPageScreenState extends State<SubPageScreen> {
     if (user != null && user.email != null) {
       setState(() {
         username = user.email!.split('@')[0];
+        fullName = user.email!;
       });
     }
+  }
+
+  String _getShortUsername(String username) {
+    List<String> words = username.split('');
+    if (words.length > 10) {
+      return words.take(10).join('') + '...';
+    }
+    return username;
   }
 
   void _logout() async {
@@ -64,23 +74,57 @@ class _SubPageScreenState extends State<SubPageScreen> {
       builder: (BuildContext context) {
         return AlertDialog(
           backgroundColor: Colors.white,
-          title: const Text("Выход из аккаунта"),
-          content: const Text("Вы уверены, что хотите выйти?"),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          title: const Text(
+            "Выход из аккаунта",
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Color(0xFF90010A),
+            ),
+          ),
+          content: const Text(
+            "Вы уверены, что хотите выйти?",
+            style: TextStyle(
+              fontSize: 16,
+              color: Colors.black87,
+            ),
+          ),
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(false),
-              child: const Text("Отмена"),
+              child: const Text(
+                "Отмена",
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.black45,
+                ),
+              ),
             ),
             TextButton(
               onPressed: () async {
                 Navigator.of(context).pop(true);
               },
-              child: const Text("Выйти", style: TextStyle(color: Colors.red)),
+              child: const Text(
+                "Выйти",
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Color(0xFF90010A),
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
           ],
         );
       },
     );
+
+    if (shouldLogout == true) {
+      await FirebaseAuth.instance.signOut();
+      Navigator.pushReplacementNamed(context, '/login');
+    }
   }
 
   @override
@@ -88,7 +132,7 @@ class _SubPageScreenState extends State<SubPageScreen> {
     return Scaffold(
       backgroundColor: const Color(0xFFE7E7E7),
       appBar: CustomAppBar(
-        title: "Йоу, ${username}",
+        title: "Йоу, ${_getShortUsername(username)}",
         onMenuTap: () {
           Scaffold.of(context).openEndDrawer();
         },
@@ -122,7 +166,8 @@ class _SubPageScreenState extends State<SubPageScreen> {
         ),
       ),
       endDrawer: CustomDrawer(
-        title: username,
+        title: _getShortUsername(username),
+        fullEmail: fullName,
         onLogout: _logout,
       ),
     );
