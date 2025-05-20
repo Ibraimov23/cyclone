@@ -1,4 +1,5 @@
 import 'package:cyclone/pages/Instruction.dart';
+import 'package:cyclone/pages/language.dart';
 import 'package:cyclone/pages/profile.dart';
 import 'package:flutter/material.dart';
 
@@ -57,7 +58,13 @@ class CustomDrawer extends StatelessWidget {
             const SizedBox(height: 30),
             _buildButton(context, 'Подписка', Icons.star),
             const SizedBox(height: 30),
-            _buildButton(context, 'Язык', Icons.language, onPressed: () {}),
+            _buildButton(context, 'Язык', Icons.language, onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => LanguageSelectionScreen()),
+              );
+            }),
             const SizedBox(height: 30),
             _buildButton(context, 'Инструкция', Icons.help_outline,
                 onPressed: () {

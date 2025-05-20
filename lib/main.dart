@@ -63,13 +63,21 @@ class CycloneApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final langProvider = Provider.of<LanguageProvider>(context);
 
+    final currentLocale = context.watch<LanguageProvider>().locale;
+
+    String? fontFamily;
+    if (currentLocale.languageCode == 'ky') {
+      fontFamily = 'NotoSans';
+    } else {
+      fontFamily = 'Montserrat';
+    }
+
     return MaterialApp(
       title: 'Cyclone',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: Colors.white,
         scaffoldBackgroundColor: Colors.white,
-        fontFamily: 'Montserrat',
       ),
       localizationsDelegates: const [
         S.delegate,

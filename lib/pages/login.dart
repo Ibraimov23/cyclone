@@ -4,6 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import "package:flutter_svg/svg.dart";
 
+import '../generated/l10n.dart';
+
 class Login extends StatefulWidget {
   const Login({super.key});
 
@@ -68,6 +70,7 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
+    final loc = S.of(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.grey.shade300,
@@ -87,8 +90,8 @@ class _LoginState extends State<Login> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 40),
-              const Text(
-                'Вход',
+              Text(
+                loc.loginTitle,
                 style: TextStyle(
                   fontWeight: FontWeight.w900,
                   fontSize: 30,
@@ -101,7 +104,7 @@ class _LoginState extends State<Login> {
                 decoration: InputDecoration(
                   filled: true,
                   fillColor: Colors.white,
-                  hintText: 'Введите вашу почту',
+                  hintText: loc.loginEmailHint,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15),
                     borderSide: BorderSide.none,
@@ -122,7 +125,7 @@ class _LoginState extends State<Login> {
                 decoration: InputDecoration(
                   filled: true,
                   fillColor: Colors.white,
-                  hintText: 'Введите пароль',
+                  hintText: loc.loginPasswordHint,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15),
                     borderSide: BorderSide.none,
@@ -143,9 +146,10 @@ class _LoginState extends State<Login> {
                   onPressed: () {
                     Navigator.pushNamed(context, '/resetpassword');
                   },
-                  child: const Text(
-                    'Забыли пароль?',
-                    style: TextStyle(fontSize: 14, color: Color(0xFF90010A)),
+                  child: Text(
+                    loc.loginForgotPassword,
+                    style:
+                        const TextStyle(fontSize: 14, color: Color(0xFF90010A)),
                   ),
                 ),
               ),
@@ -163,9 +167,9 @@ class _LoginState extends State<Login> {
                   ),
                   child: _isLoading
                       ? CircularProgressIndicator(color: Colors.white)
-                      : const Text(
-                          'Войти',
-                          style: TextStyle(
+                      : Text(
+                          loc.loginButton,
+                          style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
@@ -175,10 +179,10 @@ class _LoginState extends State<Login> {
                 ),
               ),
               const SizedBox(height: 30),
-              const Center(
+              Center(
                 child: Text(
-                  '———— Другой способ входа ————',
-                  style: TextStyle(
+                  loc.loginOrSignInWith,
+                  style: const TextStyle(
                     fontSize: 14,
                     letterSpacing: 2,
                   ),
@@ -245,16 +249,16 @@ class _LoginState extends State<Login> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'У вас нет аккаунта?',
-                    style: TextStyle(fontSize: 14, letterSpacing: 1),
+                    loc.loginNoAccount,
+                    style: const TextStyle(fontSize: 14, letterSpacing: 1),
                   ),
                   TextButton(
                     onPressed: () {
                       Navigator.pushNamed(context, '/signin');
                     },
                     child: Text(
-                      'Регистрация',
-                      style: TextStyle(
+                      loc.loginSignUpButton,
+                      style: const TextStyle(
                         color: Color(0xFF90010A),
                         fontWeight: FontWeight.w900,
                       ),

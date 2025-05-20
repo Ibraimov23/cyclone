@@ -104,6 +104,9 @@ flutter:
     - family: 'Montserrat'
       fonts:
         - asset: assets/fonts/Montserrat-VariableFont_wght.ttf
+    - family: 'NotoSans'
+      fonts:
+        - asset: assets/fonts/NotoSans-VariableFont_wdth.ttf
 flutter_intl:
   enabled: true
 

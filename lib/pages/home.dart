@@ -118,7 +118,7 @@ class _HomeState extends State<Home> {
                       crossAxisCount: 2,
                       crossAxisSpacing: 30,
                       mainAxisSpacing: 30,
-                      childAspectRatio: 1.07,
+                      childAspectRatio: 1.077,
                     ),
                     itemCount: stadosList.length,
                     itemBuilder: (context, index) {

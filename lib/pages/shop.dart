@@ -87,7 +87,7 @@ class _ShopState extends State<Shop> {
                     crossAxisCount: 1,
                     crossAxisSpacing: 16.0,
                     mainAxisSpacing: 16.0,
-                    childAspectRatio: 0.871,
+                    childAspectRatio: 0.877,
                   ),
                   itemCount: 1,
                   itemBuilder: (context, index) {

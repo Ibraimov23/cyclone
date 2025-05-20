@@ -20,12 +20,332 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ru';
 
+  static String m0(userEmail) =>
+      "Ссылка для подтверждения была отправлена на ${userEmail}. Пожалуйста, проверьте ваш почтовый ящик и перейдите по ссылке для подтверждения вашего аккаунта.";
+
+  static String m1(userName) => "Привет, ${userName}!";
+
+  static String m2(currentPage, totalPages) =>
+      "Страница ${currentPage} из ${totalPages}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "addItemButton": MessageLookupByLibrary.simpleMessage("Добавить элемент"),
+    "addRecordButton": MessageLookupByLibrary.simpleMessage("Добавить запись"),
+    "addScreenTitle": MessageLookupByLibrary.simpleMessage(
+      "Добавить новый элемент",
+    ),
+    "addVaccinationButton": MessageLookupByLibrary.simpleMessage(
+      "Добавить запись о вакцинации",
+    ),
+    "animalBreedLabel": MessageLookupByLibrary.simpleMessage("Порода"),
+    "animalDateOfBirthLabel": MessageLookupByLibrary.simpleMessage(
+      "Дата рождения",
+    ),
+    "animalMicrochipIdLabel": MessageLookupByLibrary.simpleMessage(
+      "ID микрочипа",
+    ),
+    "animalNameLabel": MessageLookupByLibrary.simpleMessage("Кличка животного"),
+    "animalOwnerLabel": MessageLookupByLibrary.simpleMessage("Владелец"),
+    "animalPassportTitle": MessageLookupByLibrary.simpleMessage(
+      "Паспорт животного",
+    ),
+    "animalSpeciesLabel": MessageLookupByLibrary.simpleMessage("Вид"),
+    "animalVaccinationsTitle": MessageLookupByLibrary.simpleMessage(
+      "Вакцинации",
+    ),
+    "appBackTooltip": MessageLookupByLibrary.simpleMessage("Назад"),
+    "appBarNotificationsTooltip": MessageLookupByLibrary.simpleMessage(
+      "Уведомления",
+    ),
+    "appBarSearchTooltip": MessageLookupByLibrary.simpleMessage("Поиск"),
+    "appBarSettingsTooltip": MessageLookupByLibrary.simpleMessage("Настройки"),
+    "bottomNavFarm": MessageLookupByLibrary.simpleMessage("Ферма"),
+    "bottomNavFeeds": MessageLookupByLibrary.simpleMessage("Кормы"),
+    "bottomNavMessages": MessageLookupByLibrary.simpleMessage("Сообщения"),
+    "bottomNavShop": MessageLookupByLibrary.simpleMessage("Магазин"),
+    "cancelButton": MessageLookupByLibrary.simpleMessage("Отмена"),
+    "cardAuthorLabel": MessageLookupByLibrary.simpleMessage("Автор:"),
+    "cardCategoryLabel": MessageLookupByLibrary.simpleMessage("Категория:"),
+    "cardDateLabel": MessageLookupByLibrary.simpleMessage("Дата:"),
+    "cardLearnMoreButton": MessageLookupByLibrary.simpleMessage(
+      "Узнать больше",
+    ),
+    "cardPriceLabel": MessageLookupByLibrary.simpleMessage("Цена:"),
+    "cardPublishedOnLabel": MessageLookupByLibrary.simpleMessage(
+      "Опубликовано:",
+    ),
+    "cardStatusLabel": MessageLookupByLibrary.simpleMessage("Статус:"),
+    "cardViewDetailsButton": MessageLookupByLibrary.simpleMessage("Подробнее"),
+    "chatbotCouldNotUnderstand": MessageLookupByLibrary.simpleMessage(
+      "Извините, я не смог этого понять. Не могли бы вы перефразировать?",
+    ),
+    "chatbotErrorOccurred": MessageLookupByLibrary.simpleMessage(
+      "Произошла ошибка. Пожалуйста, попробуйте позже.",
+    ),
+    "chatbotScreenTitle": MessageLookupByLibrary.simpleMessage("Чат поддержки"),
+    "chatbotSendButtonTooltip": MessageLookupByLibrary.simpleMessage(
+      "Отправить",
+    ),
+    "chatbotThinking": MessageLookupByLibrary.simpleMessage("Думаю..."),
+    "chatbotTypeMessageHint": MessageLookupByLibrary.simpleMessage(
+      "Введите ваше сообщение...",
+    ),
+    "chatbotWelcomeMessage": MessageLookupByLibrary.simpleMessage(
+      "Здравствуйте! Чем могу помочь?",
+    ),
+    "confirmEditButton": MessageLookupByLibrary.simpleMessage("Изменить"),
+    "confirmMessage": MessageLookupByLibrary.simpleMessage(
+      "Пожалуйста, проверьте данные перед отправкой.",
+    ),
+    "confirmScreenTitle": MessageLookupByLibrary.simpleMessage(
+      "Подтверждение данных",
+    ),
+    "confirmSubmitButton": MessageLookupByLibrary.simpleMessage("Отправить"),
+    "createItemTitle": MessageLookupByLibrary.simpleMessage(
+      "Создание нового элемента",
+    ),
+    "createNewButton": MessageLookupByLibrary.simpleMessage("Создать новый"),
+    "drawerAbout": MessageLookupByLibrary.simpleMessage("О нас"),
+    "drawerHome": MessageLookupByLibrary.simpleMessage("Главная"),
+    "drawerLogout": MessageLookupByLibrary.simpleMessage("Выйти"),
+    "drawerProfile": MessageLookupByLibrary.simpleMessage("Профиль"),
+    "drawerSettings": MessageLookupByLibrary.simpleMessage("Настройки"),
+    "drawerShop": MessageLookupByLibrary.simpleMessage("Магазин"),
+    "emailVerificationCheckSpam": MessageLookupByLibrary.simpleMessage(
+      "Если вы не видите письмо, проверьте папку \"Спам\".",
+    ),
+    "emailVerificationContinueButton": MessageLookupByLibrary.simpleMessage(
+      "Продолжить (после подтверждения)",
+    ),
+    "emailVerificationEmailSentMessage": MessageLookupByLibrary.simpleMessage(
+      "Новое письмо для подтверждения было отправлено.",
+    ),
+    "emailVerificationMessage": m0,
+    "emailVerificationResendButton": MessageLookupByLibrary.simpleMessage(
+      "Отправить письмо повторно",
+    ),
+    "emailVerificationTitle": MessageLookupByLibrary.simpleMessage(
+      "Подтвердите ваш Email",
+    ),
     "english": MessageLookupByLibrary.simpleMessage("Английский"),
+    "enterIdHint": MessageLookupByLibrary.simpleMessage(
+      "Отсканируйте или введите ID",
+    ),
+    "enterIdLabel": MessageLookupByLibrary.simpleMessage("Введите ID"),
+    "fieldRequiredError": MessageLookupByLibrary.simpleMessage(
+      "Это поле обязательно для заполнения",
+    ),
+    "financeAddTransactionButton": MessageLookupByLibrary.simpleMessage(
+      "Добавить транзакцию",
+    ),
+    "financeBalanceLabel": MessageLookupByLibrary.simpleMessage(
+      "Текущий баланс:",
+    ),
+    "financeExpensesLabel": MessageLookupByLibrary.simpleMessage("Расходы"),
+    "financeGenerateReportButton": MessageLookupByLibrary.simpleMessage(
+      "Сформировать отчет",
+    ),
+    "financeIncomeLabel": MessageLookupByLibrary.simpleMessage("Доходы"),
+    "financeNoTransactions": MessageLookupByLibrary.simpleMessage(
+      "Транзакций пока нет.",
+    ),
+    "financeReportTitle": MessageLookupByLibrary.simpleMessage(
+      "Финансовый отчет",
+    ),
+    "financeScreenTitle": MessageLookupByLibrary.simpleMessage("Финансы"),
+    "financeTransactionHistoryTitle": MessageLookupByLibrary.simpleMessage(
+      "История транзакций",
+    ),
+    "financeViewTransactionsButton": MessageLookupByLibrary.simpleMessage(
+      "Посмотреть транзакции",
+    ),
+    "homeExploreCategories": MessageLookupByLibrary.simpleMessage(
+      "Исследовать категории",
+    ),
+    "homeScreenTitle": MessageLookupByLibrary.simpleMessage("Главная"),
+    "homeViewLatest": MessageLookupByLibrary.simpleMessage("Смотреть новое"),
+    "homeWelcomeMessage": m1,
+    "idNotFoundError": MessageLookupByLibrary.simpleMessage("ID не найден"),
+    "idNumberLabel": MessageLookupByLibrary.simpleMessage("Номер ID:"),
+    "idScreenTitle": MessageLookupByLibrary.simpleMessage("Идентификация"),
+    "instructionContactSupport": MessageLookupByLibrary.simpleMessage(
+      "Связаться с поддержкой",
+    ),
+    "instructionFaqA1": MessageLookupByLibrary.simpleMessage(
+      "О1: Вы можете ... через ...",
+    ),
+    "instructionFaqQ1": MessageLookupByLibrary.simpleMessage(
+      "В1: Как мне ...?",
+    ),
+    "instructionFaqTitle": MessageLookupByLibrary.simpleMessage(
+      "Часто задаваемые вопросы",
+    ),
+    "instructionScreenTitle": MessageLookupByLibrary.simpleMessage(
+      "Инструкции",
+    ),
+    "instructionStep1Text": MessageLookupByLibrary.simpleMessage(
+      "Подробное объяснение первого шага...",
+    ),
+    "instructionStep1Title": MessageLookupByLibrary.simpleMessage(
+      "Шаг 1: Начало работы",
+    ),
+    "instructionStep2Text": MessageLookupByLibrary.simpleMessage(
+      "Подробное объяснение второго шага...",
+    ),
+    "instructionStep2Title": MessageLookupByLibrary.simpleMessage(
+      "Шаг 2: Настройка",
+    ),
+    "introDoneButton": MessageLookupByLibrary.simpleMessage("Готово"),
+    "introNextButton": MessageLookupByLibrary.simpleMessage("Далее"),
+    "introSkipButton": MessageLookupByLibrary.simpleMessage("Пропустить"),
+    "introSlide1Text": MessageLookupByLibrary.simpleMessage(
+      "Откройте для себя удивительные функции и контент, созданный для вас.",
+    ),
+    "introSlide1Title": MessageLookupByLibrary.simpleMessage(
+      "Добро пожаловать в наше приложение!",
+    ),
+    "introSlide2Text": MessageLookupByLibrary.simpleMessage(
+      "Легко перемещайтесь и наслаждайтесь безупречным опытом.",
+    ),
+    "introSlide2Title": MessageLookupByLibrary.simpleMessage(
+      "Простота в использовании",
+    ),
+    "introSlide3Text": MessageLookupByLibrary.simpleMessage(
+      "Присоединяйтесь к нашему сообществу и начните свое путешествие сегодня.",
+    ),
+    "introSlide3Title": MessageLookupByLibrary.simpleMessage("Начать"),
+    "invalidInputError": MessageLookupByLibrary.simpleMessage(
+      "Некорректный ввод",
+    ),
+    "itemCategoryHint": MessageLookupByLibrary.simpleMessage(
+      "Выберите категорию",
+    ),
+    "itemCategoryLabel": MessageLookupByLibrary.simpleMessage("Категория"),
+    "itemDescriptionHint": MessageLookupByLibrary.simpleMessage(
+      "Введите описание",
+    ),
+    "itemDescriptionLabel": MessageLookupByLibrary.simpleMessage("Описание"),
+    "itemImageUploaded": MessageLookupByLibrary.simpleMessage(
+      "Изображение загружено",
+    ),
+    "itemNameHint": MessageLookupByLibrary.simpleMessage(
+      "Введите название элемента",
+    ),
+    "itemNameLabel": MessageLookupByLibrary.simpleMessage("Название элемента"),
+    "itemNoImageSelected": MessageLookupByLibrary.simpleMessage(
+      "Изображение не выбрано",
+    ),
+    "itemPriceHint": MessageLookupByLibrary.simpleMessage("Введите цену"),
+    "itemPriceLabel": MessageLookupByLibrary.simpleMessage("Цена"),
+    "itemUploadImageButton": MessageLookupByLibrary.simpleMessage(
+      "Загрузить изображение",
+    ),
     "kyrgyz": MessageLookupByLibrary.simpleMessage("Кыргызский"),
     "languagePrompt": MessageLookupByLibrary.simpleMessage("Выберите язык"),
+    "loginButton": MessageLookupByLibrary.simpleMessage("Войти"),
+    "loginEmailHint": MessageLookupByLibrary.simpleMessage(
+      "Введите вашу почту",
+    ),
+    "loginForgotPassword": MessageLookupByLibrary.simpleMessage(
+      "Забыли пароль?",
+    ),
+    "loginNoAccount": MessageLookupByLibrary.simpleMessage(
+      "У вас нет аккаунта?",
+    ),
+    "loginOrSignInWith": MessageLookupByLibrary.simpleMessage(
+      "———— Другой способ входа ————",
+    ),
+    "loginPasswordHint": MessageLookupByLibrary.simpleMessage("Введите пароль"),
+    "loginSignUpButton": MessageLookupByLibrary.simpleMessage("Регистрация"),
+    "loginTitle": MessageLookupByLibrary.simpleMessage("Вход"),
+    "mainScreenAppBarGreeting": MessageLookupByLibrary.simpleMessage("Йоу, "),
+    "mainScreenLogoutDialogCancelButton": MessageLookupByLibrary.simpleMessage(
+      "Отмена",
+    ),
+    "mainScreenLogoutDialogConfirmButton": MessageLookupByLibrary.simpleMessage(
+      "Выйти",
+    ),
+    "mainScreenLogoutDialogMessage": MessageLookupByLibrary.simpleMessage(
+      "Вы уверены, что хотите выйти?",
+    ),
+    "mainScreenLogoutDialogTitle": MessageLookupByLibrary.simpleMessage(
+      "Выход из аккаунта",
+    ),
+    "profileChangePasswordButton": MessageLookupByLibrary.simpleMessage(
+      "Изменить пароль",
+    ),
+    "profileDialogCancel": MessageLookupByLibrary.simpleMessage("Отмена"),
+    "profileDialogConfirm": MessageLookupByLibrary.simpleMessage("Подтвердить"),
+    "profileEditButton": MessageLookupByLibrary.simpleMessage(
+      "Редактировать профиль",
+    ),
+    "profileEmailLabel": MessageLookupByLibrary.simpleMessage("Email"),
+    "profilePhoneNumberLabel": MessageLookupByLibrary.simpleMessage(
+      "Номер телефона",
+    ),
+    "profileScreenTitle": MessageLookupByLibrary.simpleMessage("Профиль"),
+    "profileSignOutButton": MessageLookupByLibrary.simpleMessage("Выйти"),
+    "profileSignOutConfirmationMessage": MessageLookupByLibrary.simpleMessage(
+      "Вы уверены, что хотите выйти?",
+    ),
+    "profileSignOutConfirmationTitle": MessageLookupByLibrary.simpleMessage(
+      "Выход",
+    ),
+    "profileUsernameLabel": MessageLookupByLibrary.simpleMessage(
+      "Имя пользователя",
+    ),
     "russian": MessageLookupByLibrary.simpleMessage("Русский"),
+    "saveButton": MessageLookupByLibrary.simpleMessage("Сохранить"),
     "selectButton": MessageLookupByLibrary.simpleMessage("Выбрать"),
+    "shopAddToCartButton": MessageLookupByLibrary.simpleMessage(
+      "Добавить в корзину",
+    ),
+    "shopFeaturedItems": MessageLookupByLibrary.simpleMessage(
+      "Рекомендуемые товары",
+    ),
+    "shopFilterButton": MessageLookupByLibrary.simpleMessage("Фильтр"),
+    "shopNewArrivals": MessageLookupByLibrary.simpleMessage(
+      "Новые поступления",
+    ),
+    "shopScreenTitle": MessageLookupByLibrary.simpleMessage("Магазин"),
+    "shopSearchHint": MessageLookupByLibrary.simpleMessage("Поиск товаров..."),
+    "shopSortByButton": MessageLookupByLibrary.simpleMessage("Сортировать по"),
+    "stemEngineeringCategory": MessageLookupByLibrary.simpleMessage(
+      "Инженерия",
+    ),
+    "stemExploreTopicButton": MessageLookupByLibrary.simpleMessage(
+      "Изучить тему",
+    ),
+    "stemLearningResources": MessageLookupByLibrary.simpleMessage(
+      "Учебные ресурсы",
+    ),
+    "stemMathematicsCategory": MessageLookupByLibrary.simpleMessage(
+      "Математика",
+    ),
+    "stemScienceCategory": MessageLookupByLibrary.simpleMessage("Наука"),
+    "stemScreenTitle": MessageLookupByLibrary.simpleMessage("STEM Зона"),
+    "stemTechnologyCategory": MessageLookupByLibrary.simpleMessage(
+      "Технологии",
+    ),
+    "subpageBackButton": MessageLookupByLibrary.simpleMessage("Назад"),
+    "subpageContentPlaceholder": MessageLookupByLibrary.simpleMessage(
+      "Дополнительная информация будет отображена здесь.",
+    ),
+    "subpageDefaultTitle": MessageLookupByLibrary.simpleMessage("Детали"),
+    "subpageSectionTitle": MessageLookupByLibrary.simpleMessage(
+      "Название раздела",
+    ),
+    "tableHeaderColumn1": MessageLookupByLibrary.simpleMessage("Колонка 1"),
+    "tableHeaderColumn2": MessageLookupByLibrary.simpleMessage("Колонка 2"),
+    "tableHeaderColumn3": MessageLookupByLibrary.simpleMessage("Колонка 3"),
+    "tableNextPage": MessageLookupByLibrary.simpleMessage("Следующая"),
+    "tableNoData": MessageLookupByLibrary.simpleMessage(
+      "Нет данных для отображения.",
+    ),
+    "tablePageIndicator": m2,
+    "tablePreviousPage": MessageLookupByLibrary.simpleMessage("Предыдущая"),
+    "tableScreenTitle": MessageLookupByLibrary.simpleMessage("Таблица данных"),
+    "verifyIdButton": MessageLookupByLibrary.simpleMessage("Проверить ID"),
   };
 }
