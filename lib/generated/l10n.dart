@@ -190,6 +190,91 @@ class S {
     );
   }
 
+  /// `My Farm`
+  String get homeTitle {
+    return Intl.message('My Farm', name: 'homeTitle', desc: '', args: []);
+  }
+
+  /// `Cattle Number`
+  String get homeCardSubtitle {
+    return Intl.message(
+      'Cattle Number',
+      name: 'homeCardSubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cattle Details`
+  String get detailsTitle {
+    return Intl.message(
+      'Cattle Details',
+      name: 'detailsTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cattle Type`
+  String get detailsCattleType {
+    return Intl.message(
+      'Cattle Type',
+      name: 'detailsCattleType',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cattle Name`
+  String get detailsCattleName {
+    return Intl.message(
+      'Cattle Name',
+      name: 'detailsCattleName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Count`
+  String get detailsCattleCount {
+    return Intl.message(
+      'Count',
+      name: 'detailsCattleCount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Loading error`
+  String get loadingError {
+    return Intl.message(
+      'Loading error',
+      name: 'loadingError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bulls`
+  String get bulls {
+    return Intl.message('Bulls', name: 'bulls', desc: '', args: []);
+  }
+
+  /// `Cows`
+  String get cows {
+    return Intl.message('Cows', name: 'cows', desc: '', args: []);
+  }
+
+  /// `Goats`
+  String get goats {
+    return Intl.message('Goats', name: 'goats', desc: '', args: []);
+  }
+
+  /// `Sheep`
+  String get sheep {
+    return Intl.message('Sheep', name: 'sheep', desc: '', args: []);
+  }
+
   /// `Profile`
   String get profileScreenTitle {
     return Intl.message(
@@ -443,6 +528,51 @@ class S {
   /// `Shop`
   String get drawerShop {
     return Intl.message('Shop', name: 'drawerShop', desc: '', args: []);
+  }
+
+  /// `Language`
+  String get drawerLanguage {
+    return Intl.message('Language', name: 'drawerLanguage', desc: '', args: []);
+  }
+
+  /// `Instructions`
+  String get drawerInstructions {
+    return Intl.message(
+      'Instructions',
+      name: 'drawerInstructions',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Subscription`
+  String get drawerSubscription {
+    return Intl.message(
+      'Subscription',
+      name: 'drawerSubscription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Statistics`
+  String get drawerStats {
+    return Intl.message('Statistics', name: 'drawerStats', desc: '', args: []);
+  }
+
+  /// `Add Account`
+  String get drawerAddAccount {
+    return Intl.message(
+      'Add Account',
+      name: 'drawerAddAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Coming soon`
+  String get drawerSoon {
+    return Intl.message('Coming soon', name: 'drawerSoon', desc: '', args: []);
   }
 
   /// `Settings`

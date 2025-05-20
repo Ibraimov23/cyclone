@@ -239,17 +239,18 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final loc = S.of(context);
     return Scaffold(
       backgroundColor: const Color(0xFFE7E7E7),
       appBar: CustomAppBar(
-        title: "Йоу, ${_getShortUsername(username)}",
+        title: "${loc.mainScreenAppBarGreeting}${_getShortUsername(username)}",
         onMenuTap: () => Scaffold.of(context).openEndDrawer(),
       ),
       body: IndexedStack(
         index: _selectedIndex,
         children: _pages,
       ),
-      bottomNavigationBar: _buildBottomNavigationBar(),
+      bottomNavigationBar: _buildBottomNavigationBar(loc),
       endDrawer: CustomDrawer(
         title: _getShortUsername(username),
         fullEmail: fullEmail,
@@ -258,12 +259,12 @@ class _MainScreenState extends State<MainScreen> {
     );
   }
 
-  Widget _buildBottomNavigationBar() {
+  Widget _buildBottomNavigationBar(localizations) {
     final items = [
-      ('Ферма', 'assets/icons/home_b.svg'),
-      ('Магазин', 'assets/icons/shop.svg'),
-      ('Сообщения', 'assets/icons/chat.svg'),
-      ('Кормы', 'assets/icons/food.svg'),
+      (localizations.bottomNavFarm, 'assets/icons/home_b.svg'),
+      (localizations.bottomNavShop, 'assets/icons/shop.svg'),
+      (localizations.bottomNavMessages, 'assets/icons/chat.svg'),
+      (localizations.bottomNavFeeds, 'assets/icons/food.svg'),
     ];
 
     return Container(

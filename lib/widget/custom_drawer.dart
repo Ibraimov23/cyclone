@@ -3,20 +3,24 @@ import 'package:cyclone/pages/language.dart';
 import 'package:cyclone/pages/profile.dart';
 import 'package:flutter/material.dart';
 
+import '../generated/l10n.dart';
+
 class CustomDrawer extends StatelessWidget {
   final String title;
   final String fullEmail;
   final VoidCallback onLogout;
 
-  const CustomDrawer(
-      {Key? key,
-      required this.title,
-      required this.fullEmail,
-      required this.onLogout})
-      : super(key: key);
+  const CustomDrawer({
+    Key? key,
+    required this.title,
+    required this.fullEmail,
+    required this.onLogout,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final loc = S.of(context);
+
     return Drawer(
       backgroundColor: Colors.white,
       shape: const RoundedRectangleBorder(
@@ -43,7 +47,8 @@ class CustomDrawer extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 50),
-            _buildButton(context, 'Профиль', Icons.person, onPressed: () {
+            _buildButton(context, loc.drawerProfile, Icons.person,
+                onPressed: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -56,17 +61,19 @@ class CustomDrawer extends StatelessWidget {
               );
             }),
             const SizedBox(height: 30),
-            _buildButton(context, 'Подписка', Icons.star),
+            _buildButton(context, loc.drawerSubscription, Icons.star),
             const SizedBox(height: 30),
-            _buildButton(context, 'Язык', Icons.language, onPressed: () {
+            _buildButton(context, loc.drawerLanguage, Icons.language,
+                onPressed: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => LanguageSelectionScreen()),
+                  builder: (context) => LanguageSelectionScreen(),
+                ),
               );
             }),
-            const SizedBox(height: 30),
-            _buildButton(context, 'Инструкция', Icons.help_outline,
+            SizedBox(height: 30),
+            _buildButton(context, loc.drawerInstructions, Icons.help_outline,
                 onPressed: () {
               Navigator.push(
                 context,
@@ -79,13 +86,15 @@ class CustomDrawer extends StatelessWidget {
               );
             }),
             const SizedBox(height: 30),
-            _buildButton(context, 'Статистика', Icons.bar_chart),
+            _buildButton(context, loc.drawerStats, Icons.bar_chart),
             const SizedBox(height: 30),
-            _buildButton(context, 'Добавить аккаунт', Icons.add, onPressed: () {
+            _buildButton(context, loc.drawerAddAccount, Icons.add,
+                onPressed: () {
               Navigator.pushNamed(context, '/signin');
             }),
             const SizedBox(height: 30),
-            _buildButton(context, 'Выйти', Icons.logout, onPressed: onLogout),
+            _buildButton(context, loc.drawerLogout, Icons.logout,
+                onPressed: onLogout),
           ],
         ),
       ),
@@ -109,13 +118,13 @@ class CustomDrawer extends StatelessWidget {
               Navigator.of(context).pop();
               Future.delayed(const Duration(milliseconds: 300), () {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
+                  SnackBar(
                     content: Text(
-                      'Скоро будет доступно',
-                      style: TextStyle(color: Colors.white),
+                      S.of(context).drawerSoon,
+                      style: const TextStyle(color: Colors.white),
                     ),
-                    backgroundColor: Color(0xFF90010A),
-                    duration: Duration(seconds: 2),
+                    backgroundColor: const Color(0xFF90010A),
+                    duration: const Duration(seconds: 2),
                   ),
                 );
               });
@@ -134,7 +143,7 @@ class CustomDrawer extends StatelessWidget {
           children: [
             Row(
               children: [
-                Icon(icon, color: Color(0xFF90010A)),
+                Icon(icon, color: const Color(0xFF90010A)),
                 const SizedBox(width: 12),
                 Text(
                   text,

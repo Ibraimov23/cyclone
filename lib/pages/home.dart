@@ -4,6 +4,8 @@ import 'package:cyclone/widget/custom_card.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import '../generated/l10n.dart';
+
 class Home extends StatefulWidget {
   const Home({super.key});
 
@@ -70,6 +72,24 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    final loc = S.of(context);
+
+    String getLocalizedAnimalType(BuildContext context, String originalType) {
+      final loc = S.of(context);
+      switch (originalType) {
+        case 'Быки':
+          return loc.bulls;
+        case 'Коровы':
+          return loc.cows;
+        case 'Козлы':
+          return loc.goats;
+        case 'Овцы':
+          return loc.sheep;
+        default:
+          return originalType;
+      }
+    }
+
     return Scaffold(
       backgroundColor: const Color(0xFFE7E7E7),
       body: RefreshIndicator(
@@ -77,8 +97,8 @@ class _HomeState extends State<Home> {
         child: Container(
           decoration: BoxDecoration(
             color: const Color(0xFFE7E7E7),
-            image: DecorationImage(
-              image: const AssetImage('assets/pattern.png'),
+            image: const DecorationImage(
+              image: AssetImage('assets/pattern.png'),
               fit: BoxFit.none,
               repeat: ImageRepeat.repeat,
             ),
@@ -88,11 +108,12 @@ class _HomeState extends State<Home> {
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Center(
-                    child: CircularProgressIndicator(color: Colors.red));
+                  child: CircularProgressIndicator(color: Colors.red),
+                );
               }
 
               if (snapshot.hasError || snapshot.data == null) {
-                return const Center(child: Text("Ошибка загрузки"));
+                return Center(child: Text(loc.loadingError));
               }
 
               var stadosList = snapshot.data!;
@@ -100,14 +121,15 @@ class _HomeState extends State<Home> {
               return ListView(
                 padding: const EdgeInsets.all(16.0),
                 children: [
-                  const Text(
-                    "Моя ферма",
+                  Text(
+                    loc.homeTitle,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: 1),
+                    style: const TextStyle(
+                      color: Colors.black,
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 1,
+                    ),
                   ),
                   const SizedBox(height: 36),
                   GridView.builder(
@@ -137,8 +159,10 @@ class _HomeState extends State<Home> {
                           );
                         },
                         child: CustomCard(
-                          title: cattle["cattleType"],
-                          description: 'номер скота \n${cattle["name"]}',
+                          title: getLocalizedAnimalType(
+                              context, cattle["cattleType"]),
+                          description:
+                              '${loc.detailsCattleCount} \n${cattle["name"]}',
                           iconPath: cattle["iconUrl"],
                           count: cattle["count"],
                         ),
@@ -153,7 +177,6 @@ class _HomeState extends State<Home> {
                         bool? created =
                             await Navigator.pushNamed(context, '/create')
                                 as bool?;
-
                         if (created == true) {
                           _loadData();
                         }
@@ -197,6 +220,26 @@ class CattleDetailsPage extends StatelessWidget {
 
   CattleDetailsPage({required this.cattleId});
 
+  String getLocalizedCattleType(String original, BuildContext context) {
+    final loc = S.of(context);
+    final locale = Localizations.localeOf(context).languageCode;
+
+    if (locale == 'ru') return original;
+
+    switch (original.toLowerCase()) {
+      case 'быки':
+        return loc.bulls;
+      case 'коровы':
+        return loc.cows;
+      case 'козлы':
+        return loc.goats;
+      case 'овцы':
+        return loc.sheep;
+      default:
+        return original;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -225,7 +268,7 @@ class CattleDetailsPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Тип скота: ${cattle["cattleType"]}',
+                    '${S.of(context).detailsCattleType}: ${getLocalizedCattleType(cattle["cattleType"], context)}',
                     style: const TextStyle(fontSize: 22),
                   ),
                   const SizedBox(height: 10),
