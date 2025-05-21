@@ -20,6 +20,16 @@ class LanguageProvider extends ChangeNotifier {
     }
   }
 
+  void changeLanguageSync(String langCode) {
+    _locale = Locale(langCode);
+    notifyListeners();
+  }
+
+  Future<void> persistLanguage(String langCode) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('langCode', langCode);
+  }
+
   Future<void> changeLanguage(String langCode) async {
     if (_locale.languageCode == langCode) return;
     _locale = Locale(langCode);

@@ -2,6 +2,7 @@ import 'package:cyclone/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 ValueNotifier<AuthService> authService = ValueNotifier(AuthService());
 
@@ -53,6 +54,8 @@ class AuthService {
           );
         } else {
           print("Вход выполнен");
+          final prefs = await SharedPreferences.getInstance();
+          await prefs.setBool('isLoggedIn', true);
         }
       }
     } catch (e) {
@@ -69,6 +72,8 @@ class AuthService {
 
   Future<void> signOut() async {
     await firebaseAuth.signOut();
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('isLoggedIn', false);
   }
 
   Future<void> resetPassword({
@@ -100,6 +105,8 @@ class AuthService {
 
       if (firebaseAuth.currentUser != null) {
         await firebaseAuth.signOut();
+        final prefs = await SharedPreferences.getInstance();
+        await prefs.setBool('isLoggedIn', false);
         print("Выход из текущего аккаунта");
       }
 

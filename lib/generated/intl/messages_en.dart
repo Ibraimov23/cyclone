@@ -28,13 +28,24 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m2(currentPage, totalPages) =>
       "Page ${currentPage} of ${totalPages}";
 
+  static String m3(value) => "${value} kg";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "accountAlreadyExistsMessage": MessageLookupByLibrary.simpleMessage(
+      "This email is already registered. Try to login.",
+    ),
+    "accountAlreadyExistsTitle": MessageLookupByLibrary.simpleMessage(
+      "Account already exists",
+    ),
     "addItemButton": MessageLookupByLibrary.simpleMessage("Add Item"),
     "addRecordButton": MessageLookupByLibrary.simpleMessage("Add Record"),
     "addScreenTitle": MessageLookupByLibrary.simpleMessage("Add New Item"),
     "addVaccinationButton": MessageLookupByLibrary.simpleMessage(
       "Add Vaccination Record",
+    ),
+    "alreadyHaveAccount": MessageLookupByLibrary.simpleMessage(
+      "Already have an account?",
     ),
     "animalBreedLabel": MessageLookupByLibrary.simpleMessage("Breed"),
     "animalDateOfBirthLabel": MessageLookupByLibrary.simpleMessage(
@@ -63,6 +74,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "bottomNavMessages": MessageLookupByLibrary.simpleMessage("Messages"),
     "bottomNavShop": MessageLookupByLibrary.simpleMessage("Shop"),
     "bulls": MessageLookupByLibrary.simpleMessage("Bulls"),
+    "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
     "cancelButton": MessageLookupByLibrary.simpleMessage("Cancel"),
     "cardAuthorLabel": MessageLookupByLibrary.simpleMessage("Author:"),
     "cardCategoryLabel": MessageLookupByLibrary.simpleMessage("Category:"),
@@ -76,6 +88,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "cardViewDetailsButton": MessageLookupByLibrary.simpleMessage(
       "View Details",
     ),
+    "changeValue": MessageLookupByLibrary.simpleMessage("Change Value"),
     "chatbotCouldNotUnderstand": MessageLookupByLibrary.simpleMessage(
       "Sorry, I couldn\'t understand that. Could you rephrase?",
     ),
@@ -95,6 +108,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "confirmMessage": MessageLookupByLibrary.simpleMessage(
       "Please review the details before submitting.",
     ),
+    "confirmPassword": MessageLookupByLibrary.simpleMessage("Confirm password"),
     "confirmScreenTitle": MessageLookupByLibrary.simpleMessage(
       "Confirm Details",
     ),
@@ -118,6 +132,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "drawerSoon": MessageLookupByLibrary.simpleMessage("Coming soon"),
     "drawerStats": MessageLookupByLibrary.simpleMessage("Statistics"),
     "drawerSubscription": MessageLookupByLibrary.simpleMessage("Subscription"),
+    "emailSentMessage": MessageLookupByLibrary.simpleMessage(
+      "A confirmation email has been sent to your address.",
+    ),
+    "emailSentTitle": MessageLookupByLibrary.simpleMessage("Email sent"),
     "emailVerificationCheckSpam": MessageLookupByLibrary.simpleMessage(
       "If you don\'t see the email, please check your spam folder.",
     ),
@@ -137,9 +155,28 @@ class MessageLookup extends MessageLookupByLibrary {
     "english": MessageLookupByLibrary.simpleMessage("English"),
     "enterIdHint": MessageLookupByLibrary.simpleMessage("Scan or type ID"),
     "enterIdLabel": MessageLookupByLibrary.simpleMessage("Enter ID"),
+    "enterPassword": MessageLookupByLibrary.simpleMessage("Enter password"),
+    "enterYourEmail": MessageLookupByLibrary.simpleMessage("Enter your email"),
+    "errorAuthentication": MessageLookupByLibrary.simpleMessage(
+      "Authentication error",
+    ),
+    "errorTitle": MessageLookupByLibrary.simpleMessage("Error"),
+    "feedSubtitle": MessageLookupByLibrary.simpleMessage(
+      "From 1500 soms per sack.",
+    ),
+    "feedTitle": MessageLookupByLibrary.simpleMessage(
+      "Premium quality livestock feed!",
+    ),
+    "fieldCorns": MessageLookupByLibrary.simpleMessage("Corn"),
+    "fieldHays": MessageLookupByLibrary.simpleMessage("Hay"),
+    "fieldHerbs": MessageLookupByLibrary.simpleMessage("Herbs"),
+    "fieldOats": MessageLookupByLibrary.simpleMessage("Oats"),
+    "fieldPeas": MessageLookupByLibrary.simpleMessage("Peas"),
     "fieldRequiredError": MessageLookupByLibrary.simpleMessage(
       "This field is required",
     ),
+    "fieldSilages": MessageLookupByLibrary.simpleMessage("Silage"),
+    "fieldStraws": MessageLookupByLibrary.simpleMessage("Straw"),
     "financeAddTransactionButton": MessageLookupByLibrary.simpleMessage(
       "Add Transaction",
     ),
@@ -243,6 +280,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "kyrgyz": MessageLookupByLibrary.simpleMessage("Kyrgyz"),
     "languagePrompt": MessageLookupByLibrary.simpleMessage("Select language"),
     "loadingError": MessageLookupByLibrary.simpleMessage("Loading error"),
+    "login": MessageLookupByLibrary.simpleMessage("Login"),
     "loginButton": MessageLookupByLibrary.simpleMessage("Login"),
     "loginEmailHint": MessageLookupByLibrary.simpleMessage("Enter your email"),
     "loginForgotPassword": MessageLookupByLibrary.simpleMessage(
@@ -252,13 +290,18 @@ class MessageLookup extends MessageLookupByLibrary {
       "Don\'t have an account?",
     ),
     "loginOrSignInWith": MessageLookupByLibrary.simpleMessage(
-      "———— Or sign in with ————",
+      "Or sign in with",
     ),
     "loginPasswordHint": MessageLookupByLibrary.simpleMessage(
       "Enter your password",
     ),
     "loginSignUpButton": MessageLookupByLibrary.simpleMessage("Sign Up"),
     "loginTitle": MessageLookupByLibrary.simpleMessage("Login"),
+    "logout": MessageLookupByLibrary.simpleMessage("Log Out"),
+    "logoutConfirmation": MessageLookupByLibrary.simpleMessage(
+      "Are you sure you want to log out?",
+    ),
+    "logoutTitle": MessageLookupByLibrary.simpleMessage("Log Out"),
     "mainScreenAppBarGreeting": MessageLookupByLibrary.simpleMessage("Yo, "),
     "mainScreenLogoutDialogCancelButton": MessageLookupByLibrary.simpleMessage(
       "Cancel",
@@ -271,6 +314,11 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "mainScreenLogoutDialogTitle": MessageLookupByLibrary.simpleMessage(
       "Account Logout",
+    ),
+    "nameColumn": MessageLookupByLibrary.simpleMessage("Name"),
+    "ok": MessageLookupByLibrary.simpleMessage("OK"),
+    "otherRegistrationMethods": MessageLookupByLibrary.simpleMessage(
+      "Other registration methods",
     ),
     "profileChangePasswordButton": MessageLookupByLibrary.simpleMessage(
       "Change Password",
@@ -291,11 +339,17 @@ class MessageLookup extends MessageLookupByLibrary {
       "Sign Out",
     ),
     "profileUsernameLabel": MessageLookupByLibrary.simpleMessage("Username"),
+    "register": MessageLookupByLibrary.simpleMessage("Register"),
+    "registerButton": MessageLookupByLibrary.simpleMessage("Register"),
+    "registration": MessageLookupByLibrary.simpleMessage("Registration"),
     "russian": MessageLookupByLibrary.simpleMessage("Russian"),
+    "save": MessageLookupByLibrary.simpleMessage("Save"),
     "saveButton": MessageLookupByLibrary.simpleMessage("Save"),
     "selectButton": MessageLookupByLibrary.simpleMessage("Choose"),
     "sheep": MessageLookupByLibrary.simpleMessage("Sheep"),
     "shopAddToCartButton": MessageLookupByLibrary.simpleMessage("Add to Cart"),
+    "shopCallButton": MessageLookupByLibrary.simpleMessage("Call"),
+    "shopContactTitle": MessageLookupByLibrary.simpleMessage("Contact us"),
     "shopFeaturedItems": MessageLookupByLibrary.simpleMessage("Featured Items"),
     "shopFilterButton": MessageLookupByLibrary.simpleMessage("Filter"),
     "shopNewArrivals": MessageLookupByLibrary.simpleMessage("New Arrivals"),
@@ -321,6 +375,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "stemTechnologyCategory": MessageLookupByLibrary.simpleMessage(
       "Technology",
     ),
+    "storageTitle": MessageLookupByLibrary.simpleMessage("Feed Storage"),
     "subpageBackButton": MessageLookupByLibrary.simpleMessage("Back"),
     "subpageContentPlaceholder": MessageLookupByLibrary.simpleMessage(
       "More information will be displayed here.",
@@ -339,6 +394,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "tablePageIndicator": m2,
     "tablePreviousPage": MessageLookupByLibrary.simpleMessage("Previous"),
     "tableScreenTitle": MessageLookupByLibrary.simpleMessage("Data Table"),
+    "unitKg": m3,
+    "valueColumn": MessageLookupByLibrary.simpleMessage("Value"),
     "verifyIdButton": MessageLookupByLibrary.simpleMessage("Verify ID"),
+    "welcomeLogin": MessageLookupByLibrary.simpleMessage("Login"),
+    "welcomeSubtitle": MessageLookupByLibrary.simpleMessage(
+      "Complete automation of the\ncattle fattening process",
+    ),
+    "welcomeTitle": MessageLookupByLibrary.simpleMessage("CYCLONE APP"),
   };
 }

@@ -28,8 +28,16 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m2(currentPage, totalPages) =>
       "Страница ${currentPage} из ${totalPages}";
 
+  static String m3(value) => "${value} кг";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "accountAlreadyExistsMessage": MessageLookupByLibrary.simpleMessage(
+      "Этот email уже зарегистрирован. Попробуйте войти.",
+    ),
+    "accountAlreadyExistsTitle": MessageLookupByLibrary.simpleMessage(
+      "Аккаунт уже существует",
+    ),
     "addItemButton": MessageLookupByLibrary.simpleMessage("Добавить элемент"),
     "addRecordButton": MessageLookupByLibrary.simpleMessage("Добавить запись"),
     "addScreenTitle": MessageLookupByLibrary.simpleMessage(
@@ -37,6 +45,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "addVaccinationButton": MessageLookupByLibrary.simpleMessage(
       "Добавить запись о вакцинации",
+    ),
+    "alreadyHaveAccount": MessageLookupByLibrary.simpleMessage(
+      "Уже есть аккаунт?",
     ),
     "animalBreedLabel": MessageLookupByLibrary.simpleMessage("Порода"),
     "animalDateOfBirthLabel": MessageLookupByLibrary.simpleMessage(
@@ -65,6 +76,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "bottomNavMessages": MessageLookupByLibrary.simpleMessage("Сообщения"),
     "bottomNavShop": MessageLookupByLibrary.simpleMessage("Магазин"),
     "bulls": MessageLookupByLibrary.simpleMessage("Быки"),
+    "cancel": MessageLookupByLibrary.simpleMessage("Отмена"),
     "cancelButton": MessageLookupByLibrary.simpleMessage("Отмена"),
     "cardAuthorLabel": MessageLookupByLibrary.simpleMessage("Автор:"),
     "cardCategoryLabel": MessageLookupByLibrary.simpleMessage("Категория:"),
@@ -78,6 +90,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "cardStatusLabel": MessageLookupByLibrary.simpleMessage("Статус:"),
     "cardViewDetailsButton": MessageLookupByLibrary.simpleMessage("Подробнее"),
+    "changeValue": MessageLookupByLibrary.simpleMessage("Изменить значение"),
     "chatbotCouldNotUnderstand": MessageLookupByLibrary.simpleMessage(
       "Извините, я не смог этого понять. Не могли бы вы перефразировать?",
     ),
@@ -93,11 +106,14 @@ class MessageLookup extends MessageLookupByLibrary {
       "Введите ваше сообщение...",
     ),
     "chatbotWelcomeMessage": MessageLookupByLibrary.simpleMessage(
-      "Здравствуйте! Чем могу помочь?",
+      "Привет! Чем могу помочь?",
     ),
     "confirmEditButton": MessageLookupByLibrary.simpleMessage("Изменить"),
     "confirmMessage": MessageLookupByLibrary.simpleMessage(
       "Пожалуйста, проверьте данные перед отправкой.",
+    ),
+    "confirmPassword": MessageLookupByLibrary.simpleMessage(
+      "Подтвердите пароль",
     ),
     "confirmScreenTitle": MessageLookupByLibrary.simpleMessage(
       "Подтверждение данных",
@@ -126,6 +142,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "drawerSoon": MessageLookupByLibrary.simpleMessage("Скоро будет доступно"),
     "drawerStats": MessageLookupByLibrary.simpleMessage("Статистика"),
     "drawerSubscription": MessageLookupByLibrary.simpleMessage("Подписка"),
+    "emailSentMessage": MessageLookupByLibrary.simpleMessage(
+      "Письмо с подтверждением отправлено на ваш email.",
+    ),
+    "emailSentTitle": MessageLookupByLibrary.simpleMessage("Письмо отправлено"),
     "emailVerificationCheckSpam": MessageLookupByLibrary.simpleMessage(
       "Если вы не видите письмо, проверьте папку \"Спам\".",
     ),
@@ -147,9 +167,30 @@ class MessageLookup extends MessageLookupByLibrary {
       "Отсканируйте или введите ID",
     ),
     "enterIdLabel": MessageLookupByLibrary.simpleMessage("Введите ID"),
+    "enterPassword": MessageLookupByLibrary.simpleMessage("Введите пароль"),
+    "enterYourEmail": MessageLookupByLibrary.simpleMessage(
+      "Введите вашу почту",
+    ),
+    "errorAuthentication": MessageLookupByLibrary.simpleMessage(
+      "Ошибка аутентификации",
+    ),
+    "errorTitle": MessageLookupByLibrary.simpleMessage("Ошибка"),
+    "feedSubtitle": MessageLookupByLibrary.simpleMessage(
+      "От 1500 сомов за мешок.",
+    ),
+    "feedTitle": MessageLookupByLibrary.simpleMessage(
+      "Корм для скота высшего качества!",
+    ),
+    "fieldCorns": MessageLookupByLibrary.simpleMessage("Кукуруза"),
+    "fieldHays": MessageLookupByLibrary.simpleMessage("Сено"),
+    "fieldHerbs": MessageLookupByLibrary.simpleMessage("Трава"),
+    "fieldOats": MessageLookupByLibrary.simpleMessage("Овес"),
+    "fieldPeas": MessageLookupByLibrary.simpleMessage("Горох"),
     "fieldRequiredError": MessageLookupByLibrary.simpleMessage(
       "Это поле обязательно для заполнения",
     ),
+    "fieldSilages": MessageLookupByLibrary.simpleMessage("Силос"),
+    "fieldStraws": MessageLookupByLibrary.simpleMessage("Солома"),
     "financeAddTransactionButton": MessageLookupByLibrary.simpleMessage(
       "Добавить транзакцию",
     ),
@@ -261,6 +302,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "kyrgyz": MessageLookupByLibrary.simpleMessage("Кыргызский"),
     "languagePrompt": MessageLookupByLibrary.simpleMessage("Выберите язык"),
     "loadingError": MessageLookupByLibrary.simpleMessage("Ошибка загрузки"),
+    "login": MessageLookupByLibrary.simpleMessage("Вход"),
     "loginButton": MessageLookupByLibrary.simpleMessage("Войти"),
     "loginEmailHint": MessageLookupByLibrary.simpleMessage(
       "Введите вашу почту",
@@ -272,11 +314,16 @@ class MessageLookup extends MessageLookupByLibrary {
       "У вас нет аккаунта?",
     ),
     "loginOrSignInWith": MessageLookupByLibrary.simpleMessage(
-      "———— Другой способ входа ————",
+      "Другой способ входа",
     ),
     "loginPasswordHint": MessageLookupByLibrary.simpleMessage("Введите пароль"),
     "loginSignUpButton": MessageLookupByLibrary.simpleMessage("Регистрация"),
     "loginTitle": MessageLookupByLibrary.simpleMessage("Вход"),
+    "logout": MessageLookupByLibrary.simpleMessage("Выйти"),
+    "logoutConfirmation": MessageLookupByLibrary.simpleMessage(
+      "Вы уверены, что хотите выйти?",
+    ),
+    "logoutTitle": MessageLookupByLibrary.simpleMessage("Выход из аккаунта"),
     "mainScreenAppBarGreeting": MessageLookupByLibrary.simpleMessage("Йоу, "),
     "mainScreenLogoutDialogCancelButton": MessageLookupByLibrary.simpleMessage(
       "Отмена",
@@ -289,6 +336,11 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "mainScreenLogoutDialogTitle": MessageLookupByLibrary.simpleMessage(
       "Выход из аккаунта",
+    ),
+    "nameColumn": MessageLookupByLibrary.simpleMessage("Название"),
+    "ok": MessageLookupByLibrary.simpleMessage("ОК"),
+    "otherRegistrationMethods": MessageLookupByLibrary.simpleMessage(
+      "Другой способ регистрации",
     ),
     "profileChangePasswordButton": MessageLookupByLibrary.simpleMessage(
       "Изменить пароль",
@@ -313,12 +365,20 @@ class MessageLookup extends MessageLookupByLibrary {
     "profileUsernameLabel": MessageLookupByLibrary.simpleMessage(
       "Имя пользователя",
     ),
+    "register": MessageLookupByLibrary.simpleMessage("Зарегистрироваться"),
+    "registerButton": MessageLookupByLibrary.simpleMessage("Регистрация"),
+    "registration": MessageLookupByLibrary.simpleMessage("Регистрация"),
     "russian": MessageLookupByLibrary.simpleMessage("Русский"),
+    "save": MessageLookupByLibrary.simpleMessage("Сохранить"),
     "saveButton": MessageLookupByLibrary.simpleMessage("Сохранить"),
     "selectButton": MessageLookupByLibrary.simpleMessage("Выбрать"),
     "sheep": MessageLookupByLibrary.simpleMessage("Овцы"),
     "shopAddToCartButton": MessageLookupByLibrary.simpleMessage(
       "Добавить в корзину",
+    ),
+    "shopCallButton": MessageLookupByLibrary.simpleMessage("Позвонить"),
+    "shopContactTitle": MessageLookupByLibrary.simpleMessage(
+      "Свяжитесь с нами",
     ),
     "shopFeaturedItems": MessageLookupByLibrary.simpleMessage(
       "Рекомендуемые товары",
@@ -347,6 +407,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "stemTechnologyCategory": MessageLookupByLibrary.simpleMessage(
       "Технологии",
     ),
+    "storageTitle": MessageLookupByLibrary.simpleMessage("Склад кормов"),
     "subpageBackButton": MessageLookupByLibrary.simpleMessage("Назад"),
     "subpageContentPlaceholder": MessageLookupByLibrary.simpleMessage(
       "Дополнительная информация будет отображена здесь.",
@@ -365,6 +426,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "tablePageIndicator": m2,
     "tablePreviousPage": MessageLookupByLibrary.simpleMessage("Предыдущая"),
     "tableScreenTitle": MessageLookupByLibrary.simpleMessage("Таблица данных"),
+    "unitKg": m3,
+    "valueColumn": MessageLookupByLibrary.simpleMessage("Значение"),
     "verifyIdButton": MessageLookupByLibrary.simpleMessage("Проверить ID"),
+    "welcomeLogin": MessageLookupByLibrary.simpleMessage("Вход"),
+    "welcomeSubtitle": MessageLookupByLibrary.simpleMessage(
+      "Полная автоматизация процесса\nоткорма скота",
+    ),
+    "welcomeTitle": MessageLookupByLibrary.simpleMessage("CYCLONE APP"),
   };
 }

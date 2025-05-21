@@ -3,6 +3,7 @@ import 'package:cyclone/services/auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import "package:flutter_svg/svg.dart";
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../generated/l10n.dart';
 
@@ -35,6 +36,9 @@ class _LoginState extends State<Login> {
         controllerEmail.text,
         controllerPassword.text,
       );
+
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setBool('isLoggedIn', true);
 
       Navigator.pushReplacement(
         context,

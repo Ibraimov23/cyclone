@@ -1,23 +1,16 @@
-import 'package:cyclone/pages/add.dart';
 import 'package:cyclone/pages/adding.dart';
 import 'package:cyclone/pages/chatbot.dart';
 import 'package:cyclone/pages/create.dart';
 import 'package:cyclone/pages/finance.dart';
 import 'package:cyclone/pages/home.dart';
-import 'package:cyclone/pages/id.dart';
-import 'package:cyclone/pages/instruction.dart';
-import 'package:cyclone/pages/intro.dart';
 import 'package:cyclone/pages/language.dart';
 import 'package:cyclone/pages/language_provider.dart';
 import 'package:cyclone/pages/login.dart';
 import 'package:cyclone/pages/newpassowrd.dart';
-import 'package:cyclone/pages/profile.dart';
 import 'package:cyclone/pages/resetpassword.dart';
 import 'package:cyclone/pages/shop.dart';
 import 'package:cyclone/pages/signin.dart';
 import 'package:cyclone/pages/stem.dart';
-import 'package:cyclone/pages/subpage.dart';
-import 'package:cyclone/pages/taable.dart';
 import 'package:cyclone/pages/welcome.dart';
 import 'package:cyclone/widget/custom_app-bar.dart';
 import 'package:cyclone/widget/custom_drawer.dart';
@@ -38,13 +31,11 @@ const String kLanguageScreenPassedKey = 'language_screen_passed';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
   final prefs = await SharedPreferences.getInstance();
   bool isLanguageScreenPassed =
       prefs.getBool(kLanguageScreenPassedKey) ?? false;
-
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
 
   runApp(
     ChangeNotifierProvider(
@@ -61,69 +52,59 @@ class CycloneApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final langProvider = Provider.of<LanguageProvider>(context);
+    return Consumer<LanguageProvider>(
+      builder: (context, langProvider, _) {
+        final currentLocale = langProvider.locale;
 
-    final currentLocale = context.watch<LanguageProvider>().locale;
+        String fontFamily = currentLocale.languageCode == 'ky'
+            ? 'NotoSans'
+            : currentLocale.languageCode == 'en'
+                ? 'WorkSans'
+                : 'Montserrat';
 
-    String? fontFamily;
-    if (currentLocale.languageCode == 'ky') {
-      fontFamily = 'NotoSans';
-    } else {
-      fontFamily = 'Montserrat';
-    }
+        return MaterialApp(
+          title: 'Cyclone',
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            primaryColor: Colors.white,
+            scaffoldBackgroundColor: Colors.white,
+            fontFamily: fontFamily,
+          ),
+          localizationsDelegates: const [
+            S.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: S.delegate.supportedLocales,
+          locale: currentLocale,
+          home: isLanguageScreenPassed
+              ? const AuthWrapper()
+              : const LanguageSelectionScreen(),
+          routes: {
+            '/chatbot': (context) => const Chatbot(),
+            '/home': (context) => const Home(),
+            '/language': (context) => const LanguageSelectionScreen(),
+            '/welcome': (context) => const Welcome(),
+            '/signin': (context) => const SignIn(),
+            '/login': (context) => const Login(),
+            '/newpassword': (context) => const NewPassword(),
+            '/resetpassword': (context) => const ResetPassword(),
+            '/create': (context) => const CreateStado(),
+            '/shop': (context) => const Shop(),
+            '/adding': (context) => const Adding(),
+            '/finance': (context) => const Finance(),
+            '/stem': (context) => const Steam(),
+          },
+          onGenerateRoute: (settings) {
+            final args = settings.arguments as Map<String, dynamic>? ?? {};
 
-    return MaterialApp(
-      title: 'Cyclone',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primaryColor: Colors.white,
-        scaffoldBackgroundColor: Colors.white,
-      ),
-      localizationsDelegates: const [
-        S.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: S.delegate.supportedLocales,
-      locale: langProvider.locale,
-      home: isLanguageScreenPassed
-          ? const AuthWrapper()
-          : const LanguageSelectionScreen(),
-      routes: {
-        '/chatbot': (context) => const Chatbot(),
-        '/home': (context) => const Home(),
-        '/language': (context) => const LanguageSelectionScreen(),
-        '/welcome': (context) => const Welcome(),
-        "/signin": (context) => const Sigin(),
-        "/login": (context) => const Login(),
-        "/newpassword": (context) => const NewPassword(),
-        "/resetpassword": (context) => const ResetPassword(),
-        "/create": (context) => const CreateStado(),
-        "/profile": (context) =>
-            Profile(username: 'null', fullEmail: 'null', onLogout: () {}),
-        "/intro": (context) => Intro(username: 'null', onLogout: () {}),
-        "/instruction": (context) =>
-            Instruction(username: 'null', onLogout: () {}),
-        "/id": (context) => const Id(
-              stadoId: 'null',
-              stadoName: 'null',
-              stadoType: 'null',
-            ),
-        "/shop": (context) => const Shop(),
-        "/taable": (context) => const TableScreen(
-              stadoName: 'null',
-              stadoId: 'null',
-            ),
-        "/adding": (context) => const Adding(),
-        "/finance": (context) => const Finance(),
-        "/stem": (context) => const Steam(),
-        "/add": (context) => const AddAnimal(stadoId: 'null'),
-        "/inner": (context) => const SubPageScreen(
-              stadoId: 'null',
-              stadoName: 'null',
-              stadoType: 'null',
-            ),
+            switch (settings.name) {
+              default:
+                return null;
+            }
+          },
+        );
       },
     );
   }
@@ -138,13 +119,13 @@ class AuthWrapper extends StatelessWidget {
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
+          return const Scaffold(
+              body: Center(child: CircularProgressIndicator()));
         }
         if (snapshot.hasData) {
           return const MainScreen();
         } else {
-          return const MainScreen();
-          /*return const LanguageSelectionScreen();*/
+          return const LanguageSelectionScreen();
         }
       },
     );
@@ -163,7 +144,7 @@ class _MainScreenState extends State<MainScreen> {
   String username = "друг";
   String fullEmail = "";
 
-  final List<Widget> _pages = const [
+  static const List<Widget> _pages = [
     Home(),
     Shop(),
     Chatbot(),
@@ -186,45 +167,49 @@ class _MainScreenState extends State<MainScreen> {
     }
   }
 
-  String _getShortUsername(String name) {
-    return name.length > 10 ? '${name.substring(0, 10)}...' : name;
-  }
+  String _shortUsername(String name) =>
+      name.length > 10 ? '${name.substring(0, 10)}...' : name;
 
-  void _onItemTapped(int index) {
-    setState(() => _selectedIndex = index);
-  }
+  void _onItemTapped(int index) => setState(() => _selectedIndex = index);
 
   Future<void> _logout() async {
+    final loc = S.of(context);
+
     final shouldLogout = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: Colors.white,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        title: const Text(
-          "Выход из аккаунта",
-          style: TextStyle(
+        title: Text(
+          loc.logoutTitle,
+          style: const TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
             color: Color(0xFF90010A),
           ),
         ),
-        content: const Text(
-          "Вы уверены, что хотите выйти?",
-          style: TextStyle(fontSize: 16, color: Colors.black87),
+        content: Text(
+          loc.logoutConfirmation,
+          style: const TextStyle(fontSize: 16, color: Colors.black87),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(false),
-            child: const Text("Отмена",
-                style: TextStyle(fontSize: 16, color: Colors.black45)),
+            child: Text(
+              loc.cancel,
+              style: const TextStyle(fontSize: 16, color: Colors.black45),
+            ),
           ),
           TextButton(
             onPressed: () => Navigator.of(context).pop(true),
-            child: const Text("Выйти",
-                style: TextStyle(
-                    fontSize: 16,
-                    color: Color(0xFF90010A),
-                    fontWeight: FontWeight.bold)),
+            child: Text(
+              loc.logout,
+              style: const TextStyle(
+                fontSize: 16,
+                color: Color(0xFF90010A),
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
         ],
       ),
@@ -232,6 +217,8 @@ class _MainScreenState extends State<MainScreen> {
 
     if (shouldLogout == true) {
       await FirebaseAuth.instance.signOut();
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setBool('isLoggedIn', false);
       if (!mounted) return;
       Navigator.pushReplacementNamed(context, '/login');
     }
@@ -243,28 +230,35 @@ class _MainScreenState extends State<MainScreen> {
     return Scaffold(
       backgroundColor: const Color(0xFFE7E7E7),
       appBar: CustomAppBar(
-        title: "${loc.mainScreenAppBarGreeting}${_getShortUsername(username)}",
+        title: "${loc.mainScreenAppBarGreeting}${_shortUsername(username)}",
         onMenuTap: () => Scaffold.of(context).openEndDrawer(),
       ),
-      body: IndexedStack(
-        index: _selectedIndex,
-        children: _pages,
-      ),
-      bottomNavigationBar: _buildBottomNavigationBar(loc),
+      body: IndexedStack(index: _selectedIndex, children: _pages),
+      bottomNavigationBar: _BottomNavBar(
+          selectedIndex: _selectedIndex, onTap: _onItemTapped, loc: loc),
       endDrawer: CustomDrawer(
-        title: _getShortUsername(username),
-        fullEmail: fullEmail,
-        onLogout: _logout,
-      ),
+          title: _shortUsername(username),
+          fullEmail: fullEmail,
+          onLogout: _logout),
     );
   }
+}
 
-  Widget _buildBottomNavigationBar(localizations) {
+class _BottomNavBar extends StatelessWidget {
+  final int selectedIndex;
+  final ValueChanged<int> onTap;
+  final S loc;
+
+  const _BottomNavBar(
+      {required this.selectedIndex, required this.onTap, required this.loc});
+
+  @override
+  Widget build(BuildContext context) {
     final items = [
-      (localizations.bottomNavFarm, 'assets/icons/home_b.svg'),
-      (localizations.bottomNavShop, 'assets/icons/shop.svg'),
-      (localizations.bottomNavMessages, 'assets/icons/chat.svg'),
-      (localizations.bottomNavFeeds, 'assets/icons/food.svg'),
+      (loc.bottomNavFarm, 'assets/icons/home_b.svg'),
+      (loc.bottomNavShop, 'assets/icons/shop.svg'),
+      (loc.bottomNavMessages, 'assets/icons/chat.svg'),
+      (loc.bottomNavFeeds, 'assets/icons/food.svg'),
     ];
 
     return Container(
@@ -278,45 +272,39 @@ class _MainScreenState extends State<MainScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: List.generate(items.length, (index) {
           final (label, iconPath) = items[index];
-          return _buildNavItem(index, label, iconPath, isCircular: index == 2);
+          final isSelected = selectedIndex == index;
+          return GestureDetector(
+            onTap: () => onTap(index),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  width: isSelected ? 48 : 40,
+                  height: isSelected ? 48 : 40,
+                  decoration: BoxDecoration(
+                    color: isSelected
+                        ? const Color(0xFF90010A)
+                        : Colors.transparent,
+                    shape: BoxShape.circle,
+                  ),
+                  padding: const EdgeInsets.all(11),
+                  child: SvgPicture.asset(
+                    iconPath,
+                    width: 28,
+                    height: 28,
+                    color: isSelected ? Colors.white : Colors.black,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(label,
+                    style: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.black54)),
+              ],
+            ),
+          );
         }),
-      ),
-    );
-  }
-
-  Widget _buildNavItem(int index, String label, String iconPath,
-      {bool isCircular = false}) {
-    final isSelected = _selectedIndex == index;
-    return GestureDetector(
-      onTap: () => _onItemTapped(index),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-            width: isSelected ? 48 : 40,
-            height: isSelected ? 48 : 40,
-            decoration: BoxDecoration(
-              color: isSelected ? const Color(0xFF90010A) : Colors.transparent,
-              shape: BoxShape.circle,
-            ),
-            padding: const EdgeInsets.all(11),
-            child: SvgPicture.asset(
-              iconPath,
-              width: 28,
-              height: 28,
-              color: isSelected ? Colors.white : Colors.black,
-            ),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            label,
-            style: const TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
-              color: Colors.black54,
-            ),
-          ),
-        ],
       ),
     );
   }

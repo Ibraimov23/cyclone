@@ -28,8 +28,16 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m2(currentPage, totalPages) =>
       "${currentPage}-бет ${totalPages}-беттердин ичинен";
 
+  static String m3(value) => "${value} кг";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "accountAlreadyExistsMessage": MessageLookupByLibrary.simpleMessage(
+      "Бул электрондук почта буга чейин катталган. Кирүү аракетин кылыңыз.",
+    ),
+    "accountAlreadyExistsTitle": MessageLookupByLibrary.simpleMessage(
+      "Аккаунт буга чейин бар",
+    ),
     "addItemButton": MessageLookupByLibrary.simpleMessage("Элемент кошуу"),
     "addRecordButton": MessageLookupByLibrary.simpleMessage("Жазуу кошуу"),
     "addScreenTitle": MessageLookupByLibrary.simpleMessage(
@@ -37,6 +45,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "addVaccinationButton": MessageLookupByLibrary.simpleMessage(
       "Эмдөө жазуусун кошуу",
+    ),
+    "alreadyHaveAccount": MessageLookupByLibrary.simpleMessage(
+      "Аккаунтуңуз барбы?",
     ),
     "animalBreedLabel": MessageLookupByLibrary.simpleMessage("Породасы"),
     "animalDateOfBirthLabel": MessageLookupByLibrary.simpleMessage(
@@ -63,6 +74,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "bottomNavMessages": MessageLookupByLibrary.simpleMessage("Билдирүүлөр"),
     "bottomNavShop": MessageLookupByLibrary.simpleMessage("Дүкөн"),
     "bulls": MessageLookupByLibrary.simpleMessage("Бука"),
+    "cancel": MessageLookupByLibrary.simpleMessage("Жокко чыгаруу"),
     "cancelButton": MessageLookupByLibrary.simpleMessage("Жокко чыгаруу"),
     "cardAuthorLabel": MessageLookupByLibrary.simpleMessage("Автору:"),
     "cardCategoryLabel": MessageLookupByLibrary.simpleMessage("Категориясы:"),
@@ -76,6 +88,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "cardViewDetailsButton": MessageLookupByLibrary.simpleMessage(
       "Кеңири маалымат",
     ),
+    "changeValue": MessageLookupByLibrary.simpleMessage("Маанини өзгөртүү"),
     "chatbotCouldNotUnderstand": MessageLookupByLibrary.simpleMessage(
       "Кечиресиз, мен муну түшүнө алган жокмун. Башкача айтып көрөсүзбү?",
     ),
@@ -94,6 +107,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "confirmEditButton": MessageLookupByLibrary.simpleMessage("Түзөтүү"),
     "confirmMessage": MessageLookupByLibrary.simpleMessage(
       "Жөнөтүүдөн мурун маалыматтарды карап чыгыңыз.",
+    ),
+    "confirmPassword": MessageLookupByLibrary.simpleMessage(
+      "Сырсөздү тастыктаңыз",
     ),
     "confirmScreenTitle": MessageLookupByLibrary.simpleMessage(
       "Маалыматтарды ырастоо",
@@ -124,6 +140,12 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "drawerStats": MessageLookupByLibrary.simpleMessage("Статистика"),
     "drawerSubscription": MessageLookupByLibrary.simpleMessage("Жазылуу"),
+    "emailSentMessage": MessageLookupByLibrary.simpleMessage(
+      "Тастыктоо каты сиздин электрондук почтага жөнөтүлдү.",
+    ),
+    "emailSentTitle": MessageLookupByLibrary.simpleMessage(
+      "Каттоо тууралуу кат жөнөтүлдү",
+    ),
     "emailVerificationCheckSpam": MessageLookupByLibrary.simpleMessage(
       "Эгер катты таппасаңыз, \"Спам\" папкасын текшериңиз.",
     ),
@@ -145,9 +167,32 @@ class MessageLookup extends MessageLookupByLibrary {
       "ID\'ни сканерлеңиз же териңиз",
     ),
     "enterIdLabel": MessageLookupByLibrary.simpleMessage("ID киргизиңиз"),
+    "enterPassword": MessageLookupByLibrary.simpleMessage(
+      "Сырсөздү киргизиңиз",
+    ),
+    "enterYourEmail": MessageLookupByLibrary.simpleMessage(
+      "Электрондук почтаңызды киргизиңиз",
+    ),
+    "errorAuthentication": MessageLookupByLibrary.simpleMessage(
+      "Аутентификация ката",
+    ),
+    "errorTitle": MessageLookupByLibrary.simpleMessage("Ката"),
+    "feedSubtitle": MessageLookupByLibrary.simpleMessage(
+      "Бир кап үчүн 1500 сомдон баштап.",
+    ),
+    "feedTitle": MessageLookupByLibrary.simpleMessage(
+      "Мал үчүн жогорку сапаттагы тоют!",
+    ),
+    "fieldCorns": MessageLookupByLibrary.simpleMessage("Жүгөрү"),
+    "fieldHays": MessageLookupByLibrary.simpleMessage("Сено"),
+    "fieldHerbs": MessageLookupByLibrary.simpleMessage("Чөп"),
+    "fieldOats": MessageLookupByLibrary.simpleMessage("Арпа"),
+    "fieldPeas": MessageLookupByLibrary.simpleMessage("Буудай"),
     "fieldRequiredError": MessageLookupByLibrary.simpleMessage(
       "Бул талаа милдеттүү",
     ),
+    "fieldSilages": MessageLookupByLibrary.simpleMessage("Силос"),
+    "fieldStraws": MessageLookupByLibrary.simpleMessage("Талаа"),
     "financeAddTransactionButton": MessageLookupByLibrary.simpleMessage(
       "Жаңы транзакция кошуу",
     ),
@@ -255,6 +300,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "kyrgyz": MessageLookupByLibrary.simpleMessage("Кыргызча"),
     "languagePrompt": MessageLookupByLibrary.simpleMessage("Тил танданыз"),
     "loadingError": MessageLookupByLibrary.simpleMessage("Жүктөөдө ката кетти"),
+    "login": MessageLookupByLibrary.simpleMessage("Кирүү"),
     "loginButton": MessageLookupByLibrary.simpleMessage("Кирүү"),
     "loginEmailHint": MessageLookupByLibrary.simpleMessage(
       "Электрондук почтаңызды киргизиңиз",
@@ -266,13 +312,18 @@ class MessageLookup extends MessageLookupByLibrary {
       "Аккаунтуңуз жокпу?",
     ),
     "loginOrSignInWith": MessageLookupByLibrary.simpleMessage(
-      "———— Башка кирүү жолдору ————",
+      "Башка кирүү жолдору",
     ),
     "loginPasswordHint": MessageLookupByLibrary.simpleMessage(
       "Сырсөзүңүздү киргизиңиз",
     ),
     "loginSignUpButton": MessageLookupByLibrary.simpleMessage("Катталуу"),
     "loginTitle": MessageLookupByLibrary.simpleMessage("Кирүү"),
+    "logout": MessageLookupByLibrary.simpleMessage("Чыгуу"),
+    "logoutConfirmation": MessageLookupByLibrary.simpleMessage(
+      "Чыгууну каалайсызбы?",
+    ),
+    "logoutTitle": MessageLookupByLibrary.simpleMessage("Аккаунттан чыгуу"),
     "mainScreenAppBarGreeting": MessageLookupByLibrary.simpleMessage("Йоу, "),
     "mainScreenLogoutDialogCancelButton": MessageLookupByLibrary.simpleMessage(
       "Жокко чыгаруу",
@@ -285,6 +336,11 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "mainScreenLogoutDialogTitle": MessageLookupByLibrary.simpleMessage(
       "Аккаунттан чыгуу",
+    ),
+    "nameColumn": MessageLookupByLibrary.simpleMessage("Аты"),
+    "ok": MessageLookupByLibrary.simpleMessage("ОК"),
+    "otherRegistrationMethods": MessageLookupByLibrary.simpleMessage(
+      "Катталуунун башка ыкмалары",
     ),
     "profileChangePasswordButton": MessageLookupByLibrary.simpleMessage(
       "Сырсөздү өзгөртүү",
@@ -311,12 +367,20 @@ class MessageLookup extends MessageLookupByLibrary {
     "profileUsernameLabel": MessageLookupByLibrary.simpleMessage(
       "Колдонуучунун аты",
     ),
+    "register": MessageLookupByLibrary.simpleMessage("Катталуу"),
+    "registerButton": MessageLookupByLibrary.simpleMessage("Катталуу"),
+    "registration": MessageLookupByLibrary.simpleMessage("Катталуу"),
     "russian": MessageLookupByLibrary.simpleMessage("Орусча"),
+    "save": MessageLookupByLibrary.simpleMessage("Сактоо"),
     "saveButton": MessageLookupByLibrary.simpleMessage("Сактоо"),
     "selectButton": MessageLookupByLibrary.simpleMessage("Тандоо"),
     "sheep": MessageLookupByLibrary.simpleMessage("Кой"),
     "shopAddToCartButton": MessageLookupByLibrary.simpleMessage(
       "Себетке кошуу",
+    ),
+    "shopCallButton": MessageLookupByLibrary.simpleMessage("Чалуу"),
+    "shopContactTitle": MessageLookupByLibrary.simpleMessage(
+      "Биз менен байланыш",
     ),
     "shopFeaturedItems": MessageLookupByLibrary.simpleMessage(
       "Сунушталган товарлар",
@@ -345,6 +409,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "stemTechnologyCategory": MessageLookupByLibrary.simpleMessage(
       "Технология",
     ),
+    "storageTitle": MessageLookupByLibrary.simpleMessage("Азык сактоочу жай"),
     "subpageBackButton": MessageLookupByLibrary.simpleMessage("Артка"),
     "subpageContentPlaceholder": MessageLookupByLibrary.simpleMessage(
       "Кошумча маалымат ушул жерде көрсөтүлөт.",
@@ -365,6 +430,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "tableScreenTitle": MessageLookupByLibrary.simpleMessage(
       "Маалымат таблицасы",
     ),
+    "unitKg": m3,
+    "valueColumn": MessageLookupByLibrary.simpleMessage("Маани"),
     "verifyIdButton": MessageLookupByLibrary.simpleMessage("ID\'ни текшерүү"),
+    "welcomeLogin": MessageLookupByLibrary.simpleMessage("Кирүү"),
+    "welcomeSubtitle": MessageLookupByLibrary.simpleMessage(
+      "Мал семиртүүнү автоматташтыруу\nпроцесси толук кандуу",
+    ),
+    "welcomeTitle": MessageLookupByLibrary.simpleMessage("Cyclone Колдонмо"),
   };
 }

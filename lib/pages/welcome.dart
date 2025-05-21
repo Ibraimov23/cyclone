@@ -1,30 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../generated/l10n.dart';
+
 class Welcome extends StatelessWidget {
   const Welcome({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final s = S.of(context);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.grey.shade300,
         leading: Container(
-          margin: EdgeInsets.all(8),
-          decoration: BoxDecoration(
+          margin: const EdgeInsets.all(8),
+          decoration: const BoxDecoration(
             color: Color(0xFF90010A),
             shape: BoxShape.circle,
           ),
-          child: IconTheme(
-            data: IconThemeData(color: Colors.white),
-            child: BackButton(),
+          child: IconButton(
+            icon: const Icon(Icons.arrow_back, color: Colors.white),
+            onPressed: () {
+              Navigator.pushReplacementNamed(context, '/language');
+            },
           ),
         ),
       ),
       backgroundColor: Colors.grey.shade300,
       body: Center(
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -33,23 +39,24 @@ class Welcome extends StatelessWidget {
                 'assets/icons/logo.svg',
                 height: 100,
               ),
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
               Text(
-                'CYCLONE APP',
-                style: TextStyle(
+                s.welcomeTitle,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
                   fontSize: 36,
                   fontWeight: FontWeight.w900,
                 ),
               ),
-              SizedBox(height: 7),
+              const SizedBox(height: 7),
               Text(
-                'Полная автоматизация процесса\nоткорма скота',
+                s.welcomeSubtitle,
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 16,
                 ),
               ),
-              SizedBox(height: 42),
+              const SizedBox(height: 42),
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
@@ -57,15 +64,15 @@ class Welcome extends StatelessWidget {
                     Navigator.pushNamed(context, '/login');
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFF90010A),
-                    padding: EdgeInsets.all(13),
+                    backgroundColor: const Color(0xFF90010A),
+                    padding: const EdgeInsets.all(13),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15),
                     ),
                   ),
                   child: Text(
-                    'Вход',
-                    style: TextStyle(
+                    s.welcomeLogin,
+                    style: const TextStyle(
                       fontSize: 20,
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
@@ -73,7 +80,7 @@ class Welcome extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
@@ -81,18 +88,19 @@ class Welcome extends StatelessWidget {
                     Navigator.pushNamed(context, '/signin');
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFF90010A),
-                    padding: EdgeInsets.all(13),
+                    backgroundColor: const Color(0xFF90010A),
+                    padding: const EdgeInsets.all(13),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15),
                     ),
                   ),
                   child: Text(
-                    'Регистрация',
-                    style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold),
+                    s.registerButton,
+                    style: const TextStyle(
+                      fontSize: 20,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),

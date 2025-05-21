@@ -107,6 +107,9 @@ flutter:
     - family: 'NotoSans'
       fonts:
         - asset: assets/fonts/NotoSans-VariableFont_wdth.ttf
+    - family: 'WorkSans'
+      fonts:
+        - asset: assets/fonts/WorkSans-VariableFont_wght.ttf
 flutter_intl:
   enabled: true
 

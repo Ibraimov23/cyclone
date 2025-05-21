@@ -85,6 +85,36 @@ class S {
     return Intl.message('Choose', name: 'selectButton', desc: '', args: []);
   }
 
+  /// `CYCLONE APP`
+  String get welcomeTitle {
+    return Intl.message(
+      'CYCLONE APP',
+      name: 'welcomeTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Complete automation of the\ncattle fattening process`
+  String get welcomeSubtitle {
+    return Intl.message(
+      'Complete automation of the\ncattle fattening process',
+      name: 'welcomeSubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Login`
+  String get welcomeLogin {
+    return Intl.message('Login', name: 'welcomeLogin', desc: '', args: []);
+  }
+
+  /// `Register`
+  String get registerButton {
+    return Intl.message('Register', name: 'registerButton', desc: '', args: []);
+  }
+
   /// `Login`
   String get loginTitle {
     return Intl.message('Login', name: 'loginTitle', desc: '', args: []);
@@ -125,10 +155,10 @@ class S {
     return Intl.message('Login', name: 'loginButton', desc: '', args: []);
   }
 
-  /// `———— Or sign in with ————`
+  /// `Or sign in with`
   String get loginOrSignInWith {
     return Intl.message(
-      '———— Or sign in with ————',
+      'Or sign in with',
       name: 'loginOrSignInWith',
       desc: '',
       args: [],
@@ -150,6 +180,136 @@ class S {
     return Intl.message(
       'Sign Up',
       name: 'loginSignUpButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Registration`
+  String get registration {
+    return Intl.message(
+      'Registration',
+      name: 'registration',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter your email`
+  String get enterYourEmail {
+    return Intl.message(
+      'Enter your email',
+      name: 'enterYourEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter password`
+  String get enterPassword {
+    return Intl.message(
+      'Enter password',
+      name: 'enterPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm password`
+  String get confirmPassword {
+    return Intl.message(
+      'Confirm password',
+      name: 'confirmPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Register`
+  String get register {
+    return Intl.message('Register', name: 'register', desc: '', args: []);
+  }
+
+  /// `Account already exists`
+  String get accountAlreadyExistsTitle {
+    return Intl.message(
+      'Account already exists',
+      name: 'accountAlreadyExistsTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This email is already registered. Try to login.`
+  String get accountAlreadyExistsMessage {
+    return Intl.message(
+      'This email is already registered. Try to login.',
+      name: 'accountAlreadyExistsMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error`
+  String get errorTitle {
+    return Intl.message('Error', name: 'errorTitle', desc: '', args: []);
+  }
+
+  /// `Email sent`
+  String get emailSentTitle {
+    return Intl.message(
+      'Email sent',
+      name: 'emailSentTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `A confirmation email has been sent to your address.`
+  String get emailSentMessage {
+    return Intl.message(
+      'A confirmation email has been sent to your address.',
+      name: 'emailSentMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `OK`
+  String get ok {
+    return Intl.message('OK', name: 'ok', desc: '', args: []);
+  }
+
+  /// `Other registration methods`
+  String get otherRegistrationMethods {
+    return Intl.message(
+      'Other registration methods',
+      name: 'otherRegistrationMethods',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Already have an account?`
+  String get alreadyHaveAccount {
+    return Intl.message(
+      'Already have an account?',
+      name: 'alreadyHaveAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Login`
+  String get login {
+    return Intl.message('Login', name: 'login', desc: '', args: []);
+  }
+
+  /// `Authentication error`
+  String get errorAuthentication {
+    return Intl.message(
+      'Authentication error',
+      name: 'errorAuthentication',
       desc: '',
       args: [],
     );
@@ -435,6 +595,41 @@ class S {
     return Intl.message(
       'Add to Cart',
       name: 'shopAddToCartButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Call`
+  String get shopCallButton {
+    return Intl.message('Call', name: 'shopCallButton', desc: '', args: []);
+  }
+
+  /// `Contact us`
+  String get shopContactTitle {
+    return Intl.message(
+      'Contact us',
+      name: 'shopContactTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Premium quality livestock feed!`
+  String get feedTitle {
+    return Intl.message(
+      'Premium quality livestock feed!',
+      name: 'feedTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `From 1500 soms per sack.`
+  String get feedSubtitle {
+    return Intl.message(
+      'From 1500 soms per sack.',
+      name: 'feedSubtitle',
       desc: '',
       args: [],
     );
@@ -1603,6 +1798,106 @@ class S {
   /// `Feeds`
   String get bottomNavFeeds {
     return Intl.message('Feeds', name: 'bottomNavFeeds', desc: '', args: []);
+  }
+
+  /// `Feed Storage`
+  String get storageTitle {
+    return Intl.message(
+      'Feed Storage',
+      name: 'storageTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Name`
+  String get nameColumn {
+    return Intl.message('Name', name: 'nameColumn', desc: '', args: []);
+  }
+
+  /// `Value`
+  String get valueColumn {
+    return Intl.message('Value', name: 'valueColumn', desc: '', args: []);
+  }
+
+  /// `Change Value`
+  String get changeValue {
+    return Intl.message(
+      'Change Value',
+      name: 'changeValue',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get cancel {
+    return Intl.message('Cancel', name: 'cancel', desc: '', args: []);
+  }
+
+  /// `Save`
+  String get save {
+    return Intl.message('Save', name: 'save', desc: '', args: []);
+  }
+
+  /// `{value} kg`
+  String unitKg(Object value) {
+    return Intl.message('$value kg', name: 'unitKg', desc: '', args: [value]);
+  }
+
+  /// `Oats`
+  String get fieldOats {
+    return Intl.message('Oats', name: 'fieldOats', desc: '', args: []);
+  }
+
+  /// `Corn`
+  String get fieldCorns {
+    return Intl.message('Corn', name: 'fieldCorns', desc: '', args: []);
+  }
+
+  /// `Silage`
+  String get fieldSilages {
+    return Intl.message('Silage', name: 'fieldSilages', desc: '', args: []);
+  }
+
+  /// `Straw`
+  String get fieldStraws {
+    return Intl.message('Straw', name: 'fieldStraws', desc: '', args: []);
+  }
+
+  /// `Peas`
+  String get fieldPeas {
+    return Intl.message('Peas', name: 'fieldPeas', desc: '', args: []);
+  }
+
+  /// `Herbs`
+  String get fieldHerbs {
+    return Intl.message('Herbs', name: 'fieldHerbs', desc: '', args: []);
+  }
+
+  /// `Hay`
+  String get fieldHays {
+    return Intl.message('Hay', name: 'fieldHays', desc: '', args: []);
+  }
+
+  /// `Log Out`
+  String get logoutTitle {
+    return Intl.message('Log Out', name: 'logoutTitle', desc: '', args: []);
+  }
+
+  /// `Are you sure you want to log out?`
+  String get logoutConfirmation {
+    return Intl.message(
+      'Are you sure you want to log out?',
+      name: 'logoutConfirmation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Log Out`
+  String get logout {
+    return Intl.message('Log Out', name: 'logout', desc: '', args: []);
   }
 }
 

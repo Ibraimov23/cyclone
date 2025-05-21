@@ -73,6 +73,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     final loc = S.of(context);
+    final lang = Localizations.localeOf(context).languageCode;
 
     String getLocalizedAnimalType(BuildContext context, String originalType) {
       final loc = S.of(context);
@@ -135,12 +136,11 @@ class _HomeState extends State<Home> {
                   GridView.builder(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       crossAxisSpacing: 30,
                       mainAxisSpacing: 30,
-                      childAspectRatio: 1.077,
+                      childAspectRatio: lang == 'ru' ? 1.071 : 1.078,
                     ),
                     itemCount: stadosList.length,
                     itemBuilder: (context, index) {

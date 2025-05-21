@@ -6,26 +6,50 @@ import '../generated/l10n.dart';
 import '../main.dart';
 import 'language_provider.dart';
 
-class LanguageSelectionScreen extends StatelessWidget {
+class LanguageSelectionScreen extends StatefulWidget {
   const LanguageSelectionScreen({super.key});
 
-  Future<void> _onLanguageSelected(
-      BuildContext context, String langCode) async {
-    final langProvider = Provider.of<LanguageProvider>(context, listen: false);
-    await langProvider.changeLanguage(langCode);
+  @override
+  State<LanguageSelectionScreen> createState() =>
+      _LanguageSelectionScreenState();
+}
 
+class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
+  String? _selectedLangCode;
+
+  @override
+  void initState() {
+    super.initState();
+    final langProvider = context.read<LanguageProvider>();
+    _selectedLangCode = langProvider.locale.languageCode;
+  }
+
+  void _onLanguageCardTapped(String langCode) {
+    final langProvider = Provider.of<LanguageProvider>(context, listen: false);
+    langProvider.changeLanguageSync(langCode);
+    langProvider.persistLanguage(langCode);
+    setState(() {
+      _selectedLangCode = langCode;
+    });
+  }
+
+  Future<void> _onSelectButtonPressed() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool(kLanguageScreenPassedKey, true);
 
-    if (context.mounted) {
-      Navigator.pushReplacementNamed(context, '/auth');
+    final isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
+
+    if (!mounted) return;
+
+    if (isLoggedIn) {
+      Navigator.pushReplacementNamed(context, '/');
+    } else {
+      Navigator.pushReplacementNamed(context, '/welcome');
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final langProvider = context.watch<LanguageProvider>();
-    final currentLangCode = langProvider.locale.languageCode;
     final loc = S.of(context);
 
     Widget _buildLanguageCard({
@@ -33,10 +57,10 @@ class LanguageSelectionScreen extends StatelessWidget {
       required String title,
       required String emoji,
     }) {
-      final isSelected = currentLangCode == code;
+      final isSelected = _selectedLangCode == code;
 
       return GestureDetector(
-        onTap: () => _onLanguageSelected(context, code),
+        onTap: () => _onLanguageCardTapped(code),
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 250),
           margin: const EdgeInsets.symmetric(vertical: 10),
@@ -68,7 +92,6 @@ class LanguageSelectionScreen extends StatelessWidget {
                 title,
                 style: TextStyle(
                   fontSize: 18,
-                  fontFamily: 'Montserrat',
                   fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
                   color: Colors.black,
                 ),
@@ -107,12 +130,7 @@ class LanguageSelectionScreen extends StatelessWidget {
               _buildLanguageCard(code: 'en', title: loc.english, emoji: '🇬🇧'),
               const Spacer(),
               ElevatedButton(
-                onPressed: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => MainScreen()),
-                  );
-                },
+                onPressed: _onSelectButtonPressed,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF90010A),
                   padding: const EdgeInsets.symmetric(vertical: 16),

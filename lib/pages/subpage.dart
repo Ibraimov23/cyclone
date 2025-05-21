@@ -6,6 +6,7 @@ import 'package:cyclone/widget/custom_drawer.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SubPageScreen extends StatefulWidget {
   final String stadoId;
@@ -123,6 +124,8 @@ class _SubPageScreenState extends State<SubPageScreen> {
 
     if (shouldLogout == true) {
       await FirebaseAuth.instance.signOut();
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setBool('isLoggedIn', false);
       Navigator.pushReplacementNamed(context, '/login');
     }
   }

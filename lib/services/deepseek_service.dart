@@ -2,11 +2,27 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
-Stream<String> sendMessageToBotStream(String userMessage) async* {
+Stream<String> sendMessageToBotStream(
+    String userMessage, String locale) async* {
+  String systemPrompt;
+
+  switch (locale) {
+    case 'ky':
+      systemPrompt = "Сен кыргызча сүйлөшүүгө тийишсиң.";
+      break;
+    case 'ru':
+      systemPrompt = "Ты должен говорить только на русском языке.";
+      break;
+    case 'en':
+    default:
+      systemPrompt = "You must speak only in English.";
+  }
+
   final request = {
     "model": "deepseek-chat",
     "stream": true,
     "messages": [
+      {"role": "system", "content": systemPrompt},
       {"role": "user", "content": userMessage}
     ]
   };
@@ -39,7 +55,7 @@ Stream<String> sendMessageToBotStream(String userMessage) async* {
           yield cleanMarkdown(content);
         }
       } catch (e) {
-        yield '[Ошибка парсинга: $e]';
+        yield '[Parsing error: $e]';
       }
     }
   }

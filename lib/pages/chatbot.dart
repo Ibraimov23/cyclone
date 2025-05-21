@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import '../generated/l10n.dart';
 import '../services/deepseek_service.dart';
 
 class Chatbot extends StatefulWidget {
@@ -45,17 +46,19 @@ class _ChatState extends State<Chatbot> {
     _listKey.currentState?.insertItem(messages.length - 1);
 
     int botIndex = messages.length - 1;
+    String locale = Localizations.localeOf(context).languageCode;
 
     try {
-      await for (final chunk in sendMessageToBotStream(userMessage)) {
+      await for (final chunk in sendMessageToBotStream(userMessage, locale)) {
         setState(() {
-          messages[botIndex]["content"] =
-              (messages[botIndex]["content"] ?? "") + chunk;
+          final previous = messages[botIndex]["content"] ?? "";
+          messages[botIndex]["content"] = previous + chunk;
         });
       }
     } catch (e) {
       setState(() {
-        messages[botIndex]["content"] = "Ошибка: $e";
+        messages[botIndex]["content"] =
+            "${S.of(context).chatbotErrorOccurred}: $e";
       });
     }
   }
@@ -81,7 +84,7 @@ class _ChatState extends State<Chatbot> {
                     const SizedBox(height: 120),
                     if (messages.isEmpty)
                       Text(
-                        "Йоу, $username! \nЧто хотите узнать?",
+                        S.of(context).chatbotWelcomeMessage,
                         textAlign: TextAlign.center,
                         style: const TextStyle(
                           color: Color(0xFF90010A),
@@ -187,7 +190,7 @@ class CustomTextField extends StatelessWidget {
                       fillColor: Colors.transparent,
                       contentPadding: const EdgeInsets.all(15),
                       border: InputBorder.none,
-                      hintText: 'Введите запрос',
+                      hintText: S.of(context).chatbotTypeMessageHint,
                       hintStyle: const TextStyle(
                         color: Color.fromRGBO(255, 255, 255, 0.52),
                         fontSize: 16,
@@ -215,10 +218,6 @@ class CustomTextField extends StatelessWidget {
                           ),
                         ],
                       ),
-                      /*child: Icon(
-                        Icons.send,
-                        color: Color(0xFF90010A),
-                      ),*/
                     ),
                   ),
                 ),

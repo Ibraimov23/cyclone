@@ -1,19 +1,20 @@
+import 'package:cyclone/generated/l10n.dart'; // Убедитесь, что путь корректен
 import 'package:cyclone/services/auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class Sigin extends StatefulWidget {
-  const Sigin({super.key});
+class SignIn extends StatefulWidget {
+  const SignIn({super.key});
 
   @override
-  State<Sigin> createState() => _siginState();
+  State<SignIn> createState() => _SignInState();
 }
 
-class _siginState extends State<Sigin> {
-  TextEditingController controllerEmail = TextEditingController();
-  TextEditingController controllerPassword = TextEditingController();
-  TextEditingController controllerConfirmPassword = TextEditingController();
+class _SignInState extends State<SignIn> {
+  final controllerEmail = TextEditingController();
+  final controllerPassword = TextEditingController();
+  final controllerConfirmPassword = TextEditingController();
 
   @override
   void dispose() {
@@ -47,16 +48,17 @@ class _siginState extends State<Sigin> {
   }
 
   void _showAccountExistsDialog() {
+    final loc = S.of(context);
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: Colors.white,
-        title: Text("Аккаунт уже существует"),
-        content: Text("Этот email уже зарегистрирован. Попробуйте войти."),
+        title: Text(loc.accountAlreadyExistsTitle),
+        content: Text(loc.accountAlreadyExistsMessage),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: Text("ОК"),
+            child: Text(loc.ok),
           ),
         ],
       ),
@@ -64,37 +66,37 @@ class _siginState extends State<Sigin> {
   }
 
   void _showErrorDialog(String message) {
+    final loc = S.of(context);
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text("Ошибка"),
+        title: Text(loc.errorTitle),
         content: Text(message),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: Text("ОК"),
+            child: Text(loc.ok),
           ),
         ],
       ),
     );
   }
 
-  Future<void> _showEmailSentDialog() {
+  Future<void> _showEmailSentDialog() async {
+    final loc = S.of(context);
     return showDialog<void>(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Письмо отправлено'),
-          content:
-              const Text('Письмо с подтверждением отправлено на ваш email.'),
+          title: Text(loc.emailSentTitle),
+          content: Text(loc.emailSentMessage),
           actions: <Widget>[
             TextButton(
               style: TextButton.styleFrom(
-                  textStyle: Theme.of(context).textTheme.labelLarge),
-              child: const Text('OK'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
+                textStyle: Theme.of(context).textTheme.labelLarge,
+              ),
+              child: Text(loc.ok),
+              onPressed: () => Navigator.of(context).pop(),
             ),
           ],
         );
@@ -104,16 +106,17 @@ class _siginState extends State<Sigin> {
 
   @override
   Widget build(BuildContext context) {
+    final loc = S.of(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.grey.shade300,
         leading: Container(
-          margin: EdgeInsets.all(8),
-          decoration: BoxDecoration(
+          margin: const EdgeInsets.all(8),
+          decoration: const BoxDecoration(
             color: Color(0xFF90010A),
             shape: BoxShape.circle,
           ),
-          child: IconTheme(
+          child: const IconTheme(
             data: IconThemeData(color: Colors.white),
             child: BackButton(),
           ),
@@ -121,209 +124,197 @@ class _siginState extends State<Sigin> {
       ),
       backgroundColor: Colors.grey.shade300,
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 24),
-              const Text(
-                'Регистрация',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 30,
-                  letterSpacing: 0,
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 24),
+            Text(
+              loc.registration,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 30,
+                letterSpacing: 0,
+              ),
+            ),
+            const SizedBox(height: 20),
+            TextField(
+              controller: controllerEmail,
+              decoration: InputDecoration(
+                filled: true,
+                fillColor: Colors.white,
+                hintText: loc.enterYourEmail,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(15),
+                  borderSide: BorderSide.none,
+                ),
+                contentPadding: const EdgeInsets.symmetric(
+                  vertical: 19,
+                  horizontal: 17,
                 ),
               ),
-              const SizedBox(height: 20),
-              TextField(
-                controller: controllerEmail,
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Colors.white,
-                  hintText: 'Введите вашу почту',
-                  border: OutlineInputBorder(
+              style: const TextStyle(
+                fontSize: 14,
+                letterSpacing: 0,
+                color: Colors.black,
+              ),
+            ),
+            const SizedBox(height: 20),
+            TextField(
+              controller: controllerPassword,
+              obscureText: true,
+              decoration: InputDecoration(
+                filled: true,
+                fillColor: Colors.white,
+                hintText: loc.enterPassword,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(15),
+                  borderSide: BorderSide.none,
+                ),
+                contentPadding: const EdgeInsets.symmetric(
+                  vertical: 19,
+                  horizontal: 17,
+                ),
+              ),
+              style: const TextStyle(
+                fontSize: 14,
+                letterSpacing: 0,
+                color: Colors.black,
+              ),
+            ),
+            const SizedBox(height: 20),
+            TextField(
+              controller: controllerConfirmPassword,
+              obscureText: true,
+              decoration: InputDecoration(
+                filled: true,
+                fillColor: Colors.white,
+                hintText: loc.confirmPassword,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(15),
+                  borderSide: BorderSide.none,
+                ),
+                contentPadding: const EdgeInsets.symmetric(
+                  vertical: 19,
+                  horizontal: 17,
+                ),
+              ),
+              style: const TextStyle(
+                fontSize: 14,
+                letterSpacing: 0,
+                color: Colors.black,
+              ),
+            ),
+            const SizedBox(height: 100),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: register,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF90010A),
+                  padding: const EdgeInsets.symmetric(vertical: 13),
+                  shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15),
-                    borderSide: BorderSide.none,
-                  ),
-                  contentPadding: const EdgeInsets.symmetric(
-                    vertical: 19,
-                    horizontal: 17,
                   ),
                 ),
-                style: const TextStyle(
-                  fontSize: 14,
-                  letterSpacing: 0,
-                  color: Colors.black,
+                child: Text(
+                  loc.register,
+                  style: const TextStyle(
+                    fontSize: 20,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
-              const SizedBox(height: 20),
-              TextField(
-                controller: controllerPassword,
-                obscureText: true,
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Colors.white,
-                  hintText: 'Введите пароль',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15),
-                    borderSide: BorderSide.none,
-                  ),
-                  contentPadding: const EdgeInsets.symmetric(
-                    vertical: 19,
-                    horizontal: 17,
-                  ),
+            ),
+            const SizedBox(height: 50),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  loc.otherRegistrationMethods,
+                  style: const TextStyle(fontSize: 14, letterSpacing: 1),
+                  textAlign: TextAlign.center,
                 ),
-                style: const TextStyle(
-                  fontSize: 14,
-                  letterSpacing: 0,
-                  color: Colors.black,
-                ),
-              ),
-              const SizedBox(height: 20),
-              TextField(
-                controller: controllerConfirmPassword,
-                obscureText: true,
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Colors.white,
-                  hintText: 'Подтвердите пароль',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15),
-                    borderSide: BorderSide.none,
-                  ),
-                  contentPadding: const EdgeInsets.symmetric(
-                    vertical: 19,
-                    horizontal: 17,
-                  ),
-                ),
-                style: const TextStyle(
-                  fontSize: 14,
-                  letterSpacing: 0,
-                  color: Colors.black,
-                ),
-              ),
-              const SizedBox(height: 100),
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {
-                    register();
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF90010A),
-                    padding: const EdgeInsets.symmetric(vertical: 13),
+              ],
+            ),
+            const SizedBox(height: 30),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                IconButton(
+                  onPressed: () {},
+                  style: IconButton.styleFrom(
+                    backgroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 18,
+                      horizontal: 40,
+                    ),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15),
                     ),
                   ),
-                  child: const Text(
-                    'Зарегистрироваться',
+                  icon: SvgPicture.asset('assets/Social/facebook.svg'),
+                ),
+                const SizedBox(width: 13),
+                IconButton(
+                  onPressed: () async {
+                    try {
+                      await authService.value.registerInWithGoogle();
+                    } catch (e) {
+                      print("Ошибка при входе через Google: $e");
+                    }
+                  },
+                  style: IconButton.styleFrom(
+                    backgroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 18,
+                      horizontal: 40,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                  ),
+                  icon: SvgPicture.asset('assets/Social/Google.svg'),
+                ),
+                const SizedBox(width: 13),
+                IconButton(
+                  onPressed: () {},
+                  style: IconButton.styleFrom(
+                    backgroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 18,
+                      horizontal: 40,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                  ),
+                  icon: SvgPicture.asset('assets/Social/whatsaap.svg'),
+                ),
+              ],
+            ),
+            const SizedBox(height: 30),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  loc.alreadyHaveAccount,
+                  style: const TextStyle(fontSize: 14, letterSpacing: 1),
+                ),
+                TextButton(
+                  onPressed: () => Navigator.pushNamed(context, '/login'),
+                  child: Text(
+                    loc.login,
                     style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF90010A),
+                      fontWeight: FontWeight.w900,
                     ),
                   ),
                 ),
-              ),
-              const SizedBox(height: 50),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
-                    '———— Другой способ регистрации ————',
-                    style: TextStyle(fontSize: 14, letterSpacing: 1),
-                    textAlign: TextAlign.center,
-                  ),
-                ],
-              ),
-              const SizedBox(height: 30),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  IconButton(
-                    onPressed: () {},
-                    style: IconButton.styleFrom(
-                      backgroundColor: Colors.white,
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 18,
-                        horizontal: 40,
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                    ),
-                    icon: SvgPicture.asset(
-                      'assets/Social/facebook.svg',
-                    ),
-                  ),
-                  const SizedBox(width: 13),
-                  IconButton(
-                    onPressed: () async {
-                      try {
-                        await authService.value.registerInWithGoogle();
-                      } catch (e) {
-                        print("Ошибка при входе через Google: $e");
-                      }
-                    },
-                    style: IconButton.styleFrom(
-                      backgroundColor: Colors.white,
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 18,
-                        horizontal: 40,
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                    ),
-                    icon: SvgPicture.asset(
-                      'assets/Social/Google.svg',
-                    ),
-                  ),
-                  const SizedBox(width: 13),
-                  IconButton(
-                    onPressed: () {},
-                    style: IconButton.styleFrom(
-                      backgroundColor: Colors.white,
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 18,
-                        horizontal: 40,
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                    ),
-                    icon: SvgPicture.asset(
-                      'assets/Social/whatsaap.svg',
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 30),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
-                    'Уже есть аккаунт?',
-                    style: TextStyle(fontSize: 14, letterSpacing: 1),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/login');
-                    },
-                    child: const Text(
-                      'Вход',
-                      style: TextStyle(
-                        color: Color(0xFF90010A),
-                        fontWeight: FontWeight.w900,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
+              ],
+            ),
+          ],
         ),
       ),
     );

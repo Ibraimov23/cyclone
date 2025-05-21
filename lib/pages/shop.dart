@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:android_intent_plus/android_intent.dart';
 import 'package:flutter/material.dart';
 
+import '../generated/l10n.dart';
+
 class Shop extends StatefulWidget {
   const Shop({super.key});
 
@@ -29,6 +31,9 @@ class _ShopState extends State<Shop> {
 
   @override
   Widget build(BuildContext context) {
+    final loc = S.of(context);
+    final lang = Localizations.localeOf(context).languageCode;
+
     return Scaffold(
       body: Container(
         height: MediaQuery.of(context).size.height,
@@ -46,9 +51,9 @@ class _ShopState extends State<Shop> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Ассортимент кормов',
-                  style: TextStyle(
+                Text(
+                  loc.shopScreenTitle,
+                  style: const TextStyle(
                     color: Colors.black,
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
@@ -69,13 +74,14 @@ class _ShopState extends State<Shop> {
                   ),
                   child: TextField(
                     decoration: InputDecoration(
-                      hintText: 'Поиск корма...',
-                      prefixIcon: Icon(Icons.search, color: Color(0xFF90010A)),
+                      hintText: loc.shopSearchHint,
+                      prefixIcon:
+                          const Icon(Icons.search, color: Color(0xFF90010A)),
                       border: OutlineInputBorder(
                         borderSide: BorderSide.none,
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      contentPadding: EdgeInsets.all(16),
+                      contentPadding: const EdgeInsets.all(16),
                     ),
                   ),
                 ),
@@ -83,11 +89,11 @@ class _ShopState extends State<Shop> {
                 GridView.builder(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 1,
                     crossAxisSpacing: 16.0,
                     mainAxisSpacing: 16.0,
-                    childAspectRatio: 0.877,
+                    childAspectRatio: lang == 'ru' ? 0.871 : 0.877,
                   ),
                   itemCount: 1,
                   itemBuilder: (context, index) {
@@ -119,26 +125,26 @@ class _ShopState extends State<Shop> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const Text(
-                                    'Корм для скота высшего качества!',
-                                    style: TextStyle(
+                                  Text(
+                                    loc.feedTitle,
+                                    style: const TextStyle(
                                       color: Colors.white,
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
                                   const SizedBox(height: 12),
-                                  const Text(
-                                    'От 1500 сомов за мешок.',
-                                    style: TextStyle(
+                                  Text(
+                                    loc.feedSubtitle,
+                                    style: const TextStyle(
                                       color: Colors.white70,
                                       fontSize: 16,
                                     ),
                                   ),
                                   const SizedBox(height: 12),
-                                  const Text(
-                                    'Свяжитесь с нами:\n+7 (123) 456-78-90',
-                                    style: TextStyle(
+                                  Text(
+                                    '${loc.shopContactTitle}:\n+7 (123) 456-78-90',
+                                    style: const TextStyle(
                                       color: Colors.white70,
                                       fontSize: 16,
                                     ),
@@ -153,7 +159,7 @@ class _ShopState extends State<Shop> {
                                       ),
                                     ),
                                     onPressed: _makeCall,
-                                    child: const Text('Позвонить'),
+                                    child: Text(loc.shopCallButton),
                                   ),
                                 ],
                               ),
