@@ -1,6 +1,8 @@
 import 'package:cyclone/services/auth_service.dart';
 import 'package:flutter/material.dart';
 
+import '../generated/l10n.dart';
+
 class ResetPassword extends StatefulWidget {
   const ResetPassword({super.key});
 
@@ -13,49 +15,33 @@ class _ResetPasswordState extends State<ResetPassword> {
 
   Future<void> _sendPasswordResetEmail() async {
     final email = _emailController.text.trim();
+    final loc = S.of(context);
 
     if (email.isEmpty) {
-      _showErrorDialog("Введите вашу почту.");
+      _showDialog(loc.successTitle, loc.emailIsEmptyError);
       return;
     }
 
     final result = await authService.value.sendPasswordResetEmail(email);
 
-    if (result == "Письмо отправлено.") {
-      _showSuccessDialog(result);
+    if (result == loc.emailSentSuccess) {
+      _showDialog(loc.successTitle, result);
     } else {
-      _showErrorDialog(result);
+      _showDialog(loc.successTitle, result);
     }
   }
 
-  void _showErrorDialog(String message) {
+  void _showDialog(String title, String message) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: Colors.white,
-        title: const Text("Успех"),
+        title: Text(title),
         content: Text(message),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text("ОК"),
-          ),
-        ],
-      ),
-    );
-  }
-
-  void _showSuccessDialog(String message) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        backgroundColor: Colors.white,
-        title: const Text("Успех"),
-        content: Text(message),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: const Text("ОК"),
+            child: Text(S.of(context).okButton),
           ),
         ],
       ),
@@ -64,6 +50,8 @@ class _ResetPasswordState extends State<ResetPassword> {
 
   @override
   Widget build(BuildContext context) {
+    final loc = S.of(context);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.grey.shade300,
@@ -87,12 +75,11 @@ class _ResetPasswordState extends State<ResetPassword> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 20),
-              const Text(
-                'Сброс пароля',
-                style: TextStyle(
+              Text(
+                loc.resetPasswordTitle,
+                style: const TextStyle(
                   fontWeight: FontWeight.w900,
                   fontSize: 30,
-                  letterSpacing: 0,
                 ),
               ),
               const SizedBox(height: 10),
@@ -102,7 +89,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                 decoration: InputDecoration(
                   filled: true,
                   fillColor: Colors.white,
-                  hintText: 'Введите вашу почту',
+                  hintText: loc.enterYourEmail,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15),
                     borderSide: BorderSide.none,
@@ -112,7 +99,6 @@ class _ResetPasswordState extends State<ResetPassword> {
                 ),
                 style: const TextStyle(
                   fontSize: 14,
-                  letterSpacing: 0,
                   color: Colors.black,
                 ),
               ),
@@ -128,9 +114,9 @@ class _ResetPasswordState extends State<ResetPassword> {
                       borderRadius: BorderRadius.circular(15),
                     ),
                   ),
-                  child: const Text(
-                    'Отправить письмо',
-                    style: TextStyle(
+                  child: Text(
+                    loc.sendEmailButton,
+                    style: const TextStyle(
                       fontSize: 20,
                       color: Colors.white,
                       fontWeight: FontWeight.bold,

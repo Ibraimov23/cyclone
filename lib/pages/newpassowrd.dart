@@ -1,6 +1,8 @@
 import 'package:cyclone/services/auth_service.dart';
 import 'package:flutter/material.dart';
 
+import '../generated/l10n.dart';
+
 class NewPassword extends StatefulWidget {
   const NewPassword({super.key});
 
@@ -20,9 +22,7 @@ class _NewPasswordState extends State<NewPassword> {
     final result = await authService.value
         .resetPasswordFromCurrentPassword(newPassword, confirmPassword);
 
-    print(result);
-
-    if (result == "Пароль успешно изменен.") {
+    if (result == S.of(context).passwordChangedSuccess) {
       _showSuccessDialog(result);
     } else {
       _showErrorDialog(result);
@@ -34,12 +34,12 @@ class _NewPasswordState extends State<NewPassword> {
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: Colors.white,
-        title: Text("Ошибка"),
+        title: Text(S.of(context).errorTitle),
         content: Text(message),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: Text("ОК"),
+            child: Text(S.of(context).ok),
           ),
         ],
       ),
@@ -51,12 +51,12 @@ class _NewPasswordState extends State<NewPassword> {
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: Colors.white,
-        title: Text("Успех"),
+        title: Text(S.of(context).successTitle),
         content: Text(message),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: Text("ОК"),
+            child: Text(S.of(context).ok),
           ),
         ],
       ),
@@ -65,6 +65,8 @@ class _NewPasswordState extends State<NewPassword> {
 
   @override
   Widget build(BuildContext context) {
+    final loc = S.of(context);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.grey.shade300,
@@ -92,24 +94,22 @@ class _NewPasswordState extends State<NewPassword> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 20),
-                const Text(
-                  'Придумайте пароль',
-                  style: TextStyle(
+                Text(
+                  loc.createPasswordTitle,
+                  style: const TextStyle(
                     fontWeight: FontWeight.w900,
                     fontSize: 30,
                     letterSpacing: 0,
                   ),
                 ),
                 const SizedBox(height: 20),
-                const SizedBox(
-                  height: 15,
-                ),
+                const SizedBox(height: 15),
                 TextField(
                   controller: _newPasswordController,
                   decoration: InputDecoration(
                     filled: true,
                     fillColor: Colors.white,
-                    hintText: 'Введите новый пароль',
+                    hintText: loc.enterNewPassword,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
                       borderSide: BorderSide.none,
@@ -124,16 +124,14 @@ class _NewPasswordState extends State<NewPassword> {
                   ),
                 ),
                 const SizedBox(height: 15),
-                const SizedBox(
-                  height: 15,
-                ),
+                const SizedBox(height: 15),
                 TextField(
                   controller: _confirmPasswordController,
                   obscureText: true,
                   decoration: InputDecoration(
                     filled: true,
                     fillColor: Colors.white,
-                    hintText: 'Введите пароль',
+                    hintText: loc.enterPassword,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
                       borderSide: BorderSide.none,
@@ -159,9 +157,9 @@ class _NewPasswordState extends State<NewPassword> {
                         borderRadius: BorderRadius.circular(15),
                       ),
                     ),
-                    child: const Text(
-                      'Изменить',
-                      style: TextStyle(
+                    child: Text(
+                      loc.changePasswordButton,
+                      style: const TextStyle(
                         fontSize: 20,
                         color: Colors.white,
                         fontWeight: FontWeight.bold,

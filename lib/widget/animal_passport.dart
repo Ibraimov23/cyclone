@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../generated/l10n.dart';
+
 class AnimalPassport extends StatelessWidget {
   final String animalName;
   final String age;
@@ -50,7 +52,6 @@ class AnimalPassport extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // 🐾 Icon Section
             Column(
               children: [
                 ClipRRect(
@@ -88,17 +89,17 @@ class AnimalPassport extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 12),
-                  _infoRow("Возраст", age),
-                  _infoRow("Вес", weight),
-                  _infoRow("Порода", breed),
+                  _infoRow(S.of(context).ageLabel, age),
+                  _infoRow(S.of(context).weightLabel, weight),
+                  _infoRow(S.of(context).breedLabel, breed),
                 ],
               ),
             ),
             const SizedBox(width: 8),
             Column(
               children: [
-                const Text(
-                  "Здоровье",
+                Text(
+                  S.of(context).healthLabel,
                   style: TextStyle(fontSize: 13, color: Colors.black54),
                 ),
                 const SizedBox(height: 6),

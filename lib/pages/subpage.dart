@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../generated/l10n.dart';
+
 class SubPageScreen extends StatefulWidget {
   final String stadoId;
   final String stadoName;
@@ -78,16 +80,16 @@ class _SubPageScreenState extends State<SubPageScreen> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
           ),
-          title: const Text(
-            "Выход из аккаунта",
+          title: Text(
+            S.of(context).logoutTitle,
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
               color: Color(0xFF90010A),
             ),
           ),
-          content: const Text(
-            "Вы уверены, что хотите выйти?",
+          content: Text(
+            S.of(context).logoutConfirmation,
             style: TextStyle(
               fontSize: 16,
               color: Colors.black87,
@@ -96,8 +98,8 @@ class _SubPageScreenState extends State<SubPageScreen> {
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(false),
-              child: const Text(
-                "Отмена",
+              child: Text(
+                S.of(context).cancel,
                 style: TextStyle(
                   fontSize: 16,
                   color: Colors.black45,
@@ -108,8 +110,8 @@ class _SubPageScreenState extends State<SubPageScreen> {
               onPressed: () async {
                 Navigator.of(context).pop(true);
               },
-              child: const Text(
-                "Выйти",
+              child: Text(
+                S.of(context).logout,
                 style: TextStyle(
                   fontSize: 16,
                   color: Color(0xFF90010A),
@@ -135,7 +137,7 @@ class _SubPageScreenState extends State<SubPageScreen> {
     return Scaffold(
       backgroundColor: const Color(0xFFE7E7E7),
       appBar: CustomAppBar(
-        title: "Йоу, ${_getShortUsername(username)}",
+        title: S.of(context).greeting(_getShortUsername(username)),
         onMenuTap: () {
           Scaffold.of(context).openEndDrawer();
         },
@@ -145,7 +147,7 @@ class _SubPageScreenState extends State<SubPageScreen> {
         children: _pages,
       ),
       bottomNavigationBar: Container(
-        padding: const EdgeInsets.only(top: 8, bottom: 10, right: 5, left: 5),
+        padding: const EdgeInsets.symmetric(vertical: 10),
         decoration: const BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.only(
@@ -159,13 +161,17 @@ class _SubPageScreenState extends State<SubPageScreen> {
             ),
           ],
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            _buildNavItem(0, 'Таблица', 'assets/icons/table.svg'),
-            _buildNavItem(1, 'Добавить', 'assets/icons/create.svg'),
-            _buildNavItem(2, 'Тех. паспорт', 'assets/icons/animal_info.svg'),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              _buildNavItem(0, S.of(context).table, 'assets/icons/table.svg'),
+              _buildNavItem(1, S.of(context).add, 'assets/icons/create.svg'),
+              _buildNavItem(2, S.of(context).techPassport,
+                  'assets/icons/animal_info.svg'),
+            ],
+          ),
         ),
       ),
       endDrawer: CustomDrawer(
@@ -200,12 +206,18 @@ class _SubPageScreenState extends State<SubPageScreen> {
             ),
           ),
           const SizedBox(height: 4),
-          Text(
-            label,
-            style: const TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
-              color: Colors.black54,
+          SizedBox(
+            width: 90,
+            child: Text(
+              label,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+                color: Colors.black54,
+              ),
             ),
           ),
         ],

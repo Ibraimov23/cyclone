@@ -2,6 +2,8 @@ import 'package:cyclone/pages/intro.dart';
 import 'package:cyclone/widget/custom_app-bar.dart';
 import 'package:flutter/material.dart';
 
+import '../generated/l10n.dart';
+
 class Instruction extends StatefulWidget {
   final String username;
   final VoidCallback onLogout;
@@ -16,10 +18,12 @@ class Instruction extends StatefulWidget {
 class _InstructionState extends State<Instruction> {
   @override
   Widget build(BuildContext context) {
+    final loc = S.of(context);
+
     return Scaffold(
       backgroundColor: const Color(0xFFE7E7E7),
       appBar: CustomAppBar(
-        title: "Привет, ${widget.username}!",
+        title: loc.greeting(widget.username),
         onMenuTap: () {
           Scaffold.of(context).openEndDrawer();
         },
@@ -40,11 +44,11 @@ class _InstructionState extends State<Instruction> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 15.0),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 15.0),
                     child: Text(
-                      'Как пользоваться',
-                      style: TextStyle(
+                      loc.instructionTitle,
+                      style: const TextStyle(
                         fontSize: 26,
                         fontWeight: FontWeight.w600,
                         color: Colors.black,
@@ -52,9 +56,9 @@ class _InstructionState extends State<Instruction> {
                     ),
                   ),
                   ReusableInstructionCard(
-                    title: 'Введение',
-                    description: 'Описание как начать работу с приложением.',
-                    duration: '15 минут',
+                    title: loc.instructionCardIntroductionTitle,
+                    description: loc.instructionCardIntroductionDescription,
+                    duration: loc.duration15min,
                     onTap: () {
                       Navigator.push(
                         context,
@@ -69,45 +73,45 @@ class _InstructionState extends State<Instruction> {
                   ),
                   const SizedBox(height: 18),
                   ReusableInstructionCard(
-                    title: 'Главный экран',
-                    description: 'Описание основ экрана и функций.',
-                    duration: '20 минут',
+                    title: loc.instructionCardMainScreenTitle,
+                    description: loc.instructionCardMainScreenDescription,
+                    duration: loc.duration20min,
                   ),
                   const SizedBox(height: 18),
                   ReusableInstructionCard(
-                    title: 'Добавление скота',
-                    description: 'Как добавить скот в систему.',
-                    duration: '20 минут',
+                    title: loc.instructionCardAddCattleTitle,
+                    description: loc.instructionCardAddCattleDescription,
+                    duration: loc.duration20min,
                   ),
                   const SizedBox(height: 18),
                   ReusableInstructionCard(
-                    title: 'Тех паспорт / Добавление',
-                    description: 'Как добавить техпаспорт животного.',
-                    duration: '20 минут',
+                    title: loc.instructionCardTechPassportTitle,
+                    description: loc.instructionCardTechPassportDescription,
+                    duration: loc.duration20min,
                   ),
                   const SizedBox(height: 18),
                   ReusableInstructionCard(
-                    title: 'Таблица животных',
-                    description: 'Как отслеживать животных в таблице.',
-                    duration: '20 минут',
+                    title: loc.instructionCardAnimalsTableTitle,
+                    description: loc.instructionCardAnimalsTableDescription,
+                    duration: loc.duration20min,
                   ),
                   const SizedBox(height: 18),
                   ReusableInstructionCard(
-                    title: 'Чат бот',
-                    description: 'Как использовать чат-бота для общения.',
-                    duration: '5 минут',
+                    title: loc.instructionCardChatBotTitle,
+                    description: loc.instructionCardChatBotDescription,
+                    duration: loc.duration5min,
                   ),
                   const SizedBox(height: 18),
                   ReusableInstructionCard(
-                    title: 'Склад кормов',
-                    description: 'Как добавить корма на склад.',
-                    duration: '4 минут',
+                    title: loc.instructionCardFeedWarehouseTitle,
+                    description: loc.instructionCardFeedWarehouseDescription,
+                    duration: loc.duration4min,
                   ),
                   const SizedBox(height: 18),
                   ReusableInstructionCard(
-                    title: 'Отслеживание веса',
-                    description: 'Как отслеживать изменение веса животных.',
-                    duration: '20 минут',
+                    title: loc.instructionCardWeightTrackingTitle,
+                    description: loc.instructionCardWeightTrackingDescription,
+                    duration: loc.duration20min,
                   ),
                 ],
               ),
@@ -135,6 +139,8 @@ class ReusableInstructionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loc = S.of(context);
+
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -184,9 +190,9 @@ class ReusableInstructionCard extends StatelessWidget {
                   const SizedBox(height: 8),
                   Row(
                     children: [
-                      const Text(
-                        'Длительность: ',
-                        style: TextStyle(
+                      Text(
+                        loc.instructionCardDurationLabel,
+                        style: const TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
                         ),

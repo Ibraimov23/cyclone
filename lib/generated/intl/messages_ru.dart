@@ -20,15 +20,25 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ru';
 
-  static String m0(userEmail) =>
+  static String m0(error) => "Ошибка при отправке подтверждения: ${error}";
+
+  static String m1(email) => "Подтверждение отправлено на адрес ${email}.";
+
+  static String m2(feedName) => "Редактировать ${feedName}";
+
+  static String m3(userEmail) =>
       "Ссылка для подтверждения была отправлена на ${userEmail}. Пожалуйста, проверьте ваш почтовый ящик и перейдите по ссылке для подтверждения вашего аккаунта.";
 
-  static String m1(userName) => "Привет, ${userName}!";
+  static String m4(username) => "Йоу, ${username}";
 
-  static String m2(currentPage, totalPages) =>
+  static String m5(stadoName) => "стадо ${stadoName}";
+
+  static String m6(userName) => "Привет, ${userName}!";
+
+  static String m7(currentPage, totalPages) =>
       "Страница ${currentPage} из ${totalPages}";
 
-  static String m3(value) => "${value} кг";
+  static String m8(value) => "${value} кг";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -38,6 +48,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "accountAlreadyExistsTitle": MessageLookupByLibrary.simpleMessage(
       "Аккаунт уже существует",
     ),
+    "add": MessageLookupByLibrary.simpleMessage("Добавить"),
+    "addAnimal": MessageLookupByLibrary.simpleMessage("Добавить животное"),
+    "addAnimalButton": MessageLookupByLibrary.simpleMessage(
+      "Добавить животное",
+    ),
+    "addButton": MessageLookupByLibrary.simpleMessage("Добавить"),
     "addItemButton": MessageLookupByLibrary.simpleMessage("Добавить элемент"),
     "addRecordButton": MessageLookupByLibrary.simpleMessage("Добавить запись"),
     "addScreenTitle": MessageLookupByLibrary.simpleMessage(
@@ -46,8 +62,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "addVaccinationButton": MessageLookupByLibrary.simpleMessage(
       "Добавить запись о вакцинации",
     ),
+    "addingTitle": MessageLookupByLibrary.simpleMessage("Добавить карту"),
+    "ageLabel": MessageLookupByLibrary.simpleMessage("Возраст"),
     "alreadyHaveAccount": MessageLookupByLibrary.simpleMessage(
       "Уже есть аккаунт?",
+    ),
+    "animalAddedSuccessfully": MessageLookupByLibrary.simpleMessage(
+      "Животное успешно добавлено",
     ),
     "animalBreedLabel": MessageLookupByLibrary.simpleMessage("Порода"),
     "animalDateOfBirthLabel": MessageLookupByLibrary.simpleMessage(
@@ -71,10 +92,26 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "appBarSearchTooltip": MessageLookupByLibrary.simpleMessage("Поиск"),
     "appBarSettingsTooltip": MessageLookupByLibrary.simpleMessage("Настройки"),
+    "appTitle": MessageLookupByLibrary.simpleMessage("Подтверждение Email"),
+    "birthDate": MessageLookupByLibrary.simpleMessage("Дата рождения"),
     "bottomNavFarm": MessageLookupByLibrary.simpleMessage("Ферма"),
     "bottomNavFeeds": MessageLookupByLibrary.simpleMessage("Кормы"),
     "bottomNavMessages": MessageLookupByLibrary.simpleMessage("Сообщения"),
     "bottomNavShop": MessageLookupByLibrary.simpleMessage("Магазин"),
+    "breed": MessageLookupByLibrary.simpleMessage("Порода"),
+    "breedLabel": MessageLookupByLibrary.simpleMessage("Порода"),
+    "bullet1": MessageLookupByLibrary.simpleMessage(
+      "1. Выберите язык интерфейса — русский или английский.",
+    ),
+    "bullet2": MessageLookupByLibrary.simpleMessage(
+      "2. Зарегистрируйтесь с помощью электронной почты и пароля.",
+    ),
+    "bullet3": MessageLookupByLibrary.simpleMessage(
+      "3. Или войдите через аккаунт Google — быстро и удобно.",
+    ),
+    "bullet4": MessageLookupByLibrary.simpleMessage(
+      "4. После входа вы попадёте на главную панель, где сможете начать работу: добавлять данные, следить за статистикой и получать аналитику.",
+    ),
     "bulls": MessageLookupByLibrary.simpleMessage("Быки"),
     "cancel": MessageLookupByLibrary.simpleMessage("Отмена"),
     "cancelButton": MessageLookupByLibrary.simpleMessage("Отмена"),
@@ -84,12 +121,22 @@ class MessageLookup extends MessageLookupByLibrary {
     "cardLearnMoreButton": MessageLookupByLibrary.simpleMessage(
       "Узнать больше",
     ),
+    "cardNameHint": MessageLookupByLibrary.simpleMessage("Название"),
+    "cardNameLabel": MessageLookupByLibrary.simpleMessage("Название Карты"),
+    "cardNumberHint": MessageLookupByLibrary.simpleMessage(
+      "XXXX   XXXX   XXXX   XXXX",
+    ),
+    "cardNumberLabel": MessageLookupByLibrary.simpleMessage("Номер Карты"),
     "cardPriceLabel": MessageLookupByLibrary.simpleMessage("Цена:"),
     "cardPublishedOnLabel": MessageLookupByLibrary.simpleMessage(
       "Опубликовано:",
     ),
     "cardStatusLabel": MessageLookupByLibrary.simpleMessage("Статус:"),
     "cardViewDetailsButton": MessageLookupByLibrary.simpleMessage("Подробнее"),
+    "cattleType": MessageLookupByLibrary.simpleMessage("Вид скота"),
+    "changeCard": MessageLookupByLibrary.simpleMessage("Изменить карту"),
+    "changePassword": MessageLookupByLibrary.simpleMessage("Изменить пароль"),
+    "changePasswordButton": MessageLookupByLibrary.simpleMessage("Изменить"),
     "changeValue": MessageLookupByLibrary.simpleMessage("Изменить значение"),
     "chatbotCouldNotUnderstand": MessageLookupByLibrary.simpleMessage(
       "Извините, я не смог этого понять. Не могли бы вы перефразировать?",
@@ -108,6 +155,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "chatbotWelcomeMessage": MessageLookupByLibrary.simpleMessage(
       "Привет! Чем могу помочь?",
     ),
+    "checkYourEmail": MessageLookupByLibrary.simpleMessage(
+      "Пожалуйста, проверьте свою почту",
+    ),
+    "closingStatement": MessageLookupByLibrary.simpleMessage(
+      "CYCLONE делает фермерство понятным, эффективным и современным. Всё управление — у вас под рукой.",
+    ),
+    "confirmButton": MessageLookupByLibrary.simpleMessage("Подтвердить"),
     "confirmEditButton": MessageLookupByLibrary.simpleMessage("Изменить"),
     "confirmMessage": MessageLookupByLibrary.simpleMessage(
       "Пожалуйста, проверьте данные перед отправкой.",
@@ -119,15 +173,33 @@ class MessageLookup extends MessageLookupByLibrary {
       "Подтверждение данных",
     ),
     "confirmSubmitButton": MessageLookupByLibrary.simpleMessage("Отправить"),
+    "confirmYourEmail": MessageLookupByLibrary.simpleMessage(
+      "Подтвердите email",
+    ),
+    "confirmationSendError": m0,
+    "confirmationSent": m1,
     "cows": MessageLookupByLibrary.simpleMessage("Коровы"),
+    "createHerdError": MessageLookupByLibrary.simpleMessage(
+      "Ошибка при создании стада",
+    ),
     "createItemTitle": MessageLookupByLibrary.simpleMessage(
       "Создание нового элемента",
     ),
     "createNewButton": MessageLookupByLibrary.simpleMessage("Создать новый"),
+    "createPasswordTitle": MessageLookupByLibrary.simpleMessage(
+      "Придумайте пароль",
+    ),
+    "createStado": MessageLookupByLibrary.simpleMessage("Создать стадо"),
+    "cvvHint": MessageLookupByLibrary.simpleMessage("CVV"),
+    "cvvLabel": MessageLookupByLibrary.simpleMessage("Защитный код"),
+    "deleteCard": MessageLookupByLibrary.simpleMessage("Удалить карту"),
     "detailsCattleCount": MessageLookupByLibrary.simpleMessage("Количество"),
     "detailsCattleName": MessageLookupByLibrary.simpleMessage("Номер скота"),
     "detailsCattleType": MessageLookupByLibrary.simpleMessage("Тип скота"),
     "detailsTitle": MessageLookupByLibrary.simpleMessage("Детали скота"),
+    "dividerDescription": MessageLookupByLibrary.simpleMessage(
+      "CYCLONE — это приложение, которое помогает фермерам упростить управление кормлением, учитывать рост поголовья и следить за запасами. Всё в одном месте, без бумажной рутины.",
+    ),
     "drawerAbout": MessageLookupByLibrary.simpleMessage("О нас"),
     "drawerAddAccount": MessageLookupByLibrary.simpleMessage(
       "Добавить аккаунт",
@@ -142,8 +214,44 @@ class MessageLookup extends MessageLookupByLibrary {
     "drawerSoon": MessageLookupByLibrary.simpleMessage("Скоро будет доступно"),
     "drawerStats": MessageLookupByLibrary.simpleMessage("Статистика"),
     "drawerSubscription": MessageLookupByLibrary.simpleMessage("Подписка"),
+    "duration15min": MessageLookupByLibrary.simpleMessage("15 минут"),
+    "duration20min": MessageLookupByLibrary.simpleMessage("20 минут"),
+    "duration4min": MessageLookupByLibrary.simpleMessage("4 минут"),
+    "duration5min": MessageLookupByLibrary.simpleMessage("5 минут"),
+    "editDialog_cancel": MessageLookupByLibrary.simpleMessage("Отменить"),
+    "editDialog_hint": MessageLookupByLibrary.simpleMessage("Введите число"),
+    "editDialog_insufficientFeed": MessageLookupByLibrary.simpleMessage(
+      "Недостаточно корма на складе",
+    ),
+    "editDialog_invalidNumber": MessageLookupByLibrary.simpleMessage(
+      "Пожалуйста, введите корректное число",
+    ),
+    "editDialog_label": MessageLookupByLibrary.simpleMessage(
+      "Введите новое значение",
+    ),
+    "editDialog_noStorage": MessageLookupByLibrary.simpleMessage(
+      "Склад не найден",
+    ),
+    "editDialog_save": MessageLookupByLibrary.simpleMessage("Сохранить"),
+    "editDialog_saveError": MessageLookupByLibrary.simpleMessage(
+      "Ошибка при сохранении данных",
+    ),
+    "editDialog_title": m2,
+    "emailAlreadyRegistered": MessageLookupByLibrary.simpleMessage(
+      "Этот адрес электронной почты уже зарегистрирован.",
+    ),
+    "emailIsEmptyError": MessageLookupByLibrary.simpleMessage(
+      "Пожалуйста, введите ваш email.",
+    ),
+    "emailLabel": MessageLookupByLibrary.simpleMessage("Электронная почта"),
+    "emailSentAgain": MessageLookupByLibrary.simpleMessage(
+      "Письмо отправлено повторно",
+    ),
     "emailSentMessage": MessageLookupByLibrary.simpleMessage(
       "Письмо с подтверждением отправлено на ваш email.",
+    ),
+    "emailSentSuccess": MessageLookupByLibrary.simpleMessage(
+      "Письмо отправлено.",
     ),
     "emailSentTitle": MessageLookupByLibrary.simpleMessage("Письмо отправлено"),
     "emailVerificationCheckSpam": MessageLookupByLibrary.simpleMessage(
@@ -155,7 +263,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "emailVerificationEmailSentMessage": MessageLookupByLibrary.simpleMessage(
       "Новое письмо для подтверждения было отправлено.",
     ),
-    "emailVerificationMessage": m0,
+    "emailVerificationMessage": m3,
     "emailVerificationResendButton": MessageLookupByLibrary.simpleMessage(
       "Отправить письмо повторно",
     ),
@@ -163,34 +271,64 @@ class MessageLookup extends MessageLookupByLibrary {
       "Подтвердите ваш Email",
     ),
     "english": MessageLookupByLibrary.simpleMessage("Английский"),
+    "enterGender": MessageLookupByLibrary.simpleMessage("Введите пол"),
     "enterIdHint": MessageLookupByLibrary.simpleMessage(
       "Отсканируйте или введите ID",
     ),
     "enterIdLabel": MessageLookupByLibrary.simpleMessage("Введите ID"),
+    "enterMedicalCard": MessageLookupByLibrary.simpleMessage(
+      "Введите медицинскую карту",
+    ),
+    "enterNewPassword": MessageLookupByLibrary.simpleMessage(
+      "Введите новый пароль",
+    ),
     "enterPassword": MessageLookupByLibrary.simpleMessage("Введите пароль"),
+    "enterStadoNumber": MessageLookupByLibrary.simpleMessage(
+      "Введите уникальный номер стадо",
+    ),
+    "enterTagNumber": MessageLookupByLibrary.simpleMessage(
+      "Введите номер бирки",
+    ),
+    "enterWeight": MessageLookupByLibrary.simpleMessage("Введите вес"),
     "enterYourEmail": MessageLookupByLibrary.simpleMessage(
       "Введите вашу почту",
+    ),
+    "errorAddingAnimal": MessageLookupByLibrary.simpleMessage(
+      "Ошибка при добавлении животного",
     ),
     "errorAuthentication": MessageLookupByLibrary.simpleMessage(
       "Ошибка аутентификации",
     ),
+    "errorLoadingBreeds": MessageLookupByLibrary.simpleMessage(
+      "Ошибка загрузки пород",
+    ),
+    "errorLoadingHealthStatuses": MessageLookupByLibrary.simpleMessage(
+      "Ошибка загрузки статусов здоровья",
+    ),
     "errorTitle": MessageLookupByLibrary.simpleMessage("Ошибка"),
+    "expiryDateHint": MessageLookupByLibrary.simpleMessage("MM/YY"),
+    "expiryDateLabel": MessageLookupByLibrary.simpleMessage("Дата/Год"),
     "feedSubtitle": MessageLookupByLibrary.simpleMessage(
       "От 1500 сомов за мешок.",
     ),
     "feedTitle": MessageLookupByLibrary.simpleMessage(
       "Корм для скота высшего качества!",
     ),
+    "feedUnit": MessageLookupByLibrary.simpleMessage("корм ед."),
     "fieldCorns": MessageLookupByLibrary.simpleMessage("Кукуруза"),
     "fieldHays": MessageLookupByLibrary.simpleMessage("Сено"),
     "fieldHerbs": MessageLookupByLibrary.simpleMessage("Трава"),
     "fieldOats": MessageLookupByLibrary.simpleMessage("Овес"),
     "fieldPeas": MessageLookupByLibrary.simpleMessage("Горох"),
+    "fieldRequired": MessageLookupByLibrary.simpleMessage("Заполните все поля"),
     "fieldRequiredError": MessageLookupByLibrary.simpleMessage(
       "Это поле обязательно для заполнения",
     ),
     "fieldSilages": MessageLookupByLibrary.simpleMessage("Силос"),
     "fieldStraws": MessageLookupByLibrary.simpleMessage("Солома"),
+    "fillAllFields": MessageLookupByLibrary.simpleMessage(
+      "Пожалуйста, заполните все поля",
+    ),
     "financeAddTransactionButton": MessageLookupByLibrary.simpleMessage(
       "Добавить транзакцию",
     ),
@@ -209,13 +347,30 @@ class MessageLookup extends MessageLookupByLibrary {
       "Финансовый отчет",
     ),
     "financeScreenTitle": MessageLookupByLibrary.simpleMessage("Финансы"),
+    "financeTitle": MessageLookupByLibrary.simpleMessage("Финансы"),
     "financeTransactionHistoryTitle": MessageLookupByLibrary.simpleMessage(
       "История транзакций",
     ),
     "financeViewTransactionsButton": MessageLookupByLibrary.simpleMessage(
       "Посмотреть транзакции",
     ),
+    "gender": MessageLookupByLibrary.simpleMessage("Пол"),
     "goats": MessageLookupByLibrary.simpleMessage("Козлы"),
+    "greeting": m4,
+    "greetingDescription": MessageLookupByLibrary.simpleMessage(
+      "Приветствие с именем пользователя",
+    ),
+    "healthGood": MessageLookupByLibrary.simpleMessage("Хорошее"),
+    "healthLabel": MessageLookupByLibrary.simpleMessage("Здоровье"),
+    "healthMedium": MessageLookupByLibrary.simpleMessage("Среднее"),
+    "healthPoor": MessageLookupByLibrary.simpleMessage("Плохое"),
+    "healthStatus": MessageLookupByLibrary.simpleMessage("Статус здоровья"),
+    "herd": MessageLookupByLibrary.simpleMessage("стадо"),
+    "herdCattleTypeNotSpecified": MessageLookupByLibrary.simpleMessage(
+      "Тип скота в стаде не указан",
+    ),
+    "herdNotFound": MessageLookupByLibrary.simpleMessage("Стадо не найдено"),
+    "herdTitle": m5,
     "homeCardSubtitle": MessageLookupByLibrary.simpleMessage("Номер скота"),
     "homeExploreCategories": MessageLookupByLibrary.simpleMessage(
       "Исследовать категории",
@@ -223,10 +378,66 @@ class MessageLookup extends MessageLookupByLibrary {
     "homeScreenTitle": MessageLookupByLibrary.simpleMessage("Главная"),
     "homeTitle": MessageLookupByLibrary.simpleMessage("Моя ферма"),
     "homeViewLatest": MessageLookupByLibrary.simpleMessage("Смотреть новое"),
-    "homeWelcomeMessage": m1,
+    "homeWelcomeMessage": m6,
+    "iHaveConfirmed": MessageLookupByLibrary.simpleMessage("Я подтвердил"),
     "idNotFoundError": MessageLookupByLibrary.simpleMessage("ID не найден"),
     "idNumberLabel": MessageLookupByLibrary.simpleMessage("Номер ID:"),
     "idScreenTitle": MessageLookupByLibrary.simpleMessage("Идентификация"),
+    "instructionCardAddCattleDescription": MessageLookupByLibrary.simpleMessage(
+      "Как добавить скот в систему.",
+    ),
+    "instructionCardAddCattleTitle": MessageLookupByLibrary.simpleMessage(
+      "Добавление скота",
+    ),
+    "instructionCardAnimalsTableDescription":
+        MessageLookupByLibrary.simpleMessage(
+          "Как отслеживать животных в таблице.",
+        ),
+    "instructionCardAnimalsTableTitle": MessageLookupByLibrary.simpleMessage(
+      "Таблица животных",
+    ),
+    "instructionCardChatBotDescription": MessageLookupByLibrary.simpleMessage(
+      "Как использовать чат-бота для общения.",
+    ),
+    "instructionCardChatBotTitle": MessageLookupByLibrary.simpleMessage(
+      "Чат бот",
+    ),
+    "instructionCardDurationLabel": MessageLookupByLibrary.simpleMessage(
+      "Длительность: ",
+    ),
+    "instructionCardFeedWarehouseDescription":
+        MessageLookupByLibrary.simpleMessage("Как добавить корма на склад."),
+    "instructionCardFeedWarehouseTitle": MessageLookupByLibrary.simpleMessage(
+      "Склад кормов",
+    ),
+    "instructionCardIntroductionDescription":
+        MessageLookupByLibrary.simpleMessage(
+          "Описание как начать работу с приложением.",
+        ),
+    "instructionCardIntroductionTitle": MessageLookupByLibrary.simpleMessage(
+      "Введение",
+    ),
+    "instructionCardMainScreenDescription":
+        MessageLookupByLibrary.simpleMessage(
+          "Описание основ экрана и функций.",
+        ),
+    "instructionCardMainScreenTitle": MessageLookupByLibrary.simpleMessage(
+      "Главный экран",
+    ),
+    "instructionCardTechPassportDescription":
+        MessageLookupByLibrary.simpleMessage(
+          "Как добавить техпаспорт животного.",
+        ),
+    "instructionCardTechPassportTitle": MessageLookupByLibrary.simpleMessage(
+      "Тех паспорт / Добавление",
+    ),
+    "instructionCardWeightTrackingDescription":
+        MessageLookupByLibrary.simpleMessage(
+          "Как отслеживать изменение веса животных.",
+        ),
+    "instructionCardWeightTrackingTitle": MessageLookupByLibrary.simpleMessage(
+      "Отслеживание веса",
+    ),
     "instructionContactSupport": MessageLookupByLibrary.simpleMessage(
       "Связаться с поддержкой",
     ),
@@ -254,6 +465,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "instructionStep2Title": MessageLookupByLibrary.simpleMessage(
       "Шаг 2: Настройка",
     ),
+    "instructionTitle": MessageLookupByLibrary.simpleMessage(
+      "Как пользоваться",
+    ),
     "introDoneButton": MessageLookupByLibrary.simpleMessage("Готово"),
     "introNextButton": MessageLookupByLibrary.simpleMessage("Далее"),
     "introSkipButton": MessageLookupByLibrary.simpleMessage("Пропустить"),
@@ -273,6 +487,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Присоединяйтесь к нашему сообществу и начните свое путешествие сегодня.",
     ),
     "introSlide3Title": MessageLookupByLibrary.simpleMessage("Начать"),
+    "introTitle": MessageLookupByLibrary.simpleMessage(
+      "CYCLONE — ваш цифровой помощник в управлении фермой",
+    ),
     "invalidInputError": MessageLookupByLibrary.simpleMessage(
       "Некорректный ввод",
     ),
@@ -299,6 +516,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "itemUploadImageButton": MessageLookupByLibrary.simpleMessage(
       "Загрузить изображение",
     ),
+    "kg": MessageLookupByLibrary.simpleMessage("кг"),
     "kyrgyz": MessageLookupByLibrary.simpleMessage("Кыргызский"),
     "languagePrompt": MessageLookupByLibrary.simpleMessage("Выберите язык"),
     "loadingError": MessageLookupByLibrary.simpleMessage("Ошибка загрузки"),
@@ -337,11 +555,18 @@ class MessageLookup extends MessageLookupByLibrary {
     "mainScreenLogoutDialogTitle": MessageLookupByLibrary.simpleMessage(
       "Выход из аккаунта",
     ),
+    "medicalCard": MessageLookupByLibrary.simpleMessage("Медицинская карта"),
     "nameColumn": MessageLookupByLibrary.simpleMessage("Название"),
     "ok": MessageLookupByLibrary.simpleMessage("ОК"),
+    "okButton": MessageLookupByLibrary.simpleMessage("ОК"),
     "otherRegistrationMethods": MessageLookupByLibrary.simpleMessage(
       "Другой способ регистрации",
     ),
+    "passwordChangedSuccess": MessageLookupByLibrary.simpleMessage(
+      "Пароль успешно изменен.",
+    ),
+    "postalCodeHint": MessageLookupByLibrary.simpleMessage("XXXX"),
+    "postalCodeLabel": MessageLookupByLibrary.simpleMessage("Почтовый Индекс"),
     "profileChangePasswordButton": MessageLookupByLibrary.simpleMessage(
       "Изменить пароль",
     ),
@@ -368,10 +593,27 @@ class MessageLookup extends MessageLookupByLibrary {
     "register": MessageLookupByLibrary.simpleMessage("Зарегистрироваться"),
     "registerButton": MessageLookupByLibrary.simpleMessage("Регистрация"),
     "registration": MessageLookupByLibrary.simpleMessage("Регистрация"),
+    "resendVerification": MessageLookupByLibrary.simpleMessage(
+      "Отправить письмо еще раз",
+    ),
+    "resetPasswordTitle": MessageLookupByLibrary.simpleMessage("Сброс пароля"),
     "russian": MessageLookupByLibrary.simpleMessage("Русский"),
     "save": MessageLookupByLibrary.simpleMessage("Сохранить"),
     "saveButton": MessageLookupByLibrary.simpleMessage("Сохранить"),
+    "saving": MessageLookupByLibrary.simpleMessage("Сохранение..."),
+    "selectBirthDate": MessageLookupByLibrary.simpleMessage(
+      "Выберите дату рождения",
+    ),
+    "selectBreed": MessageLookupByLibrary.simpleMessage("Выберите породу"),
     "selectButton": MessageLookupByLibrary.simpleMessage("Выбрать"),
+    "selectCattleType": MessageLookupByLibrary.simpleMessage(
+      "Выберите вид скота",
+    ),
+    "selectHealthStatus": MessageLookupByLibrary.simpleMessage(
+      "Выберите статус здоровья",
+    ),
+    "sendEmailButton": MessageLookupByLibrary.simpleMessage("Отправить письмо"),
+    "settings": MessageLookupByLibrary.simpleMessage("Настройки"),
     "sheep": MessageLookupByLibrary.simpleMessage("Овцы"),
     "shopAddToCartButton": MessageLookupByLibrary.simpleMessage(
       "Добавить в корзину",
@@ -390,6 +632,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "shopScreenTitle": MessageLookupByLibrary.simpleMessage("Магазин"),
     "shopSearchHint": MessageLookupByLibrary.simpleMessage("Поиск товаров..."),
     "shopSortByButton": MessageLookupByLibrary.simpleMessage("Сортировать по"),
+    "stadoCreated": MessageLookupByLibrary.simpleMessage(
+      "Стадо успешно создано!",
+    ),
+    "stadoNumber": MessageLookupByLibrary.simpleMessage("Номер стадо"),
+    "startQuestion": MessageLookupByLibrary.simpleMessage("С чего начать?"),
     "stemEngineeringCategory": MessageLookupByLibrary.simpleMessage(
       "Инженерия",
     ),
@@ -416,6 +663,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "subpageSectionTitle": MessageLookupByLibrary.simpleMessage(
       "Название раздела",
     ),
+    "successTitle": MessageLookupByLibrary.simpleMessage("Успех"),
+    "table": MessageLookupByLibrary.simpleMessage("Таблица"),
     "tableHeaderColumn1": MessageLookupByLibrary.simpleMessage("Колонка 1"),
     "tableHeaderColumn2": MessageLookupByLibrary.simpleMessage("Колонка 2"),
     "tableHeaderColumn3": MessageLookupByLibrary.simpleMessage("Колонка 3"),
@@ -423,12 +672,26 @@ class MessageLookup extends MessageLookupByLibrary {
     "tableNoData": MessageLookupByLibrary.simpleMessage(
       "Нет данных для отображения.",
     ),
-    "tablePageIndicator": m2,
+    "tablePageIndicator": m7,
     "tablePreviousPage": MessageLookupByLibrary.simpleMessage("Предыдущая"),
     "tableScreenTitle": MessageLookupByLibrary.simpleMessage("Таблица данных"),
-    "unitKg": m3,
+    "tableTitle": MessageLookupByLibrary.simpleMessage("Таблица корма"),
+    "tagNumber": MessageLookupByLibrary.simpleMessage("Клеймо животного"),
+    "techPassport": MessageLookupByLibrary.simpleMessage("Техпаспорт"),
+    "techPassportHeader": MessageLookupByLibrary.simpleMessage(
+      "Технический паспорт",
+    ),
+    "unitKg": m8,
+    "userNotAuthorized": MessageLookupByLibrary.simpleMessage(
+      "Пользователь не авторизован",
+    ),
+    "userNotFoundError": MessageLookupByLibrary.simpleMessage(
+      "Ошибка: Текущий пользователь не найден.",
+    ),
     "valueColumn": MessageLookupByLibrary.simpleMessage("Значение"),
     "verifyIdButton": MessageLookupByLibrary.simpleMessage("Проверить ID"),
+    "weight": MessageLookupByLibrary.simpleMessage("Вес (кг)"),
+    "weightLabel": MessageLookupByLibrary.simpleMessage("Вес"),
     "welcomeLogin": MessageLookupByLibrary.simpleMessage("Вход"),
     "welcomeSubtitle": MessageLookupByLibrary.simpleMessage(
       "Полная автоматизация процесса\nоткорма скота",

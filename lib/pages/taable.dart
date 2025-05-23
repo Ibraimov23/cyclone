@@ -3,6 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../generated/l10n.dart';
+
 class TableScreen extends StatefulWidget {
   final String stadoId;
   final String stadoName;
@@ -347,7 +349,7 @@ class _TableScreenState extends State<TableScreen> {
     return Column(
       children: [
         const SizedBox(height: 20),
-        const Text('Таблица корма', style: _tableTitleStyle),
+        Text(S.of(context).tableTitle, style: _tableTitleStyle),
         const SizedBox(height: 10),
         RichText(
           text: TextSpan(
@@ -356,15 +358,14 @@ class _TableScreenState extends State<TableScreen> {
               color: Colors.black,
             ),
             children: [
-              const TextSpan(
-                text: 'стадо ',
+              TextSpan(
+                text: S.of(context).herd + ' ',
                 style: TextStyle(fontWeight: FontWeight.w400),
               ),
               TextSpan(
                 text: widget.stadoName,
                 style: const TextStyle(
                   fontWeight: FontWeight.w700,
-                  fontFamily: 'Montserrat',
                 ),
               ),
             ],
@@ -460,8 +461,8 @@ class _TableScreenState extends State<TableScreen> {
                             ),
                           ),
                           alignment: Alignment.centerLeft,
-                          child: const Text(
-                            'корм ед.',
+                          child: Text(
+                            S.of(context).feedUnit,
                             style: _footerTextStyle,
                           ),
                         ),
@@ -531,7 +532,7 @@ class _TableScreenState extends State<TableScreen> {
                                         ),
                                         alignment: Alignment.center,
                                         child: Text(
-                                          val + ' кг',
+                                          val + ' ' + S.of(context).kg,
                                           style: _cellTextStyle,
                                         ),
                                       ),
@@ -600,7 +601,7 @@ class _TableScreenState extends State<TableScreen> {
         return AlertDialog(
           backgroundColor: Colors.white,
           title: Text(
-            'Редактировать ${_translateFeedName(fieldName)}',
+            S.of(context).editDialog_title(_translateFeedName(fieldName)),
             style: TextStyle(
               color: Colors.black,
               fontWeight: FontWeight.w500,
@@ -610,9 +611,9 @@ class _TableScreenState extends State<TableScreen> {
             controller: controller,
             keyboardType: TextInputType.number,
             decoration: InputDecoration(
-              labelText: 'Введите новое значение',
+              labelText: S.of(context).editDialog_label,
               labelStyle: TextStyle(color: Colors.black),
-              hintText: 'Введите число',
+              hintText: S.of(context).editDialog_hint,
               hintStyle: TextStyle(color: Colors.grey),
               enabledBorder: UnderlineInputBorder(
                 borderSide: BorderSide(color: Colors.black),
@@ -629,7 +630,7 @@ class _TableScreenState extends State<TableScreen> {
                 Navigator.of(context).pop();
               },
               child: Text(
-                'Отменить',
+                S.of(context).editDialog_cancel,
                 style: TextStyle(color: Colors.red, fontSize: 14),
               ),
             ),
@@ -640,7 +641,7 @@ class _TableScreenState extends State<TableScreen> {
                 if (newValue == null) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      content: Text('Пожалуйста, введите корректное число',
+                      content: Text(S.of(context).editDialog_invalidNumber,
                           style: TextStyle(color: Colors.white)),
                       backgroundColor: Color(0xFF90010A),
                       duration: Duration(seconds: 2),
@@ -680,7 +681,7 @@ class _TableScreenState extends State<TableScreen> {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text(
-                        'Склад не найден',
+                        S.of(context).editDialog_noStorage,
                         style: TextStyle(color: Colors.white),
                       ),
                       backgroundColor: Color(0xFF90010A),
@@ -702,7 +703,7 @@ class _TableScreenState extends State<TableScreen> {
                 if (currentStock < newValue) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                        content: Text('Недостаточно корма на складе',
+                        content: Text(S.of(context).editDialog_insufficientFeed,
                             style: TextStyle(color: Colors.white)),
                         backgroundColor: Color(0xFF90010A),
                         duration: Duration(seconds: 2)),
@@ -722,7 +723,7 @@ class _TableScreenState extends State<TableScreen> {
                   print('Ошибка при сохранении: $e');
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                        content: Text('Ошибка при сохранении данных',
+                        content: Text(S.of(context).editDialog_saveError,
                             style: TextStyle(color: Colors.white)),
                         backgroundColor: Color(0xFF90010A),
                         duration: Duration(seconds: 2)),
@@ -730,7 +731,7 @@ class _TableScreenState extends State<TableScreen> {
                 }
               },
               child: Text(
-                'Сохранить',
+                S.of(context).editDialog_save,
                 style: TextStyle(color: Colors.black, fontSize: 14),
               ),
             ),

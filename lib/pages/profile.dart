@@ -1,3 +1,4 @@
+import 'package:cyclone/generated/l10n.dart';
 import 'package:cyclone/widget/custom_app-bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -43,13 +44,14 @@ class _ProfileState extends State<Profile> {
       print(user);
       return user.isNotEmpty;
     } catch (e) {
-      print("Ошибка при проверке существования почты: $e");
+      print("Error checking email existence: $e");
       return false;
     }
   }
 
   void _confirmEmailChange() async {
     final newEmail = _emailController.text.trim();
+    final loc = S.of(context);
 
     if (newEmail == widget.fullEmail) {
       return;
@@ -61,7 +63,7 @@ class _ProfileState extends State<Profile> {
     if (emailExists) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Эта почта уже зарегистрирована.'),
+          content: Text(loc.emailAlreadyRegistered),
           backgroundColor: Colors.red,
         ),
       );
@@ -74,8 +76,8 @@ class _ProfileState extends State<Profile> {
 
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('Подтверждение отправлено на $newEmail'),
-              backgroundColor: Color(0xFF90010A),
+              content: Text(loc.confirmationSent(newEmail)),
+              backgroundColor: const Color(0xFF90010A),
             ),
           );
 
@@ -86,8 +88,7 @@ class _ProfileState extends State<Profile> {
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content:
-                  Text('Ошибка: не удалось получить текущего пользователя.'),
+              content: Text(loc.userNotFoundError),
               backgroundColor: Colors.red,
             ),
           );
@@ -95,7 +96,7 @@ class _ProfileState extends State<Profile> {
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Ошибка при отправке подтверждения: $e'),
+            content: Text(loc.confirmationSendError(e.toString())),
             backgroundColor: Colors.red,
           ),
         );
@@ -105,6 +106,8 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
+    final loc = S.of(context);
+
     return GestureDetector(
       onTap: () {
         if (_isEditingEmail) {
@@ -117,7 +120,7 @@ class _ProfileState extends State<Profile> {
       child: Scaffold(
         backgroundColor: const Color(0xFFE7E7E7),
         appBar: CustomAppBar(
-          title: "Йоу, ${widget.username}",
+          title: loc.greeting(widget.username),
           onMenuTap: () {
             Scaffold.of(context).openEndDrawer();
           },
@@ -176,14 +179,15 @@ class _ProfileState extends State<Profile> {
                                   color: Colors.black87,
                                 ),
                                 textAlign: TextAlign.center,
-                                decoration: const InputDecoration(
+                                decoration: InputDecoration(
                                   isDense: true,
-                                  contentPadding: EdgeInsets.symmetric(
+                                  contentPadding: const EdgeInsets.symmetric(
                                       horizontal: 12, vertical: 10),
-                                  border: OutlineInputBorder(),
+                                  border: const OutlineInputBorder(),
+                                  labelText: loc.emailLabel,
                                 ),
                                 autofocus: true,
-                                cursorColor: Color(0xFF90010A),
+                                cursorColor: const Color(0xFF90010A),
                               ),
                               const SizedBox(height: 10),
                               if (_showConfirmButton)
@@ -196,12 +200,12 @@ class _ProfileState extends State<Profile> {
                                       borderRadius: BorderRadius.circular(8),
                                     ),
                                   ),
-                                  child: const Padding(
-                                    padding: EdgeInsets.symmetric(
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
                                         horizontal: 24, vertical: 12),
                                     child: Text(
-                                      'Подтвердить',
-                                      style: TextStyle(
+                                      loc.confirmButton,
+                                      style: const TextStyle(
                                           fontSize: 16,
                                           fontWeight: FontWeight.bold),
                                     ),
@@ -241,7 +245,7 @@ class _ProfileState extends State<Profile> {
                 ),
                 const SizedBox(height: 30),
                 _buildButton(
-                  text: 'Изменить пароль',
+                  text: loc.changePassword,
                   icon: Icons.lock_outline,
                   onPressed: () {
                     Navigator.pushNamed(context, '/newpassword');
@@ -249,13 +253,13 @@ class _ProfileState extends State<Profile> {
                 ),
                 const SizedBox(height: 20),
                 _buildButton(
-                  text: 'Настройки',
+                  text: loc.settings,
                   icon: Icons.settings,
                   onPressed: () {},
                 ),
                 const SizedBox(height: 20),
                 _buildButton(
-                  text: 'Выйти',
+                  text: loc.logout,
                   icon: Icons.logout,
                   onPressed: widget.onLogout,
                 ),

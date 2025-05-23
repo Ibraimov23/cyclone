@@ -3,6 +3,8 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import '../generated/l10n.dart';
+
 class CreateStado extends StatefulWidget {
   const CreateStado({super.key});
 
@@ -125,10 +127,11 @@ class _CreateState extends State<CreateStado> {
 
   @override
   Widget build(BuildContext context) {
+    final loc = S.of(context);
+
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
+        // ...
         flexibleSpace: Container(
           decoration: BoxDecoration(
             color: const Color(0xFFE7E7E7),
@@ -167,9 +170,9 @@ class _CreateState extends State<CreateStado> {
             children: [
               Container(
                 padding: EdgeInsets.symmetric(vertical: 10),
-                child: const Text(
-                  'Создать стадо',
-                  style: TextStyle(
+                child: Text(
+                  loc.createStado,
+                  style: const TextStyle(
                     fontWeight: FontWeight.w900,
                     fontSize: 30,
                     letterSpacing: 0,
@@ -179,9 +182,9 @@ class _CreateState extends State<CreateStado> {
               const SizedBox(height: 15),
               Container(
                 padding: EdgeInsets.symmetric(vertical: 8),
-                child: const Text(
-                  "Номер стадо",
-                  style: TextStyle(fontSize: 20, letterSpacing: 0),
+                child: Text(
+                  loc.stadoNumber,
+                  style: const TextStyle(fontSize: 20, letterSpacing: 0),
                 ),
               ),
               Container(
@@ -191,7 +194,7 @@ class _CreateState extends State<CreateStado> {
                   decoration: InputDecoration(
                     filled: true,
                     fillColor: Colors.white,
-                    hintText: 'Введите уникальный номер стадо',
+                    hintText: loc.enterStadoNumber,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
                       borderSide: BorderSide.none,
@@ -209,9 +212,9 @@ class _CreateState extends State<CreateStado> {
               const SizedBox(height: 15),
               Container(
                 padding: EdgeInsets.symmetric(vertical: 8),
-                child: const Text(
-                  "Вид скота",
-                  style: TextStyle(
+                child: Text(
+                  loc.cattleType,
+                  style: const TextStyle(
                       fontSize: 20,
                       letterSpacing: 0,
                       fontWeight: FontWeight.w500),
@@ -221,7 +224,7 @@ class _CreateState extends State<CreateStado> {
                 padding: EdgeInsets.symmetric(vertical: 5),
                 child: DropdownButton2<String>(
                   value: selectedCattleType,
-                  hint: Text("Выберите вид скота"),
+                  hint: Text(loc.selectCattleType),
                   items: cattleTypes.map((String cattle) {
                     return DropdownMenuItem<String>(
                       value: cattle,
@@ -269,11 +272,29 @@ class _CreateState extends State<CreateStado> {
                     minimumSize: Size(double.infinity, 50),
                   ),
                   child: isLoading
-                      ? CircularProgressIndicator(
-                          color: Colors.white,
+                      ? Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              width: 20,
+                              height: 20,
+                              child: CircularProgressIndicator(
+                                color: Colors.white,
+                                strokeWidth: 2,
+                              ),
+                            ),
+                            SizedBox(width: 10),
+                            Text(
+                              loc.saving,
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ],
                         )
-                      : const Text(
-                          "Сохранить",
+                      : Text(
+                          loc.save,
                           style: TextStyle(
                               fontSize: 20,
                               color: Colors.white,

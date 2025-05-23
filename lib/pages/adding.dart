@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../generated/l10n.dart';
+
 class Adding extends StatefulWidget {
   const Adding({super.key});
 
@@ -31,7 +33,7 @@ class _AddingState extends State<Adding> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text("Добавить карту",
+              Text(S.of(context).addingTitle,
                   style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.w700,
@@ -88,7 +90,7 @@ class _AddingState extends State<Adding> {
               const SizedBox(
                 height: 40,
               ),
-              const Text("Название Карты",
+              Text(S.of(context).cardNameLabel,
                   style: TextStyle(
                       fontSize: 17,
                       fontWeight: FontWeight.w600,
@@ -100,28 +102,24 @@ class _AddingState extends State<Adding> {
                 decoration: InputDecoration(
                   filled: true,
                   fillColor: Colors.white,
-                  // Background color
-                  hintText: 'Название',
-                  // Placeholder text
+                  hintText: S.of(context).cardNameHint,
                   hintStyle: TextStyle(
-                    color: Color.fromRGBO(0, 0, 0, 0.45), // Placeholder color
-                    fontSize: 13, // Font size
-                    fontWeight: FontWeight.w500, // Font weight
+                    color: Color.fromRGBO(0, 0, 0, 0.45),
+                    fontSize: 13,
+                    fontWeight: FontWeight.w500,
                   ),
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 15, horizontal: 11),
-                  // Padding
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(4),
-                    // Optional: Add border radius
-                    borderSide: BorderSide.none, // Remove border
+                    borderSide: BorderSide.none,
                   ),
                 ),
               ),
               const SizedBox(
                 height: 25,
               ),
-              const Text("Номер Карты",
+              Text(S.of(context).cardNumberLabel,
                   style: TextStyle(
                       fontSize: 17,
                       fontWeight: FontWeight.w600,
@@ -133,21 +131,17 @@ class _AddingState extends State<Adding> {
                 decoration: InputDecoration(
                   filled: true,
                   fillColor: Colors.white,
-                  // Background color
-                  hintText: 'XXXX   XXXX   XXXX   XXXX',
-                  // Placeholder text
+                  hintText: S.of(context).cardNumberHint,
                   hintStyle: TextStyle(
-                    color: Color.fromRGBO(0, 0, 0, 0.45), // Placeholder color
-                    fontSize: 13, // Font size
-                    fontWeight: FontWeight.w500, // Font weight
+                    color: Color.fromRGBO(0, 0, 0, 0.45),
+                    fontSize: 13,
+                    fontWeight: FontWeight.w500,
                   ),
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 15, horizontal: 11),
-                  // Padding
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(4),
-                    // Optional: Add border radius
-                    borderSide: BorderSide.none, // Remove border
+                    borderSide: BorderSide.none,
                   ),
                 ),
               ),
@@ -160,7 +154,7 @@ class _AddingState extends State<Adding> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text("Дата/Год",
+                        Text(S.of(context).expiryDateLabel,
                             style: TextStyle(
                                 fontSize: 17,
                                 fontWeight: FontWeight.w600,
@@ -170,7 +164,7 @@ class _AddingState extends State<Adding> {
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: Colors.white,
-                            hintText: 'MM/YY',
+                            hintText: S.of(context).expiryDateHint,
                             hintStyle: TextStyle(
                               color: Color.fromRGBO(0, 0, 0, 0.45),
                               fontSize: 13,
@@ -192,7 +186,7 @@ class _AddingState extends State<Adding> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text("Защитный код",
+                        Text(S.of(context).cvvLabel,
                             style: TextStyle(
                                 fontSize: 17,
                                 fontWeight: FontWeight.w600,
@@ -202,7 +196,7 @@ class _AddingState extends State<Adding> {
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: Colors.white,
-                            hintText: 'CVV',
+                            hintText: S.of(context).cvvHint,
                             hintStyle: TextStyle(
                               color: Color.fromRGBO(0, 0, 0, 0.45),
                               fontSize: 13,
@@ -224,7 +218,7 @@ class _AddingState extends State<Adding> {
               const SizedBox(
                 height: 25,
               ),
-              const Text("Почтовый Индекс",
+              Text(S.of(context).postalCodeLabel,
                   style: TextStyle(
                       fontSize: 17,
                       fontWeight: FontWeight.w600,
@@ -236,21 +230,17 @@ class _AddingState extends State<Adding> {
                 decoration: InputDecoration(
                   filled: true,
                   fillColor: Colors.white,
-                  // Background color
-                  hintText: 'XXXX',
-                  // Placeholder text
+                  hintText: S.of(context).postalCodeHint,
                   hintStyle: TextStyle(
-                    color: Color.fromRGBO(0, 0, 0, 0.45), // Placeholder color
-                    fontSize: 13, // Font size
-                    fontWeight: FontWeight.w500, // Font weight
+                    color: Color.fromRGBO(0, 0, 0, 0.45),
+                    fontSize: 13,
+                    fontWeight: FontWeight.w500,
                   ),
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 15, horizontal: 11),
-                  // Padding
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(4),
-                    // Optional: Add border radius
-                    borderSide: BorderSide.none, // Remove border
+                    borderSide: BorderSide.none,
                   ),
                 ),
               ),
@@ -268,8 +258,8 @@ class _AddingState extends State<Adding> {
                       borderRadius: BorderRadius.circular(15),
                     ),
                   ),
-                  child: const Text(
-                    'Добавить',
+                  child: Text(
+                    S.of(context).addButton,
                     style: TextStyle(
                       fontSize: 24,
                       color: Colors.white,

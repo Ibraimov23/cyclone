@@ -1,13 +1,13 @@
-import 'dart:async';
-
 import 'package:cyclone/pages/home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import '../generated/l10n.dart';
+
 class EmailVerification extends StatefulWidget {
   final User user;
 
-  EmailVerification(this.user);
+  const EmailVerification(this.user, {super.key});
 
   @override
   _EmailVerificationState createState() => _EmailVerificationState();
@@ -31,7 +31,7 @@ class _EmailVerificationState extends State<EmailVerification> {
     if (isEmailVerified) {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => Home()),
+        MaterialPageRoute(builder: (context) => const Home()),
       );
     }
   }
@@ -39,29 +39,34 @@ class _EmailVerificationState extends State<EmailVerification> {
   Future<void> resendVerificationEmail() async {
     await widget.user.sendEmailVerification();
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text("Письмо отправлено повторно ✅",
-            style: TextStyle(color: Colors.white)),
-        backgroundColor: Color(0xFF90010A),
-        duration: Duration(seconds: 2)));
+      content: Text(
+        S.of(context).emailSentAgain,
+        style: const TextStyle(color: Colors.white),
+      ),
+      backgroundColor: const Color(0xFF90010A),
+      duration: const Duration(seconds: 2),
+    ));
   }
 
   @override
   Widget build(BuildContext context) {
+    final l10n = S.of(context);
+
     return Scaffold(
-      appBar: AppBar(title: Text("Подтвердите email")),
+      appBar: AppBar(title: Text(l10n.confirmYourEmail)),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("Пожалуйста, проверьте свою почту"),
-            SizedBox(height: 20),
+            Text(l10n.checkYourEmail),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: checkEmailVerified,
-              child: Text("Я подтвердил"),
+              child: Text(l10n.iHaveConfirmed),
             ),
             TextButton(
               onPressed: resendVerificationEmail,
-              child: Text("Отправить письмо еще раз"),
+              child: Text(l10n.resendVerification),
             ),
           ],
         ),

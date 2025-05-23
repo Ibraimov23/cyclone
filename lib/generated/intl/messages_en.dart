@@ -20,15 +20,25 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
-  static String m0(userEmail) =>
+  static String m0(error) => "Error sending confirmation: ${error}";
+
+  static String m1(email) => "Confirmation sent to ${email}.";
+
+  static String m2(feedName) => "Edit ${feedName}";
+
+  static String m3(userEmail) =>
       "A verification link has been sent to ${userEmail}. Please check your inbox and click the link to verify your account.";
 
-  static String m1(userName) => "Hello, ${userName}!";
+  static String m4(username) => "Yo, ${username}";
 
-  static String m2(currentPage, totalPages) =>
+  static String m5(stadoName) => "herd ${stadoName}";
+
+  static String m6(userName) => "Hello, ${userName}!";
+
+  static String m7(currentPage, totalPages) =>
       "Page ${currentPage} of ${totalPages}";
 
-  static String m3(value) => "${value} kg";
+  static String m8(value) => "${value} kg";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -38,14 +48,23 @@ class MessageLookup extends MessageLookupByLibrary {
     "accountAlreadyExistsTitle": MessageLookupByLibrary.simpleMessage(
       "Account already exists",
     ),
+    "add": MessageLookupByLibrary.simpleMessage("Add"),
+    "addAnimal": MessageLookupByLibrary.simpleMessage("Add Animal"),
+    "addAnimalButton": MessageLookupByLibrary.simpleMessage("Add Animal"),
+    "addButton": MessageLookupByLibrary.simpleMessage("Add"),
     "addItemButton": MessageLookupByLibrary.simpleMessage("Add Item"),
     "addRecordButton": MessageLookupByLibrary.simpleMessage("Add Record"),
     "addScreenTitle": MessageLookupByLibrary.simpleMessage("Add New Item"),
     "addVaccinationButton": MessageLookupByLibrary.simpleMessage(
       "Add Vaccination Record",
     ),
+    "addingTitle": MessageLookupByLibrary.simpleMessage("Add Card"),
+    "ageLabel": MessageLookupByLibrary.simpleMessage("Age"),
     "alreadyHaveAccount": MessageLookupByLibrary.simpleMessage(
       "Already have an account?",
+    ),
+    "animalAddedSuccessfully": MessageLookupByLibrary.simpleMessage(
+      "Animal added successfully",
     ),
     "animalBreedLabel": MessageLookupByLibrary.simpleMessage("Breed"),
     "animalDateOfBirthLabel": MessageLookupByLibrary.simpleMessage(
@@ -69,10 +88,26 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "appBarSearchTooltip": MessageLookupByLibrary.simpleMessage("Search"),
     "appBarSettingsTooltip": MessageLookupByLibrary.simpleMessage("Settings"),
+    "appTitle": MessageLookupByLibrary.simpleMessage("Email Verification"),
+    "birthDate": MessageLookupByLibrary.simpleMessage("Birth Date"),
     "bottomNavFarm": MessageLookupByLibrary.simpleMessage("Farm"),
     "bottomNavFeeds": MessageLookupByLibrary.simpleMessage("Feeds"),
     "bottomNavMessages": MessageLookupByLibrary.simpleMessage("Messages"),
     "bottomNavShop": MessageLookupByLibrary.simpleMessage("Shop"),
+    "breed": MessageLookupByLibrary.simpleMessage("Breed"),
+    "breedLabel": MessageLookupByLibrary.simpleMessage("Breed"),
+    "bullet1": MessageLookupByLibrary.simpleMessage(
+      "1. Choose the interface language — Russian or English.",
+    ),
+    "bullet2": MessageLookupByLibrary.simpleMessage(
+      "2. Register using your email and password.",
+    ),
+    "bullet3": MessageLookupByLibrary.simpleMessage(
+      "3. Or sign in with your Google account — quick and convenient.",
+    ),
+    "bullet4": MessageLookupByLibrary.simpleMessage(
+      "4. After logging in, you\'ll reach the main dashboard where you can start working: add data, monitor statistics, and get analytics.",
+    ),
     "bulls": MessageLookupByLibrary.simpleMessage("Bulls"),
     "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
     "cancelButton": MessageLookupByLibrary.simpleMessage("Cancel"),
@@ -80,6 +115,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "cardCategoryLabel": MessageLookupByLibrary.simpleMessage("Category:"),
     "cardDateLabel": MessageLookupByLibrary.simpleMessage("Date:"),
     "cardLearnMoreButton": MessageLookupByLibrary.simpleMessage("Learn More"),
+    "cardNameHint": MessageLookupByLibrary.simpleMessage("Name"),
+    "cardNameLabel": MessageLookupByLibrary.simpleMessage("Card Name"),
+    "cardNumberHint": MessageLookupByLibrary.simpleMessage(
+      "XXXX   XXXX   XXXX   XXXX",
+    ),
+    "cardNumberLabel": MessageLookupByLibrary.simpleMessage("Card Number"),
     "cardPriceLabel": MessageLookupByLibrary.simpleMessage("Price:"),
     "cardPublishedOnLabel": MessageLookupByLibrary.simpleMessage(
       "Published on:",
@@ -88,6 +129,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "cardViewDetailsButton": MessageLookupByLibrary.simpleMessage(
       "View Details",
     ),
+    "cattleType": MessageLookupByLibrary.simpleMessage("Cattle Type"),
+    "changeCard": MessageLookupByLibrary.simpleMessage("Change Card"),
+    "changePassword": MessageLookupByLibrary.simpleMessage("Change Password"),
+    "changePasswordButton": MessageLookupByLibrary.simpleMessage("Change"),
     "changeValue": MessageLookupByLibrary.simpleMessage("Change Value"),
     "chatbotCouldNotUnderstand": MessageLookupByLibrary.simpleMessage(
       "Sorry, I couldn\'t understand that. Could you rephrase?",
@@ -104,6 +149,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "chatbotWelcomeMessage": MessageLookupByLibrary.simpleMessage(
       "Hello! How can I help you today?",
     ),
+    "checkYourEmail": MessageLookupByLibrary.simpleMessage(
+      "Please check your email",
+    ),
+    "closingStatement": MessageLookupByLibrary.simpleMessage(
+      "CYCLONE makes farming understandable, efficient, and modern. All management is at your fingertips.",
+    ),
+    "confirmButton": MessageLookupByLibrary.simpleMessage("Confirm"),
     "confirmEditButton": MessageLookupByLibrary.simpleMessage("Edit"),
     "confirmMessage": MessageLookupByLibrary.simpleMessage(
       "Please review the details before submitting.",
@@ -113,13 +165,31 @@ class MessageLookup extends MessageLookupByLibrary {
       "Confirm Details",
     ),
     "confirmSubmitButton": MessageLookupByLibrary.simpleMessage("Submit"),
+    "confirmYourEmail": MessageLookupByLibrary.simpleMessage(
+      "Confirm your email",
+    ),
+    "confirmationSendError": m0,
+    "confirmationSent": m1,
     "cows": MessageLookupByLibrary.simpleMessage("Cows"),
+    "createHerdError": MessageLookupByLibrary.simpleMessage(
+      "Error creating herd",
+    ),
     "createItemTitle": MessageLookupByLibrary.simpleMessage("Create New Item"),
     "createNewButton": MessageLookupByLibrary.simpleMessage("Create New"),
+    "createPasswordTitle": MessageLookupByLibrary.simpleMessage(
+      "Create a password",
+    ),
+    "createStado": MessageLookupByLibrary.simpleMessage("Create Herd"),
+    "cvvHint": MessageLookupByLibrary.simpleMessage("CVV"),
+    "cvvLabel": MessageLookupByLibrary.simpleMessage("Security Code"),
+    "deleteCard": MessageLookupByLibrary.simpleMessage("Delete Card"),
     "detailsCattleCount": MessageLookupByLibrary.simpleMessage("Count"),
     "detailsCattleName": MessageLookupByLibrary.simpleMessage("Cattle Name"),
     "detailsCattleType": MessageLookupByLibrary.simpleMessage("Cattle Type"),
     "detailsTitle": MessageLookupByLibrary.simpleMessage("Cattle Details"),
+    "dividerDescription": MessageLookupByLibrary.simpleMessage(
+      "CYCLONE is an app that helps farmers simplify feeding management, track livestock growth, and monitor supplies. Everything in one place, without paperwork hassle.",
+    ),
     "drawerAbout": MessageLookupByLibrary.simpleMessage("About Us"),
     "drawerAddAccount": MessageLookupByLibrary.simpleMessage("Add Account"),
     "drawerHome": MessageLookupByLibrary.simpleMessage("Home"),
@@ -132,8 +202,42 @@ class MessageLookup extends MessageLookupByLibrary {
     "drawerSoon": MessageLookupByLibrary.simpleMessage("Coming soon"),
     "drawerStats": MessageLookupByLibrary.simpleMessage("Statistics"),
     "drawerSubscription": MessageLookupByLibrary.simpleMessage("Subscription"),
+    "duration15min": MessageLookupByLibrary.simpleMessage("15 minutes"),
+    "duration20min": MessageLookupByLibrary.simpleMessage("20 minutes"),
+    "duration4min": MessageLookupByLibrary.simpleMessage("4 minutes"),
+    "duration5min": MessageLookupByLibrary.simpleMessage("5 minutes"),
+    "editDialog_cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+    "editDialog_hint": MessageLookupByLibrary.simpleMessage("Enter a number"),
+    "editDialog_insufficientFeed": MessageLookupByLibrary.simpleMessage(
+      "Not enough feed in storage",
+    ),
+    "editDialog_invalidNumber": MessageLookupByLibrary.simpleMessage(
+      "Please enter a valid number",
+    ),
+    "editDialog_label": MessageLookupByLibrary.simpleMessage("Enter new value"),
+    "editDialog_noStorage": MessageLookupByLibrary.simpleMessage(
+      "Storage not found",
+    ),
+    "editDialog_save": MessageLookupByLibrary.simpleMessage("Save"),
+    "editDialog_saveError": MessageLookupByLibrary.simpleMessage(
+      "Error saving data",
+    ),
+    "editDialog_title": m2,
+    "emailAlreadyRegistered": MessageLookupByLibrary.simpleMessage(
+      "This email is already registered.",
+    ),
+    "emailIsEmptyError": MessageLookupByLibrary.simpleMessage(
+      "Please enter your email.",
+    ),
+    "emailLabel": MessageLookupByLibrary.simpleMessage("Email"),
+    "emailSentAgain": MessageLookupByLibrary.simpleMessage(
+      "Verification email sent again",
+    ),
     "emailSentMessage": MessageLookupByLibrary.simpleMessage(
       "A confirmation email has been sent to your address.",
+    ),
+    "emailSentSuccess": MessageLookupByLibrary.simpleMessage(
+      "Email has been sent.",
     ),
     "emailSentTitle": MessageLookupByLibrary.simpleMessage("Email sent"),
     "emailVerificationCheckSpam": MessageLookupByLibrary.simpleMessage(
@@ -145,7 +249,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "emailVerificationEmailSentMessage": MessageLookupByLibrary.simpleMessage(
       "A new verification email has been sent.",
     ),
-    "emailVerificationMessage": m0,
+    "emailVerificationMessage": m3,
     "emailVerificationResendButton": MessageLookupByLibrary.simpleMessage(
       "Resend Verification Email",
     ),
@@ -153,30 +257,60 @@ class MessageLookup extends MessageLookupByLibrary {
       "Verify Your Email",
     ),
     "english": MessageLookupByLibrary.simpleMessage("English"),
+    "enterGender": MessageLookupByLibrary.simpleMessage("Enter gender"),
     "enterIdHint": MessageLookupByLibrary.simpleMessage("Scan or type ID"),
     "enterIdLabel": MessageLookupByLibrary.simpleMessage("Enter ID"),
+    "enterMedicalCard": MessageLookupByLibrary.simpleMessage(
+      "Enter medical card",
+    ),
+    "enterNewPassword": MessageLookupByLibrary.simpleMessage(
+      "Enter new password",
+    ),
     "enterPassword": MessageLookupByLibrary.simpleMessage("Enter password"),
+    "enterStadoNumber": MessageLookupByLibrary.simpleMessage(
+      "Enter a unique herd number",
+    ),
+    "enterTagNumber": MessageLookupByLibrary.simpleMessage("Enter tag number"),
+    "enterWeight": MessageLookupByLibrary.simpleMessage("Enter weight"),
     "enterYourEmail": MessageLookupByLibrary.simpleMessage("Enter your email"),
+    "errorAddingAnimal": MessageLookupByLibrary.simpleMessage(
+      "Error while adding animal",
+    ),
     "errorAuthentication": MessageLookupByLibrary.simpleMessage(
       "Authentication error",
     ),
+    "errorLoadingBreeds": MessageLookupByLibrary.simpleMessage(
+      "Error loading breeds",
+    ),
+    "errorLoadingHealthStatuses": MessageLookupByLibrary.simpleMessage(
+      "Error loading health statuses",
+    ),
     "errorTitle": MessageLookupByLibrary.simpleMessage("Error"),
+    "expiryDateHint": MessageLookupByLibrary.simpleMessage("MM/YY"),
+    "expiryDateLabel": MessageLookupByLibrary.simpleMessage("Expiry Date"),
     "feedSubtitle": MessageLookupByLibrary.simpleMessage(
       "From 1500 soms per sack.",
     ),
     "feedTitle": MessageLookupByLibrary.simpleMessage(
       "Premium quality livestock feed!",
     ),
+    "feedUnit": MessageLookupByLibrary.simpleMessage("feed unit"),
     "fieldCorns": MessageLookupByLibrary.simpleMessage("Corn"),
     "fieldHays": MessageLookupByLibrary.simpleMessage("Hay"),
     "fieldHerbs": MessageLookupByLibrary.simpleMessage("Herbs"),
     "fieldOats": MessageLookupByLibrary.simpleMessage("Oats"),
     "fieldPeas": MessageLookupByLibrary.simpleMessage("Peas"),
+    "fieldRequired": MessageLookupByLibrary.simpleMessage(
+      "Please fill all fields",
+    ),
     "fieldRequiredError": MessageLookupByLibrary.simpleMessage(
       "This field is required",
     ),
     "fieldSilages": MessageLookupByLibrary.simpleMessage("Silage"),
     "fieldStraws": MessageLookupByLibrary.simpleMessage("Straw"),
+    "fillAllFields": MessageLookupByLibrary.simpleMessage(
+      "Please fill in all fields",
+    ),
     "financeAddTransactionButton": MessageLookupByLibrary.simpleMessage(
       "Add Transaction",
     ),
@@ -195,13 +329,30 @@ class MessageLookup extends MessageLookupByLibrary {
       "Financial Report",
     ),
     "financeScreenTitle": MessageLookupByLibrary.simpleMessage("Finances"),
+    "financeTitle": MessageLookupByLibrary.simpleMessage("Finance"),
     "financeTransactionHistoryTitle": MessageLookupByLibrary.simpleMessage(
       "Transaction History",
     ),
     "financeViewTransactionsButton": MessageLookupByLibrary.simpleMessage(
       "View Transactions",
     ),
+    "gender": MessageLookupByLibrary.simpleMessage("Gender"),
     "goats": MessageLookupByLibrary.simpleMessage("Goats"),
+    "greeting": m4,
+    "greetingDescription": MessageLookupByLibrary.simpleMessage(
+      "Greeting with username",
+    ),
+    "healthGood": MessageLookupByLibrary.simpleMessage("Good"),
+    "healthLabel": MessageLookupByLibrary.simpleMessage("Health"),
+    "healthMedium": MessageLookupByLibrary.simpleMessage("Medium"),
+    "healthPoor": MessageLookupByLibrary.simpleMessage("Poor"),
+    "healthStatus": MessageLookupByLibrary.simpleMessage("Health Status"),
+    "herd": MessageLookupByLibrary.simpleMessage("herd"),
+    "herdCattleTypeNotSpecified": MessageLookupByLibrary.simpleMessage(
+      "Herd cattle type not specified",
+    ),
+    "herdNotFound": MessageLookupByLibrary.simpleMessage("Herd not found"),
+    "herdTitle": m5,
     "homeCardSubtitle": MessageLookupByLibrary.simpleMessage("Cattle Number"),
     "homeExploreCategories": MessageLookupByLibrary.simpleMessage(
       "Explore Categories",
@@ -209,10 +360,68 @@ class MessageLookup extends MessageLookupByLibrary {
     "homeScreenTitle": MessageLookupByLibrary.simpleMessage("Home"),
     "homeTitle": MessageLookupByLibrary.simpleMessage("My Farm"),
     "homeViewLatest": MessageLookupByLibrary.simpleMessage("View Latest"),
-    "homeWelcomeMessage": m1,
+    "homeWelcomeMessage": m6,
+    "iHaveConfirmed": MessageLookupByLibrary.simpleMessage("I have confirmed"),
     "idNotFoundError": MessageLookupByLibrary.simpleMessage("ID not found"),
     "idNumberLabel": MessageLookupByLibrary.simpleMessage("ID Number:"),
     "idScreenTitle": MessageLookupByLibrary.simpleMessage("Identification"),
+    "instructionCardAddCattleDescription": MessageLookupByLibrary.simpleMessage(
+      "How to add cattle to the system.",
+    ),
+    "instructionCardAddCattleTitle": MessageLookupByLibrary.simpleMessage(
+      "Adding Cattle",
+    ),
+    "instructionCardAnimalsTableDescription":
+        MessageLookupByLibrary.simpleMessage(
+          "How to track animals in the table.",
+        ),
+    "instructionCardAnimalsTableTitle": MessageLookupByLibrary.simpleMessage(
+      "Animals Table",
+    ),
+    "instructionCardChatBotDescription": MessageLookupByLibrary.simpleMessage(
+      "How to use the chat bot for communication.",
+    ),
+    "instructionCardChatBotTitle": MessageLookupByLibrary.simpleMessage(
+      "Chat Bot",
+    ),
+    "instructionCardDurationLabel": MessageLookupByLibrary.simpleMessage(
+      "Duration: ",
+    ),
+    "instructionCardFeedWarehouseDescription":
+        MessageLookupByLibrary.simpleMessage(
+          "How to add feed to the warehouse.",
+        ),
+    "instructionCardFeedWarehouseTitle": MessageLookupByLibrary.simpleMessage(
+      "Feed Warehouse",
+    ),
+    "instructionCardIntroductionDescription":
+        MessageLookupByLibrary.simpleMessage(
+          "Description of how to get started with the app.",
+        ),
+    "instructionCardIntroductionTitle": MessageLookupByLibrary.simpleMessage(
+      "Introduction",
+    ),
+    "instructionCardMainScreenDescription":
+        MessageLookupByLibrary.simpleMessage(
+          "Description of the main screen and features.",
+        ),
+    "instructionCardMainScreenTitle": MessageLookupByLibrary.simpleMessage(
+      "Main Screen",
+    ),
+    "instructionCardTechPassportDescription":
+        MessageLookupByLibrary.simpleMessage(
+          "How to add the animal\'s tech passport.",
+        ),
+    "instructionCardTechPassportTitle": MessageLookupByLibrary.simpleMessage(
+      "Tech Passport / Adding",
+    ),
+    "instructionCardWeightTrackingDescription":
+        MessageLookupByLibrary.simpleMessage(
+          "How to track changes in animal weight.",
+        ),
+    "instructionCardWeightTrackingTitle": MessageLookupByLibrary.simpleMessage(
+      "Weight Tracking",
+    ),
     "instructionContactSupport": MessageLookupByLibrary.simpleMessage(
       "Contact Support",
     ),
@@ -240,6 +449,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "instructionStep2Title": MessageLookupByLibrary.simpleMessage(
       "Step 2: Configuration",
     ),
+    "instructionTitle": MessageLookupByLibrary.simpleMessage("How to use"),
     "introDoneButton": MessageLookupByLibrary.simpleMessage("Done"),
     "introNextButton": MessageLookupByLibrary.simpleMessage("Next"),
     "introSkipButton": MessageLookupByLibrary.simpleMessage("Skip"),
@@ -257,6 +467,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Join our community and start your journey today.",
     ),
     "introSlide3Title": MessageLookupByLibrary.simpleMessage("Get Started"),
+    "introTitle": MessageLookupByLibrary.simpleMessage(
+      "CYCLONE — your digital assistant in farm management",
+    ),
     "invalidInputError": MessageLookupByLibrary.simpleMessage("Invalid input"),
     "itemCategoryHint": MessageLookupByLibrary.simpleMessage(
       "Select a category",
@@ -277,6 +490,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "itemUploadImageButton": MessageLookupByLibrary.simpleMessage(
       "Upload Image",
     ),
+    "kg": MessageLookupByLibrary.simpleMessage("kg"),
     "kyrgyz": MessageLookupByLibrary.simpleMessage("Kyrgyz"),
     "languagePrompt": MessageLookupByLibrary.simpleMessage("Select language"),
     "loadingError": MessageLookupByLibrary.simpleMessage("Loading error"),
@@ -315,11 +529,18 @@ class MessageLookup extends MessageLookupByLibrary {
     "mainScreenLogoutDialogTitle": MessageLookupByLibrary.simpleMessage(
       "Account Logout",
     ),
+    "medicalCard": MessageLookupByLibrary.simpleMessage("Medical Card"),
     "nameColumn": MessageLookupByLibrary.simpleMessage("Name"),
     "ok": MessageLookupByLibrary.simpleMessage("OK"),
+    "okButton": MessageLookupByLibrary.simpleMessage("OK"),
     "otherRegistrationMethods": MessageLookupByLibrary.simpleMessage(
       "Other registration methods",
     ),
+    "passwordChangedSuccess": MessageLookupByLibrary.simpleMessage(
+      "Password changed successfully.",
+    ),
+    "postalCodeHint": MessageLookupByLibrary.simpleMessage("XXXX"),
+    "postalCodeLabel": MessageLookupByLibrary.simpleMessage("Postal Code"),
     "profileChangePasswordButton": MessageLookupByLibrary.simpleMessage(
       "Change Password",
     ),
@@ -342,10 +563,29 @@ class MessageLookup extends MessageLookupByLibrary {
     "register": MessageLookupByLibrary.simpleMessage("Register"),
     "registerButton": MessageLookupByLibrary.simpleMessage("Register"),
     "registration": MessageLookupByLibrary.simpleMessage("Registration"),
+    "resendVerification": MessageLookupByLibrary.simpleMessage(
+      "Resend verification email",
+    ),
+    "resetPasswordTitle": MessageLookupByLibrary.simpleMessage(
+      "Reset Password",
+    ),
     "russian": MessageLookupByLibrary.simpleMessage("Russian"),
     "save": MessageLookupByLibrary.simpleMessage("Save"),
     "saveButton": MessageLookupByLibrary.simpleMessage("Save"),
+    "saving": MessageLookupByLibrary.simpleMessage("Saving..."),
+    "selectBirthDate": MessageLookupByLibrary.simpleMessage(
+      "Select birth date",
+    ),
+    "selectBreed": MessageLookupByLibrary.simpleMessage("Select breed"),
     "selectButton": MessageLookupByLibrary.simpleMessage("Choose"),
+    "selectCattleType": MessageLookupByLibrary.simpleMessage(
+      "Select cattle type",
+    ),
+    "selectHealthStatus": MessageLookupByLibrary.simpleMessage(
+      "Select health status",
+    ),
+    "sendEmailButton": MessageLookupByLibrary.simpleMessage("Send Email"),
+    "settings": MessageLookupByLibrary.simpleMessage("Settings"),
     "sheep": MessageLookupByLibrary.simpleMessage("Sheep"),
     "shopAddToCartButton": MessageLookupByLibrary.simpleMessage("Add to Cart"),
     "shopCallButton": MessageLookupByLibrary.simpleMessage("Call"),
@@ -358,6 +598,11 @@ class MessageLookup extends MessageLookupByLibrary {
       "Search products...",
     ),
     "shopSortByButton": MessageLookupByLibrary.simpleMessage("Sort By"),
+    "stadoCreated": MessageLookupByLibrary.simpleMessage(
+      "Herd created successfully!",
+    ),
+    "stadoNumber": MessageLookupByLibrary.simpleMessage("Herd Number"),
+    "startQuestion": MessageLookupByLibrary.simpleMessage("Where to start?"),
     "stemEngineeringCategory": MessageLookupByLibrary.simpleMessage(
       "Engineering",
     ),
@@ -384,6 +629,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "subpageSectionTitle": MessageLookupByLibrary.simpleMessage(
       "Section Title",
     ),
+    "successTitle": MessageLookupByLibrary.simpleMessage("Success"),
+    "table": MessageLookupByLibrary.simpleMessage("Table"),
     "tableHeaderColumn1": MessageLookupByLibrary.simpleMessage("Column 1"),
     "tableHeaderColumn2": MessageLookupByLibrary.simpleMessage("Column 2"),
     "tableHeaderColumn3": MessageLookupByLibrary.simpleMessage("Column 3"),
@@ -391,12 +638,26 @@ class MessageLookup extends MessageLookupByLibrary {
     "tableNoData": MessageLookupByLibrary.simpleMessage(
       "No data available to display.",
     ),
-    "tablePageIndicator": m2,
+    "tablePageIndicator": m7,
     "tablePreviousPage": MessageLookupByLibrary.simpleMessage("Previous"),
     "tableScreenTitle": MessageLookupByLibrary.simpleMessage("Data Table"),
-    "unitKg": m3,
+    "tableTitle": MessageLookupByLibrary.simpleMessage("Feed Table"),
+    "tagNumber": MessageLookupByLibrary.simpleMessage("Tag Number"),
+    "techPassport": MessageLookupByLibrary.simpleMessage("Passport"),
+    "techPassportHeader": MessageLookupByLibrary.simpleMessage(
+      "Technical passport",
+    ),
+    "unitKg": m8,
+    "userNotAuthorized": MessageLookupByLibrary.simpleMessage(
+      "User not authorized",
+    ),
+    "userNotFoundError": MessageLookupByLibrary.simpleMessage(
+      "Error: Current user not found.",
+    ),
     "valueColumn": MessageLookupByLibrary.simpleMessage("Value"),
     "verifyIdButton": MessageLookupByLibrary.simpleMessage("Verify ID"),
+    "weight": MessageLookupByLibrary.simpleMessage("Weight (kg)"),
+    "weightLabel": MessageLookupByLibrary.simpleMessage("Weight"),
     "welcomeLogin": MessageLookupByLibrary.simpleMessage("Login"),
     "welcomeSubtitle": MessageLookupByLibrary.simpleMessage(
       "Complete automation of the\ncattle fattening process",

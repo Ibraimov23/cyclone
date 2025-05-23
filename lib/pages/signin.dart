@@ -1,4 +1,4 @@
-import 'package:cyclone/generated/l10n.dart'; // Убедитесь, что путь корректен
+import 'package:cyclone/generated/l10n.dart';
 import 'package:cyclone/services/auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

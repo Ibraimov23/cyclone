@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cyclone/widget/animal_passport.dart';
 import 'package:flutter/material.dart';
 
+import '../generated/l10n.dart';
+
 class Id extends StatelessWidget {
   final String stadoId;
   final String stadoName;
@@ -44,9 +46,9 @@ class Id extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const Text(
-                      'Технический паспорт',
-                      style: TextStyle(
+                    Text(
+                      S.of(context).techPassportHeader,
+                      style: const TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.w600,
                         color: Colors.black,
@@ -54,7 +56,7 @@ class Id extends StatelessWidget {
                     ),
                     const SizedBox(height: 7),
                     Text(
-                      'стадо $stadoName',
+                      S.of(context).herdTitle(stadoName),
                       style: const TextStyle(
                         fontSize: 24,
                         color: Colors.black,
@@ -79,7 +81,7 @@ class Id extends StatelessWidget {
                   }
 
                   if (snapshot.hasError) {
-                    return const Center(child: Text('Ошибка загрузки данных'));
+                    return Center(child: Text(S.of(context).loadingError));
                   }
 
                   final animals = snapshot.data?.docs ?? [];

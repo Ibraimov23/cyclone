@@ -3,6 +3,8 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import '../generated/l10n.dart';
+
 class AddAnimal extends StatefulWidget {
   final String stadoId;
 
@@ -43,14 +45,14 @@ class _CreateState extends State<AddAnimal> {
           .get();
 
       if (!stadoSnapshot.exists) {
-        print("Стадо не найдено");
+        print(S.of(context).herdNotFound);
         return;
       }
 
       final currentCattleType = stadoSnapshot.data()?['cattleType'];
 
       if (currentCattleType == null) {
-        print("Тип скота у стада не указан");
+        print(S.of(context)!.herdCattleTypeNotSpecified);
         return;
       }
 
@@ -66,7 +68,7 @@ class _CreateState extends State<AddAnimal> {
         breeds = breedList;
       });
     } catch (e) {
-      print("Ошибка при загрузке пород: $e");
+      print("${S.of(context).errorLoadingBreeds}: $e");
     }
   }
 
@@ -82,11 +84,13 @@ class _CreateState extends State<AddAnimal> {
         healthStatuses = statuses;
       });
     } catch (e) {
-      print("Ошибка при загрузке статусов здоровья: $e");
+      print("${S.of(context).errorLoadingHealthStatuses}: $e");
     }
   }
 
   Future<void> _addAnimal() async {
+    final loc = S.of(context);
+
     if (_stadoNameController.text.isEmpty ||
         _genderController.text.isEmpty ||
         _selectedDate == null ||
@@ -97,9 +101,9 @@ class _CreateState extends State<AddAnimal> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content:
-              Text("Заполните все поля", style: TextStyle(color: Colors.white)),
-          backgroundColor: Color(0xFF90010A),
-          duration: Duration(seconds: 2),
+              Text(loc.fillAllFields, style: TextStyle(color: Colors.white)),
+          backgroundColor: const Color(0xFF90010A),
+          duration: const Duration(seconds: 2),
         ),
       );
       return;
@@ -112,7 +116,7 @@ class _CreateState extends State<AddAnimal> {
     try {
       String? userId = FirebaseAuth.instance.currentUser?.uid;
       if (userId == null) {
-        throw Exception("Пользователь не авторизован");
+        throw Exception(loc.userNotAuthorized);
       }
 
       final stadoDoc = await FirebaseFirestore.instance
@@ -163,7 +167,7 @@ class _CreateState extends State<AddAnimal> {
       });
 
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Животное успешно добавлено!")),
+        SnackBar(content: Text(loc.animalAddedSuccessfully)),
       );
 
       _stadoNameController.clear();
@@ -177,13 +181,13 @@ class _CreateState extends State<AddAnimal> {
         isLoading = false;
       });
     } catch (e) {
-      print("Ошибка при добавлении животного: $e");
+      print("${loc.errorAddingAnimal}: $e");
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text("Ошибка при добавлении животного",
+          content: Text(loc.errorAddingAnimal,
               style: TextStyle(color: Colors.white)),
-          backgroundColor: Color(0xFF90010A),
-          duration: Duration(seconds: 2),
+          backgroundColor: const Color(0xFF90010A),
+          duration: const Duration(seconds: 2),
         ),
       );
       setState(() {
@@ -193,6 +197,7 @@ class _CreateState extends State<AddAnimal> {
   }
 
   Future<void> _selectDate(BuildContext context) async {
+    final loc = S.of(context);
     DateTime? picked = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
@@ -200,7 +205,7 @@ class _CreateState extends State<AddAnimal> {
       lastDate: DateTime(2050),
       builder: (BuildContext context, Widget? widget) => Theme(
         data: ThemeData(
-          colorScheme: ColorScheme.light(primary: Color(0xFF90010A)),
+          colorScheme: ColorScheme.light(primary: const Color(0xFF90010A)),
           datePickerTheme: const DatePickerThemeData(
             backgroundColor: Colors.white,
             dividerColor: Color(0xFF90010A),
@@ -222,6 +227,7 @@ class _CreateState extends State<AddAnimal> {
 
   @override
   Widget build(BuildContext context) {
+    final loc = S.of(context);
     return Scaffold(
       backgroundColor: Colors.grey.shade300,
       body: SingleChildScrollView(
@@ -239,10 +245,10 @@ class _CreateState extends State<AddAnimal> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                padding: EdgeInsets.symmetric(vertical: 10),
-                child: const Text(
-                  'Добавить животное',
-                  style: TextStyle(
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                child: Text(
+                  loc.addAnimal,
+                  style: const TextStyle(
                     fontWeight: FontWeight.w900,
                     fontSize: 30,
                     letterSpacing: 0,
@@ -251,20 +257,20 @@ class _CreateState extends State<AddAnimal> {
               ),
               const SizedBox(height: 15),
               Container(
-                padding: EdgeInsets.symmetric(vertical: 8),
-                child: const Text(
-                  "Бирочный номер",
-                  style: TextStyle(fontSize: 20, letterSpacing: 0),
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                child: Text(
+                  loc.tagNumber,
+                  style: const TextStyle(fontSize: 20, letterSpacing: 0),
                 ),
               ),
               Container(
-                padding: EdgeInsets.symmetric(vertical: 5),
+                padding: const EdgeInsets.symmetric(vertical: 5),
                 child: TextField(
                   controller: _stadoNameController,
                   decoration: InputDecoration(
                     filled: true,
                     fillColor: Colors.white,
-                    hintText: 'Введите бирочный номер',
+                    hintText: loc.enterTagNumber,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
                       borderSide: BorderSide.none,
@@ -281,20 +287,20 @@ class _CreateState extends State<AddAnimal> {
               ),
               const SizedBox(height: 10),
               Container(
-                padding: EdgeInsets.symmetric(vertical: 8),
-                child: const Text(
-                  "Пол",
-                  style: TextStyle(fontSize: 20, letterSpacing: 0),
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                child: Text(
+                  loc.gender,
+                  style: const TextStyle(fontSize: 20, letterSpacing: 0),
                 ),
               ),
               Container(
-                padding: EdgeInsets.symmetric(vertical: 5),
+                padding: const EdgeInsets.symmetric(vertical: 5),
                 child: TextField(
                   controller: _genderController,
                   decoration: InputDecoration(
                     filled: true,
                     fillColor: Colors.white,
-                    hintText: 'Введите пол животного',
+                    hintText: loc.enterGender,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
                       borderSide: BorderSide.none,
@@ -311,23 +317,72 @@ class _CreateState extends State<AddAnimal> {
               ),
               const SizedBox(height: 10),
               Container(
-                padding: EdgeInsets.symmetric(vertical: 8),
-                child: const Text(
-                  "Возраст",
-                  style: TextStyle(fontSize: 20, letterSpacing: 0),
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                child: Text(
+                  loc.breed,
+                  style: const TextStyle(fontSize: 20, letterSpacing: 0),
+                ),
+              ),
+              DropdownButtonHideUnderline(
+                child: DropdownButton2<String>(
+                  isExpanded: true,
+                  hint: Text(
+                    loc.selectBreed,
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Theme.of(context).hintColor,
+                    ),
+                  ),
+                  items: breeds
+                      .map((item) => DropdownMenuItem<String>(
+                            value: item,
+                            child: Text(item),
+                          ))
+                      .toList(),
+                  value: selectedBreed,
+                  onChanged: (value) {
+                    setState(() {
+                      selectedBreed = value;
+                    });
+                  },
+                  buttonStyleData: ButtonStyleData(
+                    height: 50,
+                    padding: const EdgeInsets.only(left: 14, right: 14),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      border: Border.all(
+                        color: Colors.grey.shade400,
+                      ),
+                      color: Colors.white,
+                    ),
+                  ),
+                  dropdownStyleData: DropdownStyleData(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                  ),
+                  menuItemStyleData: const MenuItemStyleData(
+                    padding: EdgeInsets.symmetric(horizontal: 14),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 10),
+              Container(
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                child: Text(
+                  loc.birthDate,
+                  style: const TextStyle(fontSize: 20, letterSpacing: 0),
                 ),
               ),
               GestureDetector(
-                onTap: () async {
-                  await _selectDate(context);
-                },
+                onTap: () => _selectDate(context),
                 child: AbsorbPointer(
                   child: TextField(
                     controller: _dateController,
                     decoration: InputDecoration(
                       filled: true,
                       fillColor: Colors.white,
-                      hintText: 'Выберите дату рождения животного',
+                      hintText: loc.selectBirthDate,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15),
                         borderSide: BorderSide.none,
@@ -344,22 +399,22 @@ class _CreateState extends State<AddAnimal> {
                 ),
               ),
               const SizedBox(height: 10),
-              // Вес
               Container(
-                padding: EdgeInsets.symmetric(vertical: 8),
-                child: const Text(
-                  "Вес",
-                  style: TextStyle(fontSize: 20, letterSpacing: 0),
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                child: Text(
+                  loc.weight,
+                  style: const TextStyle(fontSize: 20, letterSpacing: 0),
                 ),
               ),
               Container(
-                padding: EdgeInsets.symmetric(vertical: 5),
+                padding: const EdgeInsets.symmetric(vertical: 5),
                 child: TextField(
                   controller: _weightController,
+                  keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                     filled: true,
                     fillColor: Colors.white,
-                    hintText: 'Введите вес животного',
+                    hintText: loc.enterWeight,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
                       borderSide: BorderSide.none,
@@ -375,115 +430,72 @@ class _CreateState extends State<AddAnimal> {
                 ),
               ),
               const SizedBox(height: 10),
-              // Вес
               Container(
-                padding: EdgeInsets.symmetric(vertical: 8),
-                child: const Text(
-                  "Порода",
-                  style: TextStyle(fontSize: 20, letterSpacing: 0),
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                child: Text(
+                  loc.healthStatus,
+                  style: const TextStyle(fontSize: 20, letterSpacing: 0),
                 ),
               ),
-              Container(
-                padding: EdgeInsets.symmetric(vertical: 5),
+              DropdownButtonHideUnderline(
                 child: DropdownButton2<String>(
-                  value: selectedBreed,
-                  hint: Text("Выберите породу животного"),
-                  items: breeds.map((String breed) {
-                    return DropdownMenuItem<String>(
-                      value: breed,
-                      child: Text(breed),
-                    );
-                  }).toList(),
-                  onChanged: (String? newValue) {
-                    setState(() {
-                      selectedBreed = newValue;
-                    });
-                  },
-                  dropdownStyleData: DropdownStyleData(
-                    maxHeight: 200,
-                    offset: Offset(0, 5),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: Colors.white,
+                  isExpanded: true,
+                  hint: Text(
+                    loc.selectHealthStatus,
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Theme.of(context).hintColor,
                     ),
                   ),
-                  buttonStyleData: ButtonStyleData(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    height: 60,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                  ),
-                  menuItemStyleData: MenuItemStyleData(
-                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 10),
-              Container(
-                padding: EdgeInsets.symmetric(vertical: 8),
-                child: const Text(
-                  "Здоровье",
-                  style: TextStyle(fontSize: 20, letterSpacing: 0),
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(vertical: 5),
-                child: DropdownButton2<String>(
+                  items: healthStatuses
+                      .map((item) => DropdownMenuItem<String>(
+                            value: item,
+                            child: Text(item),
+                          ))
+                      .toList(),
                   value: selectedHealthStatus,
-                  hint: Text("Выберите статус здоровья"),
-                  items: healthStatuses.map((String status) {
-                    return DropdownMenuItem<String>(
-                      value: status,
-                      child: Text(status),
-                    );
-                  }).toList(),
-                  onChanged: (String? newValue) {
+                  onChanged: (value) {
                     setState(() {
-                      selectedHealthStatus = newValue;
+                      selectedHealthStatus = value;
                     });
                   },
-                  dropdownStyleData: DropdownStyleData(
-                    maxHeight: 200,
-                    offset: Offset(0, 5),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: Colors.white,
-                    ),
-                  ),
                   buttonStyleData: ButtonStyleData(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    height: 60,
-                    width: double.infinity,
+                    height: 50,
+                    padding: const EdgeInsets.only(left: 14, right: 14),
                     decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      border: Border.all(
+                        color: Colors.grey.shade400,
+                      ),
                       color: Colors.white,
+                    ),
+                  ),
+                  dropdownStyleData: DropdownStyleData(
+                    decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
                     ),
                   ),
-                  menuItemStyleData: MenuItemStyleData(
-                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                  menuItemStyleData: const MenuItemStyleData(
+                    padding: EdgeInsets.symmetric(horizontal: 14),
                   ),
                 ),
               ),
-
               const SizedBox(height: 10),
               Container(
-                padding: EdgeInsets.symmetric(vertical: 8),
-                child: const Text(
-                  "Медицинская карта",
-                  style: TextStyle(fontSize: 20, letterSpacing: 0),
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                child: Text(
+                  loc.medicalCard,
+                  style: const TextStyle(fontSize: 20, letterSpacing: 0),
                 ),
               ),
               Container(
-                padding: EdgeInsets.symmetric(vertical: 5),
+                padding: const EdgeInsets.symmetric(vertical: 5),
                 child: TextField(
                   controller: _medCardController,
                   decoration: InputDecoration(
                     filled: true,
                     fillColor: Colors.white,
-                    hintText: 'Введите номер медицинской карты',
+                    hintText: loc.enterMedicalCard,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
                       borderSide: BorderSide.none,
@@ -498,32 +510,27 @@ class _CreateState extends State<AddAnimal> {
                   ),
                 ),
               ),
-              const SizedBox(height: 10),
-              Container(
-                padding: EdgeInsets.only(top: 20),
-                child: ElevatedButton(
-                  onPressed: isLoading ? null : _addAnimal,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFF90010A),
-                    padding: EdgeInsets.symmetric(vertical: 16),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    minimumSize: Size(double.infinity, 50),
-                  ),
-                  child: isLoading
-                      ? CircularProgressIndicator(
-                          color: Colors.white,
-                        )
-                      : const Text(
-                          "Добавить",
-                          style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold),
+              const SizedBox(height: 25),
+              isLoading
+                  ? const Center(child: CircularProgressIndicator())
+                  : SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: _addAnimal,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFF90010A),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          padding: const EdgeInsets.symmetric(vertical: 16),
                         ),
-                ),
-              ),
+                        child: Text(
+                          loc.addAnimalButton,
+                          style: const TextStyle(
+                              fontSize: 18, color: Colors.white),
+                        ),
+                      ),
+                    ),
             ],
           ),
         ),

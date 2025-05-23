@@ -1899,6 +1899,1081 @@ class S {
   String get logout {
     return Intl.message('Log Out', name: 'logout', desc: '', args: []);
   }
+
+  /// `Create a password`
+  String get createPasswordTitle {
+    return Intl.message(
+      'Create a password',
+      name: 'createPasswordTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter new password`
+  String get enterNewPassword {
+    return Intl.message(
+      'Enter new password',
+      name: 'enterNewPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Change`
+  String get changePasswordButton {
+    return Intl.message(
+      'Change',
+      name: 'changePasswordButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Success`
+  String get successTitle {
+    return Intl.message('Success', name: 'successTitle', desc: '', args: []);
+  }
+
+  /// `Password changed successfully.`
+  String get passwordChangedSuccess {
+    return Intl.message(
+      'Password changed successfully.',
+      name: 'passwordChangedSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email Verification`
+  String get appTitle {
+    return Intl.message(
+      'Email Verification',
+      name: 'appTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please check your email`
+  String get checkYourEmail {
+    return Intl.message(
+      'Please check your email',
+      name: 'checkYourEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I have confirmed`
+  String get iHaveConfirmed {
+    return Intl.message(
+      'I have confirmed',
+      name: 'iHaveConfirmed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Resend verification email`
+  String get resendVerification {
+    return Intl.message(
+      'Resend verification email',
+      name: 'resendVerification',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Verification email sent again`
+  String get emailSentAgain {
+    return Intl.message(
+      'Verification email sent again',
+      name: 'emailSentAgain',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm your email`
+  String get confirmYourEmail {
+    return Intl.message(
+      'Confirm your email',
+      name: 'confirmYourEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reset Password`
+  String get resetPasswordTitle {
+    return Intl.message(
+      'Reset Password',
+      name: 'resetPasswordTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send Email`
+  String get sendEmailButton {
+    return Intl.message(
+      'Send Email',
+      name: 'sendEmailButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter your email.`
+  String get emailIsEmptyError {
+    return Intl.message(
+      'Please enter your email.',
+      name: 'emailIsEmptyError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email has been sent.`
+  String get emailSentSuccess {
+    return Intl.message(
+      'Email has been sent.',
+      name: 'emailSentSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `OK`
+  String get okButton {
+    return Intl.message('OK', name: 'okButton', desc: '', args: []);
+  }
+
+  /// `Yo, {username}`
+  String greeting(Object username) {
+    return Intl.message(
+      'Yo, $username',
+      name: 'greeting',
+      desc: '',
+      args: [username],
+    );
+  }
+
+  /// `Greeting with username`
+  String get greetingDescription {
+    return Intl.message(
+      'Greeting with username',
+      name: 'greetingDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This email is already registered.`
+  String get emailAlreadyRegistered {
+    return Intl.message(
+      'This email is already registered.',
+      name: 'emailAlreadyRegistered',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirmation sent to {email}.`
+  String confirmationSent(Object email) {
+    return Intl.message(
+      'Confirmation sent to $email.',
+      name: 'confirmationSent',
+      desc: '',
+      args: [email],
+    );
+  }
+
+  /// `Error: Current user not found.`
+  String get userNotFoundError {
+    return Intl.message(
+      'Error: Current user not found.',
+      name: 'userNotFoundError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error sending confirmation: {error}`
+  String confirmationSendError(Object error) {
+    return Intl.message(
+      'Error sending confirmation: $error',
+      name: 'confirmationSendError',
+      desc: '',
+      args: [error],
+    );
+  }
+
+  /// `Email`
+  String get emailLabel {
+    return Intl.message('Email', name: 'emailLabel', desc: '', args: []);
+  }
+
+  /// `Confirm`
+  String get confirmButton {
+    return Intl.message('Confirm', name: 'confirmButton', desc: '', args: []);
+  }
+
+  /// `Change Password`
+  String get changePassword {
+    return Intl.message(
+      'Change Password',
+      name: 'changePassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Settings`
+  String get settings {
+    return Intl.message('Settings', name: 'settings', desc: '', args: []);
+  }
+
+  /// `Add Animal`
+  String get addAnimal {
+    return Intl.message('Add Animal', name: 'addAnimal', desc: '', args: []);
+  }
+
+  /// `Tag Number`
+  String get tagNumber {
+    return Intl.message('Tag Number', name: 'tagNumber', desc: '', args: []);
+  }
+
+  /// `Enter tag number`
+  String get enterTagNumber {
+    return Intl.message(
+      'Enter tag number',
+      name: 'enterTagNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Gender`
+  String get gender {
+    return Intl.message('Gender', name: 'gender', desc: '', args: []);
+  }
+
+  /// `Enter gender`
+  String get enterGender {
+    return Intl.message(
+      'Enter gender',
+      name: 'enterGender',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Breed`
+  String get breed {
+    return Intl.message('Breed', name: 'breed', desc: '', args: []);
+  }
+
+  /// `Select breed`
+  String get selectBreed {
+    return Intl.message(
+      'Select breed',
+      name: 'selectBreed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Birth Date`
+  String get birthDate {
+    return Intl.message('Birth Date', name: 'birthDate', desc: '', args: []);
+  }
+
+  /// `Select birth date`
+  String get selectBirthDate {
+    return Intl.message(
+      'Select birth date',
+      name: 'selectBirthDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Weight (kg)`
+  String get weight {
+    return Intl.message('Weight (kg)', name: 'weight', desc: '', args: []);
+  }
+
+  /// `Enter weight`
+  String get enterWeight {
+    return Intl.message(
+      'Enter weight',
+      name: 'enterWeight',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Health Status`
+  String get healthStatus {
+    return Intl.message(
+      'Health Status',
+      name: 'healthStatus',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select health status`
+  String get selectHealthStatus {
+    return Intl.message(
+      'Select health status',
+      name: 'selectHealthStatus',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Medical Card`
+  String get medicalCard {
+    return Intl.message(
+      'Medical Card',
+      name: 'medicalCard',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter medical card`
+  String get enterMedicalCard {
+    return Intl.message(
+      'Enter medical card',
+      name: 'enterMedicalCard',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Animal`
+  String get addAnimalButton {
+    return Intl.message(
+      'Add Animal',
+      name: 'addAnimalButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please fill in all fields`
+  String get fillAllFields {
+    return Intl.message(
+      'Please fill in all fields',
+      name: 'fillAllFields',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Animal added successfully`
+  String get animalAddedSuccessfully {
+    return Intl.message(
+      'Animal added successfully',
+      name: 'animalAddedSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error while adding animal`
+  String get errorAddingAnimal {
+    return Intl.message(
+      'Error while adding animal',
+      name: 'errorAddingAnimal',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `User not authorized`
+  String get userNotAuthorized {
+    return Intl.message(
+      'User not authorized',
+      name: 'userNotAuthorized',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Herd not found`
+  String get herdNotFound {
+    return Intl.message(
+      'Herd not found',
+      name: 'herdNotFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Herd cattle type not specified`
+  String get herdCattleTypeNotSpecified {
+    return Intl.message(
+      'Herd cattle type not specified',
+      name: 'herdCattleTypeNotSpecified',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error loading breeds`
+  String get errorLoadingBreeds {
+    return Intl.message(
+      'Error loading breeds',
+      name: 'errorLoadingBreeds',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error loading health statuses`
+  String get errorLoadingHealthStatuses {
+    return Intl.message(
+      'Error loading health statuses',
+      name: 'errorLoadingHealthStatuses',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create Herd`
+  String get createStado {
+    return Intl.message('Create Herd', name: 'createStado', desc: '', args: []);
+  }
+
+  /// `Herd Number`
+  String get stadoNumber {
+    return Intl.message('Herd Number', name: 'stadoNumber', desc: '', args: []);
+  }
+
+  /// `Enter a unique herd number`
+  String get enterStadoNumber {
+    return Intl.message(
+      'Enter a unique herd number',
+      name: 'enterStadoNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select cattle type`
+  String get selectCattleType {
+    return Intl.message(
+      'Select cattle type',
+      name: 'selectCattleType',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cattle Type`
+  String get cattleType {
+    return Intl.message('Cattle Type', name: 'cattleType', desc: '', args: []);
+  }
+
+  /// `Saving...`
+  String get saving {
+    return Intl.message('Saving...', name: 'saving', desc: '', args: []);
+  }
+
+  /// `Please fill all fields`
+  String get fieldRequired {
+    return Intl.message(
+      'Please fill all fields',
+      name: 'fieldRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Herd created successfully!`
+  String get stadoCreated {
+    return Intl.message(
+      'Herd created successfully!',
+      name: 'stadoCreated',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error creating herd`
+  String get createHerdError {
+    return Intl.message(
+      'Error creating herd',
+      name: 'createHerdError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Table`
+  String get table {
+    return Intl.message('Table', name: 'table', desc: '', args: []);
+  }
+
+  /// `Add`
+  String get add {
+    return Intl.message('Add', name: 'add', desc: '', args: []);
+  }
+
+  /// `Passport`
+  String get techPassport {
+    return Intl.message('Passport', name: 'techPassport', desc: '', args: []);
+  }
+
+  /// `Technical passport`
+  String get techPassportHeader {
+    return Intl.message(
+      'Technical passport',
+      name: 'techPassportHeader',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `herd {stadoName}`
+  String herdTitle(Object stadoName) {
+    return Intl.message(
+      'herd $stadoName',
+      name: 'herdTitle',
+      desc: '',
+      args: [stadoName],
+    );
+  }
+
+  /// `How to use`
+  String get instructionTitle {
+    return Intl.message(
+      'How to use',
+      name: 'instructionTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Introduction`
+  String get instructionCardIntroductionTitle {
+    return Intl.message(
+      'Introduction',
+      name: 'instructionCardIntroductionTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Description of how to get started with the app.`
+  String get instructionCardIntroductionDescription {
+    return Intl.message(
+      'Description of how to get started with the app.',
+      name: 'instructionCardIntroductionDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Main Screen`
+  String get instructionCardMainScreenTitle {
+    return Intl.message(
+      'Main Screen',
+      name: 'instructionCardMainScreenTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Description of the main screen and features.`
+  String get instructionCardMainScreenDescription {
+    return Intl.message(
+      'Description of the main screen and features.',
+      name: 'instructionCardMainScreenDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Adding Cattle`
+  String get instructionCardAddCattleTitle {
+    return Intl.message(
+      'Adding Cattle',
+      name: 'instructionCardAddCattleTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `How to add cattle to the system.`
+  String get instructionCardAddCattleDescription {
+    return Intl.message(
+      'How to add cattle to the system.',
+      name: 'instructionCardAddCattleDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tech Passport / Adding`
+  String get instructionCardTechPassportTitle {
+    return Intl.message(
+      'Tech Passport / Adding',
+      name: 'instructionCardTechPassportTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `How to add the animal's tech passport.`
+  String get instructionCardTechPassportDescription {
+    return Intl.message(
+      'How to add the animal\'s tech passport.',
+      name: 'instructionCardTechPassportDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Animals Table`
+  String get instructionCardAnimalsTableTitle {
+    return Intl.message(
+      'Animals Table',
+      name: 'instructionCardAnimalsTableTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `How to track animals in the table.`
+  String get instructionCardAnimalsTableDescription {
+    return Intl.message(
+      'How to track animals in the table.',
+      name: 'instructionCardAnimalsTableDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Chat Bot`
+  String get instructionCardChatBotTitle {
+    return Intl.message(
+      'Chat Bot',
+      name: 'instructionCardChatBotTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `How to use the chat bot for communication.`
+  String get instructionCardChatBotDescription {
+    return Intl.message(
+      'How to use the chat bot for communication.',
+      name: 'instructionCardChatBotDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Feed Warehouse`
+  String get instructionCardFeedWarehouseTitle {
+    return Intl.message(
+      'Feed Warehouse',
+      name: 'instructionCardFeedWarehouseTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `How to add feed to the warehouse.`
+  String get instructionCardFeedWarehouseDescription {
+    return Intl.message(
+      'How to add feed to the warehouse.',
+      name: 'instructionCardFeedWarehouseDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Weight Tracking`
+  String get instructionCardWeightTrackingTitle {
+    return Intl.message(
+      'Weight Tracking',
+      name: 'instructionCardWeightTrackingTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `How to track changes in animal weight.`
+  String get instructionCardWeightTrackingDescription {
+    return Intl.message(
+      'How to track changes in animal weight.',
+      name: 'instructionCardWeightTrackingDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Duration: `
+  String get instructionCardDurationLabel {
+    return Intl.message(
+      'Duration: ',
+      name: 'instructionCardDurationLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `15 minutes`
+  String get duration15min {
+    return Intl.message(
+      '15 minutes',
+      name: 'duration15min',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `20 minutes`
+  String get duration20min {
+    return Intl.message(
+      '20 minutes',
+      name: 'duration20min',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `5 minutes`
+  String get duration5min {
+    return Intl.message('5 minutes', name: 'duration5min', desc: '', args: []);
+  }
+
+  /// `4 minutes`
+  String get duration4min {
+    return Intl.message('4 minutes', name: 'duration4min', desc: '', args: []);
+  }
+
+  /// `CYCLONE — your digital assistant in farm management`
+  String get introTitle {
+    return Intl.message(
+      'CYCLONE — your digital assistant in farm management',
+      name: 'introTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `CYCLONE is an app that helps farmers simplify feeding management, track livestock growth, and monitor supplies. Everything in one place, without paperwork hassle.`
+  String get dividerDescription {
+    return Intl.message(
+      'CYCLONE is an app that helps farmers simplify feeding management, track livestock growth, and monitor supplies. Everything in one place, without paperwork hassle.',
+      name: 'dividerDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Where to start?`
+  String get startQuestion {
+    return Intl.message(
+      'Where to start?',
+      name: 'startQuestion',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `1. Choose the interface language — Russian or English.`
+  String get bullet1 {
+    return Intl.message(
+      '1. Choose the interface language — Russian or English.',
+      name: 'bullet1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `2. Register using your email and password.`
+  String get bullet2 {
+    return Intl.message(
+      '2. Register using your email and password.',
+      name: 'bullet2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `3. Or sign in with your Google account — quick and convenient.`
+  String get bullet3 {
+    return Intl.message(
+      '3. Or sign in with your Google account — quick and convenient.',
+      name: 'bullet3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `4. After logging in, you'll reach the main dashboard where you can start working: add data, monitor statistics, and get analytics.`
+  String get bullet4 {
+    return Intl.message(
+      '4. After logging in, you\'ll reach the main dashboard where you can start working: add data, monitor statistics, and get analytics.',
+      name: 'bullet4',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `CYCLONE makes farming understandable, efficient, and modern. All management is at your fingertips.`
+  String get closingStatement {
+    return Intl.message(
+      'CYCLONE makes farming understandable, efficient, and modern. All management is at your fingertips.',
+      name: 'closingStatement',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Finance`
+  String get financeTitle {
+    return Intl.message('Finance', name: 'financeTitle', desc: '', args: []);
+  }
+
+  /// `Change Card`
+  String get changeCard {
+    return Intl.message('Change Card', name: 'changeCard', desc: '', args: []);
+  }
+
+  /// `Delete Card`
+  String get deleteCard {
+    return Intl.message('Delete Card', name: 'deleteCard', desc: '', args: []);
+  }
+
+  /// `Add Card`
+  String get addingTitle {
+    return Intl.message('Add Card', name: 'addingTitle', desc: '', args: []);
+  }
+
+  /// `Card Name`
+  String get cardNameLabel {
+    return Intl.message('Card Name', name: 'cardNameLabel', desc: '', args: []);
+  }
+
+  /// `Name`
+  String get cardNameHint {
+    return Intl.message('Name', name: 'cardNameHint', desc: '', args: []);
+  }
+
+  /// `Card Number`
+  String get cardNumberLabel {
+    return Intl.message(
+      'Card Number',
+      name: 'cardNumberLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `XXXX   XXXX   XXXX   XXXX`
+  String get cardNumberHint {
+    return Intl.message(
+      'XXXX   XXXX   XXXX   XXXX',
+      name: 'cardNumberHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Expiry Date`
+  String get expiryDateLabel {
+    return Intl.message(
+      'Expiry Date',
+      name: 'expiryDateLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `MM/YY`
+  String get expiryDateHint {
+    return Intl.message('MM/YY', name: 'expiryDateHint', desc: '', args: []);
+  }
+
+  /// `Security Code`
+  String get cvvLabel {
+    return Intl.message('Security Code', name: 'cvvLabel', desc: '', args: []);
+  }
+
+  /// `CVV`
+  String get cvvHint {
+    return Intl.message('CVV', name: 'cvvHint', desc: '', args: []);
+  }
+
+  /// `Postal Code`
+  String get postalCodeLabel {
+    return Intl.message(
+      'Postal Code',
+      name: 'postalCodeLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `XXXX`
+  String get postalCodeHint {
+    return Intl.message('XXXX', name: 'postalCodeHint', desc: '', args: []);
+  }
+
+  /// `Add`
+  String get addButton {
+    return Intl.message('Add', name: 'addButton', desc: '', args: []);
+  }
+
+  /// `Feed Table`
+  String get tableTitle {
+    return Intl.message('Feed Table', name: 'tableTitle', desc: '', args: []);
+  }
+
+  /// `herd`
+  String get herd {
+    return Intl.message('herd', name: 'herd', desc: '', args: []);
+  }
+
+  /// `feed unit`
+  String get feedUnit {
+    return Intl.message('feed unit', name: 'feedUnit', desc: '', args: []);
+  }
+
+  /// `kg`
+  String get kg {
+    return Intl.message('kg', name: 'kg', desc: '', args: []);
+  }
+
+  /// `Edit {feedName}`
+  String editDialog_title(Object feedName) {
+    return Intl.message(
+      'Edit $feedName',
+      name: 'editDialog_title',
+      desc: '',
+      args: [feedName],
+    );
+  }
+
+  /// `Enter new value`
+  String get editDialog_label {
+    return Intl.message(
+      'Enter new value',
+      name: 'editDialog_label',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter a number`
+  String get editDialog_hint {
+    return Intl.message(
+      'Enter a number',
+      name: 'editDialog_hint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get editDialog_cancel {
+    return Intl.message(
+      'Cancel',
+      name: 'editDialog_cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save`
+  String get editDialog_save {
+    return Intl.message('Save', name: 'editDialog_save', desc: '', args: []);
+  }
+
+  /// `Please enter a valid number`
+  String get editDialog_invalidNumber {
+    return Intl.message(
+      'Please enter a valid number',
+      name: 'editDialog_invalidNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Storage not found`
+  String get editDialog_noStorage {
+    return Intl.message(
+      'Storage not found',
+      name: 'editDialog_noStorage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Not enough feed in storage`
+  String get editDialog_insufficientFeed {
+    return Intl.message(
+      'Not enough feed in storage',
+      name: 'editDialog_insufficientFeed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error saving data`
+  String get editDialog_saveError {
+    return Intl.message(
+      'Error saving data',
+      name: 'editDialog_saveError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Age`
+  String get ageLabel {
+    return Intl.message('Age', name: 'ageLabel', desc: '', args: []);
+  }
+
+  /// `Weight`
+  String get weightLabel {
+    return Intl.message('Weight', name: 'weightLabel', desc: '', args: []);
+  }
+
+  /// `Breed`
+  String get breedLabel {
+    return Intl.message('Breed', name: 'breedLabel', desc: '', args: []);
+  }
+
+  /// `Health`
+  String get healthLabel {
+    return Intl.message('Health', name: 'healthLabel', desc: '', args: []);
+  }
+
+  /// `Good`
+  String get healthGood {
+    return Intl.message('Good', name: 'healthGood', desc: '', args: []);
+  }
+
+  /// `Medium`
+  String get healthMedium {
+    return Intl.message('Medium', name: 'healthMedium', desc: '', args: []);
+  }
+
+  /// `Poor`
+  String get healthPoor {
+    return Intl.message('Poor', name: 'healthPoor', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

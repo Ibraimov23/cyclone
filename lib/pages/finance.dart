@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 
+import '../generated/l10n.dart';
+
 class Finance extends StatefulWidget {
   const Finance({super.key});
 
@@ -34,14 +36,7 @@ class _FinanceState extends State<Finance> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                "Финансы",
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w700,
-                  color: Colors.black,
-                ),
-              ),
+              Text(S.of(context).financeTitle),
               const SizedBox(height: 25),
               SizedBox(
                 height: 190,
@@ -82,13 +77,7 @@ class _FinanceState extends State<Finance> {
                         padding: const EdgeInsets.symmetric(vertical: 13),
                       ),
                       onPressed: () {},
-                      child: const Text(
-                        'Изменить карту',
-                        style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
+                      child: Text(S.of(context).changeCard),
                     ),
                   ),
                   const SizedBox(width: 2),
@@ -103,8 +92,8 @@ class _FinanceState extends State<Finance> {
                         padding: const EdgeInsets.symmetric(vertical: 13),
                       ),
                       onPressed: () {},
-                      child: const Text(
-                        'Удалить карту',
+                      child: Text(
+                        S.of(context).deleteCard,
                         style: TextStyle(
                           fontWeight: FontWeight.w500,
                           fontSize: 12,

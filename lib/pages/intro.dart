@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../generated/l10n.dart';
 import '../widget/custom_app-bar.dart';
 
 class Intro extends StatefulWidget {
@@ -18,7 +19,7 @@ class _IntroState extends State<Intro> {
     return Scaffold(
       backgroundColor: const Color(0xFFE7E7E7),
       appBar: CustomAppBar(
-        title: "Привет, ${widget.username}!",
+        title: S.of(context).greeting(widget.username),
         onMenuTap: () {
           Scaffold.of(context).openEndDrawer();
         },
@@ -36,9 +37,9 @@ class _IntroState extends State<Intro> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'CYCLONE — ваш цифровой помощник в управлении фермой',
-                style: TextStyle(
+              Text(
+                S.of(context).introTitle,
+                style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                   color: Colors.black87,
@@ -52,7 +53,7 @@ class _IntroState extends State<Intro> {
               ),
               const SizedBox(height: 20),
               Text(
-                'CYCLONE — это приложение, которое помогает фермерам упростить управление кормлением, учитывать рост поголовья и следить за запасами. Всё в одном месте, без бумажной рутины.',
+                S.of(context).dividerDescription,
                 style: TextStyle(
                   fontSize: 15,
                   height: 1.5,
@@ -61,7 +62,7 @@ class _IntroState extends State<Intro> {
               ),
               const SizedBox(height: 20),
               Text(
-                'С чего начать?',
+                S.of(context).startQuestion,
                 style: TextStyle(
                   fontSize: 17,
                   fontWeight: FontWeight.bold,
@@ -69,14 +70,10 @@ class _IntroState extends State<Intro> {
                 ),
               ),
               const SizedBox(height: 12),
-              _buildBulletPoint(
-                  '1. Выберите язык интерфейса — русский или английский.'),
-              _buildBulletPoint(
-                  '2. Зарегистрируйтесь с помощью электронной почты и пароля.'),
-              _buildBulletPoint(
-                  '3. Или войдите через аккаунт Google — быстро и удобно.'),
-              _buildBulletPoint(
-                  '4. После входа вы попадёте на главную панель, где сможете начать работу: добавлять данные, следить за статистикой и получать аналитику.'),
+              _buildBulletPoint(S.of(context).bullet1),
+              _buildBulletPoint(S.of(context).bullet2),
+              _buildBulletPoint(S.of(context).bullet3),
+              _buildBulletPoint(S.of(context).bullet4),
               const SizedBox(height: 20),
               Center(
                 child: ClipRRect(
@@ -90,7 +87,7 @@ class _IntroState extends State<Intro> {
               ),
               const SizedBox(height: 20),
               Text(
-                'CYCLONE делает фермерство понятным, эффективным и современным. Всё управление — у вас под рукой.',
+                S.of(context).closingStatement,
                 style: TextStyle(
                   fontSize: 15,
                   height: 1.5,
