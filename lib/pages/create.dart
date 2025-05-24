@@ -180,7 +180,7 @@ class _CreateState extends State<CreateStado> {
               repeat: ImageRepeat.repeat,
             ),
           ),
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

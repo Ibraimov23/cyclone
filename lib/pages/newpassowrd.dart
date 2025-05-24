@@ -69,7 +69,7 @@ class _NewPasswordState extends State<NewPassword> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.grey.shade300,
+        backgroundColor: Colors.white,
         leading: Container(
           margin: EdgeInsets.all(8),
           decoration:
@@ -78,7 +78,7 @@ class _NewPasswordState extends State<NewPassword> {
               data: IconThemeData(color: Colors.white), child: BackButton()),
         ),
       ),
-      backgroundColor: Colors.grey.shade300,
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Container(
           decoration: const BoxDecoration(
@@ -89,7 +89,7 @@ class _NewPasswordState extends State<NewPassword> {
             ),
           ),
           child: Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -110,12 +110,26 @@ class _NewPasswordState extends State<NewPassword> {
                     filled: true,
                     fillColor: Colors.white,
                     hintText: loc.enterNewPassword,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      borderSide: BorderSide.none,
-                    ),
                     contentPadding: const EdgeInsets.symmetric(
-                        vertical: 19, horizontal: 17),
+                        vertical: 19, horizontal: 24),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                      borderSide:
+                          BorderSide(color: Colors.grey.shade400, width: 1.5),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                      borderSide:
+                          BorderSide(color: Color(0xFF90010A), width: 2.5),
+                    ),
+                    errorBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                      borderSide: BorderSide(color: Colors.red, width: 2),
+                    ),
+                    focusedErrorBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                      borderSide: BorderSide(color: Colors.redAccent, width: 2),
+                    ),
                   ),
                   style: const TextStyle(
                     fontSize: 14,
@@ -132,12 +146,26 @@ class _NewPasswordState extends State<NewPassword> {
                     filled: true,
                     fillColor: Colors.white,
                     hintText: loc.enterPassword,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      borderSide: BorderSide.none,
-                    ),
                     contentPadding: const EdgeInsets.symmetric(
-                        vertical: 19, horizontal: 17),
+                        vertical: 19, horizontal: 24),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                      borderSide:
+                          BorderSide(color: Colors.grey.shade400, width: 1.5),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                      borderSide:
+                          BorderSide(color: Color(0xFF90010A), width: 2.5),
+                    ),
+                    errorBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                      borderSide: BorderSide(color: Colors.red, width: 2),
+                    ),
+                    focusedErrorBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                      borderSide: BorderSide(color: Colors.redAccent, width: 2),
+                    ),
                   ),
                   style: const TextStyle(
                     fontSize: 14,
@@ -145,7 +173,7 @@ class _NewPasswordState extends State<NewPassword> {
                     color: Colors.black,
                   ),
                 ),
-                const SizedBox(height: 400),
+                const SizedBox(height: 350),
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(

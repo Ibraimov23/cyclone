@@ -71,6 +71,8 @@ class _SteamState extends State<Steam> {
 
   Widget _buildStorageTable(Map<String, dynamic> data) {
     final loc = S.of(context);
+    const horizontalPadding = 32.0;
+
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -95,7 +97,8 @@ class _SteamState extends State<Steam> {
                         BorderRadius.only(topLeft: Radius.circular(12)),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.all(12),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: horizontalPadding, vertical: 12),
                     child: Text(
                       loc.nameColumn,
                       style: const TextStyle(
@@ -103,6 +106,7 @@ class _SteamState extends State<Steam> {
                         fontSize: 20,
                         fontWeight: FontWeight.w600,
                       ),
+                      textAlign: TextAlign.left,
                     ),
                   ),
                 ),
@@ -115,7 +119,8 @@ class _SteamState extends State<Steam> {
                         BorderRadius.only(topRight: Radius.circular(12)),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.all(12),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: horizontalPadding, vertical: 12),
                     child: Text(
                       loc.valueColumn,
                       style: const TextStyle(
@@ -123,6 +128,7 @@ class _SteamState extends State<Steam> {
                         fontSize: 20,
                         fontWeight: FontWeight.w600,
                       ),
+                      textAlign: TextAlign.right,
                     ),
                   ),
                 ),
@@ -135,7 +141,8 @@ class _SteamState extends State<Steam> {
             final value = data[key]?.toString() ?? '0';
 
             return Container(
-              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+              padding: EdgeInsets.symmetric(
+                  vertical: 12, horizontal: horizontalPadding),
               decoration: const BoxDecoration(
                 border: Border(
                   top: BorderSide(color: Color(0xFFEEEEEE)),
@@ -148,6 +155,7 @@ class _SteamState extends State<Steam> {
                       label,
                       style: const TextStyle(
                           fontSize: 16, fontWeight: FontWeight.w500),
+                      textAlign: TextAlign.left,
                     ),
                   ),
                   Expanded(
@@ -162,13 +170,14 @@ class _SteamState extends State<Steam> {
                         }
                       },
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           Text(
                             loc.unitKg(value),
                             style: const TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.w500),
                           ),
+                          const SizedBox(width: 8),
                           SvgPicture.asset('assets/icons/pen.svg'),
                         ],
                       ),

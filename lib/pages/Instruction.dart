@@ -38,8 +38,7 @@ class _InstructionState extends State<Instruction> {
         ),
         child: SingleChildScrollView(
           child: Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+            padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16),
             child: Center(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

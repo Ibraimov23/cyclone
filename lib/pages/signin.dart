@@ -109,7 +109,7 @@ class _SignInState extends State<SignIn> {
     final loc = S.of(context);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.grey.shade300,
+        backgroundColor: Colors.white,
         leading: Container(
           margin: const EdgeInsets.all(8),
           decoration: const BoxDecoration(
@@ -122,9 +122,9 @@ class _SignInState extends State<SignIn> {
           ),
         ),
       ),
-      backgroundColor: Colors.grey.shade300,
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -144,13 +144,24 @@ class _SignInState extends State<SignIn> {
                 filled: true,
                 fillColor: Colors.white,
                 hintText: loc.enterYourEmail,
-                border: OutlineInputBorder(
+                contentPadding:
+                    const EdgeInsets.symmetric(vertical: 19, horizontal: 24),
+                enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(15),
-                  borderSide: BorderSide.none,
+                  borderSide:
+                      BorderSide(color: Colors.grey.shade400, width: 1.5),
                 ),
-                contentPadding: const EdgeInsets.symmetric(
-                  vertical: 19,
-                  horizontal: 17,
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(15),
+                  borderSide: BorderSide(color: Color(0xFF90010A), width: 2.5),
+                ),
+                errorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(15),
+                  borderSide: BorderSide(color: Colors.red, width: 2),
+                ),
+                focusedErrorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(15),
+                  borderSide: BorderSide(color: Colors.redAccent, width: 2),
                 ),
               ),
               style: const TextStyle(
@@ -167,13 +178,24 @@ class _SignInState extends State<SignIn> {
                 filled: true,
                 fillColor: Colors.white,
                 hintText: loc.enterPassword,
-                border: OutlineInputBorder(
+                contentPadding:
+                    const EdgeInsets.symmetric(vertical: 19, horizontal: 24),
+                enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(15),
-                  borderSide: BorderSide.none,
+                  borderSide:
+                      BorderSide(color: Colors.grey.shade400, width: 1.5),
                 ),
-                contentPadding: const EdgeInsets.symmetric(
-                  vertical: 19,
-                  horizontal: 17,
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(15),
+                  borderSide: BorderSide(color: Color(0xFF90010A), width: 2.5),
+                ),
+                errorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(15),
+                  borderSide: BorderSide(color: Colors.red, width: 2),
+                ),
+                focusedErrorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(15),
+                  borderSide: BorderSide(color: Colors.redAccent, width: 2),
                 ),
               ),
               style: const TextStyle(
@@ -190,13 +212,24 @@ class _SignInState extends State<SignIn> {
                 filled: true,
                 fillColor: Colors.white,
                 hintText: loc.confirmPassword,
-                border: OutlineInputBorder(
+                contentPadding:
+                    const EdgeInsets.symmetric(vertical: 19, horizontal: 24),
+                enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(15),
-                  borderSide: BorderSide.none,
+                  borderSide:
+                      BorderSide(color: Colors.grey.shade400, width: 1.5),
                 ),
-                contentPadding: const EdgeInsets.symmetric(
-                  vertical: 19,
-                  horizontal: 17,
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(15),
+                  borderSide: BorderSide(color: Color(0xFF90010A), width: 2.5),
+                ),
+                errorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(15),
+                  borderSide: BorderSide(color: Colors.red, width: 2),
+                ),
+                focusedErrorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(15),
+                  borderSide: BorderSide(color: Colors.redAccent, width: 2),
                 ),
               ),
               style: const TextStyle(
@@ -247,12 +280,13 @@ class _SignInState extends State<SignIn> {
                   style: IconButton.styleFrom(
                     backgroundColor: Colors.white,
                     padding: const EdgeInsets.symmetric(
-                      vertical: 18,
-                      horizontal: 40,
-                    ),
+                        vertical: 18, horizontal: 40),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15),
                     ),
+                    side: BorderSide(color: Colors.grey.shade300),
+                    shadowColor: Colors.black12,
+                    elevation: 3,
                   ),
                   icon: SvgPicture.asset('assets/Social/facebook.svg'),
                 ),
@@ -268,12 +302,13 @@ class _SignInState extends State<SignIn> {
                   style: IconButton.styleFrom(
                     backgroundColor: Colors.white,
                     padding: const EdgeInsets.symmetric(
-                      vertical: 18,
-                      horizontal: 40,
-                    ),
+                        vertical: 18, horizontal: 40),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15),
                     ),
+                    side: BorderSide(color: Colors.grey.shade300),
+                    shadowColor: Colors.black12,
+                    elevation: 3,
                   ),
                   icon: SvgPicture.asset('assets/Social/Google.svg'),
                 ),
@@ -283,12 +318,13 @@ class _SignInState extends State<SignIn> {
                   style: IconButton.styleFrom(
                     backgroundColor: Colors.white,
                     padding: const EdgeInsets.symmetric(
-                      vertical: 18,
-                      horizontal: 40,
-                    ),
+                        vertical: 18, horizontal: 40),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15),
                     ),
+                    side: BorderSide(color: Colors.grey.shade300),
+                    shadowColor: Colors.black12,
+                    elevation: 3,
                   ),
                   icon: SvgPicture.asset('assets/Social/whatsaap.svg'),
                 ),

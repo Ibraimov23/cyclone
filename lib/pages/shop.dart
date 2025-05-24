@@ -47,7 +47,7 @@ class _ShopState extends State<Shop> {
         ),
         child: SafeArea(
           child: SingleChildScrollView(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -93,7 +93,7 @@ class _ShopState extends State<Shop> {
                     crossAxisCount: 1,
                     crossAxisSpacing: 16.0,
                     mainAxisSpacing: 16.0,
-                    childAspectRatio: lang == 'ru' ? 0.871 : 0.877,
+                    childAspectRatio: lang == 'ru' ? 0.781 : 0.788,
                   ),
                   itemCount: 1,
                   itemBuilder: (context, index) {

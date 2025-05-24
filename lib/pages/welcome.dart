@@ -12,7 +12,7 @@ class Welcome extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.grey.shade300,
+        backgroundColor: Colors.white,
         leading: Container(
           margin: const EdgeInsets.all(8),
           decoration: const BoxDecoration(
@@ -27,7 +27,7 @@ class Welcome extends StatelessWidget {
           ),
         ),
       ),
-      backgroundColor: Colors.grey.shade300,
+      backgroundColor: Colors.white,
       body: Center(
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 20),

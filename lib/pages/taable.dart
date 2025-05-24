@@ -87,12 +87,10 @@ class _TableScreenState extends State<TableScreen> {
   static const _herdNumberStyle = TextStyle(
     color: Colors.black,
     fontSize: 24,
-    fontFamily: 'Montserat',
     fontWeight: FontWeight.w500,
   );
   static const _exportButtonStyle = TextStyle(
     color: Colors.white,
-    fontFamily: 'Montserat',
     fontSize: 24,
   );
 
