@@ -40,6 +40,22 @@ class _CreateState extends State<CreateStado> {
     }
   }
 
+  String getCattleTypeLabel(BuildContext context, String type) {
+    final loc = S.of(context);
+    switch (type.toLowerCase()) {
+      case 'быки':
+        return loc.bull;
+      case 'коровы':
+        return loc.cow;
+      case 'козлы':
+        return loc.goat;
+      case 'овцы':
+        return loc.sheep;
+      default:
+        return type;
+    }
+  }
+
   Future<void> _saveStado() async {
     if (_stadoNameController.text.isEmpty || selectedCattleType == null) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -228,7 +244,7 @@ class _CreateState extends State<CreateStado> {
                   items: cattleTypes.map((String cattle) {
                     return DropdownMenuItem<String>(
                       value: cattle,
-                      child: Text(cattle),
+                      child: Text(getCattleTypeLabel(context, cattle)),
                     );
                   }).toList(),
                   onChanged: (String? newValue) {

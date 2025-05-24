@@ -93,6 +93,21 @@ class _HomeState extends State<Home> {
 
     return Scaffold(
       backgroundColor: const Color(0xFFE7E7E7),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          bool? created =
+              await Navigator.pushNamed(context, '/create') as bool?;
+          if (created == true) {
+            _loadData();
+          }
+        },
+        backgroundColor: const Color(0xFF90010A),
+        child: const Icon(Icons.add, size: 40, color: Colors.white),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15),
+        ),
+        elevation: 6,
+      ),
       body: RefreshIndicator(
         onRefresh: _refreshData,
         child: Container(
@@ -170,41 +185,6 @@ class _HomeState extends State<Home> {
                     },
                   ),
                   const SizedBox(height: 30),
-                  Align(
-                    alignment: Alignment.center,
-                    child: GestureDetector(
-                      onTap: () async {
-                        bool? created =
-                            await Navigator.pushNamed(context, '/create')
-                                as bool?;
-                        if (created == true) {
-                          _loadData();
-                        }
-                      },
-                      child: Container(
-                        height: 80,
-                        width: 80,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15.0),
-                          color: const Color(0xFF90010A),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.25),
-                              spreadRadius: 0,
-                              blurRadius: 4,
-                              offset: const Offset(4, 4),
-                            ),
-                          ],
-                        ),
-                        child: const Icon(
-                          Icons.add,
-                          size: 60,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
                 ],
               );
             },

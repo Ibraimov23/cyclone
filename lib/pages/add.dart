@@ -52,7 +52,7 @@ class _CreateState extends State<AddAnimal> {
       final currentCattleType = stadoSnapshot.data()?['cattleType'];
 
       if (currentCattleType == null) {
-        print(S.of(context)!.herdCattleTypeNotSpecified);
+        print(S.of(context).herdCattleTypeNotSpecified);
         return;
       }
 
@@ -70,6 +70,47 @@ class _CreateState extends State<AddAnimal> {
     } catch (e) {
       print("${S.of(context).errorLoadingBreeds}: $e");
     }
+  }
+
+  String translateHealthStatus(BuildContext context, String status) {
+    switch (status.toLowerCase()) {
+      case 'хорошее':
+        return S.of(context).healthGood;
+      case 'среднее':
+        return S.of(context).healthMedium;
+      case 'плохое':
+        return S.of(context).healthPoor;
+      default:
+        return status;
+    }
+  }
+
+  String localizeBreed(BuildContext context, String russianName) {
+    final localizations = S.of(context);
+    final Map<String, String> translationKeys = {
+      'Лимузин': localizations.breedLimousin,
+      'Голштинская': localizations.breedHolstein,
+      'Нубийская': localizations.breedNubian,
+      'Симментальская': localizations.breedSimmental,
+      'Прекос': localizations.breedPrecos,
+      'Шароле': localizations.breedCharolais,
+      'Айрширская': localizations.breedAyrshire,
+      'Тексель': localizations.breedTexel,
+      'Дорпер': localizations.breedDorper,
+      'Белоголовая': localizations.breedHerefordWhitehead,
+      'Ангус': localizations.breedAngus,
+      'Черно-пестрая': localizations.breedBlackPied,
+      'Романовская': localizations.breedRomanov,
+      'Герефорд': localizations.breedHereford,
+      'Бурская': localizations.breedBoer,
+      'Тоггенбургская': localizations.breedToggenburg,
+      'Альпийская': localizations.breedAlpine,
+      'Меринос': localizations.breedMerino,
+      'Джерсейская': localizations.breedJersey,
+      'Зааненская': localizations.breedSaanen,
+    };
+
+    return translationKeys[russianName] ?? russianName;
   }
 
   Future<void> _loadHealthStatuses() async {
@@ -336,7 +377,7 @@ class _CreateState extends State<AddAnimal> {
                   items: breeds
                       .map((item) => DropdownMenuItem<String>(
                             value: item,
-                            child: Text(item),
+                            child: Text(localizeBreed(context, item)),
                           ))
                       .toList(),
                   value: selectedBreed,
@@ -450,7 +491,7 @@ class _CreateState extends State<AddAnimal> {
                   items: healthStatuses
                       .map((item) => DropdownMenuItem<String>(
                             value: item,
-                            child: Text(item),
+                            child: Text(translateHealthStatus(context, item)),
                           ))
                       .toList(),
                   value: selectedHealthStatus,

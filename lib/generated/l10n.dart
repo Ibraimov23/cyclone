@@ -2974,6 +2974,146 @@ class S {
   String get healthPoor {
     return Intl.message('Poor', name: 'healthPoor', desc: '', args: []);
   }
+
+  /// `Bulls`
+  String get bull {
+    return Intl.message('Bulls', name: 'bull', desc: '', args: []);
+  }
+
+  /// `Cows`
+  String get cow {
+    return Intl.message('Cows', name: 'cow', desc: '', args: []);
+  }
+
+  /// `Goats`
+  String get goat {
+    return Intl.message('Goats', name: 'goat', desc: '', args: []);
+  }
+
+  /// `Limousin`
+  String get breedLimousin {
+    return Intl.message('Limousin', name: 'breedLimousin', desc: '', args: []);
+  }
+
+  /// `Holstein`
+  String get breedHolstein {
+    return Intl.message('Holstein', name: 'breedHolstein', desc: '', args: []);
+  }
+
+  /// `Nubian`
+  String get breedNubian {
+    return Intl.message('Nubian', name: 'breedNubian', desc: '', args: []);
+  }
+
+  /// `Simmental`
+  String get breedSimmental {
+    return Intl.message(
+      'Simmental',
+      name: 'breedSimmental',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Precos`
+  String get breedPrecos {
+    return Intl.message('Precos', name: 'breedPrecos', desc: '', args: []);
+  }
+
+  /// `Charolais`
+  String get breedCharolais {
+    return Intl.message(
+      'Charolais',
+      name: 'breedCharolais',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ayrshire`
+  String get breedAyrshire {
+    return Intl.message('Ayrshire', name: 'breedAyrshire', desc: '', args: []);
+  }
+
+  /// `Texel`
+  String get breedTexel {
+    return Intl.message('Texel', name: 'breedTexel', desc: '', args: []);
+  }
+
+  /// `Dorper`
+  String get breedDorper {
+    return Intl.message('Dorper', name: 'breedDorper', desc: '', args: []);
+  }
+
+  /// `Hereford Whitehead`
+  String get breedHerefordWhitehead {
+    return Intl.message(
+      'Hereford Whitehead',
+      name: 'breedHerefordWhitehead',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Angus`
+  String get breedAngus {
+    return Intl.message('Angus', name: 'breedAngus', desc: '', args: []);
+  }
+
+  /// `Black Pied`
+  String get breedBlackPied {
+    return Intl.message(
+      'Black Pied',
+      name: 'breedBlackPied',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Romanov`
+  String get breedRomanov {
+    return Intl.message('Romanov', name: 'breedRomanov', desc: '', args: []);
+  }
+
+  /// `Hereford`
+  String get breedHereford {
+    return Intl.message('Hereford', name: 'breedHereford', desc: '', args: []);
+  }
+
+  /// `Boer`
+  String get breedBoer {
+    return Intl.message('Boer', name: 'breedBoer', desc: '', args: []);
+  }
+
+  /// `Toggenburg`
+  String get breedToggenburg {
+    return Intl.message(
+      'Toggenburg',
+      name: 'breedToggenburg',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Alpine`
+  String get breedAlpine {
+    return Intl.message('Alpine', name: 'breedAlpine', desc: '', args: []);
+  }
+
+  /// `Merino`
+  String get breedMerino {
+    return Intl.message('Merino', name: 'breedMerino', desc: '', args: []);
+  }
+
+  /// `Jersey`
+  String get breedJersey {
+    return Intl.message('Jersey', name: 'breedJersey', desc: '', args: []);
+  }
+
+  /// `Saanen`
+  String get breedSaanen {
+    return Intl.message('Saanen', name: 'breedSaanen', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
