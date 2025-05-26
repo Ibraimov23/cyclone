@@ -24,21 +24,23 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m1(email) => "${email} дарегине тастыктоо жөнөтүлдү.";
 
-  static String m2(feedName) => "${feedName} өзгөртүү";
+  static String m2(feedName) => "«${feedName}» жемди өчүрүүбү?";
 
-  static String m3(userEmail) =>
+  static String m3(feedName) => "${feedName} өзгөртүү";
+
+  static String m4(userEmail) =>
       "Тастыктоо шилтемеси ${userEmail} дарегине жөнөтүлдү. Сураныч, электрондук почтаңызды текшерип, аккаунтуңузду тастыктоо үчүн шилтемени басыңыз.";
 
-  static String m4(username) => "Салам, ${username}";
+  static String m5(username) => "Салам, ${username}";
 
-  static String m5(stadoName) => "үйүр ${stadoName}";
+  static String m6(stadoName) => "үйүр ${stadoName}";
 
-  static String m6(userName) => "Салам, ${userName}!";
+  static String m7(userName) => "Салам, ${userName}!";
 
-  static String m7(currentPage, totalPages) =>
+  static String m8(currentPage, totalPages) =>
       "${currentPage}-бет ${totalPages}-беттердин ичинен";
 
-  static String m8(value) => "${value} кг";
+  static String m9(value) => "${value} кг";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -53,6 +55,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "addAnimalButton": MessageLookupByLibrary.simpleMessage("Мал кошуу"),
     "addButton": MessageLookupByLibrary.simpleMessage("Кошуу"),
     "addItemButton": MessageLookupByLibrary.simpleMessage("Элемент кошуу"),
+    "addNewFeedTitle": MessageLookupByLibrary.simpleMessage("Жаңы азык кошуу"),
     "addRecordButton": MessageLookupByLibrary.simpleMessage("Жазуу кошуу"),
     "addScreenTitle": MessageLookupByLibrary.simpleMessage(
       "Жаңы элемент кошуу",
@@ -130,7 +133,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "4. Киргенден кийин негизги панелге өтөсүз, анда иштей баштай аласыз: маалымат кошуу, статистиканы көзөмөлдөө жана аналитика алуу.",
     ),
     "bulls": MessageLookupByLibrary.simpleMessage("Бука"),
-    "cancel": MessageLookupByLibrary.simpleMessage("Жокко чыгаруу"),
+    "cancel": MessageLookupByLibrary.simpleMessage("Артка"),
     "cancelButton": MessageLookupByLibrary.simpleMessage("Жокко чыгаруу"),
     "cardAuthorLabel": MessageLookupByLibrary.simpleMessage("Автору:"),
     "cardCategoryLabel": MessageLookupByLibrary.simpleMessage("Категориясы:"),
@@ -208,7 +211,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "createStado": MessageLookupByLibrary.simpleMessage("Топту түзүү"),
     "cvvHint": MessageLookupByLibrary.simpleMessage("CVV"),
     "cvvLabel": MessageLookupByLibrary.simpleMessage("Коопсуздук коду"),
+    "delete": MessageLookupByLibrary.simpleMessage("Өчүрүү"),
     "deleteCard": MessageLookupByLibrary.simpleMessage("Картаны өчүрүү"),
+    "deleteFeedConfirmation": m2,
     "detailsCattleCount": MessageLookupByLibrary.simpleMessage("Саны"),
     "detailsCattleName": MessageLookupByLibrary.simpleMessage("Малдын номери"),
     "detailsCattleType": MessageLookupByLibrary.simpleMessage("Малдын түрү"),
@@ -254,7 +259,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "editDialog_saveError": MessageLookupByLibrary.simpleMessage(
       "Маалыматты сактоодо ката кетти",
     ),
-    "editDialog_title": m2,
+    "editDialog_title": m3,
     "emailAlreadyRegistered": MessageLookupByLibrary.simpleMessage(
       "Бул почта буга чейин катталган.",
     ),
@@ -281,7 +286,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "emailVerificationEmailSentMessage": MessageLookupByLibrary.simpleMessage(
       "Жаңы тастыктоо каты жөнөтүлдү.",
     ),
-    "emailVerificationMessage": m3,
+    "emailVerificationMessage": m4,
     "emailVerificationResendButton": MessageLookupByLibrary.simpleMessage(
       "Катты кайра жөнөтүү",
     ),
@@ -330,6 +335,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "expiryDateLabel": MessageLookupByLibrary.simpleMessage(
       "Жарактуулук мөөнөтү",
     ),
+    "feedNameHint": MessageLookupByLibrary.simpleMessage("Азыктың аты"),
     "feedSubtitle": MessageLookupByLibrary.simpleMessage(
       "Бир кап үчүн 1500 сомдон баштап.",
     ),
@@ -337,6 +343,10 @@ class MessageLookup extends MessageLookupByLibrary {
       "Мал үчүн жогорку сапаттагы тоют!",
     ),
     "feedUnit": MessageLookupByLibrary.simpleMessage("тоют бирд."),
+    "feedUnitHint": MessageLookupByLibrary.simpleMessage(
+      "1 кг үчүн тоют бирдиги",
+    ),
+    "feedValueHint": MessageLookupByLibrary.simpleMessage("Азыктың баасы"),
     "fieldCorns": MessageLookupByLibrary.simpleMessage("Жүгөрү"),
     "fieldHays": MessageLookupByLibrary.simpleMessage("Сено"),
     "fieldHerbs": MessageLookupByLibrary.simpleMessage("Чөп"),
@@ -381,7 +391,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "gender": MessageLookupByLibrary.simpleMessage("Жынысы"),
     "goat": MessageLookupByLibrary.simpleMessage("Эчкилер"),
     "goats": MessageLookupByLibrary.simpleMessage("Эчки"),
-    "greeting": m4,
+    "greeting": m5,
     "greetingDescription": MessageLookupByLibrary.simpleMessage(
       "Приветствие с именем пользователя",
     ),
@@ -395,7 +405,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Үйүрдүн малынын түрү көрсөтүлгөн эмес",
     ),
     "herdNotFound": MessageLookupByLibrary.simpleMessage("Үйүр табылган жок"),
-    "herdTitle": m5,
+    "herdTitle": m6,
     "homeCardSubtitle": MessageLookupByLibrary.simpleMessage("Малдын номери"),
     "homeExploreCategories": MessageLookupByLibrary.simpleMessage(
       "Категорияларды изилдөө",
@@ -403,7 +413,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "homeScreenTitle": MessageLookupByLibrary.simpleMessage("Башкы бет"),
     "homeTitle": MessageLookupByLibrary.simpleMessage("Менин фермам"),
     "homeViewLatest": MessageLookupByLibrary.simpleMessage("Акыркыларды көрүү"),
-    "homeWelcomeMessage": m6,
+    "homeWelcomeMessage": m7,
     "iHaveConfirmed": MessageLookupByLibrary.simpleMessage("Мен ырастадым"),
     "idNotFoundError": MessageLookupByLibrary.simpleMessage("ID табылган жок"),
     "idNumberLabel": MessageLookupByLibrary.simpleMessage("ID номери:"),
@@ -516,6 +526,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "invalidInputError": MessageLookupByLibrary.simpleMessage(
       "Жараксыз киргизүү",
     ),
+    "invalidNumber": MessageLookupByLibrary.simpleMessage("Сан киргизиңиз"),
     "itemCategoryHint": MessageLookupByLibrary.simpleMessage(
       "Категорияны тандаңыз",
     ),
@@ -580,6 +591,10 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "medicalCard": MessageLookupByLibrary.simpleMessage("Медициналык карта"),
     "nameColumn": MessageLookupByLibrary.simpleMessage("Аты"),
+    "noFeedsYet": MessageLookupByLibrary.simpleMessage("Азырынча азык жок."),
+    "noStorageFound": MessageLookupByLibrary.simpleMessage(
+      "Сактагыч табылган жок.",
+    ),
     "ok": MessageLookupByLibrary.simpleMessage("ОК"),
     "okButton": MessageLookupByLibrary.simpleMessage("ОК"),
     "otherRegistrationMethods": MessageLookupByLibrary.simpleMessage(
@@ -615,6 +630,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "profileUsernameLabel": MessageLookupByLibrary.simpleMessage(
       "Колдонуучунун аты",
     ),
+    "reception": MessageLookupByLibrary.simpleMessage("К/А"),
     "register": MessageLookupByLibrary.simpleMessage("Катталуу"),
     "registerButton": MessageLookupByLibrary.simpleMessage("Катталуу"),
     "registration": MessageLookupByLibrary.simpleMessage("Катталуу"),
@@ -701,7 +717,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "tableNoData": MessageLookupByLibrary.simpleMessage(
       "Көрсөтө турган маалымат жок.",
     ),
-    "tablePageIndicator": m7,
+    "tablePageIndicator": m8,
     "tablePreviousPage": MessageLookupByLibrary.simpleMessage("Мурунку"),
     "tableScreenTitle": MessageLookupByLibrary.simpleMessage(
       "Маалымат таблицасы",
@@ -712,7 +728,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "techPassportHeader": MessageLookupByLibrary.simpleMessage(
       "Техникалык паспорт",
     ),
-    "unitKg": m8,
+    "unitKg": m9,
     "userNotAuthorized": MessageLookupByLibrary.simpleMessage(
       "Колдонуучу авторизацияланбаган",
     ),

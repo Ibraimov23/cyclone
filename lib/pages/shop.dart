@@ -53,13 +53,15 @@ class _ShopState extends State<Shop> {
               children: [
                 Text(
                   loc.shopScreenTitle,
+                  textAlign: TextAlign.center,
                   style: const TextStyle(
                     color: Colors.black,
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
+                    letterSpacing: 1,
                   ),
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 25),
                 Container(
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -93,7 +95,11 @@ class _ShopState extends State<Shop> {
                     crossAxisCount: 1,
                     crossAxisSpacing: 16.0,
                     mainAxisSpacing: 16.0,
-                    childAspectRatio: lang == 'ru' ? 0.781 : 0.788,
+                    childAspectRatio: lang == 'ru'
+                        ? 0.781
+                        : lang == 'en'
+                            ? 0.838
+                            : 0.788,
                   ),
                   itemCount: 1,
                   itemBuilder: (context, index) {

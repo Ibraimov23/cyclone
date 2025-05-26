@@ -24,21 +24,23 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m1(email) => "Confirmation sent to ${email}.";
 
-  static String m2(feedName) => "Edit ${feedName}";
+  static String m2(feedName) => "Delete feed \"${feedName}\"?";
 
-  static String m3(userEmail) =>
+  static String m3(feedName) => "Edit ${feedName}";
+
+  static String m4(userEmail) =>
       "A verification link has been sent to ${userEmail}. Please check your inbox and click the link to verify your account.";
 
-  static String m4(username) => "Yo, ${username}";
+  static String m5(username) => "Yo, ${username}";
 
-  static String m5(stadoName) => "herd ${stadoName}";
+  static String m6(stadoName) => "herd ${stadoName}";
 
-  static String m6(userName) => "Hello, ${userName}!";
+  static String m7(userName) => "Hello, ${userName}!";
 
-  static String m7(currentPage, totalPages) =>
+  static String m8(currentPage, totalPages) =>
       "Page ${currentPage} of ${totalPages}";
 
-  static String m8(value) => "${value} kg";
+  static String m9(value) => "${value} kg";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -53,6 +55,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "addAnimalButton": MessageLookupByLibrary.simpleMessage("Add Animal"),
     "addButton": MessageLookupByLibrary.simpleMessage("Add"),
     "addItemButton": MessageLookupByLibrary.simpleMessage("Add Item"),
+    "addNewFeedTitle": MessageLookupByLibrary.simpleMessage("Add new feed"),
     "addRecordButton": MessageLookupByLibrary.simpleMessage("Add Record"),
     "addScreenTitle": MessageLookupByLibrary.simpleMessage("Add New Item"),
     "addVaccinationButton": MessageLookupByLibrary.simpleMessage(
@@ -206,7 +209,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "createStado": MessageLookupByLibrary.simpleMessage("Create Herd"),
     "cvvHint": MessageLookupByLibrary.simpleMessage("CVV"),
     "cvvLabel": MessageLookupByLibrary.simpleMessage("Security Code"),
+    "delete": MessageLookupByLibrary.simpleMessage("Delete"),
     "deleteCard": MessageLookupByLibrary.simpleMessage("Delete Card"),
+    "deleteFeedConfirmation": m2,
     "detailsCattleCount": MessageLookupByLibrary.simpleMessage("Count"),
     "detailsCattleName": MessageLookupByLibrary.simpleMessage("Cattle Name"),
     "detailsCattleType": MessageLookupByLibrary.simpleMessage("Cattle Type"),
@@ -246,7 +251,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "editDialog_saveError": MessageLookupByLibrary.simpleMessage(
       "Error saving data",
     ),
-    "editDialog_title": m2,
+    "editDialog_title": m3,
     "emailAlreadyRegistered": MessageLookupByLibrary.simpleMessage(
       "This email is already registered.",
     ),
@@ -273,7 +278,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "emailVerificationEmailSentMessage": MessageLookupByLibrary.simpleMessage(
       "A new verification email has been sent.",
     ),
-    "emailVerificationMessage": m3,
+    "emailVerificationMessage": m4,
     "emailVerificationResendButton": MessageLookupByLibrary.simpleMessage(
       "Resend Verification Email",
     ),
@@ -312,6 +317,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "errorTitle": MessageLookupByLibrary.simpleMessage("Error"),
     "expiryDateHint": MessageLookupByLibrary.simpleMessage("MM/YY"),
     "expiryDateLabel": MessageLookupByLibrary.simpleMessage("Expiry Date"),
+    "feedNameHint": MessageLookupByLibrary.simpleMessage("Feed name"),
     "feedSubtitle": MessageLookupByLibrary.simpleMessage(
       "From 1500 soms per sack.",
     ),
@@ -319,6 +325,8 @@ class MessageLookup extends MessageLookupByLibrary {
       "Premium quality livestock feed!",
     ),
     "feedUnit": MessageLookupByLibrary.simpleMessage("feed unit"),
+    "feedUnitHint": MessageLookupByLibrary.simpleMessage("Feed unit per 1 kg"),
+    "feedValueHint": MessageLookupByLibrary.simpleMessage("Feed value"),
     "fieldCorns": MessageLookupByLibrary.simpleMessage("Corn"),
     "fieldHays": MessageLookupByLibrary.simpleMessage("Hay"),
     "fieldHerbs": MessageLookupByLibrary.simpleMessage("Herbs"),
@@ -363,7 +371,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "gender": MessageLookupByLibrary.simpleMessage("Gender"),
     "goat": MessageLookupByLibrary.simpleMessage("Goats"),
     "goats": MessageLookupByLibrary.simpleMessage("Goats"),
-    "greeting": m4,
+    "greeting": m5,
     "greetingDescription": MessageLookupByLibrary.simpleMessage(
       "Greeting with username",
     ),
@@ -377,7 +385,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Herd cattle type not specified",
     ),
     "herdNotFound": MessageLookupByLibrary.simpleMessage("Herd not found"),
-    "herdTitle": m5,
+    "herdTitle": m6,
     "homeCardSubtitle": MessageLookupByLibrary.simpleMessage("Cattle Number"),
     "homeExploreCategories": MessageLookupByLibrary.simpleMessage(
       "Explore Categories",
@@ -385,7 +393,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "homeScreenTitle": MessageLookupByLibrary.simpleMessage("Home"),
     "homeTitle": MessageLookupByLibrary.simpleMessage("My Farm"),
     "homeViewLatest": MessageLookupByLibrary.simpleMessage("View Latest"),
-    "homeWelcomeMessage": m6,
+    "homeWelcomeMessage": m7,
     "iHaveConfirmed": MessageLookupByLibrary.simpleMessage("I have confirmed"),
     "idNotFoundError": MessageLookupByLibrary.simpleMessage("ID not found"),
     "idNumberLabel": MessageLookupByLibrary.simpleMessage("ID Number:"),
@@ -496,6 +504,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "CYCLONE — your digital assistant in farm management",
     ),
     "invalidInputError": MessageLookupByLibrary.simpleMessage("Invalid input"),
+    "invalidNumber": MessageLookupByLibrary.simpleMessage("Enter a number"),
     "itemCategoryHint": MessageLookupByLibrary.simpleMessage(
       "Select a category",
     ),
@@ -556,6 +565,8 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "medicalCard": MessageLookupByLibrary.simpleMessage("Medical Card"),
     "nameColumn": MessageLookupByLibrary.simpleMessage("Name"),
+    "noFeedsYet": MessageLookupByLibrary.simpleMessage("No feeds yet."),
+    "noStorageFound": MessageLookupByLibrary.simpleMessage("No storage found."),
     "ok": MessageLookupByLibrary.simpleMessage("OK"),
     "okButton": MessageLookupByLibrary.simpleMessage("OK"),
     "otherRegistrationMethods": MessageLookupByLibrary.simpleMessage(
@@ -585,6 +596,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Sign Out",
     ),
     "profileUsernameLabel": MessageLookupByLibrary.simpleMessage("Username"),
+    "reception": MessageLookupByLibrary.simpleMessage("Recv"),
     "register": MessageLookupByLibrary.simpleMessage("Register"),
     "registerButton": MessageLookupByLibrary.simpleMessage("Register"),
     "registration": MessageLookupByLibrary.simpleMessage("Registration"),
@@ -663,7 +675,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "tableNoData": MessageLookupByLibrary.simpleMessage(
       "No data available to display.",
     ),
-    "tablePageIndicator": m7,
+    "tablePageIndicator": m8,
     "tablePreviousPage": MessageLookupByLibrary.simpleMessage("Previous"),
     "tableScreenTitle": MessageLookupByLibrary.simpleMessage("Data Table"),
     "tableTitle": MessageLookupByLibrary.simpleMessage("Feed Table"),
@@ -672,7 +684,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "techPassportHeader": MessageLookupByLibrary.simpleMessage(
       "Technical passport",
     ),
-    "unitKg": m8,
+    "unitKg": m9,
     "userNotAuthorized": MessageLookupByLibrary.simpleMessage(
       "User not authorized",
     ),

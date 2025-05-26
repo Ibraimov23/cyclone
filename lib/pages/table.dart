@@ -22,35 +22,13 @@ class TableScreen extends StatefulWidget {
 class _TableScreenState extends State<TableScreen> {
   Map<String, double> feedRatios = {};
 
-  final List<String> dates = [
-    'Прием 1',
-    'Прием 2',
-    'Прием 3',
-    'Прием 4',
-    'Прием 5',
-  ];
-  final List<String> feedNames = [
-    'corns',
-    'hays',
-    'herbs',
-    'oats',
-    'peas',
-    'silages',
-    'straws',
-  ];
+  List<String> dates = [];
+  List<String> feedNames = [];
+
+  Map<String, Map<String, String>> feedIdByReceptionAndName = {};
 
   List<Map<String, dynamic>> data = [];
   List<String> totals = [];
-  Map<String, double> feedUnitValues = {
-    'corns': 1.1,
-    'hays': 0.9,
-    'herbs': 1.2,
-    'oats': 1.0,
-    'peas': 1.3,
-    'silages': 0.8,
-    'straws': 0.7,
-  };
-
   Map<String, Map<String, num>> tableData = {};
   bool isLoading = true;
   final ScrollController _horizontalController = ScrollController();
@@ -73,26 +51,11 @@ class _TableScreenState extends State<TableScreen> {
     fontWeight: FontWeight.w600,
   );
 
-  static const _primaryColor = Color(0xFF90010A);
-  static const _appBarTitleStyle = TextStyle(
-    color: Colors.black,
-    fontWeight: FontWeight.w700,
-    fontSize: 24,
-  );
   static const _tableTitleStyle = TextStyle(
       color: Colors.black,
       fontSize: 24,
       fontWeight: FontWeight.w600,
       letterSpacing: 2);
-  static const _herdNumberStyle = TextStyle(
-    color: Colors.black,
-    fontSize: 24,
-    fontWeight: FontWeight.w500,
-  );
-  static const _exportButtonStyle = TextStyle(
-    color: Colors.white,
-    fontSize: 24,
-  );
 
   @override
   void initState() {
@@ -103,226 +66,78 @@ class _TableScreenState extends State<TableScreen> {
   Future<void> loadData() async {
     final user = FirebaseAuth.instance.currentUser;
     if (user == null) return;
-
     final firestore = FirebaseFirestore.instance;
-
-    firestore
-        .collection('storages')
-        .where('ownerId', isEqualTo: user.uid)
-        .snapshots()
-        .listen((storagesSnapshot) {
-      final Map<String, double> ratios = {
-        for (var feed in feedNames) feed: 0.0,
-      };
-
-      for (var doc in storagesSnapshot.docs) {
-        final data = doc.data() as Map<String, dynamic>;
-        for (var feed in feedNames) {
-          if (data[feed] is num) {
-            ratios[feed] = (data[feed] as num).toDouble();
-          }
-        }
-      }
-
-      setState(() {
-        feedRatios = ratios;
-      });
-    });
-
-    firestore
-        .collection('stados')
-        .doc(widget.stadoId)
-        .collection('tables')
-        .snapshots()
-        .listen((tablesSnapshot) {
-      Map<String, List<num>> temp = {
-        for (var f in feedNames) f: List.filled(dates.length, 0)
-      };
-
-      for (int i = 0; i < dates.length; i++) {
-        final docName = 'reception ${i + 1}';
-        final doc = tablesSnapshot.docs.firstWhere(
-          (doc) => doc.id == docName,
-          orElse: () => throw Exception('Документ не найден'),
-        );
-
-        final dataMap = doc.data() as Map<String, dynamic>;
-        for (var feed in feedNames) {
-          if (dataMap[feed] != null && dataMap[feed] is num) {
-            temp[feed]![i] = dataMap[feed] as num;
-          }
-        }
-      }
-
-      final List<Map<String, dynamic>> tempData = feedNames.map((feed) {
-        final values = temp[feed]!;
-        return {
-          'origin': feed,
-          'name': _translateFeedName(feed),
-          'values': values.map((e) => '$e').toList(),
-        };
-      }).toList();
-
-      final List<String> tempTotals = List.generate(dates.length, (i) {
-        num sum = 0;
-        for (var feed in feedNames) {
-          sum += temp[feed]![i] * (feedUnitValues[feed] ?? 1.0);
-        }
-        return sum.toStringAsFixed(1);
-      });
-
-      setState(() {
-        data = tempData;
-        totals = tempTotals;
-      });
-    });
-  }
-
-  Future<void> fetchFeedRatios() async {
-    final user = FirebaseAuth.instance.currentUser;
-    if (user == null) return;
-
-    final firestore = FirebaseFirestore.instance;
-    final snapshot = await firestore
-        .collection('storages')
-        .where('ownerId', isEqualTo: user.uid)
-        .get();
-
-    final Map<String, double> ratios = {};
-
-    for (var doc in snapshot.docs) {
-      final data = doc.data();
-      if (data.containsKey('corns') && data['corns'] is num) {
-        ratios['corns'] = (data['corns'] as num).toDouble();
-      } else {
-        ratios['corns'] = 0.0;
-      }
-
-      if (data.containsKey('hays') && data['hays'] is num) {
-        ratios['hays'] = (data['hays'] as num).toDouble();
-      } else {
-        ratios['hays'] = 0.0;
-      }
-
-      if (data.containsKey('herbs') && data['herbs'] is num) {
-        ratios['herbs'] = (data['herbs'] as num).toDouble();
-      } else {
-        ratios['herbs'] = 0.0;
-      }
-
-      if (data.containsKey('oats') && data['oats'] is num) {
-        ratios['oats'] = (data['oats'] as num).toDouble();
-      } else {
-        ratios['oats'] = 0.0;
-      }
-
-      if (data.containsKey('peas') && data['peas'] is num) {
-        ratios['peas'] = (data['peas'] as num).toDouble();
-      } else {
-        ratios['peas'] = 0.0;
-      }
-
-      if (data.containsKey('silages') && data['silages'] is num) {
-        ratios['silages'] = (data['silages'] as num).toDouble();
-      } else {
-        ratios['silages'] = 0.0;
-      }
-
-      if (data.containsKey('straws') && data['straws'] is num) {
-        ratios['straws'] = (data['straws'] as num).toDouble();
-      } else {
-        ratios['straws'] = 0.0;
-      }
-    }
-
-    setState(() {
-      feedRatios = ratios;
-    });
-  }
-
-  Future<void> fetchFeedData() async {
-    final user = FirebaseAuth.instance.currentUser;
-    if (user == null) return;
-
-    final firestore = FirebaseFirestore.instance;
-    final tableRef =
+    final tablesCollection =
         firestore.collection('stados').doc(widget.stadoId).collection('tables');
+    final tablesSnapshot = await tablesCollection.get();
+    final receptionNames = tablesSnapshot.docs.map((doc) => doc.id).toList()
+      ..sort();
+    final Set<String> feedNamesSet = {};
+    List<Map<String, double>> receptionsFeedValues =
+        List.generate(receptionNames.length, (_) => {});
+    final Map<String, double> feedUnits = {};
+    feedIdByReceptionAndName.clear();
+    for (int i = 0; i < receptionNames.length; i++) {
+      final receptionId = receptionNames[i];
+      final feedsSnapshot =
+          await tablesCollection.doc(receptionId).collection('feeds').get();
+      final Map<String, double> feedValues = {};
+      feedIdByReceptionAndName[receptionId] = {};
+      for (var feedDoc in feedsSnapshot.docs) {
+        final data = feedDoc.data();
+        final feedId = feedDoc.id;
+        final String? feedName = data['name'];
+        final dynamic value = data['value'];
+        final dynamic unitDynamic = data['feedUnit'];
+        if (feedName != null && value is num) {
+          feedValues[feedName] = value.toDouble();
+          feedNamesSet.add(feedName);
 
-    Map<String, List<num>> temp = {
-      for (var f in feedNames) f: List.filled(dates.length, 0)
+          feedIdByReceptionAndName[receptionId]![feedName] = feedId;
+
+          if (unitDynamic != null) {
+            feedUnits[feedName] = unitDynamic.toDouble();
+          } else {
+            feedUnits[feedName] = 1.0;
+          }
+        }
+      }
+      receptionsFeedValues[i] = feedValues;
+    }
+    final feedNames = feedNamesSet.toList()..sort();
+    final Map<String, double> tempFeedRatios = {
+      for (var feed in feedNames) feed: feedUnits[feed] ?? 1.0,
     };
-
-    final querySnapshot = await tableRef.get();
-
-    for (int i = 0; i < dates.length; i++) {
-      final docName = 'reception ${i + 1}';
-      QueryDocumentSnapshot<Map<String, dynamic>>? docSnap;
-
-      for (var doc in querySnapshot.docs) {
-        if (doc.id == docName) {
-          docSnap = doc;
-          break;
-        }
-      }
-
-      if (docSnap == null) {
-        continue;
-      }
-
-      final dataMap = docSnap.data();
+    Map<String, List<double>> feedValuesByReception = {
+      for (var feed in feedNames) feed: List.filled(receptionNames.length, 0.0),
+    };
+    for (int i = 0; i < receptionNames.length; i++) {
+      final feedMap = receptionsFeedValues[i];
       for (var feed in feedNames) {
-        if (dataMap[feed] != null && dataMap[feed] is num) {
-          temp[feed]![i] = dataMap[feed] as num;
-        }
+        feedValuesByReception[feed]![i] = feedMap[feed] ?? 0.0;
       }
     }
-
-    final List<Map<String, dynamic>> tempData = [];
-
-    for (var feed in feedNames) {
-      final List<num> values = temp[feed]!;
-
-      tempData.add({
+    final List<Map<String, dynamic>> tempData = feedNames.map((feed) {
+      final values = feedValuesByReception[feed]!;
+      return {
         'origin': feed,
-        'name': _translateFeedName(feed),
-        'values': values.map((e) => '$e').toList(),
-      });
-    }
-
-    final List<String> tempTotals = [];
-    for (int i = 0; i < dates.length; i++) {
-      num sum = 0;
+        'name': '$feed (${(feedUnits[feed] ?? 1.0).toStringAsFixed(1)})',
+        'values': values.map((v) => v.toStringAsFixed(1)).toList(),
+      };
+    }).toList();
+    final List<String> tempTotals = List.generate(receptionNames.length, (i) {
+      double sum = 0;
       for (var feed in feedNames) {
-        sum += temp[feed]![i];
+        sum += feedValuesByReception[feed]![i] * (tempFeedRatios[feed] ?? 1.0);
       }
-      tempTotals.add('${sum.toStringAsFixed(1)}');
-    }
-
+      return sum.toStringAsFixed(1);
+    });
     setState(() {
       data = tempData;
       totals = tempTotals;
+      dates = receptionNames;
+      feedRatios = tempFeedRatios;
     });
-  }
-
-  String _translateFeedName(String key) {
-    switch (key) {
-      case 'corns':
-        return 'Кукуруза';
-      case 'hays':
-        return 'Сено';
-      case 'herbs':
-        return 'Травы';
-      case 'oats':
-        return 'Овёс';
-      case 'peas':
-        return 'Горох';
-      case 'silages':
-        return 'Силос';
-      case 'straws':
-        return 'Солома';
-      default:
-        return key;
-    }
   }
 
   @override
@@ -357,7 +172,7 @@ class _TableScreenState extends State<TableScreen> {
             ),
             children: [
               TextSpan(
-                text: S.of(context).herd + ' ',
+                text: '${S.of(context).herd} ',
                 style: TextStyle(fontWeight: FontWeight.w400),
               ),
               TextSpan(
@@ -369,7 +184,7 @@ class _TableScreenState extends State<TableScreen> {
             ],
           ),
         ),
-        const SizedBox(height: 20),
+        const SizedBox(height: 25),
         Expanded(
           child: SingleChildScrollView(
             child: Padding(
@@ -435,7 +250,7 @@ class _TableScreenState extends State<TableScreen> {
                               children: [
                                 Expanded(
                                   child: Text(
-                                    _translateFeedName(key),
+                                    key,
                                     style: _cellTextStyle,
                                     overflow: TextOverflow.ellipsis,
                                   ),
@@ -481,16 +296,17 @@ class _TableScreenState extends State<TableScreen> {
                                 ),
                               ),
                               child: Row(
-                                children: dates
-                                    .map((d) => Container(
-                                          width: 80,
-                                          alignment: Alignment.center,
-                                          child: Text(
-                                            d,
-                                            style: _headerTextStyle,
-                                          ),
-                                        ))
-                                    .toList(),
+                                children: dates.map((d) {
+                                  final index = dates.indexOf(d) + 1;
+                                  return Container(
+                                    width: 80,
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      '${S.of(context).reception} $index',
+                                      style: _headerTextStyle,
+                                    ),
+                                  );
+                                }).toList(),
                               ),
                             ),
                             ...List.generate(data.length, (i) {
@@ -510,9 +326,10 @@ class _TableScreenState extends State<TableScreen> {
                                       onTap: () async {
                                         final newValue = await _showEditDialog(
                                           currentValue: val,
+                                          feedId: item['id'],
                                           stadoId: widget.stadoId,
                                           receptionId: 'reception ${index + 1}',
-                                          fieldName: item['origin'],
+                                          feedName: item['origin'],
                                         );
                                         if (newValue != null) {
                                           setState(() {
@@ -560,7 +377,7 @@ class _TableScreenState extends State<TableScreen> {
                                           alignment: Alignment.center,
                                           child: Text(
                                             t,
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               color: Colors.black,
                                               fontSize: 16,
                                               fontWeight: FontWeight.w800,
@@ -579,7 +396,8 @@ class _TableScreenState extends State<TableScreen> {
               ),
             ),
           ),
-        )
+        ),
+        const SizedBox(height: 25),
       ],
     );
   }
@@ -588,18 +406,23 @@ class _TableScreenState extends State<TableScreen> {
     required String currentValue,
     required String stadoId,
     required String receptionId,
-    required String fieldName,
+    required String? feedId,
+    required String feedName,
   }) async {
     TextEditingController controller =
         TextEditingController(text: currentValue);
 
+    final feedId = feedIdByReceptionAndName[receptionId]?[feedName];
+    if (feedId == null) {
+      print('feedId не найден для $feedName в $receptionId');
+    }
     return showDialog<String>(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
           backgroundColor: Colors.white,
           title: Text(
-            S.of(context).editDialog_title(_translateFeedName(fieldName)),
+            S.of(context).editDialog_title(feedName),
             style: TextStyle(
               color: Colors.black,
               fontWeight: FontWeight.w500,
@@ -647,28 +470,30 @@ class _TableScreenState extends State<TableScreen> {
                   );
                   return;
                 }
-
                 final user = FirebaseAuth.instance.currentUser;
                 if (user == null) return;
-
                 final firestore = FirebaseFirestore.instance;
                 final tableDocRef = firestore
                     .collection('stados')
                     .doc(stadoId)
                     .collection('tables')
                     .doc(receptionId);
-
+                final feedDocRef = firestore
+                    .collection('stados')
+                    .doc(stadoId)
+                    .collection('tables')
+                    .doc(receptionId)
+                    .collection('feeds')
+                    .doc(feedId);
                 final tableDocSnap = await tableDocRef.get();
                 double oldValue = 0.0;
                 if (tableDocSnap.exists) {
                   final data = tableDocSnap.data();
-                  if (data != null && data[fieldName] is num) {
-                    oldValue = (data[fieldName] as num).toDouble();
+                  if (data != null && data[feedName] is num) {
+                    oldValue = data[feedName];
                   }
                 }
-
                 double delta = newValue - oldValue;
-
                 final storageQuery = await firestore
                     .collection('storages')
                     .where('ownerId', isEqualTo: user.uid)
@@ -688,16 +513,15 @@ class _TableScreenState extends State<TableScreen> {
                   );
                   return;
                 }
-
                 final storageDoc = storageQuery.docs.first;
                 final storageRef = storageDoc.reference;
                 final storageData = storageDoc.data();
                 double currentStock = 0.0;
-                if (storageData.containsKey(fieldName) &&
-                    storageData[fieldName] is num) {
-                  currentStock = (storageData[fieldName] as num).toDouble();
+                if (storageData.containsKey(feedName) &&
+                    storageData[feedName]['value'] is num) {
+                  currentStock =
+                      (storageData[feedName]['value'] as num).toDouble();
                 }
-
                 if (currentStock < newValue) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
@@ -708,14 +532,19 @@ class _TableScreenState extends State<TableScreen> {
                   );
                   return;
                 }
-
+                if (feedId == null) {
+                  print(
+                      'Ошибка: не найден feedId для $feedName в $receptionId');
+                  return;
+                }
                 try {
                   await firestore.runTransaction((transaction) async {
-                    transaction.update(tableDocRef, {fieldName: newValue});
-                    transaction
-                        .update(storageRef, {fieldName: currentStock - delta});
+                    transaction.update(feedDocRef, {'value': newValue});
+                    transaction.update(storageRef, {
+                      '$feedName.value': double.parse(
+                          (currentStock - delta).toStringAsFixed(2))
+                    });
                   });
-
                   Navigator.of(context).pop(newValueStr);
                 } catch (e) {
                   print('Ошибка при сохранении: $e');
@@ -737,5 +566,34 @@ class _TableScreenState extends State<TableScreen> {
         );
       },
     );
+  }
+
+  Future<void> resetAndSaveStatistics(String stadoId) async {
+    final firestore = FirebaseFirestore.instance;
+    final tablesCollection =
+        firestore.collection('stados').doc(stadoId).collection('tables');
+    final statisticsCollection =
+        firestore.collection('statistics').doc(stadoId).collection('daily');
+    final receptionDocs = await tablesCollection.get();
+
+    Map<String, dynamic> aggregatedData = {};
+    for (var doc in receptionDocs.docs) {
+      final data = doc.data();
+      final receptionId = doc.id;
+
+      aggregatedData[receptionId] = data;
+
+      await tablesCollection.doc(receptionId).update(
+            data.map((key, value) => MapEntry(key, 0)),
+          );
+    }
+    final utcDate = DateTime.now().toUtc();
+    final dateString =
+        '${utcDate.year}-${utcDate.month.toString().padLeft(2, '0')}-${utcDate.day.toString().padLeft(2, '0')}';
+
+    await statisticsCollection.doc(dateString).set({
+      'date': utcDate,
+      'receptions': aggregatedData,
+    });
   }
 }

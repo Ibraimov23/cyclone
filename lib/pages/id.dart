@@ -62,7 +62,7 @@ class Id extends StatelessWidget {
                         color: Colors.black,
                       ),
                     ),
-                    const SizedBox(height: 30),
+                    const SizedBox(height: 25),
                   ],
                 ),
               ),

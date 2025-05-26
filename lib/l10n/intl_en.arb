@@ -369,5 +369,15 @@
   "breedAlpine": "Alpine",
   "breedMerino": "Merino",
   "breedJersey": "Jersey",
-  "breedSaanen": "Saanen"
+  "breedSaanen": "Saanen",
+  "addNewFeedTitle": "Add new feed",
+  "feedNameHint": "Feed name",
+  "feedValueHint": "Feed value",
+  "noFeedsYet": "No feeds yet.",
+  "noStorageFound": "No storage found.",
+  "invalidNumber": "Enter a number",
+  "deleteFeedConfirmation": "Delete feed \"{feedName}\"?",
+  "delete": "Delete",
+  "reception": "Recv",
+  "feedUnitHint": "Feed unit per 1 kg"
 }

@@ -1,6 +1,6 @@
 import 'package:cyclone/pages/add.dart';
 import 'package:cyclone/pages/id.dart';
-import 'package:cyclone/pages/taable.dart';
+import 'package:cyclone/pages/table.dart';
 import 'package:cyclone/widget/custom_app-bar.dart';
 import 'package:cyclone/widget/custom_drawer.dart';
 import 'package:firebase_auth/firebase_auth.dart';

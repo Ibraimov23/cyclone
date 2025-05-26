@@ -102,11 +102,11 @@ class _HomeState extends State<Home> {
           }
         },
         backgroundColor: const Color(0xFF90010A),
-        child: const Icon(Icons.add, size: 40, color: Colors.white),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
         ),
         elevation: 6,
+        child: const Icon(Icons.add, size: 40, color: Colors.white),
       ),
       body: RefreshIndicator(
         onRefresh: _refreshData,
@@ -147,7 +147,7 @@ class _HomeState extends State<Home> {
                       letterSpacing: 1,
                     ),
                   ),
-                  const SizedBox(height: 36),
+                  const SizedBox(height: 25),
                   GridView.builder(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),

@@ -205,7 +205,7 @@
   "nameColumn": "Аты",
   "valueColumn": "Маани",
   "changeValue": "Маанини өзгөртүү",
-  "cancel": "Жокко чыгаруу",
+  "cancel": "Артка",
   "save": "Сактоо",
   "unitKg": "{value} кг",
   "fieldOats": "Арпа",
@@ -369,5 +369,15 @@
   "breedAlpine": "Альпия",
   "breedMerino": "Меринос",
   "breedJersey": "Жерси",
-  "breedSaanen": "Заанен"
+  "breedSaanen": "Заанен",
+  "addNewFeedTitle": "Жаңы азык кошуу",
+  "feedNameHint": "Азыктың аты",
+  "feedValueHint": "Азыктың баасы",
+  "noFeedsYet": "Азырынча азык жок.",
+  "noStorageFound": "Сактагыч табылган жок.",
+  "invalidNumber": "Сан киргизиңиз",
+  "deleteFeedConfirmation": "«{feedName}» жемди өчүрүүбү?",
+  "delete": "Өчүрүү",
+  "reception": "К/А",
+  "feedUnitHint": "1 кг үчүн тоют бирдиги"
 }

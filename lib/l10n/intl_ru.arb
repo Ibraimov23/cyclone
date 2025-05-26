@@ -369,5 +369,15 @@
   "breedAlpine": "Альпийская",
   "breedMerino": "Меринос",
   "breedJersey": "Джерсейская",
-  "breedSaanen": "Зааненская"
+  "breedSaanen": "Зааненская",
+  "addNewFeedTitle": "Добавить новый корм",
+  "feedNameHint": "Название корма",
+  "feedValueHint": "Значение корма",
+  "noFeedsYet": "Пока нет кормов.",
+  "noStorageFound": "Хранилище не найдено.",
+  "invalidNumber": "Введите число",
+  "deleteFeedConfirmation": "Удалить корм «{feedName}»?",
+  "delete": "Удалить",
+  "reception": "Прием",
+  "feedUnitHint": "Кормовая единица на 1 кг"
 }

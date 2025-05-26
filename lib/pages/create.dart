@@ -67,20 +67,16 @@ class _CreateState extends State<CreateStado> {
       );
       return;
     }
-
     setState(() {
       isLoading = true;
     });
-
     try {
       String? userId = FirebaseAuth.instance.currentUser?.uid;
       if (userId == null) {
         throw Exception("Пользователь не авторизован");
       }
-
       int selectedIndex = cattleTypes.indexOf(selectedCattleType!);
       String selectedCattleTypeId = cattleTypeIds[selectedIndex];
-
       DocumentReference docRef =
           await FirebaseFirestore.instance.collection("stados").add({
         "name": _stadoNameController.text,
@@ -89,26 +85,57 @@ class _CreateState extends State<CreateStado> {
         "createdAt": Timestamp.now(),
         "cattleTypeId": selectedCattleTypeId,
       });
+      final storagesSnapshot = await FirebaseFirestore.instance
+          .collection('storages')
+          .where('ownerId', isEqualTo: userId)
+          .limit(1)
+          .get();
 
-      final List<String> feedTypes = [
-        "corns",
-        "hays",
-        "herbs",
-        "oats",
-        "peas",
-        "silages",
-        "straws",
-      ];
+      if (storagesSnapshot.docs.isEmpty) {
+        debugPrint('No feeds found in storages');
+      } else {
+        final storageData = storagesSnapshot.docs.first.data();
 
-      for (int i = 1; i <= 6; i++) {
-        Map<String, dynamic> feedData = {
-          for (var feed in feedTypes) feed: 0,
-          "createdAt": Timestamp.now(),
-        };
+        final feedNames =
+            storageData.keys.where((key) => key != 'ownerId').toList();
+        for (int receptionNumber = 1; receptionNumber <= 6; receptionNumber++) {
+          final receptionId = 'reception $receptionNumber';
+          final receptionDocRef = docRef.collection('tables').doc(receptionId);
 
-        await docRef.collection("tables").doc("reception $i").set(feedData);
+          await receptionDocRef.set({
+            'createdAt': FieldValue.serverTimestamp(),
+          });
+
+          final feedsCollectionRef = receptionDocRef.collection('feeds');
+          final feedsSnapshot = await feedsCollectionRef.limit(1).get();
+
+          if (feedsSnapshot.docs.isEmpty) {
+            for (final feedName in feedNames) {
+              final feedData = storageData[feedName];
+              final double value =
+                  (feedData is Map<String, dynamic> && feedData['value'] is num)
+                      ? feedData['value'].toDouble()
+                      : 0.0;
+
+              final double unitValue = (feedData is Map<String, dynamic> &&
+                      feedData['feedUnit'] is num)
+                  ? feedData['feedUnit'].toDouble()
+                  : 0.0;
+
+              await feedsCollectionRef.add({
+                'createdAt': FieldValue.serverTimestamp(),
+                'name': feedName,
+                'value': 0.0,
+                'feedUnit': unitValue,
+              });
+
+              debugPrint('Created feed $feedName in ${docRef.id}/$receptionId');
+            }
+          } else {
+            debugPrint('Feeds already exist in ${docRef.id}/$receptionId');
+          }
+        }
       }
-
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text("Стадо успешно создано!",
@@ -117,7 +144,6 @@ class _CreateState extends State<CreateStado> {
           duration: Duration(seconds: 2),
         ),
       );
-
       _stadoNameController.clear();
       setState(() {
         selectedCattleType = null;

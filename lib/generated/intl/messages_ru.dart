@@ -24,21 +24,23 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m1(email) => "Подтверждение отправлено на адрес ${email}.";
 
-  static String m2(feedName) => "Редактировать ${feedName}";
+  static String m2(feedName) => "Удалить корм «${feedName}»?";
 
-  static String m3(userEmail) =>
+  static String m3(feedName) => "Редактировать ${feedName}";
+
+  static String m4(userEmail) =>
       "Ссылка для подтверждения была отправлена на ${userEmail}. Пожалуйста, проверьте ваш почтовый ящик и перейдите по ссылке для подтверждения вашего аккаунта.";
 
-  static String m4(username) => "Йоу, ${username}";
+  static String m5(username) => "Йоу, ${username}";
 
-  static String m5(stadoName) => "стадо ${stadoName}";
+  static String m6(stadoName) => "стадо ${stadoName}";
 
-  static String m6(userName) => "Привет, ${userName}!";
+  static String m7(userName) => "Привет, ${userName}!";
 
-  static String m7(currentPage, totalPages) =>
+  static String m8(currentPage, totalPages) =>
       "Страница ${currentPage} из ${totalPages}";
 
-  static String m8(value) => "${value} кг";
+  static String m9(value) => "${value} кг";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -55,6 +57,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "addButton": MessageLookupByLibrary.simpleMessage("Добавить"),
     "addItemButton": MessageLookupByLibrary.simpleMessage("Добавить элемент"),
+    "addNewFeedTitle": MessageLookupByLibrary.simpleMessage(
+      "Добавить новый корм",
+    ),
     "addRecordButton": MessageLookupByLibrary.simpleMessage("Добавить запись"),
     "addScreenTitle": MessageLookupByLibrary.simpleMessage(
       "Добавить новый элемент",
@@ -216,7 +221,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "createStado": MessageLookupByLibrary.simpleMessage("Создать стадо"),
     "cvvHint": MessageLookupByLibrary.simpleMessage("CVV"),
     "cvvLabel": MessageLookupByLibrary.simpleMessage("Защитный код"),
+    "delete": MessageLookupByLibrary.simpleMessage("Удалить"),
     "deleteCard": MessageLookupByLibrary.simpleMessage("Удалить карту"),
+    "deleteFeedConfirmation": m2,
     "detailsCattleCount": MessageLookupByLibrary.simpleMessage("Количество"),
     "detailsCattleName": MessageLookupByLibrary.simpleMessage("Номер скота"),
     "detailsCattleType": MessageLookupByLibrary.simpleMessage("Тип скота"),
@@ -260,7 +267,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "editDialog_saveError": MessageLookupByLibrary.simpleMessage(
       "Ошибка при сохранении данных",
     ),
-    "editDialog_title": m2,
+    "editDialog_title": m3,
     "emailAlreadyRegistered": MessageLookupByLibrary.simpleMessage(
       "Этот адрес электронной почты уже зарегистрирован.",
     ),
@@ -287,7 +294,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "emailVerificationEmailSentMessage": MessageLookupByLibrary.simpleMessage(
       "Новое письмо для подтверждения было отправлено.",
     ),
-    "emailVerificationMessage": m3,
+    "emailVerificationMessage": m4,
     "emailVerificationResendButton": MessageLookupByLibrary.simpleMessage(
       "Отправить письмо повторно",
     ),
@@ -332,6 +339,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "errorTitle": MessageLookupByLibrary.simpleMessage("Ошибка"),
     "expiryDateHint": MessageLookupByLibrary.simpleMessage("MM/YY"),
     "expiryDateLabel": MessageLookupByLibrary.simpleMessage("Дата/Год"),
+    "feedNameHint": MessageLookupByLibrary.simpleMessage("Название корма"),
     "feedSubtitle": MessageLookupByLibrary.simpleMessage(
       "От 1500 сомов за мешок.",
     ),
@@ -339,6 +347,10 @@ class MessageLookup extends MessageLookupByLibrary {
       "Корм для скота высшего качества!",
     ),
     "feedUnit": MessageLookupByLibrary.simpleMessage("корм ед."),
+    "feedUnitHint": MessageLookupByLibrary.simpleMessage(
+      "Кормовая единица на 1 кг",
+    ),
+    "feedValueHint": MessageLookupByLibrary.simpleMessage("Значение корма"),
     "fieldCorns": MessageLookupByLibrary.simpleMessage("Кукуруза"),
     "fieldHays": MessageLookupByLibrary.simpleMessage("Сено"),
     "fieldHerbs": MessageLookupByLibrary.simpleMessage("Трава"),
@@ -381,7 +393,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "gender": MessageLookupByLibrary.simpleMessage("Пол"),
     "goat": MessageLookupByLibrary.simpleMessage("Козлы"),
     "goats": MessageLookupByLibrary.simpleMessage("Козлы"),
-    "greeting": m4,
+    "greeting": m5,
     "greetingDescription": MessageLookupByLibrary.simpleMessage(
       "Приветствие с именем пользователя",
     ),
@@ -395,7 +407,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Тип скота в стаде не указан",
     ),
     "herdNotFound": MessageLookupByLibrary.simpleMessage("Стадо не найдено"),
-    "herdTitle": m5,
+    "herdTitle": m6,
     "homeCardSubtitle": MessageLookupByLibrary.simpleMessage("Номер скота"),
     "homeExploreCategories": MessageLookupByLibrary.simpleMessage(
       "Исследовать категории",
@@ -403,7 +415,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "homeScreenTitle": MessageLookupByLibrary.simpleMessage("Главная"),
     "homeTitle": MessageLookupByLibrary.simpleMessage("Моя ферма"),
     "homeViewLatest": MessageLookupByLibrary.simpleMessage("Смотреть новое"),
-    "homeWelcomeMessage": m6,
+    "homeWelcomeMessage": m7,
     "iHaveConfirmed": MessageLookupByLibrary.simpleMessage("Я подтвердил"),
     "idNotFoundError": MessageLookupByLibrary.simpleMessage("ID не найден"),
     "idNumberLabel": MessageLookupByLibrary.simpleMessage("Номер ID:"),
@@ -518,6 +530,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "invalidInputError": MessageLookupByLibrary.simpleMessage(
       "Некорректный ввод",
     ),
+    "invalidNumber": MessageLookupByLibrary.simpleMessage("Введите число"),
     "itemCategoryHint": MessageLookupByLibrary.simpleMessage(
       "Выберите категорию",
     ),
@@ -582,6 +595,10 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "medicalCard": MessageLookupByLibrary.simpleMessage("Медицинская карта"),
     "nameColumn": MessageLookupByLibrary.simpleMessage("Название"),
+    "noFeedsYet": MessageLookupByLibrary.simpleMessage("Пока нет кормов."),
+    "noStorageFound": MessageLookupByLibrary.simpleMessage(
+      "Хранилище не найдено.",
+    ),
     "ok": MessageLookupByLibrary.simpleMessage("ОК"),
     "okButton": MessageLookupByLibrary.simpleMessage("ОК"),
     "otherRegistrationMethods": MessageLookupByLibrary.simpleMessage(
@@ -615,6 +632,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "profileUsernameLabel": MessageLookupByLibrary.simpleMessage(
       "Имя пользователя",
     ),
+    "reception": MessageLookupByLibrary.simpleMessage("Прием"),
     "register": MessageLookupByLibrary.simpleMessage("Зарегистрироваться"),
     "registerButton": MessageLookupByLibrary.simpleMessage("Регистрация"),
     "registration": MessageLookupByLibrary.simpleMessage("Регистрация"),
@@ -697,7 +715,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "tableNoData": MessageLookupByLibrary.simpleMessage(
       "Нет данных для отображения.",
     ),
-    "tablePageIndicator": m7,
+    "tablePageIndicator": m8,
     "tablePreviousPage": MessageLookupByLibrary.simpleMessage("Предыдущая"),
     "tableScreenTitle": MessageLookupByLibrary.simpleMessage("Таблица данных"),
     "tableTitle": MessageLookupByLibrary.simpleMessage("Таблица корма"),
@@ -706,7 +724,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "techPassportHeader": MessageLookupByLibrary.simpleMessage(
       "Технический паспорт",
     ),
-    "unitKg": m8,
+    "unitKg": m9,
     "userNotAuthorized": MessageLookupByLibrary.simpleMessage(
       "Пользователь не авторизован",
     ),

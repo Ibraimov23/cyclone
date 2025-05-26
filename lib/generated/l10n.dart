@@ -3114,6 +3114,91 @@ class S {
   String get breedSaanen {
     return Intl.message('Saanen', name: 'breedSaanen', desc: '', args: []);
   }
+
+  /// `Add new feed`
+  String get addNewFeedTitle {
+    return Intl.message(
+      'Add new feed',
+      name: 'addNewFeedTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Feed name`
+  String get feedNameHint {
+    return Intl.message('Feed name', name: 'feedNameHint', desc: '', args: []);
+  }
+
+  /// `Feed value`
+  String get feedValueHint {
+    return Intl.message(
+      'Feed value',
+      name: 'feedValueHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No feeds yet.`
+  String get noFeedsYet {
+    return Intl.message(
+      'No feeds yet.',
+      name: 'noFeedsYet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No storage found.`
+  String get noStorageFound {
+    return Intl.message(
+      'No storage found.',
+      name: 'noStorageFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter a number`
+  String get invalidNumber {
+    return Intl.message(
+      'Enter a number',
+      name: 'invalidNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete feed "{feedName}"?`
+  String deleteFeedConfirmation(Object feedName) {
+    return Intl.message(
+      'Delete feed "$feedName"?',
+      name: 'deleteFeedConfirmation',
+      desc: '',
+      args: [feedName],
+    );
+  }
+
+  /// `Delete`
+  String get delete {
+    return Intl.message('Delete', name: 'delete', desc: '', args: []);
+  }
+
+  /// `Recv`
+  String get reception {
+    return Intl.message('Recv', name: 'reception', desc: '', args: []);
+  }
+
+  /// `Feed unit per 1 kg`
+  String get feedUnitHint {
+    return Intl.message(
+      'Feed unit per 1 kg',
+      name: 'feedUnitHint',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
